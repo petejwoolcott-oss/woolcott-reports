@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4 Burgundy Grove — Seller Market Valuation | Woolcott Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #1a2332;
+    --slate:  #2d3a4a;
+    --gold:   #c8a45c;
+    --gold-lt:#d9bc85;
+    --light:  #f5f2ec;
+    --warm:   #ede9e1;
+    --white:  #ffffff;
+    --text:   #1e2530;
+    --muted:  #5a6470;
+    --green:  #2e7d32;
+    --amber:  #b45309;
+    --red:    #9e2a2a;
+    --ltgrn:  #e8f5e9;
+    --ltred:  #fdecea;
+    --ltyel:  #fff8ed;
+    --ltblu:  #e3edf7;
+  }
+
+  body { font-family: 'DM Sans', sans-serif; font-size: 9.5pt; color: var(--text); background: var(--white); line-height: 1.45; }
+  .page { width: 8.5in; margin: 0 auto; background: var(--white); }
+  @media print { body { margin:0; } .page { width:100%; } }
+
+  /* HEADER */
+  .report-header { background: var(--navy); padding: 26px 36px 20px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .header-left .brand { font-family: 'DM Serif Display', serif; color: var(--gold); font-size: 11pt; letter-spacing: .04em; margin-bottom: 6px; }
+  .header-left .address { font-family: 'DM Serif Display', serif; color: var(--white); font-size: 21pt; line-height: 1.15; }
+  .header-left .sub { color: var(--gold-lt); font-size: 10pt; margin-top: 3px; font-weight: 300; letter-spacing: .02em; }
+  .header-right { text-align: right; }
+  .header-right .rtype { color: var(--gold); font-size: 7.5pt; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 3px; }
+  .header-right .rdate { color: rgba(255,255,255,.5); font-size: 8pt; margin-top: 6px; }
+  .gold-bar { height: 3px; background: linear-gradient(90deg, var(--gold) 0%, var(--gold-lt) 60%, transparent 100%); }
+
+  /* STATS BAR */
+  .stats-bar { background: var(--slate); display: flex; }
+  .stat-cell { flex: 1; padding: 10px 12px; border-right: 1px solid rgba(255,255,255,.1); text-align: center; }
+  .stat-cell:last-child { border-right: none; }
+  .stat-label { color: var(--gold); font-size: 6.5pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 2px; }
+  .stat-value { color: var(--white); font-size: 11.5pt; font-weight: 700; line-height: 1.1; }
+  .stat-sub { color: rgba(255,255,255,.5); font-size: 7pt; margin-top: 1px; }
+
+  /* BODY */
+  .body-wrap { padding: 18px 36px 14px; }
+
+  /* SECTION TITLES */
+  .sec-title { font-family: 'DM Serif Display', serif; font-size: 11pt; color: var(--navy); border-bottom: 2px solid var(--gold); padding-bottom: 4px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: baseline; }
+  .sec-title span { font-family: 'DM Sans', sans-serif; font-size: 7.5pt; color: var(--muted); font-weight: 400; }
+
+  /* TWO COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px; }
+
+  /* SPOTLIGHT */
+  .spotlight { background: var(--light); border-left: 4px solid var(--gold); border-radius: 0 4px 4px 0; padding: 12px 14px; }
+  .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; }
+  .spec-item { display: flex; gap: 6px; align-items: baseline; }
+  .spec-lbl { color: var(--muted); font-size: 7.8pt; font-weight: 600; min-width: 88px; flex-shrink: 0; }
+  .spec-val { font-size: 8.5pt; color: var(--text); font-weight: 500; }
+  .spec-val.gold { color: var(--gold); font-weight: 700; }
+  .spec-val.red { color: var(--red); font-weight: 700; }
+
+  /* VALUE TABLE */
+  .vtable { width: 100%; border-collapse: collapse; font-size: 8pt; }
+  .vtable td { padding: 5px 8px; border-bottom: 1px solid #e8e3da; }
+  .vtable tr:nth-child(even) td { background: var(--light); }
+  .vtable .vt-lbl { color: var(--muted); }
+  .vtable .vt-num { text-align: right; font-weight: 600; }
+  .vtable .vt-note { color: var(--muted); font-size: 7.5pt; font-style: italic; }
+  .vtable .total td { background: var(--navy) !important; color: var(--white); font-weight: 700; font-size: 9.5pt; }
+  .vtable .total .vt-lbl { color: var(--gold); font-size: 8.5pt; }
+  .vtable .total .vt-num { color: var(--gold-lt); }
+
+  /* PRICE CALLOUT */
+  .price-callout { background: var(--light); border: 2px solid var(--gold); border-radius: 4px; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+  .pc-label { font-size: 7pt; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 3px; }
+  .pc-price { font-family: 'DM Serif Display', serif; font-size: 24pt; color: var(--navy); line-height: 1; }
+  .pc-range { font-size: 8pt; color: var(--muted); margin-top: 2px; }
+  .pc-right { text-align: right; font-size: 8pt; color: var(--slate); line-height: 1.7; }
+  .pc-right strong { color: var(--navy); font-weight: 700; }
+
+  /* COMPARISON PANELS */
+  .comp-panels { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .comp-panel { border: 1px solid #ddd; border-radius: 4px; overflow: hidden; }
+  .comp-panel-hdr { background: var(--slate); padding: 7px 10px; }
+  .comp-panel-hdr h4 { color: var(--gold); font-size: 8pt; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 1px; }
+  .comp-panel-hdr p { color: rgba(255,255,255,.6); font-size: 7pt; }
+  .comp-panel-body { padding: 8px 10px; }
+  .comp-metric { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px solid #f0ece4; font-size: 7.8pt; }
+  .comp-metric:last-child { border-bottom: none; }
+  .comp-metric .cm-lbl { color: var(--muted); }
+  .comp-metric .cm-val { font-weight: 600; }
+  .comp-metric .cm-val.green { color: var(--green); }
+  .comp-metric .cm-val.amber { color: var(--amber); }
+  .comp-metric .cm-val.red { color: var(--red); }
+  .comp-insight { background: var(--light); margin-top: 6px; padding: 5px 8px; border-radius: 3px; font-size: 7.5pt; color: var(--muted); line-height: 1.5; }
+  .comp-insight strong { color: var(--navy); }
+
+  /* TABLES */
+  table { width: 100%; border-collapse: collapse; font-size: 7.8pt; margin-bottom: 14px; }
+  thead tr { background: var(--navy); }
+  thead th { color: var(--white); font-weight: 600; font-size: 6.8pt; letter-spacing: .05em; text-transform: uppercase; padding: 6px 7px; text-align: left; white-space: nowrap; }
+  thead th.num { text-align: right; }
+  tbody tr:nth-child(even) { background: var(--light); }
+  tbody td { padding: 5px 7px; border-bottom: 1px solid #e8e3da; vertical-align: middle; }
+  tbody td.num { text-align: right; font-weight: 600; }
+  tbody td.note { color: var(--muted); font-size: 7pt; font-style: italic; }
+  .subj-row td { background: var(--ltyel) !important; font-weight: 600; }
+  .bl-row td { background: var(--ltblu) !important; }
+  .grn-row td { background: var(--ltgrn) !important; }
+  .tag { display: inline-block; font-size: 6.2pt; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: 1px 4px; border-radius: 2px; margin-left: 3px; }
+  .tag-gold { background: #f9f0dc; color: #8a6d20; }
+  .tag-blue { background: var(--ltblu); color: #1a4d7a; }
+  .tag-grn  { background: var(--ltgrn); color: var(--green); }
+  .tag-red  { background: var(--ltred); color: var(--red); }
+  .dom-amber { color: var(--amber); font-weight: 700; }
+  .dom-red   { color: var(--red);   font-weight: 700; }
+  .dom-green { color: var(--green); font-weight: 700; }
+
+  /* TAKEAWAYS */
+  .tkbox { background: var(--navy); border-radius: 4px; padding: 14px 18px; margin-bottom: 4px; }
+  .tkbox h3 { font-family: 'DM Serif Display', serif; color: var(--gold); font-size: 11pt; margin-bottom: 10px; }
+  .tk-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .tk-item { background: rgba(255,255,255,.06); border-radius: 3px; padding: 9px 11px; }
+  .tk-num { color: var(--gold); font-size: 15pt; font-family: 'DM Serif Display', serif; line-height: 1; margin-bottom: 3px; }
+  .tk-title { color: var(--white); font-weight: 600; font-size: 8pt; margin-bottom: 3px; }
+  .tk-body { color: rgba(255,255,255,.62); font-size: 7.5pt; line-height: 1.5; }
+
+  /* FOOTER */
+  .report-footer { background: var(--slate); padding: 9px 36px; display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
+  .footer-brand { font-family: 'DM Serif Display', serif; color: var(--gold); font-size: 9pt; }
+  .footer-text { color: rgba(255,255,255,.4); font-size: 6.8pt; text-align: center; flex: 1; padding: 0 16px; }
+  .footer-right { color: rgba(255,255,255,.6); font-size: 7pt; text-align: right; }
+
+  .mb14 { margin-bottom: 14px; }
+  .smallbold { font-size: 7pt; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="report-header">
+  <div class="header-left">
+    <div class="brand">Woolcott Real Estate</div>
+    <div class="address">4 Burgundy Grove</div>
+    <div class="sub">Meadowlands, Ancaster (Hamilton), ON · L9K 0E7</div>
+  </div>
+  <div class="header-right">
+    <div class="rtype">Seller Market Valuation</div>
+    <div class="rtype" style="color:var(--gold-lt);margin-top:3px;">List Price Assessment</div>
+    <div class="rdate">May 2026</div>
+  </div>
+</div>
+<div class="gold-bar"></div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-cell"><div class="stat-label">Style</div><div class="stat-value">Bungaloft</div><div class="stat-sub">Attached / Condo</div></div>
+  <div class="stat-cell"><div class="stat-label">AG Finished</div><div class="stat-value">1,678</div><div class="stat-sub">sq ft + fin. basement</div></div>
+  <div class="stat-cell"><div class="stat-label">Bedrooms</div><div class="stat-value">2+1</div><div class="stat-sub">Main + Loft + Bsmt</div></div>
+  <div class="stat-cell"><div class="stat-label">Bathrooms</div><div class="stat-value">3F + 1H</div><div class="stat-sub">4 total</div></div>
+  <div class="stat-cell"><div class="stat-label">Garage</div><div class="stat-value">1-Car</div><div class="stat-sub">Attached</div></div>
+  <div class="stat-cell"><div class="stat-label">Condo Fee</div><div class="stat-value">$400</div><div class="stat-sub">per month</div></div>
+  <div class="stat-cell"><div class="stat-label">Active Listing</div><div class="stat-value" style="font-size:10pt;">$849,900</div><div class="stat-sub">Price Review Underway</div></div>
+</div>
+
+<!-- BODY -->
+<div class="body-wrap">
+
+  <!-- ROW 1: SUBJECT + VALUE -->
+  <div class="two-col" style="margin-bottom:14px;">
+    <div>
+      <div class="sec-title">Subject Property<span>As of May 2026</span></div>
+      <div class="spotlight">
+        <div class="spec-grid">
+          <div class="spec-item"><span class="spec-lbl">Address</span><span class="spec-val">4 Burgundy Grove, Ancaster</span></div>
+          <div class="spec-item"><span class="spec-lbl">Complex</span><span class="spec-val">Wentworth Std Condo 484</span></div>
+          <div class="spec-item"><span class="spec-lbl">Style</span><span class="spec-val">Bungaloft — Row/Attached</span></div>
+          <div class="spec-item"><span class="spec-lbl">Tenure</span><span class="spec-val">Condominium</span></div>
+          <div class="spec-item"><span class="spec-lbl">AG Sq Ft</span><span class="spec-val">1,678 sq ft (LBO)</span></div>
+          <div class="spec-item"><span class="spec-lbl">Condo Fee</span><span class="spec-val">$400/mo — exterior maint.</span></div>
+          <div class="spec-item"><span class="spec-lbl">Main Floor</span><span class="spec-val">Primary suite + 5-pc ensuite</span></div>
+          <div class="spec-item"><span class="spec-lbl">Loft Level</span><span class="spec-val">2nd bed + ensuite + family rm</span></div>
+          <div class="spec-item"><span class="spec-lbl">Basement</span><span class="spec-val">Finished — 2 beds, bath, rec rm</span></div>
+          <div class="spec-item"><span class="spec-lbl">Garage</span><span class="spec-val">1-car attached</span></div>
+          <div class="spec-item"><span class="spec-lbl">Outdoor</span><span class="spec-val">Private patio, greenspace views</span></div>
+          <div class="spec-item"><span class="spec-lbl">Condition</span><span class="spec-val gold">Well updated / renovated</span></div>
+          <div class="spec-item"><span class="spec-lbl">List Price</span><span class="spec-val">Currently $849,900 — Under Review</span></div>
+          <div class="spec-item"><span class="spec-lbl">Current List</span><span class="spec-val red">$849,900 — overpriced vs data</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sec-title">Value Assessment<span>Calibrated to same-complex Toulon sale · Stonehenge as floor</span></div>
+      <table class="vtable">
+        <tbody>
+          <tr><td class="vt-lbl">Quality anchor: 89 Toulon Ave (same complex, 2,199 sqft, $975K)</td><td class="vt-num">$975,000</td><td class="vt-note">$443/sqft</td></tr>
+          <tr><td class="vt-lbl">Size adjustment: −521 sqft (subject 1,678 sqft vs 2,199 sqft)</td><td class="vt-num">−$115,000</td><td class="vt-note">~$220/sqft marginal</td></tr>
+          <tr><td class="vt-lbl">Liquidity adjustment: Toulon took 276 days to clear market</td><td class="vt-num">−$25,000</td><td class="vt-note">Conservative discount</td></tr>
+          <tr><td class="vt-lbl">Condo fee advantage: $400/mo vs $575–$702/mo competitors</td><td class="vt-num">+$20,000</td><td class="vt-note">Buyer savings</td></tr>
+          <tr><td class="vt-lbl">Finished basement (2 beds, bath, rec room)</td><td class="vt-num">+$25,000</td><td class="vt-note">Extra living space</td></tr>
+          <tr><td class="vt-lbl">1-car garage: preferred by downsizer buyer profile in this complex</td><td class="vt-num">Neutral</td><td class="vt-note">No discount applied</td></tr>
+          <tr class="total"><td class="vt-lbl">Indicated Market Value</td><td class="vt-num">$880,000</td><td class="vt-note" style="color:rgba(255,255,255,.5);">±$30K</td></tr>
+        </tbody>
+      </table>
+
+      <div class="price-callout">
+        <div>
+          <div class="pc-label">Recommended New List Price</div>
+          <div class="pc-price">$819,900</div>
+          <div class="pc-range">Expected close: <strong>$785K – $805K</strong></div>
+        </div>
+        <div class="pc-right">
+          <strong>Style:</strong> Bungaloft · 1-car garage · Condo<br>
+          <strong>$/sqft:</strong> $489 (AG) · $343 (total fin.)<br>
+          <strong>Reduction from current:</strong> −$30,000<br>
+          <strong>Comparable SP/LP:</strong> 0.95–1.04
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARISON PANELS -->
+  <div class="sec-title" style="margin-bottom:10px;">Market Comparison Analysis<span>Garage Configuration · Freehold vs Condo · Bungaloft vs Other Styles</span></div>
+  <div class="comp-panels">
+
+    <div class="comp-panel">
+      <div class="comp-panel-hdr">
+        <h4>Garage Configuration</h4>
+        <p>1-car preferred in mature downsizer complex</p>
+      </div>
+      <div class="comp-panel-body">
+        <div class="comp-metric"><span class="cm-lbl">212 Stonehenge #24 (1-car)</span><span class="cm-val green">$725K · 11 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">212 Stonehenge #1 (2-car)</span><span class="cm-val">$740K · 15/69 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">43 Landscapes (2-car, 2,733sf)</span><span class="cm-val">$915K · 63 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">89 Toulon Ave (1-car, 2,199sf)</span><span class="cm-val amber">$975K · 276 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">89 Toulon Ave (1-car) — same quality, same complex</span><span class="cm-val green">$975K · Caliber anchor</span></div>
+        <div class="comp-insight"><strong>1-car is the preferred configuration in this mature complex.</strong> The Meadowlands downsizer buyer — typically a couple or single adult — finds 2-car garages unnecessary. In practice, 2-car units have shown longer market times and less buyer urgency. The subject's 1-car garage is well matched to active demand here — not a concession.</div>
+      </div>
+    </div>
+
+    <div class="comp-panel">
+      <div class="comp-panel-hdr">
+        <h4>Freehold vs Condominium</h4>
+        <p>Recent Meadowlands townhome sales · 2026</p>
+      </div>
+      <div class="comp-panel-body">
+        <div class="comp-metric"><span class="cm-lbl">Condo townhomes (avg, 1,563sf)</span><span class="cm-val green">$712K–$740K · 7–15 DOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">Condo fees (competing units)</span><span class="cm-val amber">$199–$642/mo</span></div>
+        <div class="comp-metric"><span class="cm-lbl">Freehold 2-storey (avg, 1,600sf)</span><span class="cm-val green">$660K–$801K · 8–41 DOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">Freehold monthly road fees</span><span class="cm-val green">$89–$125/mo only</span></div>
+        <div class="comp-metric"><span class="cm-lbl">4 Burgundy Grove condo fee</span><span class="cm-val green">$400/mo — below avg condo</span></div>
+        <div class="comp-insight"><strong>Subject's $400/mo fee is competitive</strong> vs other condo bungalofts in the market ($575–$702/mo). The lower fee adds ~$15–25K to effective buyer value. Freehold townhomes sell faster in this market due to no ongoing condo risk.</div>
+      </div>
+    </div>
+
+    <div class="comp-panel">
+      <div class="comp-panel-hdr">
+        <h4>Bungaloft vs Other Styles</h4>
+        <p>Style premium / discount analysis · Meadowlands</p>
+      </div>
+      <div class="comp-panel-body">
+        <div class="comp-metric"><span class="cm-lbl">Bungaloft condo (1,678–1,973sf)</span><span class="cm-val green">$725K–$915K sold</span></div>
+        <div class="comp-metric"><span class="cm-lbl">Bungaloft $/sqft range</span><span class="cm-val">$335–$404 AG</span></div>
+        <div class="comp-metric"><span class="cm-lbl">2-Storey condo (1,510–1,900sf)</span><span class="cm-val">$699K–$800K active</span></div>
+        <div class="comp-metric"><span class="cm-lbl">3-Storey freehold (1,510–1,671sf)</span><span class="cm-val">$650K–$689K sold</span></div>
+        <div class="comp-metric"><span class="cm-lbl">2-Storey freehold (1,503–1,933sf)</span><span class="cm-val">$660K–$830K sold</span></div>
+        <div class="comp-insight"><strong>Bungaloft is a premium product</strong> — main-floor primary living appeals strongly to downsizers and aging-in-place buyers. This buyer pool will pay $40–60K above a comparable 2-storey for the layout convenience. Key selling point for 4 Burgundy Grove.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOLD COMPS TABLE -->
+  <div class="sec-title">Sold Comparables<span>Meadowlands, Ancaster · Focus on Bungaloft + Key Townhomes · 2025–2026</span></div>
+  <table>
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>Style</th>
+        <th>Tenure</th>
+        <th class="num">AG SqFt</th>
+        <th>Garage</th>
+        <th class="num">Monthly Fee</th>
+        <th class="num">List</th>
+        <th class="num">Sold</th>
+        <th class="num">SP/LP</th>
+        <th class="num">CDOM</th>
+        <th>Notable</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="bl-row">
+        <td><strong>212 Stonehenge #24</strong><span class="tag tag-blue">Bungaloft</span></td>
+        <td>Bungaloft</td><td>Condo</td><td class="num">1,793</td><td>1-car</td>
+        <td class="num">$575</td><td class="num">$699,900</td><td class="num bold">$725,000</td>
+        <td class="num"><span style="color:var(--green);font-weight:700;">1.04</span></td>
+        <td class="num dom-green">11</td>
+        <td class="note">Main-flr primary, 3-pc ensuite, loft, corner gas FP. Best direct comp.</td>
+      </tr>
+      <tr class="bl-row">
+        <td><strong>212 Stonehenge #1</strong><span class="tag tag-blue">Bungaloft</span></td>
+        <td>Bungaloft</td><td>Condo</td><td class="num">1,973</td><td>2-car</td>
+        <td class="num">$642</td><td class="num">$765,000</td><td class="num bold">$740,000</td>
+        <td class="num">0.97</td>
+        <td class="num dom-amber">15/69</td>
+        <td class="note">End unit, vaulted ceilings, 2-car garage; started $829,500 Oct 2025</td>
+      </tr>
+      <tr class="bl-row">
+        <td><strong>43 Landscapes Trail</strong><span class="tag tag-blue">Bungaloft</span></td>
+        <td>Bungaloft</td><td>Condo</td><td class="num">2,733</td><td>2-car</td>
+        <td class="num">$702</td><td class="num">$979,000</td><td class="num bold">$915,000</td>
+        <td class="num dom-amber">0.93</td>
+        <td class="num dom-amber">63</td>
+        <td class="note">Much larger; 18-ft cathedral ceilings; conservation backing</td>
+      </tr>
+      <tr class="bl-row">
+        <td><strong>89 Toulon Ave</strong><span class="tag tag-gold">Same Complex</span></td>
+        <td>Bungaloft</td><td>Condo</td><td class="num">2,199</td><td>1-car</td>
+        <td class="num">$400</td><td class="num">$999,900</td><td class="num bold">$975,000</td>
+        <td class="num">0.97</td>
+        <td class="num dom-red">276</td>
+        <td class="note">Same complex (WSCP 484); 3,555 total sqft; premium custom finishes</td>
+      </tr>
+      <tr>
+        <td><strong>16 Olivia Place</strong></td>
+        <td>2-Storey</td><td>Freehold</td><td class="num">1,550</td><td>1.5-car</td>
+        <td class="num">none</td><td class="num">$799,900</td><td class="num bold">$801,100</td>
+        <td class="num dom-green">1.00</td>
+        <td class="num dom-green">8</td>
+        <td class="note">Renovated kitchen 2018, new HW floors 2025; loft; fast sale</td>
+      </tr>
+      <tr>
+        <td><strong>36 Heming Trail</strong></td>
+        <td>2-Storey</td><td>Freehold</td><td class="num">1,933</td><td>1-car</td>
+        <td class="num">none</td><td class="num">$849,900</td><td class="num bold">$830,000</td>
+        <td class="num">0.98</td>
+        <td class="num dom-amber">41</td>
+        <td class="note">Orig $884,900; fully updated, gas FP, granite kitchen</td>
+      </tr>
+      <tr>
+        <td><strong>60 Cloverleaf #31</strong></td>
+        <td>2-Storey</td><td>Condo</td><td class="num">1,562</td><td>1-car</td>
+        <td class="num">$313</td><td class="num">$719,900</td><td class="num bold">$712,000</td>
+        <td class="num">0.99</td>
+        <td class="num dom-green">7</td>
+        <td class="note">Designer renovated end unit; aggressively priced → fast sale</td>
+      </tr>
+      <tr>
+        <td><strong>92 Vinton Road</strong></td>
+        <td>2-Storey</td><td>Freehold</td><td class="num">1,593</td><td>1-car</td>
+        <td class="num">none</td><td class="num">$799,990</td><td class="num bold">$787,990</td>
+        <td class="num dom-green">0.99</td>
+        <td class="num dom-green">3</td>
+        <td class="note">Fully renovated Feb 2026; end unit; w/o basement</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ACTIVE COMPETITION TABLE -->
+  <div class="sec-title">Active Competition<span>Meadowlands, Ancaster · May 2026</span></div>
+  <table style="margin-bottom:14px;">
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>Style</th>
+        <th>Tenure</th>
+        <th class="num">AG SqFt</th>
+        <th>Garage</th>
+        <th class="num">Monthly Fee</th>
+        <th class="num">List Price</th>
+        <th class="num">CDOM</th>
+        <th>Notable</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>20 Barley Lane</strong></td>
+        <td>3-Storey</td><td>Freehold</td><td class="num">1,510</td><td>1-car</td>
+        <td class="num">$89</td><td class="num bold">$689,900</td>
+        <td class="num dom-amber">56/115</td>
+        <td class="note">End unit, finished w/o bsmt, quartz kitchen; slow mover</td>
+      </tr>
+      <tr>
+        <td><strong>60 Cloverleaf #43</strong></td>
+        <td>2-Storey</td><td>Condo</td><td class="num">1,510</td><td>1-car</td>
+        <td class="num">$303</td><td class="num bold">$699,900</td>
+        <td class="num dom-green">1</td>
+        <td class="note">New listing; end unit; loft den; hardwood; new to market</td>
+      </tr>
+      <tr>
+        <td><strong>90 Raymond #12</strong></td>
+        <td>2-Storey</td><td>Freehold</td><td class="num">1,603</td><td>1-car</td>
+        <td class="num">$125</td><td class="num bold">$769,900</td>
+        <td class="num dom-amber">86</td>
+        <td class="note">Orig $789,900; Cal. shutters, Cal. Closets; backing greenspace</td>
+      </tr>
+      <tr>
+        <td><strong>441 Stonehenge #33</strong></td>
+        <td>2-Storey</td><td>Condo</td><td class="num">1,900</td><td>1-car</td>
+        <td class="num">$476</td><td class="num bold">$799,900</td>
+        <td class="num dom-amber">25</td>
+        <td class="note">3 bed / 3 bath; upgraded kitchen; maint-free lifestyle pitch</td>
+      </tr>
+      <tr>
+        <td><strong>105 Oakhaven Place</strong></td>
+        <td>2-Storey</td><td>Condo</td><td class="num">2,004</td><td>1-car</td>
+        <td class="num">$395</td><td class="num bold">$863,600</td>
+        <td class="num dom-amber">3/63</td>
+        <td class="note">Turnkey end unit; 2,811 total sqft; 17 new windows 2026</td>
+      </tr>
+      <tr class="subj-row">
+        <td><strong>4 Burgundy Grove ★</strong><span class="tag tag-gold">Subject</span></td>
+        <td>Bungaloft</td><td>Condo</td><td class="num">1,678</td><td>1-car</td>
+        <td class="num">$400</td><td class="num">$849,900</td>
+        <td class="num">Active</td>
+        <td class="note">Exec. bungaloft; fin. bsmt; main-flr primary; patio; greenspace</td>
+      </tr>
+      <tr>
+        <td><strong>57 Banbury Drive</strong></td>
+        <td>2-Storey</td><td>Freehold</td><td class="num">1,682</td><td><strong>2-car</strong></td>
+        <td class="num">none</td><td class="num bold">$915,999</td>
+        <td class="num dom-amber">21</td>
+        <td class="note">2-car garage + oversized driveway; updated throughout; freehold</td>
+      </tr>
+      <tr>
+        <td><strong>441 Stonehenge #40</strong></td>
+        <td>2-Storey</td><td>Condo</td><td class="num">2,011</td><td><strong>2-car</strong></td>
+        <td class="num">$481</td><td class="num bold">$1,069,900</td>
+        <td class="num dom-green">3</td>
+        <td class="note">New listing; double garage, 2,648 total sqft; custom kitchen; gas stove</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- TAKEAWAYS -->
+  <div class="tkbox">
+    <h3>Seller Takeaways &amp; Repositioning Notes</h3>
+    <div class="tk-grid">
+      <div class="tk-item">
+        <div class="tk-num">01</div>
+        <div class="tk-title">Strategic Price Repositioning Drives Results</div>
+        <div class="tk-body">Comparable bungalofts are selling in 11–69 days at prices below the current ask. Repositioning to $769,900 aligns with active market data and brings this property squarely into the range where motivated buyers are writing offers. A sharper price generates momentum and multiple-offer opportunities.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">02</div>
+        <div class="tk-title">Bungaloft Is a Premium Product in This Market</div>
+        <div class="tk-body">Main-floor primary living commands a genuine premium vs 2-storey and 3-storey townhomes. Downsizers, retirees, and professionals actively seek this layout. Market this aggressively — the bungaloft form factor is the subject's strongest competitive advantage.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">03</div>
+        <div class="tk-title">$400/mo Fee Is Below-Average for This Product</div>
+        <div class="tk-body">Comparable bungaloft condos in Meadowlands carry $575–$702/mo fees. At $400/mo the subject saves buyers $175–$300/mo versus alternatives — translating to roughly $25–50K in purchasing power. This is a headline marketing point, not a footnote.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">04</div>
+        <div class="tk-title">1-Car Garage Is the Right Fit for This Buyer</div>
+        <div class="tk-body">In this mature, downsizer-driven complex, 2-car garages have proven to be a deterrent — buyers don't need or want the extra space, and larger units carry higher fees and costs. The subject's 1-car garage is precisely what the active buyer profile is seeking. Market this as a feature, not a compromise.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">05</div>
+        <div class="tk-title">Finished Basement Adds Real Value</div>
+        <div class="tk-body">Two additional bedrooms, a full bathroom, family room, and storage in the basement represent genuine extra living space — particularly vs bungaloft comps that are primarily AG-only products. This makes the effective $/sqft highly competitive vs the sold comps at $769,900.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">06</div>
+        <div class="tk-title">Expected Close: $785K – $805K</div>
+        <div class="tk-body">At $819,900, bungaloft condo SP/LP ratios (0.95–1.04) indicate a likely close range of $785K–$805K — a meaningful improvement on the Stonehenge-anchored analysis. Toulon's $975K same-complex sale is the quality reference; the repositioned price reflects size difference and delivers a credible, defensible ask for a motivated buyer who values what this unit offers.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="report-footer">
+  <div class="footer-brand">Woolcott Real Estate</div>
+  <div class="footer-text">This report is prepared for seller advisory purposes. All data sourced from MLS. Market conditions subject to change. Not a formal appraisal.</div>
+  <div class="footer-right">4 Burgundy Grove, Ancaster ON<br>May 2026</div>
+</div>
+
+</div>
+</body>
+</html>
