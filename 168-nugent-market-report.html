@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>168 Nugent Drive — Seller Market Valuation | Woolcott Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #1a2332;
+    --slate:  #2d3a4a;
+    --gold:   #c8a45c;
+    --gold-lt:#d9bc85;
+    --light:  #f5f2ec;
+    --warm:   #ede9e1;
+    --white:  #ffffff;
+    --text:   #1e2530;
+    --muted:  #5a6470;
+    --green:  #2e7d32;
+    --amber:  #b45309;
+    --red:    #9e2a2a;
+    --ltgrn:  #e8f5e9;
+    --ltred:  #fdecea;
+    --ltyel:  #fff8ed;
+    --ltblu:  #e3edf7;
+  }
+
+  body { font-family: 'DM Sans', sans-serif; font-size: 9.5pt; color: var(--text); background: var(--white); line-height: 1.45; }
+  .page { width: 8.5in; margin: 0 auto; background: var(--white); }
+  @media print { body { margin:0; } .page { width:100%; } }
+
+  /* HEADER */
+  .report-header { background: var(--navy); padding: 26px 36px 20px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .header-left .brand { font-family: 'DM Serif Display', serif; color: var(--gold); font-size: 11pt; letter-spacing: .04em; margin-bottom: 6px; }
+  .header-left .address { font-family: 'DM Serif Display', serif; color: var(--white); font-size: 21pt; line-height: 1.15; }
+  .header-left .sub { color: var(--gold-lt); font-size: 10pt; margin-top: 3px; font-weight: 300; letter-spacing: .02em; }
+  .header-right { text-align: right; }
+  .header-right .rtype { color: var(--gold); font-size: 7.5pt; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 3px; }
+  .header-right .rdate { color: rgba(255,255,255,.5); font-size: 8pt; margin-top: 6px; }
+  .gold-bar { height: 3px; background: linear-gradient(90deg, var(--gold) 0%, var(--gold-lt) 60%, transparent 100%); }
+
+  /* STATS BAR */
+  .stats-bar { background: var(--slate); display: flex; }
+  .stat-cell { flex: 1; padding: 10px 12px; border-right: 1px solid rgba(255,255,255,.1); text-align: center; }
+  .stat-cell:last-child { border-right: none; }
+  .stat-label { color: var(--gold); font-size: 6.5pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 2px; }
+  .stat-value { color: var(--white); font-size: 11.5pt; font-weight: 700; line-height: 1.1; }
+  .stat-sub { color: rgba(255,255,255,.5); font-size: 7pt; margin-top: 1px; }
+
+  /* BODY */
+  .body-wrap { padding: 20px 36px 16px; }
+
+  /* SECTION TITLES */
+  .sec-title { font-family: 'DM Serif Display', serif; font-size: 11pt; color: var(--navy); border-bottom: 1.5px solid var(--gold); padding-bottom: 4px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: baseline; }
+  .sec-title span { font-family: 'DM Sans', sans-serif; font-size: 7.5pt; font-weight: 400; color: var(--muted); }
+
+  /* TWO COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 16px; }
+
+  /* SPOTLIGHT */
+  .spotlight { background: var(--light); border-radius: 4px; padding: 14px 16px; }
+  .spotlight h3 { font-family: 'DM Serif Display', serif; font-size: 10pt; color: var(--navy); margin-bottom: 10px; }
+  .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 10px; }
+  .spec-item { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,.06); padding: 3px 0; font-size: 8.5pt; }
+  .spec-lbl { color: var(--muted); }
+  .spec-val { font-weight: 600; text-align: right; }
+  .spec-val.green { color: var(--green); }
+  .spec-val.amber { color: var(--amber); }
+  .spec-val.red { color: var(--red); }
+
+  /* INCOME BADGE */
+  .income-badge { background: var(--ltgrn); border: 1px solid #a5d6a7; border-radius: 4px; padding: 8px 12px; margin-top: 10px; font-size: 8pt; }
+  .income-badge .ib-title { font-weight: 700; color: var(--green); font-size: 8.5pt; margin-bottom: 3px; }
+  .income-badge .ib-note { color: #2e5c30; font-size: 7.5pt; margin-top: 3px; line-height: 1.4; }
+
+  /* VALUE TABLE */
+  .vtable { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-bottom: 12px; }
+  .vtable td { padding: 5px 8px; border-bottom: 1px solid rgba(0,0,0,.07); }
+  .vt-lbl { color: var(--text); }
+  .vt-num { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .vt-note { text-align: right; color: var(--muted); font-size: 7.5pt; white-space: nowrap; }
+  .vtable tr.total td { background: var(--navy); color: var(--white); font-weight: 700; font-size: 9pt; border-radius: 2px; }
+  .vtable tr.total .vt-num { color: var(--gold); font-size: 10pt; }
+
+  /* PRICE CALLOUT */
+  .price-callout { background: var(--navy); border-radius: 4px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+  .pc-label { color: var(--gold); font-size: 7pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 3px; }
+  .pc-price { color: var(--white); font-family: 'DM Serif Display', serif; font-size: 26pt; line-height: 1; }
+  .pc-range { color: var(--gold-lt); font-size: 8pt; margin-top: 4px; }
+  .pc-right { text-align: right; color: rgba(255,255,255,.7); font-size: 8pt; line-height: 1.7; }
+  .pc-right strong { color: var(--gold-lt); }
+
+  /* COMPARISON PANELS */
+  .comp-panels { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+  .comp-panel { border: 1px solid #ddd; border-radius: 4px; overflow: hidden; }
+  .comp-panel-hdr { background: var(--slate); padding: 8px 12px; }
+  .comp-panel-hdr h4 { color: var(--white); font-size: 9pt; font-weight: 600; }
+  .comp-panel-hdr p { color: var(--gold-lt); font-size: 7pt; margin-top: 2px; }
+  .comp-panel-body { padding: 10px 12px; background: var(--white); }
+  .comp-metric { display: flex; justify-content: space-between; align-items: center; padding: 3px 0; border-bottom: 1px solid #f0f0f0; font-size: 8pt; }
+  .cm-lbl { color: var(--muted); }
+  .cm-val { font-weight: 600; }
+  .cm-val.green { color: var(--green); }
+  .cm-val.amber { color: var(--amber); }
+  .cm-val.red { color: var(--red); }
+  .comp-insight { margin-top: 8px; font-size: 7.5pt; color: var(--text); line-height: 1.45; background: var(--light); padding: 7px 9px; border-radius: 3px; }
+
+  /* TABLES */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 8pt; margin-bottom: 16px; }
+  .data-table th { background: var(--navy); color: var(--white); padding: 6px 8px; text-align: left; font-size: 7pt; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+  .data-table th.num { text-align: right; }
+  .data-table td { padding: 5px 8px; border-bottom: 1px solid #eee; vertical-align: middle; }
+  .data-table tr:nth-child(even) td { background: #fafafa; }
+  .data-table tr.bungalow-row td { background: #e8f5e9 !important; }
+  .data-table tr.subj-row td { background: var(--ltyel) !important; border-left: 3px solid var(--gold); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .dom-amber { color: var(--amber); font-weight: 600; }
+  .dom-red { color: var(--red); font-weight: 600; }
+  .sp-lp-good { color: var(--green); font-weight: 600; }
+  .sp-lp-ok { color: var(--amber); font-weight: 600; }
+  .tag { font-size: 6.5pt; font-weight: 700; padding: 1px 5px; border-radius: 3px; margin-left: 4px; text-transform: uppercase; letter-spacing: .04em; }
+  .tag-green { background: #c8e6c9; color: #1b5e20; }
+  .tag-amber { background: #ffe0b2; color: #7c4a00; }
+  .tag-gold { background: #f5e6ca; color: #7c5a1a; }
+  .tag-blue { background: #bbdefb; color: #1a3a5c; }
+  .note { color: var(--muted); font-size: 7.5pt; }
+
+  /* TAKEAWAYS */
+  .tkbox { background: var(--navy); border-radius: 4px; padding: 18px 20px; margin-bottom: 0; }
+  .tkbox h3 { font-family: 'DM Serif Display', serif; color: var(--gold); font-size: 11pt; margin-bottom: 14px; }
+  .tk-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .tk-item { }
+  .tk-num { color: var(--gold); font-size: 7pt; font-weight: 700; letter-spacing: .1em; margin-bottom: 3px; }
+  .tk-title { color: var(--white); font-size: 8.5pt; font-weight: 600; margin-bottom: 5px; line-height: 1.3; }
+  .tk-body { color: rgba(255,255,255,.65); font-size: 7.5pt; line-height: 1.5; }
+
+  /* FOOTER */
+  .report-footer { background: var(--light); border-top: 2px solid var(--gold); padding: 12px 36px; display: flex; justify-content: space-between; align-items: center; font-size: 7.5pt; color: var(--muted); }
+  .footer-brand { font-family: 'DM Serif Display', serif; color: var(--navy); font-size: 10pt; }
+  .footer-right { text-align: right; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="report-header">
+  <div class="header-left">
+    <div class="brand">Woolcott Real Estate</div>
+    <div class="address">168 Nugent Drive</div>
+    <div class="sub">Kentley, Hamilton East (Hamilton), ON · L8H 2N4</div>
+  </div>
+  <div class="header-right">
+    <div class="rtype">Seller List Price Assessment</div>
+    <div style="color:var(--gold);font-family:'DM Serif Display',serif;font-size:14pt;">Freehold Bungalow</div>
+    <div class="rdate">Prepared May 2026 · Confidential</div>
+  </div>
+</div>
+<div class="gold-bar"></div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-cell"><div class="stat-label">Style</div><div class="stat-value">Bungalow</div><div class="stat-sub">Detached · Freehold</div></div>
+  <div class="stat-cell"><div class="stat-label">Above Grade</div><div class="stat-value">1,700 sqft</div><div class="stat-sub">Solid Brick</div></div>
+  <div class="stat-cell"><div class="stat-label">Bedrooms</div><div class="stat-value">2 + 2</div><div class="stat-sub">Main + Basement</div></div>
+  <div class="stat-cell"><div class="stat-label">Bathrooms</div><div class="stat-value">2 Full</div><div class="stat-sub">3-pc Each Level</div></div>
+  <div class="stat-cell"><div class="stat-label">Garage / Parking</div><div class="stat-value">1.5-Car</div><div class="stat-sub">Detached · 5 Driveway</div></div>
+  <div class="stat-cell"><div class="stat-label">Lot</div><div class="stat-value">49 × 100</div><div class="stat-sub">Rectangular · Urban</div></div>
+  <div class="stat-cell"><div class="stat-label">Seller Target</div><div class="stat-value" style="font-size:10pt;color:var(--gold);">$730K–$760K</div><div class="stat-sub">Price Review</div></div>
+</div>
+
+<!-- BODY -->
+<div class="body-wrap">
+
+  <!-- TWO COL: SPOTLIGHT + VALUE -->
+  <div class="two-col">
+    <div>
+      <div class="sec-title">Subject Property Spotlight<span>168 Nugent Dr · Kentley, Hamilton East</span></div>
+      <div class="spotlight">
+        <h3>Property Highlights</h3>
+        <div class="spec-grid">
+          <div class="spec-item"><span class="spec-lbl">Style</span><span class="spec-val">Bungalow, Detached</span></div>
+          <div class="spec-item"><span class="spec-lbl">Tenure</span><span class="spec-val">Freehold</span></div>
+          <div class="spec-item"><span class="spec-lbl">AG SqFt</span><span class="spec-val">1,700 sqft</span></div>
+          <div class="spec-item"><span class="spec-lbl">Lot</span><span class="spec-val">49 × 100 ft</span></div>
+          <div class="spec-item"><span class="spec-lbl">Main Floor</span><span class="spec-val">2 Bed · 1 Bath (3-pc)</span></div>
+          <div class="spec-item"><span class="spec-lbl">Primary Bed</span><span class="spec-val">12'7" × 19' — Oversized</span></div>
+          <div class="spec-item"><span class="spec-lbl">Main Kitchen</span><span class="spec-val">12' × 15' · Open Concept</span></div>
+          <div class="spec-item"><span class="spec-lbl">Living Room</span><span class="spec-val">19'11" × 11'6"</span></div>
+          <div class="spec-item"><span class="spec-lbl">Floors</span><span class="spec-val">Hardwood + Ceramics</span></div>
+          <div class="spec-item"><span class="spec-lbl">Lighting</span><span class="spec-val">Pot Lights Throughout</span></div>
+          <div class="spec-item"><span class="spec-lbl">Construction</span><span class="spec-val">Solid Brick + Conc. Block</span></div>
+          <div class="spec-item"><span class="spec-lbl">Garage</span><span class="spec-val">1.5-Car Detached</span></div>
+          <div class="spec-item"><span class="spec-lbl">Parking</span><span class="spec-val">5 Driveway Spaces</span></div>
+          <div class="spec-item"><span class="spec-lbl">Condition</span><span class="spec-val green">Well Updated</span></div>
+        </div>
+        <div class="income-badge" style="margin-top:10px;">
+          <div class="ib-title">Income-Potential Basement Suite</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px 10px;margin:5px 0 4px;">
+            <div style="font-size:8pt;"><strong>Layout:</strong> Kitchen · Dining · Living Room</div>
+            <div style="font-size:8pt;"><strong>Beds / Bath:</strong> 2 Bed · 1 Full 3-pc</div>
+            <div style="font-size:8pt;"><strong>Laundry:</strong> Shared</div>
+            <div style="font-size:8pt;"><strong>Est. Rent:</strong> $2,200–$2,300 / mo</div>
+          </div>
+          <div class="ib-note">Suite is not a registered legal apartment. Market as in-law suite / income potential. Estimated gross income $26,400–$27,600/yr — a meaningful mortgage offset for owner-occupier buyers.</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sec-title">Value Assessment<span>Anchored to same-street bungalow comps</span></div>
+      <table class="vtable">
+        <tbody>
+          <tr><td class="vt-lbl">Base: 135 Nugent Dr (bungalow, same street, 1,035 sqft, no suite)</td><td class="vt-num">$590,100</td><td class="vt-note">$570/sqft · 5 CDOM</td></tr>
+          <tr><td class="vt-lbl">Size adjustment: +665 sqft @ $215/sqft (marginal rate)</td><td class="vt-num">+$143,000</td><td class="vt-note">Subject 1,700 sqft AG</td></tr>
+          <tr><td class="vt-lbl">Income suite premium (2-bed, kitchen, dining, 3-pc bath)</td><td class="vt-num">+$20,000</td><td class="vt-note">Mortgage helper value</td></tr>
+          <tr><td class="vt-lbl">Updated condition (open concept, pot lights, HW floors)</td><td class="vt-num">+$8,000</td><td class="vt-note">vs. basic finish base</td></tr>
+          <tr><td class="vt-lbl">Non-legal suite (vs. registered legal)</td><td class="vt-num">Neutral</td><td class="vt-note">Priced into suite premium</td></tr>
+          <tr class="total"><td class="vt-lbl">Indicated Market Value</td><td class="vt-num">$761,000</td><td class="vt-note" style="color:rgba(255,255,255,.5);">±$20K</td></tr>
+        </tbody>
+      </table>
+
+      <div class="price-callout">
+        <div>
+          <div class="pc-label">Recommended List Price</div>
+          <div class="pc-price">$749,900</div>
+          <div class="pc-range">Expected close: <strong>$725K – $750K</strong></div>
+        </div>
+        <div class="pc-right">
+          <strong>Style:</strong> Bungalow · 1.5-car det. · Freehold<br>
+          <strong>$/sqft (AG):</strong> $441<br>
+          <strong>Seller target:</strong> $730K–$760K ✓<br>
+          <strong>Comparable SP/LP:</strong> 0.96–1.00
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARISON PANELS -->
+  <div class="sec-title" style="margin-bottom:10px;">Market Comparison Analysis<span>Bungalow vs Other Styles · Income Suite Impact · Active Competition</span></div>
+  <div class="comp-panels">
+
+    <div class="comp-panel">
+      <div class="comp-panel-hdr">
+        <h4>Bungalow Rarity Premium</h4>
+        <p>Single-storey detached · Kentley / Hamilton East</p>
+      </div>
+      <div class="comp-panel-body">
+        <div class="comp-metric"><span class="cm-lbl">135 Nugent (bungalow, 1,035 sqft)</span><span class="cm-val green">$590K · 5 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">131 Nash Rd N (bungalow, 1,049 sqft)</span><span class="cm-val green">$600K · 17 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">Bungalow avg $/sqft AG</span><span class="cm-val">~$571/sqft</span></div>
+        <div class="comp-metric"><span class="cm-lbl">Backsplit avg $/sqft AG (area)</span><span class="cm-val">$399–$589/sqft</span></div>
+        <div class="comp-metric"><span class="cm-lbl">Subject size advantage over comps</span><span class="cm-val green">+665 sqft</span></div>
+        <div class="comp-insight"><strong>Bungalows are rare in Kentley</strong> — only 2 recent bungalow sales to compare against, both smaller than the subject. Main-floor living appeals strongly to downsizers, retirees, and mobility-conscious buyers. Subject's 1,700 sqft footprint is exceptional for this style in the neighbourhood.</div>
+      </div>
+    </div>
+
+    <div class="comp-panel">
+      <div class="comp-panel-hdr">
+        <h4>Income Suite Impact</h4>
+        <p>Bungalow/backsplit comps with in-law suites</p>
+      </div>
+      <div class="comp-panel-body">
+        <div class="comp-metric"><span class="cm-lbl">131 Nash Rd N (bungalow + in-law suite)</span><span class="cm-val green">$600K · 17 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">90 Pottruff (backsplit + in-law + sep. ent.)</span><span class="cm-val green">$685K · 52 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">135 Nugent (bungalow, NO suite)</span><span class="cm-val">$590K · 5 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">Est. rental income (subject suite)</span><span class="cm-val amber">$2,200–$2,300/mo</span></div>
+        <div class="comp-metric"><span class="cm-lbl">Annual gross income</span><span class="cm-val amber">$26,400–$27,600/yr</span></div>
+        <div class="comp-insight"><strong>Income suite adds ~$20K</strong> in buyer-perceived value as a mortgage helper. Not a legal suite — marketing language should emphasize "in-law suite" or "income potential" and avoid claiming rental income guarantees or legal status.</div>
+      </div>
+    </div>
+
+    <div class="comp-panel">
+      <div class="comp-panel-hdr">
+        <h4>Active Comp Pricing Context</h4>
+        <p>Current listings in Kentley · May 2026</p>
+      </div>
+      <div class="comp-panel-body">
+        <div class="comp-metric"><span class="cm-lbl">68 Nugent Dr (backsplit, 1,613 sqft)</span><span class="cm-val">$749,777 · 9 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">15 Fairington (backsplit, 1,930 sqft)</span><span class="cm-val amber">$749,999 · 40 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">26 Adorn Court (backsplit, 1,851 sqft)</span><span class="cm-val">$759,900 · 17 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">2 Village Dr (4-level, 2,005 sqft)</span><span class="cm-val">$769,900 · 9 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">128 Nugent Dr (backsplit, 1,383 sqft)</span><span class="cm-val amber">$815,000 · 33 CDOM</span></div>
+        <div class="comp-insight"><strong>Active market is clustered $749K–$770K.</strong> Subject at $749,900 enters at the lower end of active pricing — competitive and credible. The bungalow premium and income suite differentiate it positively against backsplit and multi-level competition.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOLD COMPS TABLE -->
+  <div class="sec-title">Sold Comparables<span>Kentley / Hamilton East · Recent Sales · Bungalows Highlighted</span></div>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Address</th><th>Style</th><th>AG SqFt</th><th>Beds</th><th>Suite</th>
+        <th class="num">List Price</th><th class="num">Sold Price</th><th class="num">SP/LP</th><th class="num">CDOM</th><th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="bungalow-row">
+        <td><strong>135 Nugent Dr</strong><span class="tag tag-green">Same St.</span></td>
+        <td>Bungalow</td><td class="num">1,035</td><td>3+0</td><td>—</td>
+        <td class="num">$599,000</td><td class="num">$590,100</td>
+        <td class="num sp-lp-good">0.99</td><td class="num">5</td>
+        <td class="note">Basic finish; no income suite; solid brick; Apr 2026</td>
+      </tr>
+      <tr class="bungalow-row">
+        <td><strong>131 Nash Rd N</strong><span class="tag tag-green">Bungalow</span></td>
+        <td>Bungalow</td><td class="num">1,049</td><td>3+0</td><td>Yes</td>
+        <td class="num">$619,999</td><td class="num">$600,000</td>
+        <td class="num sp-lp-good">0.97</td><td class="num">17</td>
+        <td class="note">2nd kitchen + rec + 3-pc; sep. entrance; updated bath; Dec 2025</td>
+      </tr>
+      <tr>
+        <td><strong>11 Sandlyn Court</strong><span class="tag tag-blue">Renovated</span></td>
+        <td>Backsplit</td><td class="num">1,035</td><td>3+0</td><td>—</td>
+        <td class="num">$769,000</td><td class="num">$750,000</td>
+        <td class="num sp-lp-good">0.98</td><td class="num">12</td>
+        <td class="note">Custom walnut kitchen, gas range, pot filler, LVP; fully reno; Mar 2026</td>
+      </tr>
+      <tr>
+        <td><strong>90 Pottruff Rd N</strong></td>
+        <td>Backsplit</td><td class="num">1,151</td><td>3+1</td><td>Yes</td>
+        <td class="num">$699,000</td><td class="num">$685,000</td>
+        <td class="num sp-lp-good">0.98</td><td class="num dom-amber">52</td>
+        <td class="note">In-law suite + sep. entrance; kitchen + fam. rm + bed + bath; Apr 2026</td>
+      </tr>
+      <tr>
+        <td><strong>146 Nugent Dr</strong><span class="tag tag-green">Same St.</span></td>
+        <td>2-Storey</td><td class="num">1,605</td><td>4+0</td><td>—</td>
+        <td class="num">$699,900</td><td class="num">$700,000</td>
+        <td class="num sp-lp-good">1.00</td><td class="num dom-amber">52</td>
+        <td class="note">Steel roof, 2 gas fireplaces, sunroom, attached garage; Dec 2025</td>
+      </tr>
+      <tr>
+        <td><strong>350 Pottruff Rd N</strong></td>
+        <td>1.5-Storey</td><td class="num">1,377</td><td>3+1</td><td>Potential</td>
+        <td class="num">$749,900</td><td class="num">$725,000</td>
+        <td class="num sp-lp-good">0.97</td><td class="num dom-amber">43</td>
+        <td class="note">Sep. side entrance; in-law rough-in; 2+ car garage; pool; Dec 2025</td>
+      </tr>
+      <tr>
+        <td><strong>6 Cavalier Court</strong></td>
+        <td>Backsplit</td><td class="num">1,112</td><td>3+0</td><td>Partial</td>
+        <td class="num">$689,900</td><td class="num">$663,000</td>
+        <td class="num sp-lp-ok">0.96</td><td class="num dom-amber">38</td>
+        <td class="note">Estate sale; summer kitchen + fam. rm; pie lot; Apr 2026</td>
+      </tr>
+      <tr>
+        <td><strong>128 Nugent Dr</strong><span class="tag tag-green">Same St.</span></td>
+        <td>Backsplit</td><td class="num">1,383</td><td>3+1</td><td>—</td>
+        <td class="num">$839,900</td><td class="num">$815,000</td>
+        <td class="num sp-lp-good">0.97</td><td class="num">9</td>
+        <td class="note">Premium reno; granite, California shutters, fireplace; 2-car; Mar 2026</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ACTIVE COMPETITION TABLE -->
+  <div class="sec-title">Active Competition<span>Current Kentley Listings · May 2026</span></div>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Address</th><th>Style</th><th>AG SqFt</th><th>Beds</th>
+        <th class="num">List Price</th><th class="num">Orig. LP</th><th class="num">CDOM</th><th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="subj-row">
+        <td><strong>168 Nugent Dr ★</strong><span class="tag tag-gold">Subject</span></td>
+        <td>Bungalow</td><td class="num">1,700</td><td>2+2</td>
+        <td class="num">$749,900</td><td class="num">—</td>
+        <td class="num">New</td>
+        <td class="note">Bungalow; income suite; open concept; 1.5-car det. garage</td>
+      </tr>
+      <tr>
+        <td><strong>68 Nugent Dr</strong><span class="tag tag-green">Same St.</span></td>
+        <td>Backsplit</td><td class="num">1,613</td><td>3+1</td>
+        <td class="num">$749,777</td><td class="num">$749,777</td>
+        <td class="num">9</td>
+        <td class="note">Corner lot; went conditional then back on market; granite kitchen</td>
+      </tr>
+      <tr>
+        <td><strong>15 Fairington Cres</strong></td>
+        <td>Backsplit</td><td class="num">1,930</td><td>3+0</td>
+        <td class="num">$749,999</td><td class="num">$819,900</td>
+        <td class="num dom-amber">40</td>
+        <td class="note">Reduced $70K; 2nd kitchen + lower suite; vacant</td>
+      </tr>
+      <tr>
+        <td><strong>26 Adorn Court</strong></td>
+        <td>Backsplit</td><td class="num">1,851</td><td>3+0</td>
+        <td class="num">$759,900</td><td class="num">$759,900</td>
+        <td class="num">17</td>
+        <td class="note">In-law suite potential; solid brick; court location</td>
+      </tr>
+      <tr>
+        <td><strong>2 Village Drive</strong></td>
+        <td>4-Level</td><td class="num">2,005</td><td>3+1</td>
+        <td class="num">$769,900</td><td class="num">$769,900</td>
+        <td class="num">9</td>
+        <td class="note">2 kitchens; tenanted; in-law potential; multiple entrances</td>
+      </tr>
+      <tr>
+        <td><strong>128 Nugent Dr</strong><span class="tag tag-green">Same St.</span></td>
+        <td>Backsplit</td><td class="num">1,383</td><td>3+1</td>
+        <td class="num">$815,000</td><td class="num">$839,900</td>
+        <td class="num dom-amber">33</td>
+        <td class="note">Same prop sold $815K Mar 2026; currently relisted; premium finishes</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- TAKEAWAYS -->
+  <div class="tkbox">
+    <h3>Seller Takeaways &amp; Positioning Notes</h3>
+    <div class="tk-grid">
+      <div class="tk-item">
+        <div class="tk-num">01</div>
+        <div class="tk-title">$749,900 Hits the Seller's Target Range</div>
+        <div class="tk-body">The $730K–$760K seller target is well-supported by comps. At $749,900, the subject enters at the lower end of active competition while commanding a justified bungalow premium. SP/LP ratios in the neighbourhood (0.96–1.00) support a close between $725K and $750K — within target.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">02</div>
+        <div class="tk-title">Bungalow on Nugent Dr Is a Rare Product</div>
+        <div class="tk-body">Only two bungalow sales in recent data — both smaller than the subject and both sold in under 17 days. Buyers seeking single-floor living in Kentley have very limited options. The subject's 1,700 sqft AG footprint, open concept layout, and oversized primary bedroom position it as the premium bungalow available.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">03</div>
+        <div class="tk-title">Lead with the Mortgage Helper Story</div>
+        <div class="tk-body">$2,200–$2,300/mo in potential rental income ($27K/yr) is a compelling owner-occupier story. Market as "in-law suite" or "income potential" — not as a legal rental unit. Buyers will factor this into affordability calculations, widening the qualified buyer pool significantly.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">04</div>
+        <div class="tk-title">Stands Out Against Backsplit Competition</div>
+        <div class="tk-body">All five active competitors are backsplits or multi-level homes. The subject's single-floor living differentiates it for buyers who want step-free main floor access — downsizers, retirees, and those with mobility considerations. These buyers are specifically searching for a bungalow and will not be distracted by multi-level alternatives.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">05</div>
+        <div class="tk-title">Condition and Finishes Justify the Premium</div>
+        <div class="tk-body">The comparable 135 Nugent (same street, basic finish, no suite) sold for $590K. The subject's updated condition — pot lights, hardwood floors, ceramics, open-concept main floor — plus the income suite justifies a $160K premium above that comp. Ensure the presentation reflects this: professional photos, staged main floor, clean suite entrance.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">06</div>
+        <div class="tk-title">Expected Close: $725K – $750K</div>
+        <div class="tk-body">At $749,900, neighbourhood SP/LP ratios of 0.96–1.00 point to a close range of $720K–$750K. The fresh listing with competitive pricing should generate early showings. Market to two buyer profiles: (1) downsizer/retiree seeking main-floor bungalow; (2) owner-occupier seeking income suite to offset carrying costs.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="report-footer">
+  <div class="footer-brand">Woolcott Real Estate</div>
+  <div class="footer-text">This report is prepared for seller advisory purposes. All data sourced from MLS. Market conditions subject to change. Not a formal appraisal. Income suite is not a registered legal apartment — language subject to marketing review.</div>
+  <div class="footer-right">168 Nugent Drive, Hamilton ON<br>May 2026</div>
+</div>
+
+</div>
+</body>
+</html>
