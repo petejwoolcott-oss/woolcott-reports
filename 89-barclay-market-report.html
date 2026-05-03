@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>89 Barclay Street — Seller Market Valuation | Woolcott Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:#1a2332; --slate:#2d3a4a; --gold:#c8a45c; --gold-lt:#d9bc85;
+    --light:#f5f2ec; --warm:#ede9e1; --white:#ffffff; --text:#1e2530;
+    --muted:#5a6470; --green:#2e7d32; --amber:#b45309; --red:#9e2a2a;
+    --ltgrn:#e8f5e9; --ltred:#fdecea; --ltyel:#fff8ed; --ltblu:#e3edf7;
+  }
+  body { font-family:'DM Sans',sans-serif; font-size:9.5pt; color:var(--text); background:var(--white); line-height:1.45; }
+  .page { width:8.5in; margin:0 auto; background:var(--white); }
+  @media print { body{margin:0;} .page{width:100%;} }
+
+  .report-header { background:var(--navy); padding:26px 36px 20px; display:flex; justify-content:space-between; align-items:flex-end; }
+  .header-left .brand { font-family:'DM Serif Display',serif; color:var(--gold); font-size:11pt; letter-spacing:.04em; margin-bottom:6px; }
+  .header-left .address { font-family:'DM Serif Display',serif; color:var(--white); font-size:21pt; line-height:1.15; }
+  .header-left .sub { color:var(--gold-lt); font-size:10pt; margin-top:3px; font-weight:300; letter-spacing:.02em; }
+  .header-right { text-align:right; }
+  .header-right .rtype { color:var(--gold); font-size:7.5pt; font-weight:700; letter-spacing:.12em; text-transform:uppercase; margin-bottom:3px; }
+  .header-right .rdate { color:rgba(255,255,255,.5); font-size:8pt; margin-top:6px; }
+  .gold-bar { height:3px; background:linear-gradient(90deg,var(--gold) 0%,var(--gold-lt) 60%,transparent 100%); }
+
+  .stats-bar { background:var(--slate); display:flex; }
+  .stat-cell { flex:1; padding:10px 12px; border-right:1px solid rgba(255,255,255,.1); text-align:center; }
+  .stat-cell:last-child { border-right:none; }
+  .stat-label { color:var(--gold); font-size:6.5pt; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:2px; }
+  .stat-value { color:var(--white); font-size:11.5pt; font-weight:700; line-height:1.1; }
+  .stat-sub { color:rgba(255,255,255,.5); font-size:7pt; margin-top:1px; }
+
+  .body-wrap { padding:20px 36px 16px; }
+  .sec-title { font-family:'DM Serif Display',serif; font-size:11pt; color:var(--navy); border-bottom:1.5px solid var(--gold); padding-bottom:4px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:baseline; }
+  .sec-title span { font-family:'DM Sans',sans-serif; font-size:7.5pt; font-weight:400; color:var(--muted); }
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:16px; }
+
+  .spotlight { background:var(--light); border-radius:4px; padding:14px 16px; }
+  .spotlight h3 { font-family:'DM Serif Display',serif; font-size:10pt; color:var(--navy); margin-bottom:10px; }
+  .spec-grid { display:grid; grid-template-columns:1fr 1fr; gap:3px 10px; }
+  .spec-item { display:flex; justify-content:space-between; border-bottom:1px solid rgba(0,0,0,.06); padding:3px 0; font-size:8.5pt; }
+  .spec-lbl { color:var(--muted); }
+  .spec-val { font-weight:600; text-align:right; }
+  .spec-val.green { color:var(--green); }
+  .spec-val.amber { color:var(--amber); }
+
+  .vtable { width:100%; border-collapse:collapse; font-size:8.5pt; margin-bottom:12px; }
+  .vtable td { padding:5px 8px; border-bottom:1px solid rgba(0,0,0,.07); }
+  .vt-lbl { color:var(--text); }
+  .vt-num { text-align:right; font-weight:700; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .vt-note { text-align:right; color:var(--muted); font-size:7.5pt; white-space:nowrap; }
+  .vtable tr.total td { background:var(--navy); color:var(--white); font-weight:700; font-size:9pt; }
+  .vtable tr.total .vt-num { color:var(--gold); font-size:10pt; }
+
+  .price-callout { background:var(--navy); border-radius:4px; padding:14px 16px; display:flex; justify-content:space-between; align-items:center; margin-top:12px; }
+  .pc-label { color:var(--gold); font-size:7pt; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:3px; }
+  .pc-price { color:var(--white); font-family:'DM Serif Display',serif; font-size:26pt; line-height:1; }
+  .pc-range { color:var(--gold-lt); font-size:8pt; margin-top:4px; }
+  .pc-right { text-align:right; color:rgba(255,255,255,.7); font-size:8pt; line-height:1.7; }
+  .pc-right strong { color:var(--gold-lt); }
+
+  /* 2-PC IMPACT STRIP */
+  .impact-strip { display:grid; grid-template-columns:1fr auto 1fr auto 1fr; gap:0; margin:12px 0 16px; border:1px solid #ddd; border-radius:4px; overflow:hidden; }
+  .impact-cell { padding:10px 14px; text-align:center; background:var(--white); }
+  .impact-cell.before { background:#fdecea; }
+  .impact-cell.after { background:#e8f5e9; }
+  .impact-cell.invest { background:var(--ltyel); }
+  .impact-arrow { display:flex; align-items:center; justify-content:center; background:#f0f0f0; padding:0 10px; font-size:14pt; color:var(--muted); border-left:1px solid #ddd; border-right:1px solid #ddd; }
+  .impact-lbl { font-size:6.5pt; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:3px; }
+  .impact-val { font-family:'DM Serif Display',serif; font-size:14pt; line-height:1.1; color:var(--navy); }
+  .impact-sub { font-size:7pt; color:var(--muted); margin-top:2px; }
+  .impact-delta { font-size:8pt; font-weight:700; margin-top:4px; }
+  .impact-delta.pos { color:var(--green); }
+  .impact-delta.neu { color:var(--amber); }
+
+  /* 2-PC ANALYSIS BANNER */
+  .bath-panel { border:2px solid var(--gold); border-radius:4px; margin-bottom:16px; overflow:hidden; }
+  .bath-panel-hdr { background:var(--gold); padding:8px 14px; display:flex; justify-content:space-between; align-items:center; }
+  .bath-panel-hdr h4 { font-family:'DM Serif Display',serif; color:var(--navy); font-size:11pt; }
+  .bath-panel-hdr .verdict { background:var(--navy); color:var(--gold); font-size:8pt; font-weight:700; padding:3px 10px; border-radius:3px; letter-spacing:.04em; }
+  .bath-panel-body { padding:14px 16px; background:var(--white); display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+  .bath-col h5 { color:var(--navy); font-size:8.5pt; font-weight:700; margin-bottom:6px; border-bottom:1px solid #ddd; padding-bottom:4px; }
+  .bath-col p { font-size:8pt; color:var(--text); line-height:1.5; }
+  .bath-col .verdict-yes { color:var(--green); font-weight:700; font-size:8.5pt; margin-top:6px; }
+  .bath-col .verdict-cav { color:var(--amber); font-weight:700; font-size:8.5pt; margin-top:6px; }
+
+  .comp-panels { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+  .comp-panel { border:1px solid #ddd; border-radius:4px; overflow:hidden; }
+  .comp-panel-hdr { background:var(--slate); padding:8px 12px; }
+  .comp-panel-hdr h4 { color:var(--white); font-size:9pt; font-weight:600; }
+  .comp-panel-hdr p { color:var(--gold-lt); font-size:7pt; margin-top:2px; }
+  .comp-panel-body { padding:10px 12px; background:var(--white); }
+  .comp-metric { display:flex; justify-content:space-between; align-items:center; padding:3px 0; border-bottom:1px solid #f0f0f0; font-size:8pt; }
+  .cm-lbl { color:var(--muted); }
+  .cm-val { font-weight:600; }
+  .cm-val.green { color:var(--green); }
+  .cm-val.amber { color:var(--amber); }
+  .cm-val.red { color:var(--red); }
+  .comp-insight { margin-top:8px; font-size:7.5pt; color:var(--text); line-height:1.45; background:var(--light); padding:7px 9px; border-radius:3px; }
+
+  .data-table { width:100%; border-collapse:collapse; font-size:8pt; margin-bottom:16px; }
+  .data-table th { background:var(--navy); color:var(--white); padding:6px 8px; text-align:left; font-size:7pt; font-weight:600; letter-spacing:.04em; text-transform:uppercase; }
+  .data-table th.num { text-align:right; }
+  .data-table td { padding:5px 8px; border-bottom:1px solid #eee; vertical-align:middle; }
+  .data-table tr:nth-child(even) td { background:#fafafa; }
+  .data-table tr.highlight td { background:#e8f5e9 !important; }
+  .data-table tr.subj-row td { background:var(--ltyel) !important; border-left:3px solid var(--gold); }
+  .num { text-align:right; font-variant-numeric:tabular-nums; }
+  .dom-amber { color:var(--amber); font-weight:600; }
+  .dom-red { color:var(--red); font-weight:600; }
+  .sp-lp-good { color:var(--green); font-weight:600; }
+  .sp-lp-ok { color:var(--amber); font-weight:600; }
+  .tag { font-size:6.5pt; font-weight:700; padding:1px 5px; border-radius:3px; margin-left:4px; text-transform:uppercase; letter-spacing:.04em; }
+  .tag-green { background:#c8e6c9; color:#1b5e20; }
+  .tag-amber { background:#ffe0b2; color:#7c4a00; }
+  .tag-gold { background:#f5e6ca; color:#7c5a1a; }
+  .tag-blue { background:#bbdefb; color:#1a3a5c; }
+  .note { color:var(--muted); font-size:7.5pt; }
+
+  .tkbox { background:var(--navy); border-radius:4px; padding:18px 20px; margin-bottom:0; }
+  .tkbox h3 { font-family:'DM Serif Display',serif; color:var(--gold); font-size:11pt; margin-bottom:14px; }
+  .tk-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+  .tk-num { color:var(--gold); font-size:7pt; font-weight:700; letter-spacing:.1em; margin-bottom:3px; }
+  .tk-title { color:var(--white); font-size:8.5pt; font-weight:600; margin-bottom:5px; line-height:1.3; }
+  .tk-body { color:rgba(255,255,255,.65); font-size:7.5pt; line-height:1.5; }
+
+  .report-footer { background:var(--light); border-top:2px solid var(--gold); padding:12px 36px; display:flex; justify-content:space-between; align-items:center; font-size:7.5pt; color:var(--muted); }
+  .footer-brand { font-family:'DM Serif Display',serif; color:var(--navy); font-size:10pt; }
+  .footer-right { text-align:right; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="report-header">
+  <div class="header-left">
+    <div class="brand">Woolcott Real Estate</div>
+    <div class="address">89 Barclay Street</div>
+    <div class="sub">Westdale South, Hamilton, ON · L8S 1P3</div>
+  </div>
+  <div class="header-right">
+    <div class="rtype">Seller List Price Assessment</div>
+    <div style="color:var(--gold);font-family:'DM Serif Display',serif;font-size:14pt;">Freehold 2-Storey</div>
+    <div class="rdate">Prepared May 2026 · Confidential</div>
+  </div>
+</div>
+<div class="gold-bar"></div>
+
+<div class="stats-bar">
+  <div class="stat-cell"><div class="stat-label">Style</div><div class="stat-value">2-Storey</div><div class="stat-sub">Detached · Freehold</div></div>
+  <div class="stat-cell"><div class="stat-label">Above Grade</div><div class="stat-value">1,408 sqft</div><div class="stat-sub">Solid Brick</div></div>
+  <div class="stat-cell"><div class="stat-label">Bedrooms</div><div class="stat-value">3</div><div class="stat-sub">All Upper Level</div></div>
+  <div class="stat-cell"><div class="stat-label">Bathrooms</div><div class="stat-value">1 + 1</div><div class="stat-sub">4-pc Upper · 2-pc Basement</div></div>
+  <div class="stat-cell"><div class="stat-label">Parking</div><div class="stat-value">2-Car</div><div class="stat-sub">No Garage · Driveway</div></div>
+  <div class="stat-cell"><div class="stat-label">Lot</div><div class="stat-value">37.7 × 100</div><div class="stat-sub">Rectangular · Freehold</div></div>
+  <div class="stat-cell"><div class="stat-label">Condition</div><div class="stat-value" style="font-size:10pt;color:var(--gold);">Well Updated</div><div class="stat-sub">Kitchen '21 · Roof '22</div></div>
+</div>
+
+<div class="body-wrap">
+
+  <!-- TWO COL -->
+  <div class="two-col">
+    <div>
+      <div class="sec-title">Subject Property Spotlight<span>89 Barclay St · Westdale South</span></div>
+      <div class="spotlight">
+        <h3>Property Highlights</h3>
+        <div class="spec-grid">
+          <div class="spec-item"><span class="spec-lbl">Style</span><span class="spec-val">2-Storey, Detached</span></div>
+          <div class="spec-item"><span class="spec-lbl">Tenure</span><span class="spec-val">Freehold</span></div>
+          <div class="spec-item"><span class="spec-lbl">AG SqFt</span><span class="spec-val">1,408 sqft</span></div>
+          <div class="spec-item"><span class="spec-lbl">Lot</span><span class="spec-val">37.7 × 100.2 ft</span></div>
+          <div class="spec-item"><span class="spec-lbl">Bedrooms</span><span class="spec-val">3 (all upper)</span></div>
+          <div class="spec-item"><span class="spec-lbl">Bathrooms</span><span class="spec-val">1+1 (upper 4-pc + bsmt 2-pc)</span></div>
+          <div class="spec-item"><span class="spec-lbl">Basement</span><span class="spec-val">Laundry + Storage + 2-pc Bath</span></div>
+          <div class="spec-item"><span class="spec-lbl">Parking</span><span class="spec-val">2-car driveway</span></div>
+          <div class="spec-item"><span class="spec-lbl">Kitchen</span><span class="spec-val green">New 2021</span></div>
+          <div class="spec-item"><span class="spec-lbl">Roof</span><span class="spec-val green">Replaced 2022</span></div>
+          <div class="spec-item"><span class="spec-lbl">Windows</span><span class="spec-val green">Replaced 2019</span></div>
+          <div class="spec-item"><span class="spec-lbl">Furnace / HWT</span><span class="spec-val amber">2005 (21 yrs)</span></div>
+          <div class="spec-item"><span class="spec-lbl">Finishes</span><span class="spec-val">Nicely Updated</span></div>
+          <div class="spec-item"><span class="spec-lbl">Prev. Listing</span><span class="spec-val">None on MLS</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sec-title">Value Assessment<span>Anchored to recent Westdale 2-storey solds</span></div>
+      <table class="vtable">
+        <tbody>
+          <tr><td class="vt-lbl">Base: 86 Dromore Cres (2.5-sty, 1,470 sqft, 1 bath, original finishes)</td><td class="vt-num">$845,000</td><td class="vt-note">$575/sqft · 22 CDOM</td></tr>
+          <tr><td class="vt-lbl">Size adjustment: −62 sqft @ $575/sqft (subject is smaller)</td><td class="vt-num">−$36,000</td><td class="vt-note">1,408 vs 1,470 sqft</td></tr>
+          <tr><td class="vt-lbl">Condition premium: kitchen '21, roof '22, windows '19 vs original comp</td><td class="vt-num">+$20,000</td><td class="vt-note">Updated vs vintage</td></tr>
+          <tr><td class="vt-lbl">Bath: 1+1 (upper 4-pc + basement 2-pc off kitchen rough-in): residual gap vs main-floor powder</td><td class="vt-num">−$5,000</td><td class="vt-note">vs full 2-bath peers</td></tr>
+          <tr><td class="vt-lbl">No garage (2-car driveway): consistent with Westdale norm</td><td class="vt-num">Neutral</td><td class="vt-note">Area standard</td></tr>
+          <tr><td class="vt-lbl">Basement (laundry + storage + 2-pc bath): functional, no finishing deficit</td><td class="vt-num">Neutral</td><td class="vt-note">Functional use</td></tr>
+          <tr class="total"><td class="vt-lbl">Indicated Market Value</td><td class="vt-num">$824,000</td><td class="vt-note" style="color:rgba(255,255,255,.5);">±$20K</td></tr>
+        </tbody>
+      </table>
+
+      <div class="price-callout">
+        <div>
+          <div class="pc-label">Recommended List Price</div>
+          <div class="pc-price">$864,900</div>
+          <div class="pc-range">Expected close: <strong>$825K – $855K</strong></div>
+        </div>
+        <div class="pc-right">
+          <strong>Style:</strong> 2-Storey · No garage · Freehold<br>
+          <strong>$/sqft (AG):</strong> $614<br>
+          <strong>First-time listed · 1+1 baths</strong><br>
+          <strong>Comparable SP/LP:</strong> 0.96–1.00
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2-PC VALUE IMPACT STRIP -->
+  <div class="impact-strip">
+    <div class="impact-cell before">
+      <div class="impact-lbl">Without 2-pc Bathroom</div>
+      <div class="impact-val">$849,900</div>
+      <div class="impact-sub">List price · 1 bath only</div>
+      <div class="impact-delta neu">Close: $815K–$845K</div>
+    </div>
+    <div class="impact-arrow">→</div>
+    <div class="impact-cell invest">
+      <div class="impact-lbl">Investment</div>
+      <div class="impact-val">$5,000</div>
+      <div class="impact-sub">Fixtures + tile + labour</div>
+      <div class="impact-delta neu">Rough-in confirmed ✓</div>
+    </div>
+    <div class="impact-arrow">→</div>
+    <div class="impact-cell after">
+      <div class="impact-lbl">With 2-pc Added</div>
+      <div class="impact-val">$864,900</div>
+      <div class="impact-sub">List price · 1+1 baths</div>
+      <div class="impact-delta pos">Close: $825K–$855K · +$15K list</div>
+    </div>
+  </div>
+
+  <!-- 2-PC BATHROOM ANALYSIS -->
+  <div class="bath-panel">
+    <div class="bath-panel-hdr">
+      <h4>Basement 2-pc Bathroom: Rough-In Confirmed · Pricing Updated to $864,900</h4>
+      <div class="verdict">✓ Proceeding — Added to Specs</div>
+    </div>
+    <div class="bath-panel-body">
+      <div class="bath-col">
+        <h5>What the Comp Data Shows</h5>
+        <p>Every comparable Westdale sale with 2+ baths significantly outperformed single-bath homes on both price and days on market. 68 Bond St (fully reno, 2 baths) sold $889K in 8 days. 20 Arkell (nicely updated, 2 baths) sold $870K. In contrast, 86 Dromore (1 bath, original) sold $845K in 22 days. The bath differential in this market is roughly $20–40K, depending on quality and location of the second bathroom.</p>
+        <div class="verdict-yes">Market gap: ~$20–40K for 2nd bathroom</div>
+      </div>
+      <div class="bath-col">
+        <h5>Value of a Basement 2-pc Specifically</h5>
+        <p>A basement 2-pc is less valuable than a main-floor powder room — buyers prioritize accessible guest convenience over a tucked-away basement toilet. However, it still enables the listing to market as "2 bathrooms," which meaningfully widens the buyer pool and moves the conversation past the single-bath objection. A basement 2-pc at 89 Barclay is estimated to add $10–15K in sale price, likely more in showing traffic and offer competition.</p>
+        <div class="verdict-yes">Estimated value add: $10,000–$15,000</div>
+      </div>
+      <div class="bath-col">
+        <h5>Confirmed: Rough-In Present · Off-Kitchen Location</h5>
+        <p>Rough-in is confirmed and the location is off the kitchen — the most logical and accessible placement in the home. This means $5K covers fixtures, minor tile, and labour only. No new plumbing runs required. The location adjacent to the kitchen maximizes utility perception for buyers and avoids the "tucked-away" objection common to far-corner basement baths.</p>
+        <div class="verdict-yes">✓ ROI confirmed: ~2–3× on $5K spend</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARISON PANELS -->
+  <div class="sec-title" style="margin-bottom:10px;">Market Context<span>Bath Count Impact · Condition Premium · Westdale Pricing Range</span></div>
+  <div class="comp-panels">
+    <div class="comp-panel">
+      <div class="comp-panel-hdr">
+        <h4>1 Bath vs 2 Baths: Westdale Data</h4>
+        <p>Recent sales · bath count vs price · same neighbourhood</p>
+      </div>
+      <div class="comp-panel-body">
+        <div class="comp-metric"><span class="cm-lbl">68 Bond St S (2-sty, 1,474 sqft, 2 baths, full reno)</span><span class="cm-val green">$889K · 8 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">20 Arkell St (1.5-sty, 1,327 sqft, 2 baths, updated)</span><span class="cm-val green">$870K · 86 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">86 Dromore Cres (2.5-sty, 1,470 sqft, 1 bath, original)</span><span class="cm-val amber">$845K · 22 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">131 Barclay (2.5-sty, 1,800 sqft, 3 baths, original)</span><span class="cm-val amber">$815K · 31 CDOM</span></div>
+        <div class="comp-insight"><strong>Adding a 2nd bathroom matters.</strong> 2-bath homes consistently outperform — both in price and speed. The $5K basement 2-pc (if rough-in exists) effectively positions 89 Barclay alongside the $870–$889K comparable set rather than the $845K single-bath tier.</div>
+      </div>
+    </div>
+
+    <div class="comp-panel">
+      <div class="comp-panel-hdr">
+        <h4>Condition Premium in Westdale</h4>
+        <p>Updated vs original finish impact · 2025–2026 sales</p>
+      </div>
+      <div class="comp-panel-body">
+        <div class="comp-metric"><span class="cm-lbl">68 Bond St (full gut reno — quartz, baths, HW)</span><span class="cm-val green">$889K · SP/LP 1.00</span></div>
+        <div class="comp-metric"><span class="cm-lbl">20 Arkell St (nicely renovated, pot lights, granite)</span><span class="cm-val green">$870K · SP/LP 0.97</span></div>
+        <div class="comp-metric"><span class="cm-lbl">89 Barclay (updated — kitchen '21, roof '22, windows '19)</span><span class="cm-val amber">Subject · estimated</span></div>
+        <div class="comp-metric"><span class="cm-lbl">86 Dromore (original finishes, character intact)</span><span class="cm-val amber">$845K · SP/LP 0.97</span></div>
+        <div class="comp-metric"><span class="cm-lbl">88 Cline Ave N (dated, 83 CDOM)</span><span class="cm-val red">$811K · SP/LP 0.93</span></div>
+        <div class="comp-insight">Subject sits between "original" and "fully renovated" — meaningfully updated but not a gut reno. Pricing should reflect that distinction clearly. Furnace/HWT at 2005 (21 yrs) is a minor caveat buyers may flag; disclose proactively.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOLD COMPS TABLE -->
+  <div class="sec-title">Sold Comparables<span>Westdale South / Barclay Street · 2025–2026 · Most Recent First</span></div>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Address</th><th>Style</th><th>AG SqFt</th><th>Bed</th><th>Bath</th>
+        <th class="num">List Price</th><th class="num">Sold Price</th><th class="num">SP/LP</th><th class="num">CDOM</th><th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="highlight">
+        <td><strong>131 Barclay St</strong><span class="tag tag-green">Same St.</span></td>
+        <td>2.5-Storey</td><td class="num">1,800</td><td>4</td><td>3 (main 2-pc · upper 5-pc · bsmt 2-pc)</td>
+        <td class="num">$849,900</td><td class="num">$815,000</td>
+        <td class="num sp-lp-ok">0.96</td><td class="num dom-amber">31</td>
+        <td class="note">Same family 50+ yrs; family rm addition; classic Westdale; May 2026</td>
+      </tr>
+      <tr>
+        <td><strong>88 Cline Ave N</strong></td>
+        <td>2.5-Storey</td><td class="num">1,664</td><td>4</td><td>3 (upper 4-pc · 3rd 3-pc · bsmt 2-pc)</td>
+        <td class="num">$869,900</td><td class="num">$810,796</td>
+        <td class="num sp-lp-ok">0.93</td><td class="num dom-red">83</td>
+        <td class="note">Prev listed $949,900; detached garage; Apr 2026</td>
+      </tr>
+      <tr>
+        <td><strong>20 Arkell St</strong></td>
+        <td>1.5-Storey</td><td class="num">1,327</td><td>3</td><td>2 (main 2-pc · upper 4-pc)</td>
+        <td class="num">$899,900</td><td class="num">$870,000</td>
+        <td class="num sp-lp-good">0.97</td><td class="num dom-red">86</td>
+        <td class="note">Nicely updated; pot lights; granite kitchen; quartz bath; Apr 2026</td>
+      </tr>
+      <tr class="highlight">
+        <td><strong>9 Barclay St</strong><span class="tag tag-green">Same St.</span></td>
+        <td>2.5-Storey</td><td class="num">1,776</td><td>4+1</td><td>3 (main 2-pc · upper 4-pc · bsmt 3-pc)</td>
+        <td class="num">$899,800</td><td class="num">$885,000</td>
+        <td class="num sp-lp-good">0.98</td><td class="num">11</td>
+        <td class="note">Investment property; basement suite w/ sep. entrance; tenanted; Feb 2026</td>
+      </tr>
+      <tr>
+        <td><strong>68 Bond St S</strong><span class="tag tag-blue">Best Reno</span></td>
+        <td>2-Storey</td><td class="num">1,474</td><td>3</td><td>2 (main 2-pc · upper ensuite)</td>
+        <td class="num">$889,900</td><td class="num">$889,000</td>
+        <td class="num sp-lp-good">1.00</td><td class="num">8</td>
+        <td class="note">Full gut reno: quartz, HW refinished, sep. entrance bsmt; Nov 2025</td>
+      </tr>
+      <tr>
+        <td><strong>86 Dromore Cres</strong></td>
+        <td>2.5-Storey</td><td class="num">1,470</td><td>4</td><td>1 (upper 4-pc)</td>
+        <td class="num">$874,900</td><td class="num">$845,000</td>
+        <td class="num sp-lp-good">0.97</td><td class="num">22</td>
+        <td class="note">Original finishes; hardwood throughout; 3-car drive + rear garage; Dec 2025</td>
+      </tr>
+      <tr>
+        <td><strong>76 Barclay St</strong><span class="tag tag-green">Same St.</span></td>
+        <td>1.5-Storey</td><td class="num">925</td><td>4+4</td><td>2.5 (main 4-pc · loft 2-pc · bsmt 3-pc)</td>
+        <td class="num">$949,000</td><td class="num">$921,000</td>
+        <td class="num sp-lp-good">0.97</td><td class="num dom-amber">49</td>
+        <td class="note">Full investor reno; legal rental license; quartz, 200A panel; Aug 2025</td>
+      </tr>
+      <tr>
+        <td><strong>21 Paisley Ave S</strong></td>
+        <td>2.5-Storey</td><td class="num">1,657</td><td>5+1</td><td>2 (upper 4-pc · bsmt 3-pc)</td>
+        <td class="num">$839,000</td><td class="num">$800,000</td>
+        <td class="num sp-lp-ok">0.95</td><td class="num dom-red">284</td>
+        <td class="note">Extended DOM history; furnished; near McMaster; Dec 2025</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ACTIVE COMPETITION TABLE -->
+  <div class="sec-title">Active Competition<span>Westdale South · Current Listings · May 2026</span></div>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Address</th><th>Style</th><th>AG SqFt</th><th>Bed</th><th>Bath</th>
+        <th class="num">List Price</th><th class="num">Orig. LP</th><th class="num">CDOM</th><th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="subj-row">
+        <td><strong>89 Barclay St ★</strong><span class="tag tag-gold">Subject</span></td>
+        <td>2-Storey</td><td class="num">1,408</td><td>3</td><td>1+1 (upper 4-pc · bsmt 2-pc)</td>
+        <td class="num">$864,900</td><td class="num">—</td>
+        <td class="num">New</td>
+        <td class="note">New kitchen '21, roof '22, windows '19; 2-car drive; 2-pc off kitchen; first time listed</td>
+      </tr>
+      <tr>
+        <td><strong>73 Arkell St</strong></td>
+        <td>1.5-Storey</td><td class="num">1,285</td><td>3</td><td>2 (main 2-pc · upper 4-pc)</td>
+        <td class="num">$899,000</td><td class="num">$999,000</td>
+        <td class="num dom-red">109</td>
+        <td class="note">Comprehensively reno'd 2018 (studs); Ipe deck; garage; been from $999K</td>
+      </tr>
+      <tr>
+        <td><strong>84 South Oval</strong></td>
+        <td>2.5-Storey</td><td class="num">1,469</td><td>5+1</td><td>2 (upper 5-pc · bsmt 3-pc)</td>
+        <td class="num">$849,000</td><td class="num">$949,000</td>
+        <td class="num dom-red">68</td>
+        <td class="note">Legal rental; investment; prev listed $949K; ESA certified</td>
+      </tr>
+      <tr>
+        <td><strong>184 Arkell St</strong></td>
+        <td>2.5-Storey</td><td class="num">1,293</td><td>4+2</td><td>2 (upper 3-pc · bsmt 3-pc)</td>
+        <td class="num">$820,000</td><td class="num">$820,000</td>
+        <td class="num dom-red">86</td>
+        <td class="note">Tenanted; $39,548/yr income; investor product</td>
+      </tr>
+      <tr>
+        <td><strong>33 Cline Ave N</strong></td>
+        <td>2-Storey</td><td class="num">1,169</td><td>4+2</td><td>2 (upper 3-pc · bsmt 3-pc)</td>
+        <td class="num">$779,900</td><td class="num">$869,900</td>
+        <td class="num dom-red">97</td>
+        <td class="note">Tenanted; investor; price cut from $869,900; 30-ft lot</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- TAKEAWAYS -->
+  <div class="tkbox">
+    <h3>Seller Takeaways &amp; Positioning Notes</h3>
+    <div class="tk-grid">
+      <div class="tk-item">
+        <div class="tk-num">01</div>
+        <div class="tk-title">$864,900 Is the Right Entry Point</div>
+        <div class="tk-body">With the basement 2-pc added, the subject enters above the single-bath / untouched tier ($815–$845K) and positions directly alongside the 2-bath updated comps ($870–$889K). At $864,900, the price is credible, supported by market data, and reflects the 1+1 bath configuration without overreaching into full-reno territory. Room to negotiate toward an $825K–$855K close.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">02</div>
+        <div class="tk-title">First-Time Listing Is a Marketing Asset</div>
+        <div class="tk-body">Every active competitor has lingering history — 73 Arkell started at $999K, 84 South Oval at $949K, 33 Cline at $869K. The subject comes to market fresh with no prior DOM. In Westdale, where buyers are savvy and track pricing history, a clean first listing with a well-supported price is a significant competitive advantage. Lead with that.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">03</div>
+        <div class="tk-title">2-pc Bathroom: Rough-In Confirmed, Proceed</div>
+        <div class="tk-body">Rough-in is confirmed and the location is off the kitchen — the best possible placement. At ~$5K for fixtures and labour, the 2-pc adds an estimated $10–15K in market value (2–3× ROI) and enables the listing to market as "1+1 baths," removing the single-bath objection entirely. This is one of the cleanest pre-listing investments possible for this property.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">04</div>
+        <div class="tk-title">Furnace / HWT: Disclose and Price In</div>
+        <div class="tk-body">The 2005 furnace and hot water tank are 21 years old — buyers and their inspectors will flag this. Proactive disclosure in the listing is preferable to a renegotiation post-offer. Either budget a credit of $3,000–$5,000 in negotiation, or replace the HWT (relatively low cost) prior to listing to reduce the objection.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">05</div>
+        <div class="tk-title">Westdale Buyers Want Move-In Ready</div>
+        <div class="tk-body">The 8-day sale of 68 Bond St at $889K and the 11-day sale of 9 Barclay at $885K confirm that well-presented, ready-to-occupy Westdale homes move fast. Professional staging and photography are essential — this neighbourhood attracts buyers who will pay premium for minimal work. The 2021 kitchen and updated finishes are the story; let photos tell it.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">06</div>
+        <div class="tk-title">Expected Close: $825K – $855K</div>
+        <div class="tk-body">With the 2-pc added and listing at $864,900, SP/LP ratios of 0.96–1.00 point to a close range of $825K–$855K. The 1+1 bath configuration moves 89 Barclay out of the single-bath tier and into direct competition with the $870–$889K sold comps — a meaningful shift in buyer perception that supports the higher close range.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="report-footer">
+  <div class="footer-brand">Woolcott Real Estate</div>
+  <div class="footer-text">This report is prepared for seller advisory purposes. All data sourced from MLS. Market conditions subject to change. Not a formal appraisal.</div>
+  <div class="footer-right">89 Barclay Street, Hamilton ON<br>May 2026</div>
+</div>
+
+</div>
+</body>
+</html>
