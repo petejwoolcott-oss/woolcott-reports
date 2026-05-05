@@ -15,7 +15,37 @@
   }
   body { font-family:'DM Sans',sans-serif; font-size:9.5pt; color:var(--text); background:var(--white); line-height:1.45; }
   .page { width:8.5in; margin:0 auto; background:var(--white); }
-  @media print { body{margin:0;} .page{width:100%;} }
+  /* PRINT BUTTON */
+  .print-btn { position:fixed; bottom:24px; right:24px; background:var(--navy); color:var(--gold); border:none; padding:10px 20px; font-family:'DM Sans',sans-serif; font-size:9pt; font-weight:600; letter-spacing:.06em; text-transform:uppercase; border-radius:4px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:100; }
+  .print-btn:hover { background:var(--slate); }
+
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { margin:0; background:white; }
+    .page { width:100%; margin:0; }
+    .print-btn { display:none !important; }
+
+    /* Section page-break control */
+    .report-header, .gold-bar, .stats-bar { page-break-after:avoid; }
+    .two-col { page-break-inside:avoid; }
+    .impact-strip { page-break-inside:avoid; }
+    .bath-panel { page-break-inside:avoid; }
+    .comp-panels { page-break-inside:avoid; }
+    .tkbox { page-break-inside:avoid; }
+    .data-table { page-break-inside:auto; }
+    .data-table tr { page-break-inside:avoid; page-break-after:auto; }
+    .data-table thead { display:table-header-group; }
+
+    /* Force page break before takeaways if needed */
+    .tkbox { page-break-before:auto; }
+
+    /* Ensure backgrounds and colours render */
+    .report-header, .stats-bar, .stat-cell, .price-callout,
+    .bath-panel-hdr, .comp-panel-hdr, .tkbox,
+    .vtable tr.total td, .data-table th,
+    .impact-cell.before, .impact-cell.after, .impact-cell.invest,
+    .data-table tr.subj-row td, .data-table tr.highlight td { background-color: attr(style) !important; }
+  }
 
   .report-header { background:var(--navy); padding:26px 36px 20px; display:flex; justify-content:space-between; align-items:flex-end; }
   .header-left .brand { font-family:'DM Serif Display',serif; color:var(--gold); font-size:11pt; letter-spacing:.04em; margin-bottom:6px; }
@@ -133,6 +163,7 @@
 </style>
 </head>
 <body>
+<button class="print-btn" onclick="window.print()">⎙ Print / Save PDF</button>
 <div class="page">
 
 <div class="report-header">
@@ -151,8 +182,8 @@
 
 <div class="stats-bar">
   <div class="stat-cell"><div class="stat-label">Style</div><div class="stat-value">2-Storey</div><div class="stat-sub">Detached · Freehold</div></div>
-  <div class="stat-cell"><div class="stat-label">Above Grade</div><div class="stat-value">1,408 sqft</div><div class="stat-sub">Solid Brick</div></div>
-  <div class="stat-cell"><div class="stat-label">Bedrooms</div><div class="stat-value">3</div><div class="stat-sub">All Upper Level</div></div>
+  <div class="stat-cell"><div class="stat-label">Above Grade</div><div class="stat-value">~1,608 sqft</div><div class="stat-sub">Incl. est. 200 sqft attic</div></div>
+  <div class="stat-cell"><div class="stat-label">Bedrooms</div><div class="stat-value">4</div><div class="stat-sub">3 Upper · 1 Finished Attic</div></div>
   <div class="stat-cell"><div class="stat-label">Bathrooms</div><div class="stat-value">1 + 1</div><div class="stat-sub">4-pc Upper · 2-pc Basement</div></div>
   <div class="stat-cell"><div class="stat-label">Parking</div><div class="stat-value">2-Car</div><div class="stat-sub">No Garage · Driveway</div></div>
   <div class="stat-cell"><div class="stat-label">Lot</div><div class="stat-value">37.7 × 100</div><div class="stat-sub">Rectangular · Freehold</div></div>
@@ -170,9 +201,10 @@
         <div class="spec-grid">
           <div class="spec-item"><span class="spec-lbl">Style</span><span class="spec-val">2-Storey, Detached</span></div>
           <div class="spec-item"><span class="spec-lbl">Tenure</span><span class="spec-val">Freehold</span></div>
-          <div class="spec-item"><span class="spec-lbl">AG SqFt</span><span class="spec-val">1,408 sqft</span></div>
+          <div class="spec-item"><span class="spec-lbl">AG SqFt</span><span class="spec-val">~1,608 sqft</span></div>
+          <div class="spec-item" style="grid-column:1/-1;"><span class="spec-lbl" style="font-style:italic;">† Includes est. 200 sqft finished attic; attic portion is an estimate</span><span class="spec-val"></span></div>
           <div class="spec-item"><span class="spec-lbl">Lot</span><span class="spec-val">37.7 × 100.2 ft</span></div>
-          <div class="spec-item"><span class="spec-lbl">Bedrooms</span><span class="spec-val">3 (all upper)</span></div>
+          <div class="spec-item"><span class="spec-lbl">Bedrooms</span><span class="spec-val">4 (3 upper + 1 attic)</span></div>
           <div class="spec-item"><span class="spec-lbl">Bathrooms</span><span class="spec-val">1+1 (upper 4-pc + bsmt 2-pc)</span></div>
           <div class="spec-item"><span class="spec-lbl">Basement</span><span class="spec-val">Laundry + Storage + 2-pc Bath</span></div>
           <div class="spec-item"><span class="spec-lbl">Parking</span><span class="spec-val">2-car driveway</span></div>
@@ -190,26 +222,26 @@
       <div class="sec-title">Value Assessment<span>Anchored to recent Westdale 2-storey solds</span></div>
       <table class="vtable">
         <tbody>
-          <tr><td class="vt-lbl">Base: 86 Dromore Cres (2.5-sty, 1,470 sqft, 1 bath, original finishes)</td><td class="vt-num">$845,000</td><td class="vt-note">$575/sqft · 22 CDOM</td></tr>
-          <tr><td class="vt-lbl">Size adjustment: −62 sqft @ $575/sqft (subject is smaller)</td><td class="vt-num">−$36,000</td><td class="vt-note">1,408 vs 1,470 sqft</td></tr>
+          <tr><td class="vt-lbl">Base: 86 Dromore Cres (2.5-sty, 1,470 sqft, 4 bed, 1 bath, original finishes)</td><td class="vt-num">$845,000</td><td class="vt-note">$575/sqft · 22 CDOM</td></tr>
+          <tr><td class="vt-lbl">Size adjustment: +138 sqft (subject larger; conservative rate — attic sqft valued below main-floor)</td><td class="vt-num">+$20,000</td><td class="vt-note">~1,608 vs 1,470 sqft</td></tr>
           <tr><td class="vt-lbl">Condition premium: kitchen '21, roof '22, windows '19 vs original comp</td><td class="vt-num">+$20,000</td><td class="vt-note">Updated vs vintage</td></tr>
           <tr><td class="vt-lbl">Bath: 1+1 (upper 4-pc + basement 2-pc off kitchen rough-in): residual gap vs main-floor powder</td><td class="vt-num">−$5,000</td><td class="vt-note">vs full 2-bath peers</td></tr>
           <tr><td class="vt-lbl">No garage (2-car driveway): consistent with Westdale norm</td><td class="vt-num">Neutral</td><td class="vt-note">Area standard</td></tr>
           <tr><td class="vt-lbl">Basement (laundry + storage + 2-pc bath): functional, no finishing deficit</td><td class="vt-num">Neutral</td><td class="vt-note">Functional use</td></tr>
-          <tr class="total"><td class="vt-lbl">Indicated Market Value</td><td class="vt-num">$824,000</td><td class="vt-note" style="color:rgba(255,255,255,.5);">±$20K</td></tr>
+          <tr class="total"><td class="vt-lbl">Indicated Market Value</td><td class="vt-num">$875,000</td><td class="vt-note" style="color:rgba(255,255,255,.5);">±$20K</td></tr>
         </tbody>
       </table>
 
       <div class="price-callout">
         <div>
           <div class="pc-label">Recommended List Price</div>
-          <div class="pc-price">$864,900</div>
-          <div class="pc-range">Expected close: <strong>$825K – $855K</strong></div>
+          <div class="pc-price">$874,900</div>
+          <div class="pc-range">Expected close: <strong>$840K – $865K</strong></div>
         </div>
         <div class="pc-right">
           <strong>Style:</strong> 2-Storey · No garage · Freehold<br>
-          <strong>$/sqft (AG):</strong> $614<br>
-          <strong>First-time listed · 1+1 baths</strong><br>
+          <strong>$/sqft (AG):</strong> $544 (~1,608 sqft)<br>
+          <strong>First-time listed · 4 bed · 1+1 baths</strong><br>
           <strong>Comparable SP/LP:</strong> 0.96–1.00
         </div>
       </div>
@@ -220,9 +252,9 @@
   <div class="impact-strip">
     <div class="impact-cell before">
       <div class="impact-lbl">Without 2-pc Bathroom</div>
-      <div class="impact-val">$849,900</div>
+      <div class="impact-val">$859,900</div>
       <div class="impact-sub">List price · 1 bath only</div>
-      <div class="impact-delta neu">Close: $815K–$845K</div>
+      <div class="impact-delta neu">Close: $825K–$850K</div>
     </div>
     <div class="impact-arrow">→</div>
     <div class="impact-cell invest">
@@ -234,16 +266,16 @@
     <div class="impact-arrow">→</div>
     <div class="impact-cell after">
       <div class="impact-lbl">With 2-pc Added</div>
-      <div class="impact-val">$864,900</div>
+      <div class="impact-val">$874,900</div>
       <div class="impact-sub">List price · 1+1 baths</div>
-      <div class="impact-delta pos">Close: $825K–$855K · +$15K list</div>
+      <div class="impact-delta pos">Close: $840K–$865K · +$15K list</div>
     </div>
   </div>
 
   <!-- 2-PC BATHROOM ANALYSIS -->
   <div class="bath-panel">
     <div class="bath-panel-hdr">
-      <h4>Basement 2-pc Bathroom: Rough-In Confirmed · Pricing Updated to $864,900</h4>
+      <h4>Basement 2-pc Bathroom: Rough-In Confirmed · Pricing Updated to $874,900</h4>
       <div class="verdict">✓ Proceeding — Added to Specs</div>
     </div>
     <div class="bath-panel-body">
@@ -379,10 +411,10 @@
     <tbody>
       <tr class="subj-row">
         <td><strong>89 Barclay St ★</strong><span class="tag tag-gold">Subject</span></td>
-        <td>2-Storey</td><td class="num">1,408</td><td>3</td><td>1+1 (upper 4-pc · bsmt 2-pc)</td>
-        <td class="num">$864,900</td><td class="num">—</td>
+        <td>2-Storey</td><td class="num">~1,608†</td><td>4</td><td>1+1 (upper 4-pc · bsmt 2-pc)</td>
+        <td class="num">$874,900</td><td class="num">—</td>
         <td class="num">New</td>
-        <td class="note">New kitchen '21, roof '22, windows '19; 2-car drive; 2-pc off kitchen; first time listed</td>
+        <td class="note">Kitchen '21, roof '22, windows '19; 2-car drive; 2-pc off kitchen; † incl. est. 200 sqft finished attic</td>
       </tr>
       <tr>
         <td><strong>73 Arkell St</strong></td>
@@ -421,8 +453,8 @@
     <div class="tk-grid">
       <div class="tk-item">
         <div class="tk-num">01</div>
-        <div class="tk-title">$864,900 Is the Right Entry Point</div>
-        <div class="tk-body">With the basement 2-pc added, the subject enters above the single-bath / untouched tier ($815–$845K) and positions directly alongside the 2-bath updated comps ($870–$889K). At $864,900, the price is credible, supported by market data, and reflects the 1+1 bath configuration without overreaching into full-reno territory. Room to negotiate toward an $825K–$855K close.</div>
+        <div class="tk-title">$874,900 Is the Right Entry Point</div>
+        <div class="tk-body">With corrected sqft of ~1,608 and the 2-pc added, the subject enters directly alongside the updated 2-bath comp tier ($870–$889K) at a competitive $544/sqft — among the most attractive $/sqft in the Westdale market. Four bedrooms, well-updated condition, and a first-time listing give this property a clean, credible story with room to close $840K–$865K.</div>
       </div>
       <div class="tk-item">
         <div class="tk-num">02</div>
@@ -446,8 +478,8 @@
       </div>
       <div class="tk-item">
         <div class="tk-num">06</div>
-        <div class="tk-title">Expected Close: $825K – $855K</div>
-        <div class="tk-body">With the 2-pc added and listing at $864,900, SP/LP ratios of 0.96–1.00 point to a close range of $825K–$855K. The 1+1 bath configuration moves 89 Barclay out of the single-bath tier and into direct competition with the $870–$889K sold comps — a meaningful shift in buyer perception that supports the higher close range.</div>
+        <div class="tk-title">Expected Close: $840K – $865K</div>
+        <div class="tk-body">With corrected sqft of ~1,608, the 2-pc added, and listing at $874,900, SP/LP ratios of 0.96–1.00 point to a close range of $840K–$865K. At $544/sqft the pricing is competitive and defensible — buyers and their agents will see strong value relative to the comp set, which supports both traffic and offers.</div>
       </div>
     </div>
   </div>
