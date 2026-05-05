@@ -96,7 +96,7 @@ Any agent entering a lead into FUB manually must notify an administrator so the 
 
 ## Commission Splits
 
-### Incoming Vendor Leads (I)
+### Incoming Vendor Leads
 
 **Split: 55/45 in favour of Woolcott Real Estate** (unless otherwise set out herein). Double-ended listing sales split 55/45 in favour of Woolcott.
 
@@ -104,14 +104,14 @@ Any agent entering a lead into FUB manually must notify an administrator so the 
 
 >i **Escalation:** If the following is true, set a listing appointment and forward to Drew/Jayne as we may determine that assistance is required: over 5 acres, commercial, vacant land, value likely over $1.7 million.
 
-### Incoming Buyer Leads (II)
+### Incoming Buyer Leads
 
 **Split: 50/50 on all buyer deals.** Double-ended buyer deals split 50/50.
 
 1. By Buyer Agent duty shift (except ISA generated leads and pre-construction leads).
 2. At the earliest possible opportunity, the lead should be offered a CMA if they have a house to sell in our market area. If the buyer lead has a home to sell and doesn't have a Listing Agent attached, send to listings@woolcott.ca to start a listing file.
 
-### Open House, Personal Leads, Referrals (III)
+### Open House, Personal Leads, Referrals
 
 **Open House Leads:** Split 50/50 for buyer deals and 55/45 for vendor leads. The generating sales representative works with the buying and/or selling lead. Open House leads are manually entered into FUB at the earliest practicable opportunity to prevent duplicate leads. The agent must notify an administrator (drewandjayne@woolcott.ca) when a lead is entered so it can be checked. If a lead visits multiple open houses in one day, the agent who enters the lead first into FUB owns the lead.
 
@@ -121,7 +121,7 @@ Any agent entering a lead into FUB manually must notify an administrator so the 
 
 **Referrals (to non-team agents):** Split 50/50 between the referring agent and the house.
 
-### Cold Calls and Door-Knocking (IV)
+### Cold Calls and Door-Knocking
 
 **Split: 50/50 for buyer deals and 55/45 for vendor deals.** The generating sales rep works with the lead. Door knock leads are manually entered into FUB at the earliest practicable opportunity. The agent must notify an administrator (drewandjayne@woolcott.ca) when entering a lead so it can be tracked and checked.
 
@@ -129,7 +129,7 @@ When moving a cold call lead from your Cold Call List to your database, follow t
 
 > **Who Gets Added to FUB from Cold Calls/Door Knocks:** LEADS get entered - not simply people whose phone number or address we happen to have. If leads are spoken with, agree to be communicated with in the future AND you have taken down their first name, then they can be entered into the database. It is not fair to grab swaths of uncontacted names and claim them.
 
-### Private/FSBOs (V)
+### Private/FSBOs
 
 **Split: 55/45 on vendor deals and 50/50 on buyer deals.** Any sales rep on the team can chase a private in any area. The usual database ownership rules apply. Leads should be sent to listings@woolcott.ca as soon as possible. If the prospect sells and purchases, the sales rep that listed the private can work with them on the buyer as well. Chasing privates is treated the same as Open House leads - agent generated, and the agent can opt to work both ends.
 
@@ -145,7 +145,7 @@ Exclusive listings are handled with the following requirements:
 - Listing side split remains 55/45 in favour of Woolcott; buyer side remains 50/50.
 - If a non-Woolcott agent brings an offer on an exclusive listing, the Listing Agent has full discretion over what, if anything, to pay the buying agent.
 
-### Double Ends and If Buys (X)
+### Double Ends and If Buys
 
 **Double Ends - No Commission Concession:** Buying agent paid as per MLS, listing agent paid as per listing agreement. Buying end split 50/50; Listing end split 55/45 in favour of the company.
 
@@ -168,7 +168,7 @@ Exclusive listings are handled with the following requirements:
 
 ### Claiming Leads on Duty
 
-A lead comes in through FUB during an agent's duty shift. The on-duty agent has an **obligation to contact the lead**, but has the option to either claim it and continue working it, or contact it once and leave it in the New Lead Day Pond for another agent to pick up.
+A lead comes in through FUB during an agent's duty shift. The on-duty agent has an **obligation to contact the lead within 15 minutes** (call, text, or email), but has the option to either claim it and continue working it, or contact it once and leave it in the New Lead Day Pond for another agent to pick up.
 
 - **Buyer leads** go to the Buyer Agent on duty.
 - **Listing leads** go to the Listing Agent on duty.
@@ -183,6 +183,7 @@ Monday through Friday, 9am to 5pm. During previews, calls will be sent to on-dut
 
 ### After-Hours Shifts
 
+- Agents cannot book showings, listing appointments, or personal appointments during a duty shift.
 - An auto email is sent to the on-duty agent at the beginning of their shift to confirm availability.
 - If the agent does not respond within 15 minutes, the remainder of their shift goes to another agent.
 - If a call-in lead comes in after hours or a lead doesn't auto-populate into FUB (Open House, Door Knock, etc.), the lead must be manually added. See the Manually Adding a Lead section.
@@ -201,7 +202,7 @@ Monday through Friday, 9am to 5pm. During previews, calls will be sent to on-dut
 
 ## Lead Protection
 
-### Database Lead Protection (VII)
+### Database Lead Protection
 
 All leads are protected in the database. If an agent is the Buyer Agent or the Listing Agent on a lead, they have the exclusive right to work with that lead.
 
@@ -220,7 +221,7 @@ In the rare case that the client will not use a BA or LA assigned (in spite of b
 
 > **The client always has the absolute right to pick whichever agent they wish to work with.** All reasonable efforts must be taken to have the client work with the appropriate agent per the rules above before this happens.
 
-## Reallocation of Leads (VIII)
+## Reallocation of Leads
 
 If a lead falls out of compliance with the contact schedule and is not followed up according to the plan, it can and will be reassigned away from the agent to wherever the company sees fit - another agent of the appropriate type, an ISA, or back to the pond.
 
@@ -235,27 +236,27 @@ If a lead falls out of compliance with the contact schedule and is not followed 
 
 If an ISA picks up a reallocated lead and converts it, ISA fees apply per the ISA Rules section. The lead will be assigned to a different agent than the original (delinquent) owner.
 
-## ISA Rules (IX)
+## ISA Rules
 
-### ISA Compensation - Updated April 27, 2026
+### ISA Compensation â€” Updated April 27, 2026
 
-#### Listing Appointments
+**Listing Appointments**
 
 When Isabella books a listing appointment, the opportunity is sent to a listing agent for approval before being assigned. If the agent declines, Isabella moves on to the next agent.
 
-A flat **$300 appointment fee** applies once the appointment is met. The fee is split evenly - **$150 paid by Woolcott**, **$150 deducted from the agent** who attends the appointment. **The fee is only paid if the appointment actually takes place.** It is earned regardless of whether the listing is signed.
+A flat **$300 appointment fee** applies once the appointment is met. The fee is split evenly â€” **$150 paid by Woolcott**, **$150 deducted from the agent** who attends the appointment. **The fee is only paid if the appointment actually takes place.** It is earned regardless of whether the listing is signed.
 
-#### Distribution
+**Distribution**
 
 Isabella distributes appointments via a **round-robin system** among Listing Agents. **Exception:** If a lead is out of area, Isabella shotgun-distributes the opportunity to all Listing Agents and the first to respond takes it.
 
-#### Buyer Opportunities
+**Buyer Opportunities**
 
-Isabella is bonused on buyer showings and in-person buyer appointments she sets up. A flat **$300 fee** applies per appointment met - split evenly, with **$150 paid by Woolcott** and **$150 paid by the Buyer Agent** who attends. The fee is only paid if the appointment actually takes place.
+Isabella is bonused on buyer showings and in-person buyer appointments she sets up. A flat **$300 fee** applies per appointment met â€” split evenly, with **$150 paid by Woolcott** and **$150 paid by the Buyer Agent** who attends. The fee is only paid if the appointment actually takes place.
 
 Distribution of buyer opportunities is at Isabella's discretion among Buyer Agents. Standard buyer-side commission splits apply.
 
-#### List + Buy Combo
+**List + Buy Combo**
 
 When Isabella books a combo list/buy opportunity, she will make every effort to serve the listing side to a Listing Agent and the buy side to a Buyer Agent. If the client insists on one agent, Isabella has discretion over which agent receives it. The $300 listing appointment fee applies to the listing side, and the $300 buyer appointment fee applies to the buy side, per the rules above.
 
@@ -266,6 +267,101 @@ The company has enlisted an Inside Sales Associate to nurture leads from various
 ### ISA Calling Through Listing Agent Warm Calls (from May 2022)
 
 Certain listing agents may agree to have ISAs contact their clients for CMAs. In cases where a walk-through is booked, the agent pays the ISA $100 per address directly. If that client then lists within 6 months and the home sells, the listing appointment fee applies (less the $100 original fee) of the agent's commission.
+
+## Duplicate Leads
+
+Although every effort will be made to avoid duplication, duplicates may exist due to leads using different phone numbers, email addresses, or spouse's names. If a duplicate is discovered, agents should try to work it out among themselves. Failing that, both parties meet with Management to reach a resolution. Failing that, Management will resolve unilaterally.
+
+## Listing Agent Responsibilities
+
+- All required data fields on the listing must be completed - it is not Admin's job.
+- If submitted after 3pm, Admin may not process that day (after 2pm on a Friday = next business day).
+- **Commission Shortfalls:** All listings that go live must have a parcel register pulled before Woolcott incurs any expenses (media, staging, etc). Cost split 50/50 with Woolcott and the listing agent. The listing agent is personally responsible for any buyer commissions owed if there are not enough funds on closing day. If proper due diligence was completed and the seller subsequently defaults, the shortfall will be split evenly.
+- Complete the comments in full (including client comments) â€” Admin has not been in the home.
+- [Listing Process How To â†’](https://woolcottrealtyinc.sharepoint.com/:w:/r/sites/Work/_layouts/15/Doc.aspx?sourcedoc=%7B8B447858-DD80-4368-84C6-5386550673CE%7D&file=Listing%20Process%20How%20To.docx&action=default&mobileredirect=true&DefaultItemOpen=1)
+- If the property qualifies for staging, complete the staging request template and send to Justine and Sue.
+- **Photography:** Complete the photo request template and email to Justine. Photos have 24-hour turnaround (not same day). Best practice is 48 hours from photos for listing live date.
+- **Weekly Vendor Calls:** Must talk to each Vendor every week at a minimum (calls, texts, emails). A common complaint from sellers is that their agent never talks to them.
+
+## Staging Program
+
+- No staging for listings with less than 90 days term or if the commission to us is less than $10,000. If commission is under $10,000, the agent requests staging, and the listing does not sell (cancels or expires), the agent will reimburse 50% of staging costs up to $250.
+- As of July 2025, all listings with staging are subject to a **$2,000 cancellation fee** if cancelled or suspended prior to the expiry date. This is in the Schedule A for all listing agreements.
+  - If an agent procures their own paperwork and omits this clause, or if it is removed without consent of Justine or Jayne (must be documented in FUB), the listing agent is liable for this cost.
+
+>i **Buyer Agents** must consult with Jayne (or Drew in her absence) prior to any listing appointment to maintain closing rate.
+
+## Agent Mentorship Program
+
+### New Agent - No Experience
+
+- First 2 weeks: work with Peter to complete onboarding training.
+- Senior agent selected by Peter.
+- Meet with Senior Agent weekly for progress, wins/losses, role playing, scripting, objection handling.
+- Shadow the agent (duty shifts, showings, FUB, Open Houses, Buyer Presentations, Listing Presentations).
+- Senior Agent available for last-minute questions and assistance with offers.
+- Senior Agent gets a 10% referral (50% house; 40% Buyer Agent; 10% Mentor) on first 2 deals. If the Senior Agent is a Buyer Agent and one deal is a Listing, Senior Buyer Agent and Listing Agent split the 10% evenly.
+- Minimum 3 months, can be extended with mutual agreement.
+
+### New Agent - Experience
+
+- First week or two: work with Peter to complete onboarding.
+- Senior Agent selected by Peter.
+- Shadow agent (duty shifts, showings, FUB, Open Houses, Buyer Presentations, Listing Presentations).
+- Senior Agent available for last-minute questions and assistance with offers.
+- Senior Agent gets a 10% referral of only the Agent's commission on first 2 deals.
+- Minimum 3 months, can be extended with mutual agreement.
+
+### Existing Agent Needing Assistance
+
+- Agent can ask for help or be encouraged by Drew and Peter.
+- Senior Agent selected by Peter.
+- Senior Agent gets a 10% referral (50% house; 40% Buyer Agent; 10% Mentor) on first 2 deals.
+- Minimum 3 months, can be extended with mutual agreement.
+
+## Normal Trading Area
+
+- **East:** as far as the Mississauga/Oakville border
+- **North:** to the 401
+- **South:** not beyond Brantford (rural Brantford is NOT included)
+- **Towards Niagara:** Grimsby is the extent
+
+## Team Preview Duties
+
+### Previews
+
+- All Buyer Agents are to preview all required listings.
+- Previews are held Wednesdays from 9:00am to 2:00pm only.
+- If a Buyer Agent fails to preview on the designated day, they have 2 additional days. If 3 days pass without previewing, their Buyer Agent shifts will be reallocated until outstanding previews are completed.
+- Listings added after the preview list is sent out are considered optional.
+- If there are time constraints set by the seller in addition to the set timelines, the preview is deemed optional.
+- Admin will block the first Wednesday 9am-2pm in BrokerBay for new listings that have not been previewed.
+- **Deadline for preview feedback:** Thursday at noon.
+
+### Open House Duties
+
+- **Wednesday prior:** Bring 1 Open House sign to the property and place it on the lawn (except Oakville listings). **Do not contact the client directly until you have spoken with the Listing Agent for the property** to coordinate any messaging or property-specific notes. Then call the client to introduce yourself, ask about feature sheets, and learn anything special about the property.
+- **Day of:** Drop off at least 3 additional signs. There is a list of recommended documents on the Open House wall in the Waterdown office.
+- **Feedback:** Inform homeowners and include drewandjayne@woolcott.ca and the Listing Agent no later than 9am Monday following. Best practice is immediately after the Open House. Failure to do so may result in forfeiture of duty shifts for the following week.
+
+### Out of Town Listings
+
+- Buyer Agents will not be compelled to host Open Houses or preview listings outside the normal trading area.
+- If an Open House is required outside the normal trading area, it is hosted by the Listing Agent or a volunteer.
+- Buyer Agents can still take calls and set up showings on out-of-town listings.
+- If the Buyer Agent does not want to show the property, they should circulate to all Buyer Agents. If no one accepts, let the Sales Manager know.
+
+## Vacation Policy
+
+- You cannot be away and watch your business at the same time. Let someone handle business while you are away.
+- **1 week or greater:** Let Management know via email and let us know who is watching. We will block both your calendar and the vacation calendar.
+- **More than 2 weeks:** Chat with Management first for planning.
+- No shifts for three days prior to being away for 5+ days.
+- If not away on a Long Weekend or Christmas Holidays and do not want shifts, you must have someone cover you. No "here but not taking shifts."
+- Most any one agent can cover is for two other agents.
+- Listing Agents can only cover Listing Agents; Buyer Agents can only cover Buyer Agents.
+- **Minimum:** 4 Listing Agents and 5 Buyer Agents stay.
+- Agents must have an **out-of-office auto-reply** set on their email if they are out of town and unable to respond. It is recommended that agents forward their email to the covering agent for the duration of their absence.
 
 ## FUB (Follow Up Boss) - How To and SOPs
 
@@ -279,7 +375,7 @@ Certain listing agents may agree to have ISAs contact their clients for CMAs. In
 
 ### Agent Daily Workflow
 
-1. Contact all new leads first â€” **1: TALK TO NOW!** Smart List
+1. Contact all new leads first - **1: TALK TO NOW!** Smart List
 2. Then contact the **2: ATTEMPTED CONTACT** Smart List
 3. Check your Inbox for inbound text messages and missed calls
 4. Open your Tasks to see if anything pressing
@@ -324,7 +420,7 @@ Certain listing agents may agree to have ISAs contact their clients for CMAs. In
 | Birthday List / Partner Birthday List | Any contact assigned to you with a birthday in the next 14 days | - |
 | Working | All clients you are actively working or trying to convert | Max 25 people. Add by tagging 'Working' on their profile. |
 
-### Database Rules (XII)
+### Database Rules
 
 All conversations with clients are to be summarized in FUB within 2 business days.
 
@@ -341,7 +437,7 @@ During business hours (9am to 7pm daily) please send leads to drewandjayne@woolc
 1. Log into Follow Up Boss on your desktop.
 2. In the upper-right hand corner, click the blue Add Person icon.
 
-![FUB Toolbar â€” Add Person Button](./images/image2.png)
+![FUB Toolbar - Add Person Button](./images/image2.png)
 
 3. Add the contact's First Name, Last Name, Email, Phone Number and Lead Source.
 
@@ -363,10 +459,10 @@ You do not have to work any leads that you don't want to. But, you must give the
 *If you are the main agent on the lead:*
 1. You must give the other agent on the file the opportunity to take over the lead.
 2. Make a note for why you are reallocating. Be sure to @ the agent so they get a notification.
-3. Replace your name in the â€œAgentâ€ field with the collaboratorâ€™s name.
+3. Replace your name in the "Agent" field with the collaborator's name.
 4. Click green checkmark to remove yourself.
 
-![FUB â€” Reassigning Agent on a Lead](./images/image4.png)
+![FUB - Reassigning Agent on a Lead](./images/image4.png)
 
 **For reallocating leads where there is no collaborator:**
 1. Make a note for why you are reallocating.
@@ -396,11 +492,11 @@ To locate the verified leads pond: Go to the "People" tab and click the "More" b
 
 In order to claim a lead from the pond, you **must have had a substantial conversation** (appointment or search set up) and/or the client has agreed to a follow up.
 
-1. Ensure that you click the â€œLog Callâ€ under the contact so that it calls from your FUB number.
-2. Click â€œAgentâ€ and change it from â€œVerified Leads â€” Pondâ€ to your name. Click the green check mark. A note will be made: â€œClaimed by {AGENT} from Verified Leads â€” Pond.â€
+1. Ensure that you click the "Log Call" under the contact so that it calls from your FUB number.
+2. Click "Agent" and change it from "Verified Leads - Pond" to your name. Click the green check mark. A note will be made: "Claimed by {AGENT} from Verified Leads - Pond."
 3. Change the stage of this lead to match the follow up cadence that you would like.
 
-![FUB â€” Moving Lead to Verified Leads Pond](./images/image5.png)
+![FUB - Moving Lead to Verified Leads Pond](./images/image5.png)
 
 [Watch Justine's Loom walkthrough â†’](https://www.loom.com/share/deeadeac1e134ca3b96ade8ee8ce3bc1)
 
@@ -490,104 +586,10 @@ A drip campaign automatically pauses when:
 - Contact or relationship replies to your FUB number by text.
 - A phone call on your FUB number lasts more than 2.5 minutes (does not include short calls, voicemails, or manually logged calls).
 
-To manually pause: Navigate to the contact record â†’ Action Plan section at bottom right â†’ find the plan name â†’ click arrow beside â€œRunningâ€ â†’ click Pause.
+To manually pause: Navigate to the contact record â†’ Action Plan section at bottom right â†’ find the plan name â†’ click arrow beside "Running" â†’ click Pause.
 
-![FUB â€” Pausing a Drip Action Plan](./images/image7.png)
+![FUB - Pausing a Drip Action Plan](./images/image7.png)
 
 ### Questions to Keep People on the Phone
 
 [Reference document with conversation questions â†’](https://docs.google.com/document/d/1rWvWAQ-JcUxrSBOlK6BgXtkNt_E8aEYAWFxoMvYiLwg/edit)
-
-## Duplicate Leads (XI)
-
-Although every effort will be made to avoid duplication, duplicates may exist due to leads using different phone numbers, email addresses, or spouse's names. If a duplicate is discovered, agents should try to work it out among themselves. Failing that, both parties meet with Management to reach a resolution. Failing that, Management will resolve unilaterally.
-
-## Listing Agent Responsibilities (XIV)
-
-- All required data fields on the listing must be completed - it is not Admin's job.
-- If submitted after 3pm, Admin may not process that day (after 2pm on a Friday = next business day).
-- **Commission Shortfalls:** All listings that go live must have a parcel register pulled before Woolcott incurs any expenses (media, staging, etc). Cost split 50/50 with Woolcott and the listing agent. The listing agent is personally responsible for any buyer commissions owed if there are not enough funds on closing day. If proper due diligence was completed and the seller subsequently defaults, the shortfall will be split evenly.
-- Complete the comments in full (including client comments) - Admin has not been in the home.
-- If the property qualifies for staging, complete the staging request template and send to Justine and Sue.
-- **Photography:** Complete the photo request template and email to Justine. Photos have 24-hour turnaround (not same day). Best practice is 48 hours from photos for listing live date.
-- **Weekly Vendor Calls:** Must talk to each Vendor every week at a minimum (calls, texts, emails). A common complaint from sellers is that their agent never talks to them.
-
-## Staging Program (XV)
-
-- No staging for listings with less than 90 days term or if the commission to us is less than $10,000. If commission is under $10,000, the agent requests staging, and the listing does not sell (cancels or expires), the agent will reimburse 50% of staging costs up to $250.
-- As of July 2025, all listings with staging are subject to a **$2,000 cancellation fee** if cancelled or suspended prior to the expiry date. This is in the Schedule A for all listing agreements.
-  - If an agent procures their own paperwork and omits this clause, or if it is removed without consent of Justine or Jayne (must be documented in FUB), the listing agent is liable for this cost.
-
->i **Buyer Agents** must consult with Jayne (or Drew in her absence) prior to any listing appointment to maintain closing rate.
-
-## Agent Mentorship Program (XVI)
-
-### New Agent - No Experience
-
-- First 2 weeks: work with Peter to complete onboarding training.
-- Senior agent selected by Peter.
-- Meet with Senior Agent weekly for progress, wins/losses, role playing, scripting, objection handling.
-- Shadow the agent (duty shifts, showings, FUB, Open Houses, Buyer Presentations, Listing Presentations).
-- Senior Agent available for last-minute questions and assistance with offers.
-- Senior Agent gets a 10% referral (50% house; 40% Buyer Agent; 10% Mentor) on first 2 deals. If the Senior Agent is a Buyer Agent and one deal is a Listing, Senior Buyer Agent and Listing Agent split the 10% evenly.
-- Minimum 3 months, can be extended with mutual agreement.
-
-### New Agent - Experience
-
-- First week or two: work with Peter to complete onboarding.
-- Senior Agent selected by Peter.
-- Shadow agent (duty shifts, showings, FUB, Open Houses, Buyer Presentations, Listing Presentations).
-- Senior Agent available for last-minute questions and assistance with offers.
-- Senior Agent gets a 10% referral of only the Agent's commission on first 2 deals.
-- Minimum 3 months, can be extended with mutual agreement.
-
-### Existing Agent Needing Assistance
-
-- Agent can ask for help or be encouraged by Drew and Peter.
-- Senior Agent selected by Peter.
-- Senior Agent gets a 10% referral (50% house; 40% Buyer Agent; 10% Mentor) on first 2 deals.
-- Minimum 3 months, can be extended with mutual agreement.
-
-## Normal Trading Area
-
-- **East:** as far as the Mississauga/Oakville border
-- **North:** to the 401
-- **South:** not beyond Brantford (rural Brantford is NOT included)
-- **Towards Niagara:** Grimsby is the extent
-
-## Team Preview Duties (XVII)
-
-### Previews
-
-- All Buyer Agents are to preview all required listings.
-- Previews are held Wednesdays from 9:00am to 2:00pm only.
-- If a Buyer Agent fails to preview on the designated day, they have 2 additional days. If 3 days pass without previewing, their Buyer Agent shifts will be reallocated until outstanding previews are completed.
-- Listings added after the preview list is sent out are considered optional.
-- If there are time constraints set by the seller in addition to the set timelines, the preview is deemed optional.
-- Admin will block the first Wednesday 9am-2pm in BrokerBay for new listings that have not been previewed.
-- **Deadline for preview feedback:** Thursday at noon.
-
-### Open House Duties
-
-- **Wednesday prior:** Bring 1 Open House sign to the property and place it on the lawn (except Oakville listings). **Do not contact the client directly until you have spoken with the Listing Agent for the property** to coordinate any messaging or property-specific notes. Then call the client to introduce yourself, ask about feature sheets, and learn anything special about the property.
-- **Day of:** Drop off at least 3 additional signs. There is a list of recommended documents on the Open House wall in the Waterdown office.
-- **Feedback:** Inform homeowners and include drewandjayne@woolcott.ca and the Listing Agent no later than 9am Monday following. Best practice is immediately after the Open House. Failure to do so may result in forfeiture of duty shifts for the following week.
-
-### Out of Town Listings
-
-- Buyer Agents will not be compelled to host Open Houses or preview listings outside the normal trading area.
-- If an Open House is required outside the normal trading area, it is hosted by the Listing Agent or a volunteer.
-- Buyer Agents can still take calls and set up showings on out-of-town listings.
-- If the Buyer Agent does not want to show the property, they should circulate to all Buyer Agents. If no one accepts, let the Sales Manager know.
-
-## Vacation Policy (XIII)
-
-- You cannot be away and watch your business at the same time. Let someone handle business while you are away.
-- **1 week or greater:** Let Management know via email and let us know who is watching. We will block both your calendar and the vacation calendar.
-- **More than 2 weeks:** Chat with Management first for planning.
-- No shifts for three days prior to being away for 5+ days.
-- If not away on a Long Weekend or Christmas Holidays and do not want shifts, you must have someone cover you. No "here but not taking shifts."
-- Most any one agent can cover is for two other agents.
-- Listing Agents can only cover Listing Agents; Buyer Agents can only cover Buyer Agents.
-- **Minimum:** 4 Listing Agents and 5 Buyer Agents stay.
-- Agents must have an **out-of-office auto-reply** set on their email if they are out of town and unable to respond. It is recommended that agents forward their email to the covering agent for the duration of their absence.
