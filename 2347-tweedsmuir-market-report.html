@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2347 Tweedsmuir Court — Seller Market Valuation | Woolcott Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:#1a2332; --slate:#2d3a4a; --gold:#c8a45c; --gold-lt:#d9bc85;
+    --light:#f5f2ec; --warm:#ede9e1; --white:#ffffff; --text:#1e2530;
+    --muted:#5a6470; --green:#2e7d32; --amber:#b45309; --red:#9e2a2a;
+    --ltgrn:#e8f5e9; --ltred:#fdecea; --ltyel:#fff8ed; --ltblu:#e3edf7;
+  }
+  body { font-family:'DM Sans',sans-serif; font-size:9.5pt; color:var(--text); background:var(--white); line-height:1.45; }
+  .page { width:8.5in; margin:0 auto; background:var(--white); }
+
+  /* PRINT */
+  .print-btn { position:fixed; bottom:24px; right:24px; background:var(--navy); color:var(--gold); border:none; padding:10px 20px; font-family:'DM Sans',sans-serif; font-size:9pt; font-weight:600; letter-spacing:.06em; text-transform:uppercase; border-radius:4px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:100; }
+  .print-btn:hover { background:var(--slate); }
+  @media print {
+    * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+    body { margin:0; }
+    .page { width:100%; margin:0; }
+    .print-btn { display:none !important; }
+    .two-col, .why-panel, .history-strip, .comp-panels, .tkbox { page-break-inside:avoid; }
+    .data-table tr { page-break-inside:avoid; }
+    .data-table thead { display:table-header-group; }
+  }
+
+  /* HEADER */
+  .report-header { background:var(--navy); padding:26px 36px 20px; display:flex; justify-content:space-between; align-items:flex-end; }
+  .header-left .brand { font-family:'DM Serif Display',serif; color:var(--gold); font-size:11pt; letter-spacing:.04em; margin-bottom:6px; }
+  .header-left .address { font-family:'DM Serif Display',serif; color:var(--white); font-size:21pt; line-height:1.15; }
+  .header-left .sub { color:var(--gold-lt); font-size:10pt; margin-top:3px; font-weight:300; letter-spacing:.02em; }
+  .header-right { text-align:right; }
+  .header-right .rtype { color:var(--gold); font-size:7.5pt; font-weight:700; letter-spacing:.12em; text-transform:uppercase; margin-bottom:3px; }
+  .header-right .rdate { color:rgba(255,255,255,.5); font-size:8pt; margin-top:6px; }
+  .gold-bar { height:3px; background:linear-gradient(90deg,var(--gold) 0%,var(--gold-lt) 60%,transparent 100%); }
+
+  /* STATS BAR */
+  .stats-bar { background:var(--slate); display:flex; }
+  .stat-cell { flex:1; padding:10px 12px; border-right:1px solid rgba(255,255,255,.1); text-align:center; }
+  .stat-cell:last-child { border-right:none; }
+  .stat-label { color:var(--gold); font-size:6.5pt; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:2px; }
+  .stat-value { color:var(--white); font-size:11.5pt; font-weight:700; line-height:1.1; }
+  .stat-sub { color:rgba(255,255,255,.5); font-size:7pt; margin-top:1px; }
+
+  /* BODY */
+  .body-wrap { padding:20px 36px 16px; }
+  .sec-title { font-family:'DM Serif Display',serif; font-size:11pt; color:var(--navy); border-bottom:1.5px solid var(--gold); padding-bottom:4px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:baseline; }
+  .sec-title span { font-family:'DM Sans',sans-serif; font-size:7.5pt; font-weight:400; color:var(--muted); }
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:16px; }
+
+  /* SPOTLIGHT */
+  .spotlight { background:var(--light); border-radius:4px; padding:14px 16px; }
+  .spotlight h3 { font-family:'DM Serif Display',serif; font-size:10pt; color:var(--navy); margin-bottom:10px; }
+  .spec-grid { display:grid; grid-template-columns:1fr 1fr; gap:3px 10px; }
+  .spec-item { display:flex; justify-content:space-between; border-bottom:1px solid rgba(0,0,0,.06); padding:3px 0; font-size:8.5pt; }
+  .spec-lbl { color:var(--muted); }
+  .spec-val { font-weight:600; text-align:right; }
+  .spec-val.green { color:var(--green); }
+  .spec-val.amber { color:var(--amber); }
+  .spec-val.red { color:var(--red); }
+
+  /* VALUE TABLE */
+  .vtable { width:100%; border-collapse:collapse; font-size:8.5pt; margin-bottom:12px; }
+  .vtable td { padding:5px 8px; border-bottom:1px solid rgba(0,0,0,.07); }
+  .vt-lbl { color:var(--text); }
+  .vt-num { text-align:right; font-weight:700; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .vt-note { text-align:right; color:var(--muted); font-size:7.5pt; white-space:nowrap; }
+  .vtable tr.total td { background:var(--navy); color:var(--white); font-weight:700; font-size:9pt; }
+  .vtable tr.total .vt-num { color:var(--gold); font-size:10pt; }
+
+  /* PRICE CALLOUT */
+  .price-callout { background:var(--navy); border-radius:4px; padding:14px 16px; display:flex; justify-content:space-between; align-items:center; margin-top:12px; }
+  .pc-label { color:var(--gold); font-size:7pt; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:3px; }
+  .pc-price { color:var(--white); font-family:'DM Serif Display',serif; font-size:26pt; line-height:1; }
+  .pc-range { color:var(--gold-lt); font-size:8pt; margin-top:4px; }
+  .pc-right { text-align:right; color:rgba(255,255,255,.7); font-size:8pt; line-height:1.7; }
+  .pc-right strong { color:var(--gold-lt); }
+
+  /* WHY IT HASN'T SOLD PANEL */
+  .why-panel { border:2px solid var(--red); border-radius:4px; margin-bottom:16px; overflow:hidden; }
+  .why-hdr { background:var(--red); padding:8px 14px; display:flex; justify-content:space-between; align-items:center; }
+  .why-hdr h4 { font-family:'DM Serif Display',serif; color:var(--white); font-size:11pt; }
+  .why-hdr .verdict { background:var(--white); color:var(--red); font-size:8pt; font-weight:700; padding:3px 10px; border-radius:3px; letter-spacing:.04em; }
+  .why-body { padding:14px 16px; background:var(--white); display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+  .why-col h5 { color:var(--red); font-size:8.5pt; font-weight:700; margin-bottom:6px; border-bottom:1px solid #f0d0d0; padding-bottom:4px; }
+  .why-col p { font-size:8pt; color:var(--text); line-height:1.5; }
+  .why-flag { color:var(--red); font-weight:700; font-size:8.5pt; margin-top:6px; }
+  .why-note { color:var(--amber); font-weight:700; font-size:8.5pt; margin-top:6px; }
+
+  /* LISTING HISTORY STRIP */
+  .history-strip { margin-bottom:16px; border:1px solid #ddd; border-radius:4px; overflow:hidden; }
+  .history-hdr { background:var(--slate); padding:8px 14px; }
+  .history-hdr h4 { color:var(--white); font-size:9pt; font-weight:600; }
+  .history-hdr p { color:var(--gold-lt); font-size:7pt; margin-top:2px; }
+  .history-body { padding:12px 14px; background:var(--white); display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+  .hist-event { padding:8px 10px; border-radius:3px; border-left:3px solid; }
+  .hist-event.new { background:#e8f5e9; border-color:var(--green); }
+  .hist-event.reduce { background:var(--ltyel); border-color:var(--amber); }
+  .hist-event.cancel { background:var(--ltred); border-color:var(--red); }
+  .hist-event.cond { background:var(--ltblu); border-color:#1565c0; }
+  .hist-date { font-size:7pt; font-weight:700; letter-spacing:.04em; color:var(--muted); margin-bottom:2px; }
+  .hist-event-type { font-size:8pt; font-weight:700; color:var(--navy); }
+  .hist-price { font-size:9.5pt; font-weight:700; font-family:'DM Serif Display',serif; color:var(--navy); }
+  .hist-note { font-size:7pt; color:var(--muted); margin-top:2px; line-height:1.4; }
+
+  /* COMP PANELS */
+  .comp-panels { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+  .comp-panel { border:1px solid #ddd; border-radius:4px; overflow:hidden; }
+  .comp-panel-hdr { background:var(--slate); padding:8px 12px; }
+  .comp-panel-hdr h4 { color:var(--white); font-size:9pt; font-weight:600; }
+  .comp-panel-hdr p { color:var(--gold-lt); font-size:7pt; margin-top:2px; }
+  .comp-panel-body { padding:10px 12px; background:var(--white); }
+  .comp-metric { display:flex; justify-content:space-between; align-items:center; padding:3px 0; border-bottom:1px solid #f0f0f0; font-size:8pt; }
+  .cm-lbl { color:var(--muted); }
+  .cm-val { font-weight:600; }
+  .cm-val.green { color:var(--green); }
+  .cm-val.amber { color:var(--amber); }
+  .cm-val.red { color:var(--red); }
+  .comp-insight { margin-top:8px; font-size:7.5pt; color:var(--text); line-height:1.45; background:var(--light); padding:7px 9px; border-radius:3px; }
+
+  /* DATA TABLES */
+  .data-table { width:100%; border-collapse:collapse; font-size:8pt; margin-bottom:16px; }
+  .data-table th { background:var(--navy); color:var(--white); padding:6px 8px; text-align:left; font-size:7pt; font-weight:600; letter-spacing:.04em; text-transform:uppercase; }
+  .data-table th.num { text-align:right; }
+  .data-table td { padding:5px 8px; border-bottom:1px solid #eee; vertical-align:middle; }
+  .data-table tr:nth-child(even) td { background:#fafafa; }
+  .data-table tr.highlight td { background:var(--ltgrn) !important; }
+  .data-table tr.subj-row td { background:var(--ltyel) !important; border-left:3px solid var(--gold); }
+  .data-table tr.warn-row td { background:var(--ltred) !important; }
+  .num { text-align:right; font-variant-numeric:tabular-nums; }
+  .dom-amber { color:var(--amber); font-weight:600; }
+  .dom-red { color:var(--red); font-weight:600; }
+  .sp-lp-good { color:var(--green); font-weight:600; }
+  .sp-lp-ok { color:var(--amber); font-weight:600; }
+  .sp-lp-bad { color:var(--red); font-weight:600; }
+  .tag { font-size:6.5pt; font-weight:700; padding:1px 5px; border-radius:3px; margin-left:4px; text-transform:uppercase; letter-spacing:.04em; }
+  .tag-green { background:#c8e6c9; color:#1b5e20; }
+  .tag-amber { background:#ffe0b2; color:#7c4a00; }
+  .tag-gold { background:#f5e6ca; color:#7c5a1a; }
+  .tag-red { background:#ffcdd2; color:#7f0000; }
+  .tag-blue { background:#bbdefb; color:#1a3a5c; }
+  .note { color:var(--muted); font-size:7.5pt; }
+
+  /* TAKEAWAYS */
+  .tkbox { background:var(--navy); border-radius:4px; padding:18px 20px; margin-bottom:0; }
+  .tkbox h3 { font-family:'DM Serif Display',serif; color:var(--gold); font-size:11pt; margin-bottom:14px; }
+  .tk-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+  .tk-num { color:var(--gold); font-size:7pt; font-weight:700; letter-spacing:.1em; margin-bottom:3px; }
+  .tk-title { color:var(--white); font-size:8.5pt; font-weight:600; margin-bottom:5px; line-height:1.3; }
+  .tk-body { color:rgba(255,255,255,.65); font-size:7.5pt; line-height:1.5; }
+
+  /* FOOTER */
+  .report-footer { background:var(--light); border-top:2px solid var(--gold); padding:12px 36px; display:flex; justify-content:space-between; align-items:center; font-size:7.5pt; color:var(--muted); }
+  .footer-brand { font-family:'DM Serif Display',serif; color:var(--navy); font-size:10pt; }
+  .footer-right { text-align:right; }
+</style>
+</head>
+<body>
+<button class="print-btn" onclick="window.print()">⎙ Print / Save PDF</button>
+<div class="page">
+
+<div class="report-header">
+  <div class="header-left">
+    <div class="brand">Woolcott Real Estate</div>
+    <div class="address">2347 Tweedsmuir Court</div>
+    <div class="sub">Brant Hills, Burlington, ON · L7P 4K9</div>
+  </div>
+  <div class="header-right">
+    <div class="rtype">Seller Market Valuation &amp; Pricing Review</div>
+    <div style="color:var(--gold);font-family:'DM Serif Display',serif;font-size:14pt;">Freehold 2-Storey · Professionally Renovated</div>
+    <div class="rdate">Prepared May 2026 · Confidential</div>
+  </div>
+</div>
+<div class="gold-bar"></div>
+
+<div class="stats-bar">
+  <div class="stat-cell"><div class="stat-label">Style</div><div class="stat-value">2-Storey</div><div class="stat-sub">Detached · Freehold</div></div>
+  <div class="stat-cell"><div class="stat-label">Above Grade</div><div class="stat-value">2,160 sqft</div><div class="stat-sub">Per Plans</div></div>
+  <div class="stat-cell"><div class="stat-label">Bedrooms</div><div class="stat-value">4 + 1</div><div class="stat-sub">4 Upper · 1 Basement</div></div>
+  <div class="stat-cell"><div class="stat-label">Bathrooms</div><div class="stat-value">3 + 1</div><div class="stat-sub">Ensuite · 4-pc · 3-pc · 2-pc</div></div>
+  <div class="stat-cell"><div class="stat-label">Garage</div><div class="stat-value">2-Car</div><div class="stat-sub">Attached · 6 Total Parking</div></div>
+  <div class="stat-cell"><div class="stat-label">Lot</div><div class="stat-value">40 × 94</div><div class="stat-sub">Irregular · Cul-de-Sac</div></div>
+  <div class="stat-cell"><div class="stat-label">CDOM</div><div class="stat-value" style="font-size:10pt;color:#f28b82;">168 Days</div><div class="stat-sub">Re-listed Apr 30/26</div></div>
+</div>
+
+<div class="body-wrap">
+
+  <!-- TWO COL -->
+  <div class="two-col">
+    <div>
+      <div class="sec-title">Subject Property Spotlight<span>2347 Tweedsmuir Court · Brant Hills</span></div>
+      <div class="spotlight">
+        <h3>Property Highlights</h3>
+        <div class="spec-grid">
+          <div class="spec-item"><span class="spec-lbl">Style</span><span class="spec-val">2-Storey, Detached</span></div>
+          <div class="spec-item"><span class="spec-lbl">Tenure</span><span class="spec-val">Freehold</span></div>
+          <div class="spec-item"><span class="spec-lbl">AG SqFt</span><span class="spec-val">2,160 sqft</span></div>
+          <div class="spec-item"><span class="spec-lbl">Year Built</span><span class="spec-val">1981 · Prof. renovated 2025</span></div>
+          <div class="spec-item"><span class="spec-lbl">Bedrooms</span><span class="spec-val">4+1 (4 upper + 1 bsmt)</span></div>
+          <div class="spec-item"><span class="spec-lbl">Bathrooms</span><span class="spec-val">3+1 (ensuite, 4-pc, 3-pc, 2-pc)</span></div>
+          <div class="spec-item"><span class="spec-lbl">Lot</span><span class="spec-val">40 × 94.37 ft (irregular)</span></div>
+          <div class="spec-item"><span class="spec-lbl">Parking</span><span class="spec-val">6 total (2 garage + 4 drive)</span></div>
+          <div class="spec-item"><span class="spec-lbl">Kitchen</span><span class="spec-val green">Custom · Waterfall Island</span></div>
+          <div class="spec-item"><span class="spec-lbl">Main Floor</span><span class="spec-val green">Laundry · Gas Fireplace</span></div>
+          <div class="spec-item"><span class="spec-lbl">Primary Suite</span><span class="spec-val green">4-pc Ensuite · Walk-in Closet</span></div>
+          <div class="spec-item"><span class="spec-lbl">Roof</span><span class="spec-val amber">2018</span></div>
+          <div class="spec-item"><span class="spec-lbl">Basement</span><span class="spec-val">Rec Rm · Bed · 3-pc Bath</span></div>
+          <div class="spec-item"><span class="spec-lbl">Occupancy</span><span class="spec-val green">Vacant · Easy Showings</span></div>
+          <div class="spec-item"><span class="spec-lbl">Seller</span><span class="spec-val amber">Corporate (Numbered Co.)</span></div>
+          <div class="spec-item"><span class="spec-lbl">Location</span><span class="spec-val">Quiet Court · Cul-de-Sac</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sec-title">Value Assessment<span>Anchored to highest Brant Hills 2-storey sale · renovation premium applied</span></div>
+      <table class="vtable">
+        <tbody>
+          <tr><td class="vt-lbl">Base: 2378 Arnold Crescent (updated/maintained 2-sty, 2,022 sqft AG, 4 bed, inground pool, pie lot 41×145)</td><td class="vt-num">$1,330,000</td><td class="vt-note">SP/LP 1.00 · 10 CDOM</td></tr>
+          <tr><td class="vt-lbl">Professional renovation premium: Tweedsmuir complete professional reno (floors, kitchen, all baths, basement, trim, walls removed, deck) vs Arnold "updated/maintained"</td><td class="vt-num">+$30,000</td><td class="vt-note">Scope advantage</td></tr>
+          <tr><td class="vt-lbl">No inground pool (base comp had pool): meaningful outdoor amenity gap</td><td class="vt-num">−$25,000</td><td class="vt-note">Pool absent</td></tr>
+          <tr><td class="vt-lbl">Size adjustment: +138 sqft AG @ $200/sqft (subject larger)</td><td class="vt-num">+$28,000</td><td class="vt-note">2,160 vs 2,022 sqft</td></tr>
+          <tr><td class="vt-lbl">Lot adjustment: subject 40×94 vs comp pie lot 41×145 — significantly shorter depth</td><td class="vt-num">−$20,000</td><td class="vt-note">Smaller lot footprint</td></tr>
+          <tr><td class="vt-lbl">Location: quiet cul-de-sac court vs crescent — lower traffic, family-friendly</td><td class="vt-num">+$5,000</td><td class="vt-note">Court premium</td></tr>
+          <tr><td class="vt-lbl">Basement: finished rec room + bed + 3-pc bath (base comp had similar lower level)</td><td class="vt-num">Neutral</td><td class="vt-note">Comparable</td></tr>
+          <tr class="total"><td class="vt-lbl">Indicated Market Value</td><td class="vt-num">$1,348,000</td><td class="vt-note" style="color:rgba(255,255,255,.5);">±$25K</td></tr>
+        </tbody>
+      </table>
+
+      <div class="price-callout">
+        <div>
+          <div class="pc-label">Recommended List Price</div>
+          <div class="pc-price">$1,329,900</div>
+          <div class="pc-range">Expected close: <strong>$1,285K – $1,320K</strong></div>
+        </div>
+        <div class="pc-right">
+          <strong>Reduction required:</strong> −$70,000<br>
+          <strong>$/sqft (AG):</strong> $616<br>
+          <strong>Comparable SP/LP:</strong> 0.97–0.99<br>
+          <strong>Strategy:</strong> Renovation premium · below market ceiling
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY IT HASN'T SOLD -->
+  <div class="why-panel">
+    <div class="why-hdr">
+      <h4>Why It Hasn't Sold: Diagnostic Analysis</h4>
+      <div class="verdict">6 Contributing Factors Identified</div>
+    </div>
+    <div class="why-body">
+      <div class="why-col">
+        <h5>① Overpriced From Day One</h5>
+        <p>The property launched at $1,489,900 in November 2025 — $159K above the highest comparable sale in Brant Hills ($1,330,000 at 2378 Arnold Crescent). Even accounting for a full renovation premium, market evidence supports a value of approximately $1,348,000. Every price reduction since has been reactive, not strategic, leaving buyers to wonder how far it will fall rather than acting on current value.</p>
+        <div class="why-flag">Current price still ~$70K above market evidence</div>
+      </div>
+      <div class="why-col">
+        <h5>② 168 CDOM Is Visible To Every Buyer</h5>
+        <p>Despite the April 30 re-list, every MLS sheet shows CDOM: 168. Buyers and buyer agents pull this data immediately. In a market where well-priced Brant Hills homes sell in 7–28 days, 168 CDOM creates a powerful "what's wrong with this house?" perception that suppresses showing traffic and offer activity regardless of price.</p>
+        <div class="why-flag">CDOM stigma cannot be hidden — only overcome with price</div>
+      </div>
+      <div class="why-col">
+        <h5>③ The Collapsed Conditional Deal</h5>
+        <p>A buyer went conditional November 27, 2025 — deal fell through and property returned to market December 11. This is the single most damaging event in the listing history. Every buyer's agent researching this property sees it. The questions it raises: Did an inspection reveal issues? Did an appraisal come in short? Either scenario is concerning, and neither has been addressed publicly.</p>
+        <div class="why-note">⚠ Proactive disclosure / inspection report recommended</div>
+      </div>
+      <div class="why-col">
+        <h5>④ Corporate Seller = Documentation Expectation</h5>
+        <p>Seller is listed as "1964878 Ontario Inc." — a numbered company. While the renovation quality and finishes are self-evident in person, buyers purchasing from a corporate seller have a higher expectation for supporting documentation: permits, ESA electrical certificate, and a pre-listing home inspection. In the absence of these, some buyers hesitate or condition offers more aggressively. Proactively providing these materials removes friction at the offer stage.</p>
+        <div class="why-note">⚠ Provide permits, ESA cert + inspection report upfront</div>
+      </div>
+      <div class="why-col">
+        <h5>⑤ Head-to-Head Competition at Lower Price</h5>
+        <p>2391 Arnold Crescent — a 2-storey, 2,151 sqft, 4-bedroom home in the same Brant Hills neighbourhood — is currently listed at $1,279,900 with only 12 CDOM. Buyers comparing the two properties see a $120K premium for the subject, plus a 156-day DOM history. At that spread, buyers choose 2391 Arnold. Subject needs to close the gap or undercut to generate urgency.</p>
+        <div class="why-flag">$120K gap vs comparable active competition</div>
+      </div>
+      <div class="why-col">
+        <h5>⑥ Lot Size at Premium Price Point</h5>
+        <p>At 40×94 ft (irregular), the subject has the smallest lot of any comparable in the active or sold set. Competing homes sit on 41×145, 45×120, 50×115, and 55×140 lots — substantially larger. Brant Hills buyers at this price point typically expect more outdoor space. The lot constraint is not a deal-breaker but it requires the price to compensate, not command a premium.</p>
+        <div class="why-flag">Smallest lot of all comparables at highest price</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LISTING HISTORY -->
+  <div class="history-strip">
+    <div class="history-hdr">
+      <h4>Listing Price History — 2347 Tweedsmuir Court</h4>
+      <p>Nov 2025 → May 2026 · Three listing IDs · Two price reductions · One collapsed conditional</p>
+    </div>
+    <div class="history-body">
+      <div class="hist-event new">
+        <div class="hist-date">NOV 19/25</div>
+        <div class="hist-event-type">New Listing</div>
+        <div class="hist-price">$1,489,900</div>
+        <div class="hist-note">Listed post-renovation. Priced $188K above market evidence.</div>
+      </div>
+      <div class="hist-event cond">
+        <div class="hist-date">NOV 27 → DEC 11/25</div>
+        <div class="hist-event-type">Conditional → Fell Through</div>
+        <div class="hist-price">$1,489,900</div>
+        <div class="hist-note">Deal went conditional, returned to market Dec 11. Reason unknown — major buyer concern.</div>
+      </div>
+      <div class="hist-event reduce">
+        <div class="hist-date">FEB 2 / APR 14/26</div>
+        <div class="hist-event-type">2× Price Reductions</div>
+        <div class="hist-price">$1,449,900 → $1,399,900</div>
+        <div class="hist-note">Chasing market down over 140 days. Each reduction signals seller motivation without generating offers.</div>
+      </div>
+      <div class="hist-event cancel">
+        <div class="hist-date">APR 30/26 · Re-listed</div>
+        <div class="hist-event-type">Cancel + Fresh List</div>
+        <div class="hist-price">$1,399,900</div>
+        <div class="hist-note">CDOM: 168 still visible. No reset in buyer perception. Same price, same property.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMP PANELS -->
+  <div class="sec-title" style="margin-bottom:10px;">Market Context<span>Renovation Premium · Lot vs Price · Active Competition Headwinds</span></div>
+  <div class="comp-panels">
+    <div class="comp-panel">
+      <div class="comp-panel-hdr">
+        <h4>Renovation Premium: What the Market Pays</h4>
+        <p>Brant Hills 2-storey solds · renovated vs original · 2025–2026</p>
+      </div>
+      <div class="comp-panel-body">
+        <div class="comp-metric"><span class="cm-lbl">2392 Arnold (full gut reno, 2,018 sqft, 184 CDOM)</span><span class="cm-val red">$1,301,500 · SP/LP 0.98</span></div>
+        <div class="comp-metric"><span class="cm-lbl">2378 Arnold (updated/maintained, 2,022 sqft, pool)</span><span class="cm-val green">$1,330,000 · SP/LP 1.00 · 10 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">2387 Rushbury (well maintained, 2,176 sqft, court)</span><span class="cm-val amber">$1,200,000 · SP/LP 0.97 · 28 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">2325 Montgomery (original, 2,077 sqft, corner)</span><span class="cm-val green">$1,210,000 · SP/LP 1.01 · 7 CDOM</span></div>
+        <div class="comp-insight"><strong>Key insight:</strong> 2378 Arnold — updated/maintained with a pool but not a gut renovation — represents the market ceiling at $1,330,000 (10 CDOM). Tweedsmuir's complete gut renovation (floors, kitchen, all baths, basement, trim, walls removed) commands a premium over Arnold, offset by the absence of a pool and smaller lot. Indicated market value: ~$1,348,000.</div>
+      </div>
+    </div>
+
+    <div class="comp-panel">
+      <div class="comp-panel-hdr">
+        <h4>Active Competition Analysis</h4>
+        <p>Current Brant Hills listings · pricing context · May 2026</p>
+      </div>
+      <div class="comp-panel-body">
+        <div class="comp-metric"><span class="cm-lbl">2391 Arnold (2-sty, 2,151 sqft, 4 bed, 3+1 bath)</span><span class="cm-val red">$1,279,900 · 12 CDOM · Key rival</span></div>
+        <div class="comp-metric"><span class="cm-lbl">2144 Sandringham (4 bed, 3 bath, 1,191 sqft AG)</span><span class="cm-val amber">$1,349,000 · 20 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">2474 Cavendish (2-sty, 1,175 sqft AG, 4 bed)</span><span class="cm-val amber">$1,248,000 · 9 CDOM</span></div>
+        <div class="comp-metric"><span class="cm-lbl">2360 Cavendish (backsplit, 1,541 sqft, 4 bed)</span><span class="cm-val amber">$1,200,000 · 41 CDOM</span></div>
+        <div class="comp-insight"><strong>Primary threat:</strong> 2391 Arnold is fresh to market (12 CDOM), similar size (2,151 sqft), and $120K cheaper than subject's current price. At $1,329,900, the recommended list, subject holds a $50K premium over 2391 Arnold — justified by the full gut renovation that buyers will see clearly in person. That spread is defensible. The current $70K gap is not.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOLD COMPS TABLE -->
+  <div class="sec-title">Sold Comparables<span>Brant Hills, Burlington · 2025–2026 · Most Recent First</span></div>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Address</th><th>Style</th><th>AG SqFt</th><th>Bed</th><th>Bath</th>
+        <th class="num">List Price</th><th class="num">Sold Price</th><th class="num">SP/LP</th><th class="num">CDOM</th><th>Condition / Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="highlight">
+        <td><strong>2392 Arnold Cres</strong><span class="tag tag-amber">Partial Reno</span></td>
+        <td>2-Storey</td><td class="num">2,018</td><td>4</td><td>3+1</td>
+        <td class="num">$1,330,000</td><td class="num">$1,301,500</td>
+        <td class="num sp-lp-ok">0.98</td><td class="num dom-red">184</td>
+        <td class="note">Kitchen + bath updates, pot lights — not a full gut renovation; ESA cert provided; 2-car garage; 45×120 lot; Feb 2026</td>
+      </tr>
+      <tr>
+        <td><strong>2378 Arnold Cres</strong><span class="tag tag-green">Fastest Sale</span></td>
+        <td>2-Storey</td><td class="num">2,022</td><td>4</td><td>2+2</td>
+        <td class="num">$1,329,000</td><td class="num">$1,330,000</td>
+        <td class="num sp-lp-good">1.00</td><td class="num">10</td>
+        <td class="note">Lovingly updated; inground pool; pie lot 41×145; 2,972 total sqft; new furnace 2025; Mar 2026</td>
+      </tr>
+      <tr>
+        <td><strong>2183 Sandringham Dr</strong></td>
+        <td>Raised Bungalow</td><td class="num">1,500</td><td>3</td><td>2</td>
+        <td class="num">$1,265,000</td><td class="num">$1,240,000</td>
+        <td class="num sp-lp-ok">0.98</td><td class="num">13</td>
+        <td class="note">HGTV featured full reno (2020 main, 2025 lower); composite deck; hot tub; 55×100 lot; Apr 2026</td>
+      </tr>
+      <tr>
+        <td><strong>2325 Montgomery Dr</strong></td>
+        <td>2-Storey</td><td class="num">2,077</td><td>4</td><td>2+1</td>
+        <td class="num">$1,199,000</td><td class="num">$1,210,000</td>
+        <td class="num sp-lp-good">1.01</td><td class="num">7</td>
+        <td class="note">Original condition; pool; corner lot 55×140; unfinished basement; strong demand for right price; Apr 2026</td>
+      </tr>
+      <tr>
+        <td><strong>2387 Rushbury Court</strong></td>
+        <td>2-Storey</td><td class="num">2,176</td><td>4</td><td>2+1</td>
+        <td class="num">$1,239,900</td><td class="num">$1,200,000</td>
+        <td class="num sp-lp-ok">0.97</td><td class="num dom-amber">28</td>
+        <td class="note">Well maintained; saltwater pool; quiet court; 50×115 lot; key updates roof/windows 2021; May 2026</td>
+      </tr>
+      <tr>
+        <td><strong>2055 Mountain Grove</strong></td>
+        <td>2-Storey</td><td class="num">2,340</td><td>4+1</td><td>3+1</td>
+        <td class="num">$1,249,900</td><td class="num">$1,250,000</td>
+        <td class="num sp-lp-good">1.00</td><td class="num">8</td>
+        <td class="note">Updated kitchen; gas fireplace; 3,147 total sqft; large lot 61×115; Apr 2026</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ACTIVE COMPETITION TABLE -->
+  <div class="sec-title">Active Competition<span>Brant Hills, Burlington · Current Listings · May 2026</span></div>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Address</th><th>Style</th><th>AG SqFt</th><th>Bed</th><th>Bath</th>
+        <th class="num">List Price</th><th class="num">CDOM</th><th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="warn-row">
+        <td><strong>2347 Tweedsmuir Court ★</strong><span class="tag tag-gold">Subject</span></td>
+        <td>2-Storey</td><td class="num">2,160</td><td>4+1</td><td>3+1</td>
+        <td class="num">$1,399,900</td>
+        <td class="num dom-red">168</td>
+        <td class="note">Fully renovated; 2-car garage; court; re-listed Apr 30 — same price, visible CDOM history</td>
+      </tr>
+      <tr class="highlight">
+        <td><strong>2391 Arnold Cres</strong><span class="tag tag-red">Primary Rival</span></td>
+        <td>2-Storey</td><td class="num">2,151</td><td>4</td><td>3+1</td>
+        <td class="num">$1,279,900</td>
+        <td class="num">12</td>
+        <td class="note">Similar size, fresh listing, $120K cheaper — buyers choose this first at current subject pricing</td>
+      </tr>
+      <tr>
+        <td><strong>2144 Sandringham Dr</strong></td>
+        <td>2-Storey</td><td class="num">1,191</td><td>3+1</td><td>3</td>
+        <td class="num">$1,349,000</td>
+        <td class="num dom-amber">20</td>
+        <td class="note">Much smaller AG sqft; building DOM; not a direct competitor on size</td>
+      </tr>
+      <tr>
+        <td><strong>2474 Cavendish Dr</strong></td>
+        <td>2-Storey</td><td class="num">1,175</td><td>4</td><td>3+1</td>
+        <td class="num">$1,248,000</td>
+        <td class="num">9</td>
+        <td class="note">Much smaller AG sqft; 50×100 lot; fresh listing; lower price point</td>
+      </tr>
+      <tr>
+        <td><strong>2360 Cavendish Dr</strong></td>
+        <td>Backsplit</td><td class="num">1,541</td><td>3+1</td><td>2+1</td>
+        <td class="num">$1,200,000</td>
+        <td class="num dom-amber">41</td>
+        <td class="note">Different style; building DOM; renovated; attractive price relative to sqft</td>
+      </tr>
+      <tr>
+        <td><strong>2018 Barlow Cres</strong></td>
+        <td>Bungalow</td><td class="num">1,936</td><td>2+1</td><td>3</td>
+        <td class="num">$1,200,000</td>
+        <td class="num">7</td>
+        <td class="note">Original owner; walkout basement; 63×103 lot; different buyer profile (bungalow)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- TAKEAWAYS -->
+  <div class="tkbox">
+    <h3>Seller Takeaways &amp; Recommended Strategy</h3>
+    <div class="tk-grid">
+      <div class="tk-item">
+        <div class="tk-num">01</div>
+        <div class="tk-title">Reduce to $1,329,900 — Decisive and Final</div>
+        <div class="tk-body">Three price reductions and a re-list have not worked because none moved the price to where the market evidence sits. At $1,329,900 — just below the market ceiling established by 2378 Arnold ($1,330,000) — the subject is priced to reflect its genuine value: a complete gut renovation in a quiet court location with 2,160 sqft, 4+1 beds, and a 2-car garage. This positions the subject $50K above 2391 Arnold, a premium buyers can validate the moment they walk through the door.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">02</div>
+        <div class="tk-title">Address the Collapsed Conditional Proactively</div>
+        <div class="tk-body">Every buyer agent who pulls this property's history sees the November conditional that fell apart. The most effective way to neutralize this is to make a pre-listing home inspection report available to prospective buyers immediately upon showing. If an ESA electrical certificate was obtained (as the comp at 2392 Arnold provided), make that available too. Transparency converts a red flag into a confidence builder.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">03</div>
+        <div class="tk-title">Professional Staging Is Non-Negotiable</div>
+        <div class="tk-body">The property is vacant — which is excellent for showing flexibility but damaging for emotional connection. Buyers viewing a vacant gut-renovated home by a numbered company feel like they're walking through a product, not a potential home. Professional staging of the primary rooms (living/dining, family room, primary bedroom) will dramatically improve offer conversion. The renovation quality is real; staging lets buyers feel it.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">04</div>
+        <div class="tk-title">Court Location Is a Genuine Strength — Lead With It</div>
+        <div class="tk-body">Tweedsmuir Court is a cul-de-sac — quiet, low traffic, safe for children, with a neighbourhood feel that family buyers in Brant Hills actively seek. This feature is undersold in the current listing narrative. Steps from Bruce T. Lindley Public School (French Immersion) adds significant family buyer appeal. Reframe the listing story around community and lifestyle, not just finishes.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">05</div>
+        <div class="tk-title">Fresh Photography and New Listing Narrative</div>
+        <div class="tk-body">The same photos and listing copy that have been associated with 168 CDOM of market history need to be replaced entirely. New photography (ideally with staging in place), a rewritten narrative that emphasizes the court, the school proximity, the full 5-bedroom/4-bathroom configuration, and the renovation scope will present a meaningfully different product to the market — even if the underlying property is the same.</div>
+      </div>
+      <div class="tk-item">
+        <div class="tk-num">06</div>
+        <div class="tk-title">Expected Outcome at $1,329,900</div>
+        <div class="tk-body">At $1,329,900, SP/LP ratios of 0.97–0.99 point to a close range of $1,285,000–$1,320,000. The renovation quality is evident in person and fully supports the price relative to the comp set. With documentation provided upfront, staging in place, and fresh photography, this property has everything needed to close at the high end of its range. Pricing and perception have prevented the sale — the product has not.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="report-footer">
+  <div class="footer-brand">Woolcott Real Estate</div>
+  <div class="footer-text">Prepared by: <strong>Anita McGowan, Broker</strong> · This report is prepared for seller advisory purposes. All data sourced from MLS. Market conditions subject to change. Not a formal appraisal.</div>
+  <div class="footer-right">2347 Tweedsmuir Court, Burlington ON<br>May 2026</div>
+</div>
+
+</div>
+</body>
+</html>
