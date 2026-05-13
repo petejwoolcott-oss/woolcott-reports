@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1354 No 1 Side Road — Market Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:#f5f2ec;color:#1a2332;font-size:15px;line-height:1.6}
+  .wrap{max-width:900px;margin:0 auto;padding:32px 20px 60px}
+
+  /* HEADER */
+  .hdr{background:#1a2332;color:#fff;border-radius:10px 10px 0 0;padding:36px 36px 28px;position:relative;overflow:hidden}
+  .hdr::before{content:'';position:absolute;top:0;right:0;width:260px;height:100%;background:linear-gradient(135deg,transparent 60%,rgba(200,164,92,.13))}
+  .hdr-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#c8a45c;margin-bottom:10px;font-weight:500}
+  .hdr h1{font-family:'DM Serif Display',serif;font-size:28px;line-height:1.2;margin-bottom:6px;color:#fff}
+  .hdr-sub{font-size:13px;color:rgba(255,255,255,.7);margin-bottom:0}
+  .seller-badge{display:inline-block;background:rgba(200,164,92,.18);border:1px solid rgba(200,164,92,.4);color:#c8a45c;font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:20px;margin-top:12px;font-weight:500}
+
+  /* STATS BAR */
+  .stats-bar{background:#2d3a4a;display:flex;flex-wrap:wrap;gap:0;border-radius:0}
+  .stat{flex:1;min-width:120px;padding:14px 18px;border-right:1px solid rgba(255,255,255,.08);text-align:center}
+  .stat:last-child{border-right:none}
+  .stat-val{font-size:14px;font-weight:600;color:#c8a45c;display:block}
+  .stat-lbl{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:2px;display:block}
+
+  /* CDOM ALERT */
+  .cdom-alert{background:#fff;border-left:4px solid #c0392b;border-radius:0 8px 8px 0;padding:18px 22px;margin:22px 0;display:flex;align-items:flex-start;gap:16px}
+  .cdom-icon{font-size:28px;flex-shrink:0}
+  .cdom-alert strong{color:#c0392b;font-size:15px;display:block;margin-bottom:4px}
+  .cdom-alert p{color:#2d3a4a;font-size:13.5px;line-height:1.6}
+
+  /* SECTION */
+  .section{background:#fff;border-radius:8px;padding:28px 30px;margin:18px 0;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+  .section-hdr{display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid #eee}
+  .section-hdr h2{font-family:'DM Serif Display',serif;font-size:18px;color:#1a2332}
+  .section-num{background:#1a2332;color:#c8a45c;font-size:11px;font-weight:700;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+  /* SPEC GRID */
+  .spec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px}
+  .spec-item{background:#f9f7f4;border-radius:6px;padding:12px 14px}
+  .spec-item span:first-child{display:block;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#888;margin-bottom:4px}
+  .spec-item span:last-child{font-size:14px;font-weight:600;color:#1a2332}
+
+  /* QUESTION CALLOUT */
+  .question-box{background:#1a2332;color:#fff;border-radius:8px;padding:28px 32px;margin:18px 0;text-align:center}
+  .question-box .q-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#c8a45c;margin-bottom:10px}
+  .question-box .q-text{font-family:'DM Serif Display',serif;font-size:22px;color:#fff;line-height:1.4}
+
+  /* ANSWER BOX */
+  .answer-box{border-radius:8px;padding:24px 28px;margin:18px 0}
+  .answer-box.caution{background:#fff8e6;border:1px solid #f0c060;border-left:4px solid #e8a020}
+  .answer-box.no{background:#fdf1f0;border:1px solid #e8b0a8;border-left:4px solid #c0392b}
+  .answer-box.yes{background:#f0f7f0;border:1px solid #a8c8a8;border-left:4px solid #2e7d32}
+  .answer-box h3{font-family:'DM Serif Display',serif;font-size:17px;margin-bottom:10px}
+  .answer-box.caution h3{color:#b07800}
+  .answer-box.no h3{color:#c0392b}
+  .answer-box.yes h3{color:#2e7d32}
+  .answer-box p{font-size:13.5px;color:#2d3a4a;line-height:1.65}
+
+  /* TABLE */
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+  th{background:#1a2332;color:#c8a45c;padding:9px 12px;text-align:left;font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:600}
+  td{padding:9px 12px;border-bottom:1px solid #f0ece5;vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:#faf8f5}
+  .subject-row td{background:#fff8e6;font-weight:600}
+  .best-sold td{background:#f0f7f0}
+  td .badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;letter-spacing:.5px}
+  td .badge.top{background:#d4edda;color:#155724}
+  td .badge.warn{background:#fde8e6;color:#c0392b}
+  td .badge.amber{background:#fff3cd;color:#856404}
+  td .badge.blue{background:#cce5ff;color:#004085}
+
+  /* VALUE TABLE */
+  .val-table{width:100%;margin-top:10px}
+  .val-table tr td:first-child{font-weight:500;color:#2d3a4a;font-size:13.5px}
+  .val-table tr td:last-child{text-align:right;font-weight:600;font-size:13.5px}
+  .val-table .positive td:last-child{color:#2e7d32}
+  .val-table .negative td:last-child{color:#c0392b}
+  .val-table .anchor-row td{color:#1a2332;font-weight:700;background:#f5f2ec;padding:11px 14px}
+  .val-table .total-row td{background:#1a2332;color:#c8a45c;font-weight:700;font-size:14px;padding:12px 14px}
+
+  /* PRICE CALLOUT */
+  .price-callout{background:#1a2332;border-radius:8px;padding:24px 28px;margin:20px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  .price-callout .price-main{font-family:'DM Serif Display',serif;font-size:32px;color:#c8a45c}
+  .price-callout .price-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:6px}
+  .price-callout .price-range{font-size:13px;color:rgba(255,255,255,.85);margin-top:4px}
+  .price-callout .price-detail{text-align:right}
+  .price-callout .price-detail span{display:block;font-size:13px;color:rgba(255,255,255,.7)}
+  .price-callout .price-detail strong{font-size:15px;color:#fff}
+
+  /* VERDICT */
+  .verdict{background:#fff;border:2px solid #1a2332;border-radius:10px;padding:28px 32px;margin:22px 0}
+  .verdict .v-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#888;margin-bottom:10px}
+  .verdict h2{font-family:'DM Serif Display',serif;font-size:22px;color:#c0392b;margin-bottom:14px}
+  .verdict p{font-size:14px;color:#2d3a4a;line-height:1.7;margin-bottom:12px}
+  .verdict p:last-child{margin-bottom:0}
+
+  /* RECO LIST */
+  .reco-list{list-style:none;padding:0;margin-top:8px}
+  .reco-list li{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid #f0ece5;align-items:flex-start}
+  .reco-list li:last-child{border-bottom:none}
+  .reco-num{background:#c8a45c;color:#1a2332;font-weight:700;font-size:11px;min-width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+  .reco-text strong{display:block;font-size:14px;color:#1a2332;margin-bottom:3px}
+  .reco-text span{font-size:13px;color:#555;line-height:1.55}
+
+  /* FOOTER */
+  .footer{margin-top:36px;text-align:center;color:#888;font-size:12px;padding-top:20px;border-top:1px solid #ddd}
+
+  /* PRINT BUTTON */
+  .print-btn{display:block;margin:22px auto 0;background:#1a2332;color:#c8a45c;border:none;padding:12px 30px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;border-radius:6px;cursor:pointer;transition:background .2s}
+  .print-btn:hover{background:#2d3a4a}
+
+  /* PRINT */
+  @media print{
+    *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+    body{background:#fff}
+    .print-btn{display:none!important}
+    .wrap{padding:0}
+    .section,.verdict,.answer-box,.cdom-alert,.question-box,.price-callout{break-inside:avoid}
+  }
+
+  @media(max-width:600px){
+    .spec-grid{grid-template-columns:repeat(2,1fr)}
+    .stat{min-width:90px}
+    .price-callout{flex-direction:column;text-align:center}
+    .price-callout .price-detail{text-align:center}
+    th,td{padding:7px 8px;font-size:12px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="hdr">
+    <div class="hdr-label">Market Analysis Report · Prepared May 13, 2026</div>
+    <h1>1354 No 1 Side Road</h1>
+    <div class="hdr-sub">North Burlington Rural · Burlington, ON · L7P 0R9 · NEC Dev Control Area</div>
+    <div class="hdr-sub" style="margin-top:4px">2-Storey Detached Estate · Freehold · Hidden Lake Golf Course Views</div>
+    <span class="seller-badge">Prepared for the Sellers</span>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat"><span class="stat-val">2-Storey</span><span class="stat-lbl">Style</span></div>
+    <div class="stat"><span class="stat-val">4,726 sqft</span><span class="stat-lbl">AG Finished</span></div>
+    <div class="stat"><span class="stat-val">7,563 sqft</span><span class="stat-lbl">Total Finished</span></div>
+    <div class="stat"><span class="stat-val">6 Bed / 5+1 Bath</span><span class="stat-lbl">Configuration</span></div>
+    <div class="stat"><span class="stat-val">4.5 Garage</span><span class="stat-lbl">Spaces</span></div>
+    <div class="stat"><span class="stat-val">0.69 Acres</span><span class="stat-lbl">120 × 250 ft</span></div>
+    <div class="stat"><span class="stat-val" style="color:#e88">563 Days</span><span class="stat-lbl">Total CDOM</span></div>
+  </div>
+
+  <!-- THE QUESTION -->
+  <div class="question-box">
+    <div class="q-label">The Question on the Table</div>
+    <div class="q-text">You've indicated your minimum is $2,600,000.<br>Is that realistic in today's market?</div>
+  </div>
+
+  <!-- CDOM ALERT -->
+  <div class="cdom-alert">
+    <div class="cdom-icon">⏱</div>
+    <div>
+      <strong>563 cumulative days on market — this is the central issue.</strong>
+      <p>Your home has been listed and re-listed since approximately October 2024, and in that time, no sale has occurred. The market has had 563 days to speak — and the message has been consistent. Every buyer's agent researching your property will see this history immediately. It shapes their clients' expectations and their offer strategy, regardless of your home's true quality. Addressing the $2.6M question requires being honest about what that number means in this context.</p>
+    </div>
+  </div>
+
+  <!-- YOUR HOME AT A GLANCE -->
+  <div class="section">
+    <div class="section-hdr">
+      <div class="section-num">1</div>
+      <h2>Your Home at a Glance</h2>
+    </div>
+    <div class="spec-grid">
+      <div class="spec-item"><span>Property Type</span><span>Detached 2-Storey</span></div>
+      <div class="spec-item"><span>Above-Grade Sqft</span><span>4,726 sqft</span></div>
+      <div class="spec-item"><span>Total Finished</span><span>7,563 sqft</span></div>
+      <div class="spec-item"><span>Bedrooms</span><span>6 (all above grade)</span></div>
+      <div class="spec-item"><span>Bathrooms</span><span>5 full + 1 half</span></div>
+      <div class="spec-item"><span>Garages</span><span>4.5 spaces (double + 2.5 car)</span></div>
+      <div class="spec-item"><span>Lot Size</span><span>0.69 acres (120 × 250 ft)</span></div>
+      <div class="spec-item"><span>Year Built / Updated</span><span>1960 / Major reno 2021</span></div>
+      <div class="spec-item"><span>Current List Price</span><span>$2,650,000</span></div>
+      <div class="spec-item"><span>Current DOM</span><span>15 days (listed Apr 28, 2026)</span></div>
+      <div class="spec-item"><span>Cumulative DOM</span><span>563 days total</span></div>
+      <div class="spec-item"><span>Annual Taxes</span><span>$12,894 (2025)</span></div>
+    </div>
+    <p style="font-size:13px;color:#666;margin-top:14px;line-height:1.6">
+      <strong>Key strengths:</strong> The largest finished home in the North Burlington Rural market by a significant margin. Across from Hidden Lake Golf Course. Two garages (4.5 total spaces). Comprehensive 2021 updates (electrical, plumbing, furnace, roof). Main floor in-law/independent suite. Recreation room with pool table, wet bar, wine room, and gym. Covered deck with fireplace. Six bedrooms all above grade — ideal for multigenerational families.
+    </p>
+  </div>
+
+  <!-- SOLD COMPS -->
+  <div class="section">
+    <div class="section-hdr">
+      <div class="section-num">2</div>
+      <h2>What Has Actually Sold — Recent Comparable Sales</h2>
+    </div>
+    <p style="font-size:13px;color:#555;margin-bottom:14px">These are the most relevant properties that have sold in the North Burlington Rural area recently. They set the ceiling of what the market will pay.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Address</th>
+          <th>Style</th>
+          <th>AG Sqft</th>
+          <th>Beds</th>
+          <th>Lot</th>
+          <th>Sold Price</th>
+          <th>SP/LP</th>
+          <th>CDOM</th>
+          <th>Sold</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>6685 McNiven Rd</td>
+          <td>Sidesplit</td>
+          <td>2,186</td>
+          <td>5 (3+2)</td>
+          <td>1.32 ac</td>
+          <td><strong>$2,040,000</strong></td>
+          <td>0.97</td>
+          <td>20</td>
+          <td>May 2026</td>
+        </tr>
+        <tr>
+          <td>2560 No 2 Side Rd</td>
+          <td>Bungalow</td>
+          <td>3,059</td>
+          <td>6 (4+2)</td>
+          <td>0.68 ac</td>
+          <td><strong>$2,400,500</strong></td>
+          <td>0.94</td>
+          <td>116</td>
+          <td>Apr 2026</td>
+        </tr>
+        <tr>
+          <td>5535 Cedar Springs Rd</td>
+          <td>2-Storey</td>
+          <td>3,408</td>
+          <td>5 (4+1)</td>
+          <td>0.74 ac</td>
+          <td><strong>$2,450,000</strong></td>
+          <td>0.95</td>
+          <td>34</td>
+          <td>Apr 2026</td>
+        </tr>
+        <tr class="best-sold">
+          <td>6365 Breckenridge Pl <span class="badge top">2.5 ac · Pool</span></td>
+          <td>2-Storey</td>
+          <td>3,400</td>
+          <td>4 (4+0)</td>
+          <td>2.5 ac</td>
+          <td><strong>$2,565,000</strong></td>
+          <td>0.93</td>
+          <td>284</td>
+          <td>May 2026</td>
+        </tr>
+        <tr class="best-sold">
+          <td>2577 No 8 Side Rd <span class="badge top">Conservation · Pool</span></td>
+          <td>Bungalow</td>
+          <td>3,053</td>
+          <td>5 (4+1)</td>
+          <td>~1 ac</td>
+          <td><strong>$2,620,000</strong></td>
+          <td>1.00</td>
+          <td>76</td>
+          <td>Dec 2025</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:#888;margin-top:12px">Note: 6365 Breckenridge and 2577 No 8 Side Road are highlighted as the two highest sales. Both had features that drove premium pricing — Breckenridge on 2.5 acres backing a ravine/Bruce Trail; 8 Side Road on conservation land with a heated saltwater pool and 12-car parking.</p>
+  </div>
+
+  <!-- VALUE ANALYSIS -->
+  <div class="section">
+    <div class="section-hdr">
+      <div class="section-num">3</div>
+      <h2>Where the Market Places Your Home's Value</h2>
+    </div>
+    <p style="font-size:13px;color:#555;margin-bottom:18px">We anchor to the two most comparable sold properties and adjust for meaningful differences. This is the same methodology appraisers and buyer agents use to evaluate your home.</p>
+
+    <p style="font-size:12.5px;font-weight:600;color:#1a2332;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">Anchor A — 5535 Cedar Springs Road (Closest Match)</p>
+    <table class="val-table">
+      <tr class="anchor-row"><td>Base: 5535 Cedar Springs Rd — 2-Storey, 3,408 sqft AG, 0.74 ac, renovated, pool, CDOM 34</td><td>$2,450,000</td></tr>
+      <tr class="positive"><td>+ Larger home size (+1,318 sqft AG @ ~$75/sqft)</td><td>+$99,000</td></tr>
+      <tr class="negative"><td>− No inground pool</td><td>−$30,000</td></tr>
+      <tr class="positive"><td>+ Golf course views / premium address</td><td>+$20,000</td></tr>
+      <tr class="negative"><td>− Lot slightly smaller (0.69 vs 0.74 ac)</td><td>−$5,000</td></tr>
+      <tr class="total-row"><td>Indicated Value — Anchor A</td><td>$2,534,000</td></tr>
+    </table>
+
+    <p style="font-size:12.5px;font-weight:600;color:#1a2332;margin:20px 0 8px;text-transform:uppercase;letter-spacing:.5px">Anchor B — 6365 Breckenridge Place (Highest Comparable)</p>
+    <table class="val-table">
+      <tr class="anchor-row"><td>Base: 6365 Breckenridge Pl — 2-Storey, 3,400 sqft AG, 2.5 ac, pool, 3-car garage, CDOM 284</td><td>$2,565,000</td></tr>
+      <tr class="positive"><td>+ Larger home size (+1,326 sqft AG @ ~$60/sqft)</td><td>+$80,000</td></tr>
+      <tr class="negative"><td>− Significantly less land (0.69 vs 2.5 acres)</td><td>−$75,000</td></tr>
+      <tr class="negative"><td>− No inground pool</td><td>−$30,000</td></tr>
+      <tr class="positive"><td>+ Golf course views / premium address</td><td>+$20,000</td></tr>
+      <tr class="total-row"><td>Indicated Value — Anchor B</td><td>$2,560,000</td></tr>
+    </table>
+
+    <div class="price-callout" style="margin-top:20px">
+      <div>
+        <div class="price-label">Indicated Market Value</div>
+        <div class="price-main">~$2,550,000</div>
+        <div class="price-range">Blended range: $2,490,000 – $2,600,000</div>
+      </div>
+      <div class="price-detail">
+        <span>$/sqft (AG, at value)</span>
+        <strong>~$540/sqft</strong>
+        <span style="margin-top:8px">Most likely sale price</span>
+        <strong style="color:#e88">$2,400,000 – $2,500,000</strong>
+      </div>
+    </div>
+
+    <div class="answer-box caution" style="margin-top:16px">
+      <h3>Why the "most likely sale price" is lower than the indicated value</h3>
+      <p>Indicated market value assumes normal market conditions — a properly exposed listing where buyers see a fresh property and negotiate from a balanced position. With 563 days of accumulated market history, that's not the situation you're in. Every buyer who walks through your door has already been informed by their agent that this home has been listed for a year and a half without selling. That's leverage in their hands, not yours. The 563 CDOM creates an expectation of a discount, and achieving full market value under these conditions requires either a buyer who doesn't know the history (unlikely), or a buyer with a specific need — the right family, the right timing — who values your home uniquely enough to pay what it's worth.</p>
+    </div>
+  </div>
+
+  <!-- ACTIVE COMPETITION -->
+  <div class="section">
+    <div class="section-hdr">
+      <div class="section-num">4</div>
+      <h2>What Buyers Are Comparing You Against Right Now</h2>
+    </div>
+    <p style="font-size:13px;color:#555;margin-bottom:14px">These are the active listings buyers will see alongside yours when they search North Burlington Rural this week.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Address</th>
+          <th>Style</th>
+          <th>AG Sqft</th>
+          <th>Beds</th>
+          <th>Lot</th>
+          <th>List Price</th>
+          <th>CDOM</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>5590 Blind Line</td>
+          <td>Sidesplit</td>
+          <td>2,676</td>
+          <td>5 (4+1)</td>
+          <td>~2 ac</td>
+          <td>$2,099,000</td>
+          <td>162</td>
+          <td><span class="badge amber">Pool · In-law suite</span></td>
+        </tr>
+        <tr>
+          <td>2084 Grand Blvd</td>
+          <td>Bungalow</td>
+          <td>2,081</td>
+          <td>3 (3+0)</td>
+          <td>&lt;0.5 ac</td>
+          <td>$2,298,800</td>
+          <td>141</td>
+          <td><span class="badge blue">Gated community</span></td>
+        </tr>
+        <tr>
+          <td>6306 McNiven Rd</td>
+          <td>2-Storey</td>
+          <td>2,726</td>
+          <td>4 (4+0)</td>
+          <td>~0.7 ac</td>
+          <td>$2,385,000</td>
+          <td>65</td>
+          <td><span class="badge amber">Renovated · Pool · Heated garage</span></td>
+        </tr>
+        <tr>
+          <td>2602 No 2 Side Rd</td>
+          <td>Bungalow</td>
+          <td>1,923</td>
+          <td>3 (2+1)</td>
+          <td>2.0 ac</td>
+          <td>$2,450,000</td>
+          <td>12</td>
+          <td><span class="badge blue">Development potential · Plans available</span></td>
+        </tr>
+        <tr class="subject-row">
+          <td><strong>1354 No 1 Side Rd ← You</strong></td>
+          <td>2-Storey</td>
+          <td>4,726</td>
+          <td>6 (6+0)</td>
+          <td>0.69 ac</td>
+          <td>$2,650,000</td>
+          <td><span class="badge warn">563</span></td>
+          <td>$265K above next highest active</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:12.5px;color:#555;margin-top:14px;line-height:1.65">Your home is listed $265,000 above the next highest active listing — 2602 No 2 Side Road, which is largely a land/development play. For a buyer choosing between 6306 McNiven Road (professionally renovated, pool, $2,385,000) and your home ($2,650,000), the conversation becomes: "What additional value do I get for $265,000 more?" Your home's answer is approximately 2,000 additional sqft and a golf course view. For the right family, that's compelling. For the median buyer, it's a difficult gap to close.</p>
+  </div>
+
+  <!-- VERDICT -->
+  <div class="verdict">
+    <div class="v-label">The Honest Answer</div>
+    <h2>Is $2,600,000 a Realistic Minimum?</h2>
+    <p>The market data places the indicated value of your home at approximately <strong>$2,490,000–$2,600,000</strong>. So in theory, yes — $2,600,000 sits at the very edge of what the market supports. The highest recent sale in the area, 2577 No 8 Side Road, sold for $2,620,000 in December 2025. That property had a heated saltwater pool, conservation land setting, and was positioned as a true lifestyle estate — but it confirms that buyers exist at that level.</p>
+    <p>The challenge is not the intrinsic value of your home. The challenge is what 563 days of market exposure does to that value in a negotiation. Buyers and their agents are not going to pay full market value for a home they know has been sitting. They are going to start lower — often significantly lower — and expect you to meet them somewhere in the middle. Based on how CDOM affects buyer psychology and negotiating leverage in this price range, a more realistic range for an actual sale — under current conditions — is <strong>$2,400,000 to $2,500,000</strong>.</p>
+    <p>If $2,600,000 is your absolute floor, that is a decision only you can make. But you should make it with clear eyes: the market data does not currently support expecting $2.6M as a likely outcome, and holding firm at that number extends the risk of another expired listing and further CDOM accumulation.</p>
+  </div>
+
+  <!-- TAKEAWAYS -->
+  <div class="section">
+    <div class="section-hdr">
+      <div class="section-num">5</div>
+      <h2>Recommendations Going Forward</h2>
+    </div>
+    <ul class="reco-list">
+      <li>
+        <div class="reco-num">1</div>
+        <div class="reco-text">
+          <strong>Have a frank conversation about your number.</strong>
+          <span>The data supports a realistic sale in the $2,400,000–$2,500,000 range. If your true bottom line is $2.6M, be prepared for the possibility that a sale at that number requires exceptional timing and the right buyer. If you can accept $2,450,000–$2,500,000, a transaction is achievable.</span>
+        </div>
+      </li>
+      <li>
+        <div class="reco-num">2</div>
+        <div class="reco-text">
+          <strong>Reset the CDOM story with a meaningful re-launch, not just a re-list.</strong>
+          <span>Simply changing the listing number does little when 563 days of history remains attached to the address. A genuine reset requires new photography, fresh staging, a renewed marketing campaign, and — critically — a price that creates new energy. Buyers and agents need a reason to look again.</span>
+        </div>
+      </li>
+      <li>
+        <div class="reco-num">3</div>
+        <div class="reco-text">
+          <strong>Lean into what makes this home genuinely unique.</strong>
+          <span>No other active or recently sold property in North Burlington Rural comes close to 7,563 sqft of finished space with 6 bedrooms and 4.5 garage spaces at this price. This is a niche product for a specific buyer — a multigenerational family, a buyer relocating from a larger market, or someone who specifically needs the scale. Marketing should be targeted at that audience, not the general rural estate buyer.</span>
+        </div>
+      </li>
+      <li>
+        <div class="reco-num">4</div>
+        <div class="reco-text">
+          <strong>Consider an inground pool as a selling point gap — or price to reflect it.</strong>
+          <span>Every comp at or above $2,400,000 either has a pool or offers something exceptional in lieu. Your home does not have a pool. Buyers at this price point expect resort-style outdoor living. Either install a pool (not advisable during a sale process) or accept that the absence needs to be reflected in pricing expectations.</span>
+        </div>
+      </li>
+      <li>
+        <div class="reco-num">5</div>
+        <div class="reco-text">
+          <strong>Time is not your ally at this price point.</strong>
+          <span>Each additional month of CDOM makes it harder to justify the premium. The active listings you are competing against — particularly 5590 Blind Line and 6306 McNiven — have also been sitting, and eventually one of them will sell or reduce. When that happens, it resets buyer expectations for the entire market segment. Moving decisively now — before further market shifts — is in your interest.</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <button class="print-btn" onclick="window.print()">⎙ Print / Save as PDF</button>
+
+  <div class="footer">
+    <p>Prepared by: <strong>Anita McGowan, Broker</strong> · RE/MAX Escarpment Realty Inc.</p>
+    <p style="margin-top:5px">Data sourced from Cornerstone Association of REALTORS® / CoreLogic Matrix · Prepared May 13, 2026</p>
+    <p style="margin-top:5px;font-style:italic">Information deemed reliable but not guaranteed. This report is prepared for the sellers of 1354 No 1 Side Road and is confidential.</p>
+  </div>
+
+</div>
+</body>
+</html>
