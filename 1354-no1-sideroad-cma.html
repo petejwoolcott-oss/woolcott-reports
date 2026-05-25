@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1354 No 1 Side Road — Market Valuation Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1e;
+    --cream: #f5f0e8;
+    --navy: #1c2b4a;
+    --gold: #c9a84c;
+    --warm-grey: #6b655a;
+    --light-grey: #e8e3da;
+    --green: #2d6a4f;
+    --red: #9b2335;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--cream); color: var(--ink); font-family: 'Manrope', sans-serif; font-size: 15px; line-height: 1.6; }
+
+  /* Banner */
+  .banner { background: var(--navy); color: white; padding: 56px 40px 48px; text-align: center; }
+  .banner .kicker { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .banner h1 { font-family: 'Fraunces', serif; font-size: clamp(32px, 5vw, 56px); font-weight: 300; font-style: italic; line-height: 1.1; margin-bottom: 12px; }
+  .banner .subtitle { font-size: 15px; color: rgba(255,255,255,0.65); font-weight: 400; }
+  .banner .meta { margin-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 0.06em; }
+
+  /* Sections */
+  .section { padding: 48px 40px; max-width: 960px; margin: 0 auto; }
+  .section.alt { background: white; max-width: 100%; }
+  .section.alt .inner { max-width: 960px; margin: 0 auto; padding: 0 40px; }
+  .section-header { margin-bottom: 32px; }
+  .kicker { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  h2 { font-family: 'Fraunces', serif; font-size: clamp(28px, 4vw, 42px); font-weight: 400; line-height: 1.15; color: var(--navy); }
+  h3 { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--warm-grey); margin-bottom: 16px; }
+
+  /* Stat grids */
+  .grid { display: grid; gap: 16px; }
+  .g2 { grid-template-columns: repeat(2, 1fr); }
+  .g3 { grid-template-columns: repeat(3, 1fr); }
+  .g4 { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 600px) { .g2, .g3, .g4 { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 400px) { .g2, .g3, .g4 { grid-template-columns: 1fr; } }
+
+  .tile { background: var(--cream); border: 1px solid var(--light-grey); padding: 20px; border-radius: 2px; }
+  .tile .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warm-grey); margin-bottom: 6px; }
+  .tile .val { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 500; color: var(--navy); line-height: 1.1; }
+  .tile .sub { font-size: 12px; color: var(--warm-grey); margin-top: 4px; }
+
+  /* Value conclusion highlight */
+  .value-box { background: var(--navy); color: white; padding: 36px 40px; border-radius: 2px; text-align: center; }
+  .value-box .kicker { color: var(--gold); margin-bottom: 12px; }
+  .value-box .big { font-family: 'Fraunces', serif; font-size: clamp(36px, 6vw, 64px); font-weight: 400; font-style: italic; line-height: 1; margin-bottom: 8px; }
+  .value-box .range { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: rgba(255,255,255,0.6); }
+  .value-box .note { margin-top: 16px; font-size: 13px; color: rgba(255,255,255,0.55); }
+
+  /* Price alert */
+  .alert { background: #fef2f2; border-left: 3px solid var(--red); padding: 16px 20px; border-radius: 0 2px 2px 0; margin-top: 24px; font-size: 13px; color: var(--red); font-weight: 600; }
+
+  /* Pull quote */
+  .pull-quote { border-left: 3px solid var(--gold); padding: 16px 24px; margin: 24px 0; font-family: 'Fraunces', serif; font-size: 18px; font-style: italic; color: var(--navy); }
+
+  /* Tables */
+  .comp-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 16px; }
+  .comp-table th { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warm-grey); padding: 10px 12px; text-align: left; border-bottom: 2px solid var(--light-grey); background: var(--cream); }
+  .comp-table td { padding: 10px 12px; border-bottom: 1px solid var(--light-grey); vertical-align: top; }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table tr.highlight { background: rgba(201,168,76,0.08); font-weight: 600; }
+  .comp-table tr.subject { background: rgba(28,43,74,0.06); font-weight: 600; }
+  .comp-table tr.excluded { opacity: 0.55; }
+  .star { color: var(--gold); }
+
+  /* Price history */
+  .price-history { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 12px; }
+  .ph-item { background: var(--light-grey); padding: 6px 12px; border-radius: 2px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--warm-grey); }
+  .ph-arrow { color: var(--red); font-size: 14px; }
+  .ph-item.current { background: var(--navy); color: white; }
+
+  /* Body copy */
+  .body-copy p { margin-bottom: 16px; color: var(--ink); line-height: 1.7; }
+  .body-copy p:last-child { margin-bottom: 0; }
+
+  /* Footer */
+  footer { background: var(--navy); color: rgba(255,255,255,0.45); text-align: center; padding: 32px 40px; font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.8; }
+  footer strong { color: rgba(255,255,255,0.7); }
+
+  .spacer { height: 8px; }
+  .mt { margin-top: 32px; }
+</style>
+</head>
+<body>
+
+<!-- Banner -->
+<div class="banner">
+  <div class="kicker">Comparative Market Analysis</div>
+  <h1>1354 No 1 Side Road</h1>
+  <div class="subtitle">Burlington, Ontario &nbsp;·&nbsp; L7P 0R9</div>
+  <div class="meta">Prepared May 25, 2026 &nbsp;·&nbsp; Anita McGowan, Broker &nbsp;·&nbsp; Woolcott Real Estate</div>
+</div>
+
+<!-- Subject Property -->
+<div class="section">
+  <div class="section-header">
+    <div class="kicker">Subject Property</div>
+    <h2>Property Overview</h2>
+  </div>
+  <div class="grid g4">
+    <div class="tile"><div class="label">Style</div><div class="val" style="font-size:18px">2 Storey</div><div class="sub">Detached — Freehold</div></div>
+    <div class="tile"><div class="label">Total Size</div><div class="val">7,563 SF</div><div class="sub">4,726 AG + 2,837 BG</div></div>
+    <div class="tile"><div class="label">Beds / Baths</div><div class="val">6 / 6</div><div class="sub">Full baths</div></div>
+    <div class="tile"><div class="label">Lot</div><div class="val" style="font-size:18px">0.69 ac</div><div class="sub">NEC Dev Control, N. Burlington</div></div>
+  </div>
+  <div class="grid g3 mt">
+    <div class="tile"><div class="label">Garage</div><div class="val" style="font-size:20px">4.5</div><div class="sub">Spaces</div></div>
+    <div class="tile"><div class="label">Current List Price</div><div class="val" style="font-size:20px">$2,650,000</div><div class="sub">27 / 575 DOM / CDOM</div></div>
+    <div class="tile"><div class="label">Key Features</div><div class="val" style="font-size:13px; font-family:'Manrope',sans-serif; font-weight:500; padding-top:4px;">In-law suite, gym, wet bar, wine room, rec room, covered deck w/ fireplace</div><div class="sub">Across from Hidden Lake Golf Course</div></div>
+  </div>
+
+  <div class="spacer"></div>
+  <h3 style="margin-top:28px;">Price History</h3>
+  <div class="price-history">
+    <div class="ph-item">$3,750,000</div>
+    <div class="ph-arrow">→</div>
+    <div class="ph-item">$3,499,900</div>
+    <div class="ph-arrow">→</div>
+    <div class="ph-item">$3,299,900</div>
+    <div class="ph-arrow">→</div>
+    <div class="ph-item">$2,699,000</div>
+    <div class="ph-arrow">→</div>
+    <div class="ph-item current">$2,650,000</div>
+  </div>
+</div>
+
+<!-- Market Value Conclusion -->
+<div class="section alt">
+  <div class="inner">
+    <div class="section-header">
+      <div class="kicker">Market Value Conclusion</div>
+      <h2>Estimated Value</h2>
+    </div>
+    <div class="value-box">
+      <div class="kicker">Most Probable Market Value</div>
+      <div class="big">$2,400,000 – $2,450,000</div>
+      <div class="range">Estimated Range: $2,350,000 – $2,500,000</div>
+      <div class="note">Anchored by 15 Palomino Drive, Carlisle — closest size-matched comparable at 7,474 SF / 6 bed, sold $2,400,000 (21 DOM)</div>
+    </div>
+    <div class="alert">⚠️ Current list price of $2,650,000 is above indicated market value. No comparable sold above $2,620,000 in the last 60 days.</div>
+
+    <div class="pull-quote mt">
+      "575 cumulative days on market with five successive price reductions from $3,750,000. Sustained market resistance supports a value conclusion at or below the midpoint of recent solds."
+    </div>
+  </div>
+</div>
+
+<!-- Sold Comparables -->
+<div class="section">
+  <div class="section-header">
+    <div class="kicker">Last 60 Days</div>
+    <h2>Sold Comparables</h2>
+  </div>
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>Municipality</th>
+        <th>Sold Price</th>
+        <th>Total SF</th>
+        <th>$/SF</th>
+        <th>Lot</th>
+        <th>Close Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="highlight">
+        <td><span class="star">★</span> 15 Palomino Dr</td>
+        <td>Carlisle</td>
+        <td>$2,400,000</td>
+        <td>7,474 (AG+BG)</td>
+        <td>$321</td>
+        <td>1.0 ac</td>
+        <td>Apr 28/26</td>
+      </tr>
+      <tr>
+        <td>5535 Cedar Springs Rd</td>
+        <td>Burlington</td>
+        <td>$2,450,000</td>
+        <td>3,408 AG</td>
+        <td>$719 AG</td>
+        <td>0.74 ac</td>
+        <td>Apr 21/26</td>
+      </tr>
+      <tr>
+        <td>6365 Breckenridge Dr</td>
+        <td>Burlington</td>
+        <td>$2,565,000</td>
+        <td>3,400 AG</td>
+        <td>$754 AG</td>
+        <td>2.5 ac</td>
+        <td>May 4/26</td>
+      </tr>
+      <tr>
+        <td>59 Palomino Dr</td>
+        <td>Carlisle</td>
+        <td>$2,620,000</td>
+        <td>4,718 (AG+BG)</td>
+        <td>$556</td>
+        <td>&lt;2 ac</td>
+        <td>May 14/26</td>
+      </tr>
+      <tr class="excluded">
+        <td>† 6101 Walkers Line</td>
+        <td>Burlington</td>
+        <td>$2,597,000</td>
+        <td>2,534 AG</td>
+        <td>$1,025 AG</td>
+        <td>26 ac</td>
+        <td>Pending</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px; color:var(--warm-grey); margin-top:10px;"><span class="star">★</span> Closest size match — 7,474 SF, 6 bed, 1 ac, SP/LP 0.92, 21 DOM &nbsp;·&nbsp; † Excluded — 26-acre lot is materially different asset class</p>
+
+  <div class="body-copy mt">
+    <p>Five transactions closed in the Burlington and Hamilton-area rural market over the past 60 days, with sold prices ranging from $2,400,000 to $2,620,000. The ceiling of that range is meaningful: despite strong property offerings across Carlisle, Burlington NEC, and Flamborough, no comparable sold above $2,620,000 in the period.</p>
+    <p>The most directly relevant comparable is 15 Palomino Drive, Carlisle. At 7,474 SF total and 6 bedrooms on a 1-acre lot, it is the closest match to the subject in terms of scale, and it sold quickly — 21 days on market — at $2,400,000. The SP/LP ratio of 0.92 reflects a modest but typical negotiation discount on a premium property, not distressed pricing. This sale establishes the lower boundary of the subject's probable value range.</p>
+    <p>The two Burlington NEC sales (Cedar Springs and Breckenridge) are materially smaller homes (~3,400 SF AG) but confirm buyers are active and willing to transact in this market at the $2.4M–$2.6M level. On a per-square-foot basis these homes traded at $719–$754/SF above grade, compared to approximately $351/SF for the subject at current list — reflecting the well-documented discount buyers apply to larger luxury homes where incremental square footage carries diminishing per-foot value.</p>
+  </div>
+</div>
+
+<!-- Active Listings -->
+<div class="section alt">
+  <div class="inner">
+    <div class="section-header">
+      <div class="kicker">Current Inventory</div>
+      <h2>Active Comparable Listings</h2>
+    </div>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Address</th>
+          <th>Municipality</th>
+          <th>List Price</th>
+          <th>DOM / CDOM</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>100 Chesswood Trail</td>
+          <td>Flamborough</td>
+          <td>$2,300,000</td>
+          <td>96 / 355</td>
+          <td>Conditional</td>
+        </tr>
+        <tr>
+          <td>402 Progreston Rd</td>
+          <td>Hamilton</td>
+          <td>$2,349,000</td>
+          <td>—</td>
+          <td>Conditional</td>
+        </tr>
+        <tr>
+          <td>351 Rock Chapel Rd</td>
+          <td>Dundas</td>
+          <td>$2,349,000</td>
+          <td>—</td>
+          <td>Active</td>
+        </tr>
+        <tr>
+          <td>2172 Centre Rd</td>
+          <td>Flamborough</td>
+          <td>$2,395,000</td>
+          <td>—</td>
+          <td>Active</td>
+        </tr>
+        <tr>
+          <td>1291 Old Hwy 8</td>
+          <td>Hamilton</td>
+          <td>$2,400,000</td>
+          <td>—</td>
+          <td>Active</td>
+        </tr>
+        <tr>
+          <td>2602 No 2 Side Rd</td>
+          <td>Burlington</td>
+          <td>$2,450,000</td>
+          <td>—</td>
+          <td>Active</td>
+        </tr>
+        <tr>
+          <td>5 Prato Verde</td>
+          <td>Flamborough</td>
+          <td>$2,589,000</td>
+          <td>—</td>
+          <td>Active</td>
+        </tr>
+        <tr>
+          <td>986 Highway 8</td>
+          <td>Hamilton</td>
+          <td>$2,599,900</td>
+          <td>—</td>
+          <td>Active</td>
+        </tr>
+        <tr>
+          <td>2129 Highview Dr</td>
+          <td>Burlington</td>
+          <td>$2,689,000</td>
+          <td>81</td>
+          <td>Active</td>
+        </tr>
+        <tr>
+          <td>37 Appaloosa Trail</td>
+          <td>Carlisle</td>
+          <td>$2,699,000</td>
+          <td>—</td>
+          <td>Conditional</td>
+        </tr>
+        <tr class="subject">
+          <td>⬛ 1354 No 1 Side Rd</td>
+          <td>Burlington</td>
+          <td>$2,650,000</td>
+          <td>27 / 575</td>
+          <td>Active (Subject)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="body-copy mt">
+      <p>The active market tells a clear story about where buyers are transacting and where they are not. Three properties have gone conditional — spanning $2,300,000 to $2,699,000 — but the two lower-priced conditionals resolved quickly, while Chesswood accumulated 355 cumulative days before finding a buyer at $2,300,000.</p>
+      <p>At the upper end of active inventory, 2129 Highview Drive in Burlington is listed at $2,689,000 and has been on market for 81 days without an accepted offer. This property directly overlaps with the subject's price territory and its inability to attract a conditional offer reinforces that buyer resistance intensifies above $2,650,000.</p>
+      <p>The cluster of active listings between $2,349,000 and $2,450,000 represents the most competitive price band in the current market. In aggregate, the active market confirms what the solds indicate: buyer activity is concentrated in the $2,300,000–$2,500,000 range. Properties priced above $2,600,000 are accumulating market time without offers. The subject's current list price of $2,650,000 places it above the demonstrated point of buyer engagement.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Disclaimer -->
+<footer>
+  <strong>Woolcott Real Estate &nbsp;·&nbsp; RE/MAX Escarpment Realty Inc.</strong><br>
+  Prepared by Anita McGowan, Broker &nbsp;·&nbsp; May 25, 2026<br><br>
+  This analysis is based on MLS data available as of the preparation date. Market conditions change and this report<br>
+  is intended as a professional opinion of probable market value, not a formal appraisal.
+</footer>
+
+</body>
+</html>
