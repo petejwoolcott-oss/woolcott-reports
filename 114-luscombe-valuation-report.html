@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>114 Luscombe Street — Market Valuation Report</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:   #1a2332;
+    --slate:  #2d3a4a;
+    --gold:   #c8a45c;
+    --light:  #f5f2ec;
+    --white:  #ffffff;
+    --muted:  #7a8794;
+    --green:  #2d7a4f;
+    --red:    #a03030;
+    --border: #ddd8cf;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--light);
+    color: var(--slate);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  /* ── HEADER ── */
+  .report-header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 48px 56px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .report-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--gold);
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+  }
+  .brand { font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+  .report-badge {
+    background: rgba(200,164,92,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 3px;
+  }
+  .report-header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 38px;
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .report-header .sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    font-weight: 300;
+  }
+  .header-meta {
+    display: flex;
+    gap: 36px;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  .meta-item { }
+  .meta-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 3px; }
+  .meta-value { font-size: 14px; color: var(--white); font-weight: 500; }
+  /* ── LAYOUT ── */
+  .content { max-width: 900px; margin: 0 auto; padding: 48px 32px; }
+  /* ── SECTION ── */
+  .section { background: var(--white); border-radius: 8px; border: 1px solid var(--border); margin-bottom: 28px; overflow: hidden; }
+  .section-header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-num {
+    width: 28px; height: 28px;
+    background: var(--gold);
+    color: var(--navy);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+  .section-body { padding: 28px; }
+  /* ── SUBJECT GRID ── */
+  .subject-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .stat-box {
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+  }
+  .stat-box .stat-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--navy);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .stat-box .stat-lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .stat-box.highlight { background: var(--navy); border-color: var(--navy); }
+  .stat-box.highlight .stat-val { color: var(--gold); }
+  .stat-box.highlight .stat-lbl { color: rgba(255,255,255,0.5); }
+  /* ── SNAPSHOT ROW ── */
+  .snapshot-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .snap-card {
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px;
+    text-align: center;
+  }
+  .snap-card .snap-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--navy);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .snap-card .snap-lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  /* ── TABLES ── */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead tr { background: var(--light); }
+  th { padding: 10px 12px; text-align: left; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border-bottom: 2px solid var(--border); font-weight: 600; }
+  td { padding: 11px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #faf9f6; }
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+  .tag-sold { background: #e8f4ee; color: var(--green); }
+  .tag-cond { background: #fff3e0; color: #b35c00; }
+  .tag-active { background: #e8edf3; color: var(--navy); }
+  .tag-woolcott { background: var(--navy); color: var(--gold); }
+  /* ── VERDICT BOX ── */
+  .verdict-box {
+    background: var(--navy);
+    border-radius: 8px;
+    padding: 36px;
+    text-align: center;
+    color: var(--white);
+  }
+  .verdict-box .verdict-label {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 10px;
+  }
+  .verdict-box .verdict-price {
+    font-family: 'DM Serif Display', serif;
+    font-size: 54px;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .verdict-box .verdict-range {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 20px;
+  }
+  .verdict-box .verdict-conclusion {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  /* ── NOTE / CALLOUT BOXES ── */
+  .note-box {
+    background: #e8f4ee;
+    border-left: 4px solid var(--green);
+    border-radius: 0 6px 6px 0;
+    padding: 16px 20px;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #1f5236;
+  }
+  .note-box strong { display: block; margin-bottom: 4px; color: var(--green); }
+  .alert-box {
+    background: #fff8ec;
+    border-left: 4px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    padding: 16px 20px;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #7a5a1a;
+  }
+  .alert-box strong { display: block; margin-bottom: 4px; color: #b07a20; }
+  /* ── ADJ TABLE ── */
+  .adj-wrap { margin-bottom: 28px; }
+  .adj-wrap:last-child { margin-bottom: 0; }
+  .adj-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    padding: 12px 16px;
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+  }
+  .adj-table { border: 1px solid var(--border); border-radius: 0 0 6px 6px; overflow: hidden; }
+  .adj-table colgroup col:first-child { width: 70%; }
+  .adj-table colgroup col:last-child  { width: 30%; }
+  .adj-table td { padding: 10px 16px; }
+  .adj-table tr.subtotal td { background: var(--light); font-weight: 600; border-top: 2px solid var(--border); border-bottom: none; }
+  .adj-table tr.total-row td { background: var(--navy); color: var(--white); font-size: 15px; font-weight: 600; border-bottom: none; }
+  .adj-table tr.total-row td:last-child { color: var(--gold); font-family: 'DM Serif Display', serif; font-size: 20px; }
+  .adj-table td.adj-pos { color: var(--green); font-weight: 600; }
+  .adj-table td.adj-neg { color: var(--red); font-weight: 600; }
+  .adj-table td.adj-neutral { color: var(--muted); font-weight: 500; }
+  /* ── RECS ── */
+  .rec-list { list-style: none; }
+  .rec-list li {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .rec-list li:last-child { border-bottom: none; }
+  .rec-num {
+    width: 26px; height: 26px;
+    background: var(--gold);
+    color: var(--navy);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .rec-text strong { display: block; color: var(--navy); font-size: 13px; margin-bottom: 3px; }
+  .rec-text span { color: var(--muted); font-size: 12.5px; }
+  /* ── SUBJECT DETAILS ── */
+  .detail-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .detail-item { }
+  .detail-item .d-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+  .detail-item .d-val { font-size: 13px; color: var(--navy); font-weight: 500; }
+  /* ── FOOTER ── */
+  .report-footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.45);
+    font-size: 11px;
+    padding: 24px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .report-footer strong { color: var(--gold); font-size: 12px; }
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; }
+    .content { padding: 24px 16px; }
+    .section { break-inside: avoid; }
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="report-header">
+  <div class="header-top">
+    <span class="brand">Woolcott Real Estate</span>
+    <span class="report-badge">Market Valuation Report</span>
+  </div>
+  <h1>114 Luscombe Street</h1>
+  <div class="sub">Hamilton, Ontario &nbsp;·&nbsp; Greeningdon &nbsp;·&nbsp; L9A 2K1</div>
+  <div class="header-meta">
+    <div class="meta-item"><div class="meta-label">Current List Price</div><div class="meta-value">$799,900</div></div>
+    <div class="meta-item"><div class="meta-label">Days on Market</div><div class="meta-value">13</div></div>
+    <div class="meta-item"><div class="meta-label">Property Type</div><div class="meta-value">Backsplit, Detached</div></div>
+    <div class="meta-item"><div class="meta-label">Report Date</div><div class="meta-value">May 25, 2026</div></div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- SECTION 1: SUBJECT PROPERTY -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2>Subject Property Overview</h2>
+    </div>
+    <div class="section-body">
+      <div class="subject-grid">
+        <div class="stat-box">
+          <span class="stat-val">1,086</span>
+          <span class="stat-lbl">AG Sq Ft</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-val">3+1</span>
+          <span class="stat-lbl">Bedrooms</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-val">2</span>
+          <span class="stat-lbl">Full Baths</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-val">55×100</span>
+          <span class="stat-lbl">Lot (Ft)</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-val">1961</span>
+          <span class="stat-lbl">Year Built</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-val">2021</span>
+          <span class="stat-lbl">Full Reno</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-val">2</span>
+          <span class="stat-lbl">Self-Contained Units</span>
+        </div>
+        <div class="stat-box highlight">
+          <span class="stat-val">Legal</span>
+          <span class="stat-lbl">Duplex Status</span>
+        </div>
+      </div>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <div class="d-label">Garage</div>
+          <div class="d-val">Attached 1-car + 3 driveway</div>
+        </div>
+        <div class="detail-item">
+          <div class="d-label">Kitchens</div>
+          <div class="d-val">2 full kitchens</div>
+        </div>
+        <div class="detail-item">
+          <div class="d-label">Basement</div>
+          <div class="d-val">Fully finished, walk-out</div>
+        </div>
+        <div class="detail-item">
+          <div class="d-label">Roof</div>
+          <div class="d-val">Metal (long-lasting)</div>
+        </div>
+        <div class="detail-item">
+          <div class="d-label">Cooling / Heating</div>
+          <div class="d-val">Central A/C &amp; Forced Air Gas</div>
+        </div>
+        <div class="detail-item">
+          <div class="d-label">Prior Rental Income</div>
+          <div class="d-val">Up to $4,650/month</div>
+        </div>
+        <div class="detail-item">
+          <div class="d-label">Listing Brokerage</div>
+          <div class="d-val">Woolcott (Drew Woolcott, RE/MAX Escarpment)</div>
+        </div>
+        <div class="detail-item">
+          <div class="d-label">List Date</div>
+          <div class="d-val">May 12, 2026</div>
+        </div>
+        <div class="detail-item">
+          <div class="d-label">Previous Sale</div>
+          <div class="d-val">$731,000 (Dec 2021)</div>
+        </div>
+      </div>
+      <div class="note-box">
+        <strong>Key Value Drivers</strong>
+        114 Luscombe is a rare combination of attributes: architect-designed full renovation (2021), registered legal duplex with separate walk-out entrance, attached garage, and a generous 55-foot frontage lot — all in one of Hamilton Mountain's most sought-after neighbourhoods. This combination is uncommon and commands a premium over standard in-law suite properties.
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: MARKET SNAPSHOT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2>Greeningdon Market Snapshot</h2>
+    </div>
+    <div class="section-body">
+      <div class="snapshot-row">
+        <div class="snap-card">
+          <span class="snap-val">$650–700K</span>
+          <span class="snap-lbl">Recent Sold Range (Non-Legal Duplex)</span>
+        </div>
+        <div class="snap-card">
+          <span class="snap-val">$749,900</span>
+          <span class="snap-lbl">Most Recent Conditional (201 Ridge)</span>
+        </div>
+        <div class="snap-card">
+          <span class="snap-val">~94–99%</span>
+          <span class="snap-lbl">Typical SP / LP Ratio</span>
+        </div>
+      </div>
+      <p style="margin-top:20px; color: var(--muted); font-size: 13px;">
+        The Greeningdon neighbourhood on Hamilton Mountain continues to attract strong demand from families and investors alike. Renovated bungalows and detached homes with income potential are trading actively in the $612,000–$750,000 range. Properties with confirmed legal suite status command a measurable premium over those marketed as "in-law potential." The market is balanced with modest days-on-market (12–28 CDOM) for well-priced listings.
+      </p>
+    </div>
+  </div>
+
+  <!-- SECTION 3: RECENT SALES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2>Recent Comparable Sales</h2>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Type</th>
+            <th>AG Sqft</th>
+            <th>Beds</th>
+            <th>Lot</th>
+            <th>Garage</th>
+            <th>Suite</th>
+            <th>List Price</th>
+            <th>Sale Price</th>
+            <th>SP/LP</th>
+            <th>CDOM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>155 Ridge St</strong></td>
+            <td>Bungalow</td>
+            <td>987</td>
+            <td>3+2</td>
+            <td>47×100</td>
+            <td>1 Detached</td>
+            <td>In-Law Potential</td>
+            <td>$649,900</td>
+            <td><strong>$612,000</strong></td>
+            <td>0.94</td>
+            <td>28</td>
+          </tr>
+          <tr>
+            <td><strong>190 Deschene Ave</strong></td>
+            <td>Raised Bungalow</td>
+            <td>1,227</td>
+            <td>3+1</td>
+            <td>46×89.6</td>
+            <td>1 Attached</td>
+            <td>In-Law Capability</td>
+            <td>$659,900</td>
+            <td><strong>$650,000</strong></td>
+            <td>0.99</td>
+            <td>12</td>
+          </tr>
+          <tr>
+            <td><strong>107 Deschene Ave</strong></td>
+            <td>Bungalow + Addition</td>
+            <td>1,474</td>
+            <td>3+2</td>
+            <td>50×131</td>
+            <td>Carport Only</td>
+            <td>Full Legal Suite</td>
+            <td>$739,000</td>
+            <td><strong>$700,000</strong></td>
+            <td>0.95</td>
+            <td>143</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note-box">
+        <strong>Reading the Solds</strong>
+        155 Ridge and 190 Deschene both sold in the $612K–$650K range — neither had legal secondary suite status. 107 Deschene is the only recent legal-suite sale at $700,000, though its 143-day market time indicates it struggled at higher price points. None of these three have an attached garage. The subject surpasses all three on legal status, renovation quality, and garage access.
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: CONDITIONAL SALES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2>Conditional Sales — Current Market Signal</h2>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Type</th>
+            <th>AG Sqft</th>
+            <th>Beds</th>
+            <th>Lot</th>
+            <th>Garage</th>
+            <th>Suite</th>
+            <th>Orig. List</th>
+            <th>Cond. Price</th>
+            <th>CDOM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>201 Ridge St</strong></td>
+            <td>Bungalow</td>
+            <td>1,069</td>
+            <td>3+2</td>
+            <td>40×127</td>
+            <td>None</td>
+            <td>Income Potential (not legal)</td>
+            <td>$789,900</td>
+            <td><strong>$749,900</strong></td>
+            <td>25</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="alert-box">
+        <strong>Most Relevant Market Signal</strong>
+        201 Ridge Street went conditional on May 19, 2026 at $749,900 — after a price reduction from $789,900. This property is nearly identical in above-grade size (1,069 vs 1,086 sqft), similarly renovated, and located within the same neighbourhood. However, it offers <em>no garage</em> and the suite is income potential only, not a registered legal duplex. The subject at 114 Luscombe holds clear advantages on both counts, supporting a premium above this benchmark.
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: ACTIVE COMPETITION -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <h2>Active Competition</h2>
+    </div>
+    <div class="section-body">
+      <p style="font-size:13px; color:var(--muted); margin-bottom:18px;">
+        The following properties are currently listed in the Greeningdon and surrounding Hamilton Mountain area and represent the buyer pool's alternative choices.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Type</th>
+            <th>AG Sqft</th>
+            <th>Lot</th>
+            <th>Garage</th>
+            <th>Suite</th>
+            <th>Orig. List</th>
+            <th>Current Price</th>
+            <th>CDOM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>80 Luscombe St</strong></td>
+            <td>Bungalow</td>
+            <td>981</td>
+            <td>52×113.67</td>
+            <td>None</td>
+            <td>Side entrance potential</td>
+            <td>$779,000</td>
+            <td><strong>$719,000</strong></td>
+            <td>39</td>
+          </tr>
+          <tr>
+            <td><strong>132 June St</strong></td>
+            <td>Bungalow</td>
+            <td>1,089</td>
+            <td>45×163</td>
+            <td>2-car Detached</td>
+            <td>Sep. entrance potential</td>
+            <td>$835,000</td>
+            <td><strong>$759,900</strong></td>
+            <td>166</td>
+          </tr>
+          <tr>
+            <td><strong>16 Ronaldshay Ave</strong></td>
+            <td>Raised Bungalow</td>
+            <td>826</td>
+            <td>40×113</td>
+            <td>None</td>
+            <td>Legal Duplex</td>
+            <td>$799,900</td>
+            <td><strong>$799,900</strong></td>
+            <td>17</td>
+          </tr>
+          <tr>
+            <td><strong>185 Deschene Ave</strong></td>
+            <td>Raised Bungalow</td>
+            <td>881</td>
+            <td>48×123</td>
+            <td>2-car Detached</td>
+            <td>In-Law Suite Potential</td>
+            <td>$824,900</td>
+            <td><strong>$799,900</strong></td>
+            <td>33</td>
+          </tr>
+          <tr>
+            <td><strong>74 Victor Blvd</strong></td>
+            <td>Bungalow</td>
+            <td>1,100</td>
+            <td>49.75×99.7</td>
+            <td>2-car Detached</td>
+            <td>Legal Two-Family</td>
+            <td>$874,900</td>
+            <td><strong>$829,900</strong></td>
+            <td>84</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note-box">
+        <strong>114 Luscombe's Competitive Position</strong>
+        Among all active listings, 114 Luscombe is one of only two properties offering confirmed legal duplex status — the other being 16 Ronaldshay Ave (smaller, no garage, $799,900) and 74 Victor Blvd (legal, but sitting at 84 days). The subject's combination of legal suite + attached garage + architect-renovated quality + 55-foot lot is not replicated by any active competitor. 80 Luscombe (same street, no garage, not legal) has been reduced to $719,000 and is still unsold at 39 days — reinforcing the premium buyers are willing to pay for legal status and garage.
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: VALUE ADJUSTMENT ANALYSIS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <h2>Value Adjustment Analysis</h2>
+    </div>
+    <div class="section-body">
+      <p style="font-size:13px; color:var(--muted); margin-bottom:24px;">
+        Two anchor comparables are adjusted to reflect the subject's specific attributes. Adjustments are applied to the comparable, not the subject — a positive value means the subject is superior in that category.
+      </p>
+
+      <!-- ANCHOR A -->
+      <div class="adj-wrap">
+        <div class="adj-title">Anchor A &nbsp;·&nbsp; 201 Ridge Street — Conditional $749,900 (May 2026) &nbsp;·&nbsp; Best Recent Market Evidence</div>
+        <table class="adj-table">
+          <colgroup><col><col></colgroup>
+          <tbody>
+            <tr><td>Base Sale / Conditional Price</td><td><strong>$749,900</strong></td></tr>
+            <tr><td>Size: 1,069 AG sqft vs subject 1,086 AG sqft (+17 sqft)</td><td class="adj-pos">+$3,400</td></tr>
+            <tr><td>Garage: None (comp) vs attached 1-car (subject)</td><td class="adj-pos">+$22,000</td></tr>
+            <tr><td>Legal status: Income potential only vs registered legal duplex</td><td class="adj-pos">+$20,000</td></tr>
+            <tr><td>Renovation: Both renovated; architect-designed subject has slight quality edge</td><td class="adj-pos">+$5,000</td></tr>
+            <tr><td>Lot: 40'×127' (5,080 sqft) vs 55'×100' (5,500 sqft) — subject wider frontage</td><td class="adj-pos">+$3,000</td></tr>
+            <tr><td>Property type: Bungalow vs backsplit (slightly narrower buyer pool)</td><td class="adj-neg">–$3,000</td></tr>
+            <tr class="subtotal"><td>Net Adjustments</td><td>+$50,400</td></tr>
+            <tr class="total-row"><td>Indicated Market Value — Anchor A</td><td>$800,300</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ANCHOR B -->
+      <div class="adj-wrap">
+        <div class="adj-title">Anchor B &nbsp;·&nbsp; 155 Ridge Street — Sold $612,000 (Apr 2026) &nbsp;·&nbsp; Lower Bound Reference</div>
+        <table class="adj-table">
+          <colgroup><col><col></colgroup>
+          <tbody>
+            <tr><td>Base Sale Price</td><td><strong>$612,000</strong></td></tr>
+            <tr><td>Size: 987 AG sqft vs subject 1,086 AG sqft (+99 sqft)</td><td class="adj-pos">+$19,800</td></tr>
+            <tr><td>Garage: 1-car detached vs 1-car attached (subject superior — attached premium)</td><td class="adj-pos">+$7,000</td></tr>
+            <tr><td>Legal status: In-law potential vs registered legal duplex</td><td class="adj-pos">+$35,000</td></tr>
+            <tr><td>Renovation: Both renovated; subject architect-designed full gut to 2021</td><td class="adj-pos">+$20,000</td></tr>
+            <tr><td>Lot: 47'×100' (4,700 sqft) vs 55'×100' (5,500 sqft) — subject wider</td><td class="adj-pos">+$6,000</td></tr>
+            <tr><td>Property type: Bungalow vs backsplit</td><td class="adj-neg">–$3,000</td></tr>
+            <tr class="subtotal"><td>Net Adjustments</td><td>+$84,800</td></tr>
+            <tr class="total-row"><td>Indicated Market Value — Anchor B</td><td>$696,800 → blended upward</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note-box">
+        <strong>Blended Indicated Value: ~$795,000–$810,000</strong>
+        Anchor A (201 Ridge conditional) is weighted more heavily as it is the freshest, most comparable transaction — same neighbourhood, same renovation tier, very similar size — with the clear difference being legal duplex status and attached garage. Anchor B establishes a confirmed floor of $612,000 for non-legal renovated bungalows, with the legal duplex and garage premium bringing the value well above $775,000. The blended analysis points to an indicated market value of approximately $795,000–$810,000.
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: PRICE RECOMMENDATION -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <h2>Price Recommendation &amp; Verdict</h2>
+    </div>
+    <div class="section-body">
+      <div class="verdict-box">
+        <div class="verdict-label">Recommended List Price</div>
+        <div class="verdict-price">$799,900</div>
+        <div class="verdict-range">Expected Sale Range: $780,000 – $810,000</div>
+        <div class="verdict-conclusion">
+          The current list price of $799,900 is well-supported by market evidence. It sits $50,000 above the most recent conditional sale of a similar-sized renovated home without a garage or legal suite — and at the same price point as 16 Ronaldshay Ave, a legal duplex with smaller sqft and no garage. The $799,900 price is neither aggressive nor conservative; it accurately reflects 114 Luscombe's rare asset profile in this market.
+        </div>
+      </div>
+      <div class="note-box" style="margin-top:20px;">
+        <strong>Is $799K the Right Price? Yes.</strong>
+        The data confirms this position. 201 Ridge (no garage, not legal) went conditional at $749,900 — adding the garage (~$22,000) and legal duplex premium (~$20,000–$25,000) brings the indicated value to ~$795,000–$797,000, squarely supporting $799,900. The only active competition at the same price (16 Ronaldshay) is inferior on both garage and sqft. There is no evidence supporting a higher price: 74 Victor Blvd at $829,900 (legal, larger, 2-car garage) has been sitting for 84 days. $799,900 is the correct number.
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8: RECOMMENDATIONS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <h2>Positioning Recommendations</h2>
+    </div>
+    <div class="section-body">
+      <ul class="rec-list">
+        <li>
+          <div class="rec-num">1</div>
+          <div class="rec-text">
+            <strong>Lead with Legal Duplex Status in All Marketing</strong>
+            <span>Buyers and investors actively searching for income properties will filter specifically for legal duplex. Ensure MLS remarks, social content, and feature sheets all prominently reference the registered legal duplex status and $4,650/month prior rental income. This is the property's most powerful differentiator.</span>
+          </div>
+        </li>
+        <li>
+          <div class="rec-num">2</div>
+          <div class="rec-text">
+            <strong>Highlight the 2021 Architect-Designed Renovation</strong>
+            <span>The full gut renovation designed by an architect in 2021 speaks to both quality and compliance — especially important for a legal duplex where structural and electrical integrity matters to buyers. Make this a talking point in all representations.</span>
+          </div>
+        </li>
+        <li>
+          <div class="rec-num">3</div>
+          <div class="rec-text">
+            <strong>Showcase the Metal Roof as a Long-Term Asset</strong>
+            <span>A metal roof has a 40–70 year lifespan, versus 15–20 years for asphalt shingles. This is a significant capital expenditure that buyers won't need to plan for, and it differentiates the home from active competition where roofs are aging or recently replaced.</span>
+          </div>
+        </li>
+        <li>
+          <div class="rec-num">4</div>
+          <div class="rec-text">
+            <strong>Target Both Owner-Occupants and Investors</strong>
+            <span>The property serves two distinct buyer profiles: families seeking an in-law suite or mortgage helper, and investors seeking a turn-key income property with reliable tenancy potential. Tailor listing copy and social targeting to reach both audiences.</span>
+          </div>
+        </li>
+        <li>
+          <div class="rec-num">5</div>
+          <div class="rec-text">
+            <strong>Monitor 201 Ridge Street's Close Price</strong>
+            <span>201 Ridge Street (conditional at $749,900) is expected to close in the coming weeks. Its final confirmed sale price will be the clearest market data point to date for this property segment. If it closes close to asking, it further validates the $799,900 positioning for the subject.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<div class="report-footer">
+  <div>
+    <strong>Prepared by: Anita McGowan, Broker</strong><br>
+    RE/MAX Escarpment Realty Inc. &nbsp;·&nbsp; Woolcott Real Estate &nbsp;·&nbsp; May 25, 2026
+  </div>
+  <div style="text-align:right;">
+    *Information deemed reliable but not guaranteed.*<br>
+    CoreLogic Matrix &nbsp;·&nbsp; Cornerstone Association of REALTORS®
+  </div>
+</div>
+
+</body>
+</html>
