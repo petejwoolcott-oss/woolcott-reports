@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>678 Chantler Road — Market Analysis | Woolcott Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #f5f1e8; color: #1a1a1e;
+    font-family: 'Manrope', system-ui, sans-serif; line-height: 1.6; }
+
+  /* Typography */
+  h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 700; line-height: 1.15; margin: 0; }
+  .mono { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }
+  .kicker { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace; color: #6b655a; font-weight: 500; margin-bottom: 12px; display: block; }
+  .kicker-navy { color: #1A3A6B; }
+  .kicker-gold { color: #b89443; }
+  .kicker-red  { color: #a83a1f; }
+  .kicker-green { color: #3d5a2c; }
+  .serif { font-family: 'Fraunces', Georgia, serif; }
+  .italic { font-style: italic; }
+
+  /* Layout */
+  .pad    { padding: 56px 48px; }
+  .pad-lg { padding: 80px 48px; }
+  .alt    { background: #ebe5d6; }
+  .max    { max-width: 1100px; margin: 0 auto; }
+  .grid   { display: grid; gap: 24px; }
+  .g2 { grid-template-columns: 1fr 1fr; }
+  .g3 { grid-template-columns: 1fr 1fr 1fr; }
+  .g4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .g2-1 { grid-template-columns: 2fr 1fr; }
+  .g1-2 { grid-template-columns: 1fr 2fr; }
+
+  /* Banner */
+  .banner-navy { background: #1A3A6B; color: #f5f1e8; }
+  .banner-ink  { background: #1a1a1e; color: #f5f1e8; }
+
+  /* Tiles */
+  .tile { background: #f5f1e8; padding: 28px; border-top: 6px solid #1A3A6B; }
+  .tile-red   { border-top-color: #a83a1f; }
+  .tile-green { border-top-color: #3d5a2c; }
+  .tile-gold  { border-top-color: #b89443; }
+  .tile-ink   { background: #1a1a1e; color: #f5f1e8; border-top-color: #b89443; }
+  .tile .stat { font-family: 'Fraunces', Georgia, serif; font-size: 52px;
+    font-weight: 700; color: #1A3A6B; line-height: 1; margin: 8px 0 4px; }
+  .tile-red   .stat { color: #a83a1f; }
+  .tile-green .stat { color: #3d5a2c; }
+  .tile-gold  .stat { color: #b89443; }
+  .tile-ink   .stat { color: #b89443; }
+  .tile .label { font-size: 13px; color: #6b655a; margin-top: 6px; line-height: 1.4; }
+  .tile-ink .label { color: #ebe5d6; }
+  .tile .sub { font-size: 11px; font-family: 'JetBrains Mono', monospace;
+    color: #6b655a; margin-top: 4px; }
+  .mini-bar-wrap { height: 8px; background: rgba(26,26,30,0.08); border-radius: 0; margin-top: 14px; }
+  .mini-bar { height: 8px; background: #1A3A6B; }
+  .mini-bar-red   { background: #a83a1f; }
+  .mini-bar-green { background: #3d5a2c; }
+
+  /* Pull quotes */
+  .pull-quote { border-left: 4px solid #1A3A6B; background: #f5f1e8;
+    padding: 28px 32px; font-family: 'Fraunces', Georgia, serif; font-size: 22px;
+    font-style: italic; line-height: 1.45; color: #1a1a1e; }
+  .pull-quote-navy { background: #1A3A6B; color: #f5f1e8; padding: 40px 48px;
+    font-family: 'Fraunces', Georgia, serif; font-size: 26px; font-style: italic;
+    line-height: 1.45; }
+  .pull-quote-navy.huge { font-size: 32px; }
+
+  /* Pills */
+  .pill { display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;
+    font-family: 'JetBrains Mono', monospace; }
+  .pill-navy  { background: #dde4ee; color: #1A3A6B; }
+  .pill-red   { background: #f5d4cb; color: #a83a1f; }
+  .pill-green { background: #d6e0c8; color: #3d5a2c; }
+  .pill-gold  { background: #f4e5c7; color: #8B6B1F; }
+  .pill-ink   { background: #1a1a1e; color: #f5f1e8; }
+
+  /* Tables */
+  table.editorial { width: 100%; border-collapse: collapse; font-size: 14px; }
+  table.editorial th { font-size: 11px; font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.1em; text-transform: uppercase; color: #6b655a;
+    border-bottom: 2px solid #1a1a1e; padding: 10px 12px; text-align: left; }
+  table.editorial td { padding: 12px; border-bottom: 1px solid rgba(26,26,30,0.1); vertical-align: top; }
+  table.editorial tr:last-child td { border-bottom: none; }
+  table.editorial .num { font-family: 'JetBrains Mono', monospace; }
+  table.editorial tr.highlight td { background: #dde4ee; font-weight: 600; }
+
+  /* Chart frames */
+  .chart-frame { background: #f5f1e8; padding: 24px; border: 1px solid rgba(26,26,30,0.13); }
+  .chart-h-sm { height: 220px; }
+  .chart-h-md { height: 300px; }
+
+  /* Divider */
+  .divider { border: none; border-top: 1px solid rgba(26,26,30,0.12); margin: 0; }
+
+  /* Feature list */
+  .feat-list { list-style: none; padding: 0; margin: 0; }
+  .feat-list li { padding: 10px 0; border-bottom: 1px solid rgba(26,26,30,0.1);
+    font-size: 14px; display: flex; align-items: flex-start; gap: 10px; }
+  .feat-list li:last-child { border-bottom: none; }
+  .feat-icon { color: #3d5a2c; font-weight: 700; flex-shrink: 0; }
+  .feat-icon-warn { color: #a83a1f; }
+
+  /* Tags */
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+
+  /* Footer */
+  footer { background: #1a1a1e; color: #f5f1e8; padding: 40px 48px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.8; }
+  footer a { color: #b89443; text-decoration: none; }
+  footer .footer-grid { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
+  footer .muted { color: #6b655a; }
+
+  /* Watermark badge */
+  .conf-badge { display: inline-block; background: #a83a1f; color: #fff;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em;
+    text-transform: uppercase; padding: 4px 12px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════ HERO ═══════════════════════════════════ -->
+<section class="banner-navy pad">
+  <div class="max">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:40px;">
+      <div>
+        <span class="kicker" style="color:#b89443; margin-bottom:8px;">Woolcott Real Estate · Comparative Market Analysis</span>
+        <h1 style="font-size:52px; color:#f5f1e8; font-style:italic; line-height:1.1; max-width:640px;">
+          678 Chantler Road<br><span style="font-weight:400; font-size:36px;">Fenwick, Pelham, Ontario</span>
+        </h1>
+      </div>
+      <div style="text-align:right;">
+        <span class="conf-badge">Confidential · REALTORS® Only</span>
+        <div style="margin-top:12px; font-size:12px; font-family:'JetBrains Mono',monospace; color:#b89443; opacity:0.8;">
+          Prepared May 28, 2026<br>MLS# 40833771
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g4">
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:20px;">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">List Price</div>
+        <div style="font-family:'Fraunces',serif; font-size:38px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">$1,350,000</div>
+        <div style="font-size:12px; color:rgba(245,241,232,0.6);">Active · 2 DOM</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:20px;">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Living Area</div>
+        <div style="font-family:'Fraunces',serif; font-size:38px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">3,371</div>
+        <div style="font-size:12px; color:rgba(245,241,232,0.6);">sq ft above grade</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:20px;">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Lot Size</div>
+        <div style="font-family:'Fraunces',serif; font-size:38px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">50.9 ac</div>
+        <div style="font-size:12px; color:rgba(245,241,232,0.6);">Rare rural estate parcel</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:20px;">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Beds / Baths</div>
+        <div style="font-family:'Fraunces',serif; font-size:38px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">6 / 3</div>
+        <div style="font-size:12px; color:rgba(245,241,232,0.6);">All above grade</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ PROPERTY OVERVIEW ═══════════════════════════════════ -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">Property Overview</span>
+    <h2 style="font-size:48px; margin-bottom:12px; font-style:italic;">What you're looking at</h2>
+    <p style="font-size:16px; color:#6b655a; max-width:700px; margin-bottom:48px;">
+      A genuine 50-acre estate in the heart of Fenwick — rare at any price. Income-producing, fully furnished, and move-in ready with a licensed short-term rental operation and active farm lease.
+    </p>
+
+    <div class="grid g2-1" style="gap:32px; align-items:start;">
+      <div>
+        <div class="grid g2" style="margin-bottom:24px;">
+          <div class="tile">
+            <span class="kicker kicker-gold">Built</span>
+            <div class="stat" style="font-size:40px;">1990</div>
+            <div class="label">Fully updated systems within 5 years</div>
+          </div>
+          <div class="tile tile-green">
+            <span class="kicker kicker-green">STR Income</span>
+            <div class="stat" style="font-size:40px; color:#3d5a2c;">Active</div>
+            <div class="label">Licensed · 10-person occupancy · OPA zoning</div>
+          </div>
+        </div>
+        <div class="grid g2">
+          <div class="tile tile-gold">
+            <span class="kicker kicker-gold">Farm Lease</span>
+            <div class="stat" style="font-size:40px; color:#b89443;">$1,500</div>
+            <div class="label">Annual income · ~30 acres under signed farming contract</div>
+          </div>
+          <div class="tile">
+            <span class="kicker">Taxes (2026)</span>
+            <div class="stat" style="font-size:40px;">$9,094</div>
+            <div class="label">Annual property tax</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="background:#ebe5d6; padding:28px; margin-bottom:24px;">
+          <span class="kicker kicker-gold">Key Highlights</span>
+          <ul class="feat-list">
+            <li><span class="feat-icon">✓</span> Picturesque private pond with island</li>
+            <li><span class="feat-icon">✓</span> Sold fully furnished — move-in day one</li>
+            <li><span class="feat-icon">✓</span> Heat pump installed 2023/2024</li>
+            <li><span class="feat-icon">✓</span> New roof (2021), new water heater (2026)</li>
+            <li><span class="feat-icon">✓</span> Kitchen + laundry appliances ≤ 3 yrs old</li>
+            <li><span class="feat-icon">✓</span> 500-gal propane, 4,000-gal concrete cistern</li>
+            <li><span class="feat-icon">✓</span> Security gate, barn on property</li>
+            <li><span class="feat-icon">✓</span> 3 fireplaces (electric, family room, living room)</li>
+            <li><span class="feat-icon feat-icon-warn">!</span> Crawl space only — no finished basement</li>
+            <li><span class="feat-icon feat-icon-warn">!</span> Propane tank under contract</li>
+          </ul>
+        </div>
+        <div class="tag-row">
+          <span class="pill pill-green">STR Licensed</span>
+          <span class="pill pill-navy">Fully Furnished</span>
+          <span class="pill pill-gold">50 Acres</span>
+          <span class="pill pill-navy">Private Pond</span>
+          <span class="pill pill-green">Farm Income</span>
+          <span class="pill pill-gold">Vacant Possession</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ PRICE HISTORY ═══════════════════════════════════ -->
+<section class="pad-lg alt">
+  <div class="max">
+    <span class="kicker kicker-gold">Price History — This Property</span>
+    <h2 style="font-size:48px; margin-bottom:12px; font-style:italic;">Where this listing has been</h2>
+    <p style="font-size:16px; color:#6b655a; margin-bottom:40px;">
+      678 Chantler has been to market several times. Understanding that journey matters for pricing strategy.
+    </p>
+
+    <table class="editorial">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>MLS #</th>
+          <th>List Price</th>
+          <th>Sold / Result</th>
+          <th>DOM</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td><strong>2026 (Active)</strong></td>
+          <td class="num">40833771</td>
+          <td class="num"><strong>$1,350,000</strong></td>
+          <td><span class="pill pill-navy">Active · 2 DOM</span></td>
+          <td class="num">2</td>
+          <td>Current listing — Drew Woolcott, RE/MAX Escarpment</td>
+        </tr>
+        <tr>
+          <td>2021</td>
+          <td class="num">30813116</td>
+          <td class="num">$1,190,000 → $1,200,000</td>
+          <td class="num"><strong>SOLD $1,200,000</strong></td>
+          <td class="num">519</td>
+          <td>Listed $1,495,000 in 2020 → reduced → sold. Sotheby's.</td>
+        </tr>
+        <tr>
+          <td>2019–2020</td>
+          <td class="num">30771266</td>
+          <td class="num">$1,950,000</td>
+          <td><span class="pill pill-red">Cancelled</span></td>
+          <td class="num">239</td>
+          <td>Land listing. Never sold at aspirational price.</td>
+        </tr>
+        <tr>
+          <td>2019–2020</td>
+          <td class="num">30771719</td>
+          <td class="num">$1,950,000</td>
+          <td><span class="pill pill-red">Expired</span></td>
+          <td class="num">188</td>
+          <td>Parallel land listing attempt. Also expired.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pull-quote" style="margin-top:32px;">
+      The last time this property actually sold was April 2021 — at <strong>$1,200,000</strong> after 519 days and two rounds of price reductions from $1,950,000.
+      The current ask of $1,350,000 is <strong>$150,000 above that sale price</strong>.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ COMPARABLE ═══════════════════════════════════ -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">Best Available Comparable</span>
+    <h2 style="font-size:48px; margin-bottom:12px; font-style:italic;">1191 Sunset Drive, Pelham</h2>
+    <p style="font-size:16px; color:#6b655a; margin-bottom:40px;">
+      Active listing in the same Fenwick neighbourhood. Same build era, similar rural character — but a materially different property profile. This is the best available active comp, though it's an imperfect match given the size and acreage gap.
+    </p>
+
+    <div class="grid g2" style="gap:32px; margin-bottom:32px;">
+      <!-- Subject Property -->
+      <div style="border: 2px solid #1A3A6B; padding: 0; overflow:hidden;">
+        <div style="background:#1A3A6B; color:#f5f1e8; padding:16px 24px;">
+          <span style="font-size:11px; font-family:'JetBrains Mono',monospace; letter-spacing:0.15em; text-transform:uppercase; color:#b89443;">Subject Property</span>
+          <div style="font-family:'Fraunces',serif; font-size:22px; font-weight:700; margin-top:4px;">678 Chantler Road</div>
+          <div style="font-size:13px; opacity:0.7; margin-top:2px;">MLS# 40833771 · Active 2 DOM</div>
+        </div>
+        <div style="padding:24px;">
+          <table style="width:100%; font-size:13px; border-collapse:collapse;">
+            <tr><td style="padding:6px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">List Price</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; font-weight:700; border-bottom:1px solid rgba(26,26,30,0.08);">$1,350,000</td></tr>
+            <tr><td style="padding:6px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">$/sq ft AG</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">$401</td></tr>
+            <tr><td style="padding:6px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">AG Sq Ft</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">3,371</td></tr>
+            <tr><td style="padding:6px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">Beds / Baths</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">6 / 3</td></tr>
+            <tr><td style="padding:6px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">Lot</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">50.9 acres</td></tr>
+            <tr><td style="padding:6px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">Basement</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">Crawl Space</td></tr>
+            <tr><td style="padding:6px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">Garage</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">None</td></tr>
+            <tr><td style="padding:6px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">Water</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">Cistern</td></tr>
+            <tr><td style="padding:6px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">STR Income</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; font-weight:700; color:#3d5a2c; border-bottom:1px solid rgba(26,26,30,0.08);">Yes (licensed)</td></tr>
+            <tr><td style="padding:6px 0; color:#6b655a;">Taxes (2026)</td><td style="text-align:right; font-family:'JetBrains Mono',monospace;">$9,094</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Comparable -->
+      <div style="border: 1px solid rgba(26,26,30,0.15); padding: 0; overflow:hidden;">
+        <div style="background:#ebe5d6; padding:16px 24px;">
+          <span style="font-size:11px; font-family:'JetBrains Mono',monospace; letter-spacing:0.15em; text-transform:uppercase; color:#6b655a;">Active Comparable</span>
+          <div style="font-family:'Fraunces',serif; font-size:22px; font-weight:700; color:#1a1a1e; margin-top:4px;">1191 Sunset Drive</div>
+          <div style="font-size:13px; color:#6b655a; margin-top:2px;">MLS# 40810905 · Active 76 DOM</div>
+        </div>
+        <div style="padding:24px;">
+          <table style="width:100%; font-size:13px; border-collapse:collapse;">
+            <tr><td style="padding:6px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">List Price</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; font-weight:700; border-bottom:1px solid rgba(26,26,30,0.08);">$1,085,000 <span style="color:#a83a1f; font-size:11px;">(↓ from $1,089K)</span></td></tr>
+            <tr><td style="padding:6px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">$/sq ft AG</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">$707</td></tr>
+            <tr><td style="padding:6px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">AG Sq Ft</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">1,536</td></tr>
+            <tr><td style="padding:6px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">Beds / Baths</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">3 / 3</td></tr>
+            <tr><td style="padding:6px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">Lot</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">0.26 acres</td></tr>
+            <tr><td style="padding:6px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">Basement</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">Full Finished</td></tr>
+            <tr><td style="padding:6px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">Garage</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">Attached + Detached Shop</td></tr>
+            <tr><td style="padding:6px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">Water</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">Municipal</td></tr>
+            <tr><td style="padding:6px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">STR Income</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">No</td></tr>
+            <tr><td style="padding:6px 0; color:#6b655a;">Taxes (2025)</td><td style="text-align:right; font-family:'JetBrains Mono',monospace;">$5,026</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#dde4ee; padding:24px 28px; border-left:4px solid #1A3A6B;">
+      <span class="kicker kicker-navy" style="margin-bottom:8px;">Comparable Note</span>
+      <p style="margin:0; font-size:14px; line-height:1.7;">
+        Sunset Drive is the closest active listing in Fenwick — same rural character, same build era — but it's a <strong>fundamentally different product</strong>. It's a 0.26-acre improved bungalow with a finished basement and municipal water. Chantler is a 50-acre estate with income, a pond, and no real ceiling on buyer type. A direct apples-to-apples price comparison isn't possible here. The per-sq-ft math ($401/sq ft vs. $707/sq ft on Sunset) shows the land premium is already embedded in Chantler's ask.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ MARKET POSITIONING CHART ═══════════════════════════════════ -->
+<section class="pad-lg alt">
+  <div class="max">
+    <span class="kicker kicker-gold">Price Trajectory</span>
+    <h2 style="font-size:48px; margin-bottom:12px; font-style:italic;">Market history at a glance</h2>
+    <p style="font-size:16px; color:#6b655a; margin-bottom:40px;">
+      678 Chantler's pricing journey — from peak aspiration to eventual sale to today's ask.
+    </p>
+
+    <div class="chart-frame chart-h-md" style="max-width:760px;">
+      <canvas id="priceChart"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ VALUATION ═══════════════════════════════════ -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">Valuation Analysis</span>
+    <h2 style="font-size:48px; margin-bottom:12px; font-style:italic;">Where does value land?</h2>
+    <p style="font-size:16px; color:#6b655a; max-width:720px; margin-bottom:48px;">
+      Estate properties of this nature trade on buyer-specific value, not straight comp math. Here's how to frame it.
+    </p>
+
+    <div class="grid g3" style="margin-bottom:40px;">
+      <div class="tile tile-red">
+        <span class="kicker kicker-red">Low / Floor</span>
+        <div class="stat" style="color:#a83a1f;">$1.18M</div>
+        <div class="label">Conservative anchor — last confirmed sale ($1.2M, 2021) adjusted slightly downward for today's rate environment and longer DOM history. Expect 60+ days and negotiation at this level.</div>
+      </div>
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">Fair Market / Target</span>
+        <div class="stat" style="color:#b89443;">$1.25–1.30M</div>
+        <div class="label">Accounts for 5 years of appreciation from the $1.2M sale, income value of STR licence and farm lease, and the full-furnishings inclusion. Strong offer range for a motivated buyer.</div>
+      </div>
+      <div class="tile">
+        <span class="kicker">Current Ask</span>
+        <div class="stat">$1.35M</div>
+        <div class="label">At the high end of what market evidence supports without income verification. Justifiable if STR financials are strong — sellers confirmed they'll share detailed income data with serious buyers.</div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="gap:32px;">
+      <div>
+        <div class="pull-quote">
+          "The income story is the price story. Get the STR financials first — if this property has been pulling $60K–$100K+/year in short-term rental income, the ask gets much easier to justify."
+        </div>
+      </div>
+      <div>
+        <span class="kicker kicker-navy" style="margin-bottom:12px;">Value Drivers (Pro · Con)</span>
+        <ul class="feat-list">
+          <li><span class="feat-icon">+</span> <strong>50 acres</strong> — genuinely rare in Pelham/Niagara</li>
+          <li><span class="feat-icon">+</span> Licensed STR with proven occupancy</li>
+          <li><span class="feat-icon">+</span> Private pond with island (photogenic, drives STR bookings)</li>
+          <li><span class="feat-icon">+</span> Fully furnished & move-in ready</li>
+          <li><span class="feat-icon">+</span> All major systems updated ≤ 5 years</li>
+          <li><span class="feat-icon feat-icon-warn">−</span> Crawl space (no basement) limits usability</li>
+          <li><span class="feat-icon feat-icon-warn">−</span> Cistern water source (not municipal)</li>
+          <li><span class="feat-icon feat-icon-warn">−</span> 519-day sale history in 2021 signals thin buyer pool</li>
+          <li><span class="feat-icon feat-icon-warn">−</span> Limited comps — hard for lenders to appraise</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ CTA BANNER ═══════════════════════════════════ -->
+<section class="banner-navy pad-lg">
+  <div class="max" style="text-align:center;">
+    <span class="kicker" style="color:#b89443; text-align:center;">Summary</span>
+    <h2 class="pull-quote-navy huge" style="background:transparent; padding:0; margin:16px 0 24px; text-align:center; font-size:34px;">
+      $1,350,000 is defensible — if the income numbers back it up.
+    </h2>
+    <p style="font-size:16px; color:rgba(245,241,232,0.75); max-width:700px; margin:0 auto 32px;">
+      The property's unique combination of acreage, STR licence, and full furnishings places it in a category of its own. Buyers should request the STR income disclosure before forming an offer strategy. A fair offer for a motivated buyer likely lands in the <span style="color:#b89443; font-weight:700;">$1.25M–$1.30M range</span>.
+    </p>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <div style="background:rgba(255,255,255,0.1); padding:16px 28px; border:1px solid rgba(255,255,255,0.2);">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443; margin-bottom:4px;">Listing Agent</div>
+        <div style="font-family:'Fraunces',serif; font-size:18px; font-weight:700;">Drew Woolcott, Broker</div>
+        <div style="font-size:13px; color:rgba(245,241,232,0.65); margin-top:2px;">905-332-9223 · drewandjayne@woolcott.ca</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.1); padding:16px 28px; border:1px solid rgba(255,255,255,0.2);">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443; margin-bottom:4px;">Offer Instructions</div>
+        <div style="font-family:'Fraunces',serif; font-size:18px; font-weight:700;">24-hr Irrevocable</div>
+        <div style="font-size:13px; color:rgba(245,241,232,0.65); margin-top:2px;">Attach Schedule B + Form 801</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ FOOTER ═══════════════════════════════════ -->
+<footer>
+  <div class="footer-grid max">
+    <div>
+      <div style="font-size:14px; color:#f5f1e8; font-family:'Fraunces',serif; font-style:italic; margin-bottom:8px;">Woolcott Real Estate</div>
+      <div class="muted">RE/MAX Escarpment Realty Inc. · 905-689-9223</div>
+      <div class="muted" style="margin-top:4px;">Prepared by Henry (AI Assistant) · May 28, 2026</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="muted">MLS# 40833771 · Cornerstone Association of REALTORS®</div>
+      <div class="muted" style="margin-top:4px;">Information deemed reliable but not guaranteed. Confidential for REALTORS® only.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  Chart.defaults.font.family = "'Manrope', sans-serif";
+  Chart.defaults.font.size = 11;
+  Chart.defaults.color = "#6b655a";
+  Chart.defaults.borderColor = "rgba(26,26,30,0.1)";
+
+  const ctx = document.getElementById('priceChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [
+        '2019 List\n(Expired)',
+        '2020 List\n(Cancelled)',
+        '2021 List\n(Price Drop)',
+        '2021 Sale',
+        '2026 Ask\n(Active)'
+      ],
+      datasets: [{
+        label: 'Price',
+        data: [1950000, 1950000, 1190000, 1200000, 1350000],
+        backgroundColor: [
+          '#f5d4cb',
+          '#f5d4cb',
+          '#dde4ee',
+          '#d6e0c8',
+          '#1A3A6B'
+        ],
+        borderColor: [
+          '#a83a1f',
+          '#a83a1f',
+          '#1A3A6B',
+          '#3d5a2c',
+          '#1A3A6B'
+        ],
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a1a1e',
+          titleColor: '#b89443',
+          bodyColor: '#f5f1e8',
+          bodyFont: { family: "'JetBrains Mono', monospace" },
+          cornerRadius: 0,
+          callbacks: {
+            label: function(ctx) {
+              return ' $' + ctx.parsed.y.toLocaleString('en-CA');
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { font: { family: "'JetBrains Mono', monospace", size: 10 } }
+        },
+        y: {
+          grid: { color: 'rgba(26,26,30,0.07)' },
+          ticks: {
+            font: { family: "'JetBrains Mono', monospace", size: 10 },
+            callback: function(value) {
+              return '$' + (value / 1000000).toFixed(1) + 'M';
+            }
+          },
+          min: 800000,
+          max: 2200000
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>
