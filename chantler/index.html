@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>678 Chantler Road · Buyer's Value Analysis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    *,*::before,*::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #f5f1e8; color: #1a1a1e; font-family: 'Manrope', system-ui, sans-serif; }
+    .display { font-family: 'Fraunces', Georgia, serif; }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+    .kicker { letter-spacing: 0.18em; font-size: 11px; text-transform: uppercase; font-weight: 600; color: #6b655a; }
+    .kicker-navy { color: #1A3A6B; } .kicker-red { color: #a83a1f; } .kicker-gold { color: #8B6B1F; } .kicker-green { color: #3d5a2c; }
+    .navy { color: #1A3A6B; } .red { color: #a83a1f; } .green { color: #3d5a2c; } .gold { color: #b89443; }
+    section { break-inside: avoid; }
+    .pad { padding: 56px 48px; } .pad-lg { padding: 80px 48px; }
+    .alt { background: #ebe5d6; }
+    .border-bottom { border-bottom: 1px solid rgba(26,26,30,0.13); }
+    h1.serif, h2.serif, h3.serif { font-family: 'Fraunces', Georgia, serif; font-weight: 500; letter-spacing: -0.025em; margin: 0; }
+    .tile { background: #f5f1e8; padding: 28px; border-top: 6px solid #1A3A6B; }
+    .tile-red { border-top-color: #a83a1f; } .tile-green { border-top-color: #3d5a2c; } .tile-gold { border-top-color: #b89443; }
+    .tile-ink { background: #1a1a1e; color: #f5f1e8; border-top-color: #b89443; }
+    .tile .stat { font-family: 'Fraunces', serif; font-size: 56px; font-weight: 700; line-height: 1; letter-spacing: -0.03em; margin: 8px 0; color: #1A3A6B; }
+    .tile-red .stat { color: #a83a1f; } .tile-green .stat { color: #3d5a2c; } .tile-gold .stat { color: #b89443; }
+    .tile-ink .stat { color: #f4e5c7; } .tile .label { font-size: 13px; color: #6b655a; line-height: 1.4; }
+    .tile-ink .label { color: rgba(245,241,232,0.75); }
+    .pull-quote { border-left: 4px solid #1A3A6B; background: #f5f1e8; padding: 28px 32px; margin: 32px 0; font-family: 'Fraunces', serif; font-size: 22px; line-height: 1.45; font-style: italic; color: #1a1a1e; }
+    .pull-quote-navy { background: #1A3A6B; color: #f5f1e8; border-left: none; padding: 40px 48px; font-family: 'Fraunces', serif; font-size: 22px; line-height: 1.45; font-style: italic; margin: 32px 0; }
+    .pull-quote-navy.huge { font-size: 30px; }
+    .pull-quote-gold-bg { background: #f4e5c7; border-left: 4px solid #b89443; padding: 28px 32px; margin: 32px 0; font-family: 'Fraunces', serif; font-size: 22px; line-height: 1.45; font-style: italic; }
+    table.editorial { width: 100%; border-collapse: collapse; }
+    table.editorial th { text-align: left; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #6b655a; padding: 12px 14px; border-bottom: 2px solid #1a1a1e; font-weight: 600; }
+    table.editorial td { padding: 14px 14px; border-bottom: 1px solid rgba(26,26,30,0.1); font-size: 14px; vertical-align: top; }
+    table.editorial .num { font-family: 'JetBrains Mono', monospace; font-weight: 500; }
+    table.editorial .addr { font-weight: 600; color: #1a1a1e; }
+    table.editorial .addr-sub { font-size: 11px; color: #6b655a; font-weight: 400; margin-top: 2px; }
+    table.editorial .right { text-align: right; }
+    table.editorial .gain { color: #3d5a2c; font-weight: 700; }
+    table.editorial .loss { color: #a83a1f; font-weight: 700; }
+    .pill { display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; font-family: 'Manrope', sans-serif; }
+    .pill-navy { background: #dde4ee; color: #1A3A6B; } .pill-red { background: #f5d4cb; color: #a83a1f; }
+    .pill-green { background: #d6e0c8; color: #3d5a2c; } .pill-gold { background: #f4e5c7; color: #8B6B1F; }
+    .grid { display: grid; gap: 24px; }
+    .g2 { grid-template-columns: 1fr 1fr; } .g3 { grid-template-columns: 1fr 1fr 1fr; } .g4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+    .chart-frame { background: #f5f1e8; padding: 24px; border: 1px solid rgba(26,26,30,0.13); }
+    .chart-h-md { position: relative; height: 360px; }
+    .banner-navy { background: #1A3A6B; color: #f5f1e8; }
+    .comp { background: #f5f1e8; padding: 22px 24px; border-left: 3px solid #1A3A6B; position: relative; }
+    .comp.gold-comp { border-left-color: #b89443; background: #f4e5c7; border-left-width: 4px; }
+    .comp .comp-price { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 700; color: #1A3A6B; line-height: 1; margin-bottom: 6px; }
+    .comp.gold-comp .comp-price { color: #8B6B1F; }
+    .comp .comp-addr { font-size: 14px; font-weight: 700; color: #1a1a1e; margin-bottom: 8px; }
+    .comp .comp-meta { font-size: 12px; color: #6b655a; line-height: 1.6; }
+    .comp .comp-tag { position: absolute; top: 18px; right: 18px; }
+    ul.editorial { padding-left: 0; list-style: none; margin: 0; }
+    ul.editorial li { padding: 14px 0 14px 28px; position: relative; font-size: 15px; line-height: 1.65; border-bottom: 1px solid rgba(26,26,30,0.08); }
+    ul.editorial li:last-child { border-bottom: none; }
+    ul.editorial li::before { content: ''; position: absolute; left: 0; top: 24px; width: 14px; height: 2px; background: #b89443; }
+    .banner-navy ul.editorial li { border-bottom-color: rgba(245,241,232,0.12); color: rgba(245,241,232,0.92); }
+    .footer-bar { padding: 32px 48px; background: #1a1a1e; color: rgba(245,241,232,0.7); font-size: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-bar .brand { color: #f4e5c7; font-weight: 700; letter-spacing: 0.1em; font-size: 13px; }
+    .disclaimer { padding: 20px 48px; background: #ebe5d6; font-size: 10px; color: #6b655a; line-height: 1.6; }
+    @media print { section { page-break-inside: avoid; } .pad-lg { padding: 48px 36px; } .pad { padding: 36px; } }
+    @page { size: letter; margin: 0.4in; }
+
+    /* Layout wrapper */
+    .page-wrap { max-width: 1280px; margin: 0 auto; }
+
+    /* Masthead extras */
+    .masthead-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 48px; }
+    .masthead-hero { margin-bottom: 24px; }
+    .hero-headline { font-family: 'Fraunces', Georgia, serif; font-size: 64px; font-weight: 400; line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 16px 0; color: #f5f1e8; font-style: italic; }
+    .hero-headline strong { font-weight: 700; font-style: normal; }
+    .hero-subtitle { font-size: 16px; color: rgba(245,241,232,0.75); max-width: 680px; line-height: 1.65; margin: 0; font-weight: 400; }
+
+    /* Section headers */
+    .section-header { margin-bottom: 32px; }
+    .section-header h2.serif { font-size: 38px; margin-top: 10px; line-height: 1.2; }
+    .section-header .subtitle { margin-top: 14px; font-size: 15px; color: #6b655a; line-height: 1.7; max-width: 820px; }
+    .section-header.light h2.serif { color: #f5f1e8; }
+    .section-header.light .subtitle { color: rgba(245,241,232,0.7); }
+    .section-header.light .kicker { color: rgba(245,241,232,0.5); }
+
+    /* Tile kicker */
+    .tile .kicker { display: block; margin-bottom: 4px; }
+
+    /* Subject row highlight */
+    tr.subject-row td { background: #f4e5c7; }
+    tr.subject-row td:first-child { border-left: 4px solid #b89443; padding-left: 10px; }
+
+    /* Price history note */
+    .history-note { margin-top: 24px; padding: 18px 24px; background: #ebe5d6; border-left: 3px solid #6b655a; font-size: 13px; color: #6b655a; line-height: 1.65; }
+    .history-note strong { color: #1a1a1e; }
+
+    /* Closing statement */
+    .closing-statement { margin-top: 32px; font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; color: #f5f1e8; }
+
+    /* Chart label */
+    .chart-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; color: #6b655a; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- ═══════════════════════════════════════════════
+       MASTHEAD
+  ═══════════════════════════════════════════════ -->
+  <section class="banner-navy pad-lg">
+    <div class="masthead-top">
+      <span class="kicker" style="color: rgba(245,241,232,0.5);">Woolcott Real Estate</span>
+      <span class="kicker" style="color: rgba(245,241,232,0.4);">Buyer's Analysis &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; May 2026</span>
+    </div>
+    <div class="masthead-hero">
+      <div class="kicker kicker-gold" style="margin-bottom: 18px; font-size: 12px; letter-spacing: 0.22em;">678 Chantler Road &nbsp;·&nbsp; Fenwick</div>
+      <h1 class="hero-headline">50 acres. Income from day one.<br><strong>The case for $1.3M.</strong></h1>
+      <p class="hero-subtitle">A buyer's-eye analysis of what this estate is worth — and why the numbers land right where Peter thinks they do.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 0 — THE THESIS
+  ═══════════════════════════════════════════════ -->
+  <section class="pad border-bottom">
+    <div class="section-header">
+      <div class="kicker">Section Zero &nbsp;·&nbsp; The Thesis</div>
+      <h2 class="serif" style="font-size: 38px; margin-top: 10px; line-height: 1.2;">You're not buying a house. You're buying a Niagara estate with working income — at near-2021 pricing.</h2>
+      <p class="subtitle" style="margin-top: 14px; font-size: 15px; color: #6b655a; line-height: 1.7; max-width: 820px;">The list price is $1.35M. The last sale was $1.2M in 2021. Five years of improvements and STR income generation later, $1.3M is a disciplined, supportable offer.</p>
+    </div>
+
+    <div class="grid g4" style="margin-bottom: 0;">
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">Lot Size</span>
+        <div class="stat" style="font-size: 48px;">50.9 Acres</div>
+        <div class="label">Largest lot in the comp set — by a factor of 25</div>
+      </div>
+      <div class="tile">
+        <span class="kicker">Above Grade</span>
+        <div class="stat">3,371 Sq Ft</div>
+        <div class="label">6 bedrooms, 3 baths — furnished and turnkey</div>
+      </div>
+      <div class="tile tile-green">
+        <span class="kicker kicker-green">Short-Term Rental</span>
+        <div class="stat" style="font-size: 36px; padding-top: 4px;">STR Licensed</div>
+        <div class="label">10-person capacity, OPA-approved, 5 years documented income</div>
+      </div>
+      <div class="tile tile-ink">
+        <span class="kicker" style="color: rgba(245,241,232,0.5);">Buyer Target</span>
+        <div class="stat">$1.3M Target</div>
+        <div class="label">~3.7% below ask — a normal negotiation result in this market</div>
+      </div>
+    </div>
+
+    <div class="pull-quote-navy huge" style="margin-top: 32px; margin-bottom: 0;">
+      "At $1.3M you're paying $100K more than the 2021 sale. After five years of improvements, income generation, and inflation — that's essentially flat. This is a strong entry point."
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 1 — LAND: THE DEFINING DIFFERENTIATOR
+  ═══════════════════════════════════════════════ -->
+  <section class="pad alt">
+    <div class="section-header">
+      <div class="kicker">Section One &nbsp;·&nbsp; Land Value</div>
+      <h2 class="serif" style="font-size: 38px; margin-top: 10px; line-height: 1.2;">Every comparable in this market tops out at 2.1 acres. <em>This one has 50.</em></h2>
+      <p class="subtitle" style="margin-top: 14px; font-size: 15px; color: #6b655a; line-height: 1.7; max-width: 820px;">The land gap between 678 Chantler and every other comparable is not incremental — it's categorical. This is the single most important fact in evaluating the asking price.</p>
+    </div>
+
+    <div class="chart-frame">
+      <div class="chart-label">Lot Size — Subject Property vs. Comparables (acres)</div>
+      <div class="chart-h-md" style="height: 380px;">
+        <canvas id="lotSizeChart"></canvas>
+      </div>
+    </div>
+
+    <div class="pull-quote" style="margin-top: 32px;">
+      "Comparable rural properties with 2 acres close between $1.04M and $1.085M. This property has 25x the land. The $200K–$300K premium embedded in the ask is explained by the land alone — before the house, the STR income, and the inclusions."
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 2 — INCOME PROFILE
+  ═══════════════════════════════════════════════ -->
+  <section class="pad border-bottom">
+    <div class="section-header">
+      <div class="kicker">Section Two &nbsp;·&nbsp; Income Profile</div>
+      <h2 class="serif" style="font-size: 38px; margin-top: 10px; line-height: 1.2;">A licensed short-term rental operation and a farm lease. <em>Both transferable to the buyer.</em></h2>
+      <p class="subtitle" style="margin-top: 14px; font-size: 15px; color: #6b655a; line-height: 1.7; max-width: 820px;">Most residential properties have one income stream: zero. This estate has two documented, transferable revenue streams — and the primary one has a five-year track record and an official municipal licence.</p>
+    </div>
+
+    <div class="grid g2">
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">STR Licence</span>
+        <div class="stat" style="font-size: 42px;">Licensed</div>
+        <div class="label">10-person occupancy cap, OPA zoning compliant, private pond with island = premium STR backdrop. 5+ years operating. Sellers will share full income details with serious buyers.</div>
+      </div>
+      <div class="tile">
+        <span class="kicker">Farm Lease</span>
+        <div class="stat">$1,500</div>
+        <div class="label">Per year, under signed contract. ~30 of the 50 acres are actively farmed. Passive income with zero management overhead.</div>
+      </div>
+    </div>
+
+    <div class="pull-quote-gold-bg">
+      "The STR licence alone has real value — municipal short-term rental licences in Ontario are not easy to obtain and they do not automatically transfer with properties that don't hold them. You're buying the licence and the track record."
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 3 — THE COMP SET
+  ═══════════════════════════════════════════════ -->
+  <section class="pad alt">
+    <div class="section-header">
+      <div class="kicker">Section Three &nbsp;·&nbsp; The Comparable Properties</div>
+      <h2 class="serif" style="font-size: 38px; margin-top: 10px; line-height: 1.2;">What else is on the market — and what's actually been selling.</h2>
+      <p class="subtitle" style="margin-top: 14px; font-size: 15px; color: #6b655a; line-height: 1.7; max-width: 820px;">Four active listings and two recent sales in Fenwick/Pelham. None come close on land. All are priced between $1.04M and $1.499M.</p>
+    </div>
+
+    <div style="overflow-x: auto;">
+      <table class="editorial">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Status</th>
+            <th class="right">Price</th>
+            <th>Lot Size</th>
+            <th>Sq Ft</th>
+            <th>Beds / Bath</th>
+            <th>Key Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="subject-row">
+            <td>
+              <div class="addr">678 Chantler Rd</div>
+              <div class="addr-sub">Fenwick — Subject Property</div>
+            </td>
+            <td><span class="pill pill-gold">Active · 2 DOM</span></td>
+            <td class="num right" style="color: #8B6B1F; font-weight: 700;">$1,350,000</td>
+            <td class="num" style="color: #8B6B1F; font-weight: 700;">50.9 acres</td>
+            <td class="num">3,371 AG</td>
+            <td>6 bed / 3 bath</td>
+            <td style="color: #6b4c0f; font-size: 13px;">Subject property — furnished estate, STR licence, barn, pond</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="addr">975 Foss Rd</div>
+              <div class="addr-sub">Fenwick</div>
+            </td>
+            <td><span class="pill pill-navy">Active · 6 DOM</span></td>
+            <td class="num right">$1,224,900</td>
+            <td class="num">~1.5 acres</td>
+            <td class="num">1,537 AG + full bsmt</td>
+            <td>4 bed / 3 bath</td>
+            <td style="font-size: 13px; color: #6b655a;">3rd listing attempt; market rejected $1.25–1.29M</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="addr">19 Lampman Dr</div>
+              <div class="addr-sub">Fenwick — Cherry Ridge</div>
+            </td>
+            <td><span class="pill pill-navy">Active · 35 DOM</span></td>
+            <td class="num right">$1,190,000</td>
+            <td class="num">&lt;0.5 acres</td>
+            <td class="num">2,633 total</td>
+            <td>3 bed / 3 bath</td>
+            <td style="font-size: 13px; color: #6b655a;">Municipal services; 2012 build; no income</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="addr">15 Mansfield Dr</div>
+              <div class="addr-sub">Fenwick</div>
+            </td>
+            <td><span class="pill pill-red">Active · 84 CDOM</span></td>
+            <td class="num right">$1,499,000</td>
+            <td class="num">&lt;0.5 acres</td>
+            <td class="num">4,476 total</td>
+            <td>7 bed / 3 bath</td>
+            <td style="font-size: 13px; color: #6b655a;">Cut from $1,599,900; high DOM signals market resistance</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="addr">1191 Sunset Dr</div>
+              <div class="addr-sub">Pelham</div>
+            </td>
+            <td><span class="pill pill-red">Active · 76 DOM</span></td>
+            <td class="num right">$1,085,000</td>
+            <td class="num">0.26 acres</td>
+            <td class="num">2,787 total</td>
+            <td>3 bed / 3 bath</td>
+            <td style="font-size: 13px; color: #6b655a;">Already corrected; prior sale $985K in Jun 2024</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="addr">849 River Rd</div>
+              <div class="addr-sub">Fenwick</div>
+            </td>
+            <td><span class="pill pill-green">Sold · Jun 2026</span></td>
+            <td class="num right gain">$1,085,000</td>
+            <td class="num">2.09 acres</td>
+            <td class="num">1,902 AG</td>
+            <td>3 bed / 2 bath</td>
+            <td style="font-size: 13px; color: #6b655a;">Best rural comp — 186 DOM, 4 price cuts to close</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="addr">1129 Balfour St</div>
+              <div class="addr-sub">Fenwick</div>
+            </td>
+            <td><span class="pill pill-green">Sold · Feb 2026</span></td>
+            <td class="num right gain">$1,040,000</td>
+            <td class="num">0.17 acres</td>
+            <td class="num">1,785 AG</td>
+            <td>3 bed / 1 bath</td>
+            <td style="font-size: 13px; color: #6b655a;">New build 2022; unfinished basement; 4 listings over 2 years</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pull-quote" style="margin-top: 32px;">
+      "The two rural comparables with any meaningful acreage (River Rd at 2.09 acres, Foss at 1.5 acres) are anchoring at $1.085M–$1.225M. The jump from 2.1 acres to 50 acres is not a small upgrade — it's a different asset class."
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 4 — PRICE HISTORY
+  ═══════════════════════════════════════════════ -->
+  <section class="pad border-bottom">
+    <div class="section-header">
+      <div class="kicker">Section Four &nbsp;·&nbsp; Price History</div>
+      <h2 class="serif" style="font-size: 38px; margin-top: 10px; line-height: 1.2;">The property sold for $1.2M in 2021. <em>Five years and a full renovation later, you're at $1.3M.</em></h2>
+      <p class="subtitle" style="margin-top: 14px; font-size: 15px; color: #6b655a; line-height: 1.7; max-width: 820px;">Context matters. The 2021 sale was at near-peak market conditions. The current ask of $1.35M represents modest appreciation — and the buyer's target of $1.3M is essentially flat in real terms.</p>
+    </div>
+
+    <div class="grid g3">
+      <div class="tile">
+        <span class="kicker">Apr 2021 Sale</span>
+        <div class="stat">$1,200,000</div>
+        <div class="label">Prior sale price — near-peak market, same property</div>
+      </div>
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">Today's Ask</span>
+        <div class="stat">$1,350,000</div>
+        <div class="label">5 years later, with heat pump, water heater, roof, appliances all updated</div>
+      </div>
+      <div class="tile tile-green">
+        <span class="kicker kicker-green">Buyer Target</span>
+        <div class="stat">$1,300,000</div>
+        <div class="label">+$100K vs 2021 sale = 8.3% over 5 years = 1.6% per year appreciation</div>
+      </div>
+    </div>
+
+    <div class="pull-quote" style="margin-top: 32px;">
+      "Inflation over 5 years in Canada has been roughly 17%. If this property kept pace with inflation, it would be worth ~$1.4M today. At $1.3M the buyer is getting it below inflation-adjusted 2021 pricing — with five years of capital improvements included."
+    </div>
+
+    <div class="history-note">
+      <strong>Prior listing history:</strong> Before the 2021 sale, this property was listed multiple times — at $1.95M in 2019 and between $1.3M–$1.495M in 2020 — with no sale. The 2021 close at $1.2M was a below-ask result. The current sellers have priced with market discipline. $1.3M is a clean, well-supported number.
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 5 — THE VALUE CASE
+  ═══════════════════════════════════════════════ -->
+  <section class="pad alt">
+    <div class="section-header">
+      <div class="kicker">Section Five &nbsp;·&nbsp; The Case for $1.3M</div>
+      <h2 class="serif" style="font-size: 38px; margin-top: 10px; line-height: 1.2;">Five reasons the number holds.</h2>
+    </div>
+
+    <ul class="editorial">
+      <li>
+        <strong>The land is real and irreplaceable.</strong> 50.9 acres in Niagara with frontage of 2,521 ft. Rural A1 zoning land in this region trades at $10,000–$25,000+ per acre depending on use. Even at $10K/acre, the land alone is worth ~$510,000 before the house.
+      </li>
+      <li>
+        <strong>The house is 3,371 sq ft — fully updated and furnished.</strong> Comparable bungalows of 1,400–1,900 sqft are trading at $1.04M–$1.085M unfinished. A 3,371 sqft home fully turnkey with all contents included represents a meaningful size premium.
+      </li>
+      <li>
+        <strong>The STR licence has standalone value.</strong> Ontario municipalities have been restricting short-term rental licences since 2023. A valid, operating licence with 5 years of income history in a tourism-adjacent region (Niagara wine country) transfers with the property — this is not a speculative income projection, it's a documented operating business.
+      </li>
+      <li>
+        <strong>The farm lease offsets carry.</strong> $1,500/year is not transformative — but on a $1.3M acquisition, $1,500/year in passive income with no management overhead is a permanently positive entry in the carrying cost ledger.
+      </li>
+      <li>
+        <strong>The ask is already reasonable.</strong> The property was listed at $1.95M in 2019. It sold for $1.2M in 2021 after years of market resistance. The current sellers are not overreaching — the $1.35M ask represents a disciplined, market-aware starting position. $1.3M is a 3.7% reduction from ask — a normal, clean transaction.
+      </li>
+    </ul>
+
+    <div class="pull-quote-navy huge" style="margin-top: 32px; margin-bottom: 0;">
+      "The last buyer paid $1.2M in 2021 — at peak market, with no improvements included. You're being asked for $1.35M after five years of capital investment, a fully furnished turnkey estate, and a licensed income stream. At $1.3M you're getting a better deal than the 2021 buyer did."
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 6 — KEY TAKEAWAYS
+  ═══════════════════════════════════════════════ -->
+  <section class="banner-navy pad-lg">
+    <div class="section-header light">
+      <div class="kicker" style="color: #b89443; letter-spacing: 0.18em;">Section Six &nbsp;·&nbsp; Six Things to Take Away</div>
+      <h2 class="serif" style="font-size: 38px; margin-top: 10px; line-height: 1.2; color: #f5f1e8;">For the buyer. The full picture on one page.</h2>
+    </div>
+
+    <ul class="editorial">
+      <li>678 Chantler Road is a 50.9-acre estate in Fenwick (Pelham), 15 minutes from Niagara's wine country. It is listed at $1,350,000 — 2 days on market.</li>
+      <li>The property sold for $1,200,000 in April 2021. Today's ask represents modest appreciation of ~1.6% per year — well below inflation. At $1.3M, you're effectively buying at below-inflation-adjusted 2021 pricing.</li>
+      <li>Every comparable property in the Fenwick/Pelham market with any acreage tops out at 2.1 acres and trades at $1.04M–$1.085M. The 50-acre difference is what justifies the premium — and then some.</li>
+      <li>The property holds an active, municipal short-term rental licence with a 10-person occupancy limit. Combined with a farm lease generating $1,500/year, the income profile makes this a different asset class than a standard residential purchase.</li>
+      <li>All major systems have been updated within the past five years: heat pump, water heater, roof, kitchen and laundry appliances. The property is sold fully furnished — every piece of furniture, every appliance, every item of kitchenware is included.</li>
+      <li>Offer at $1.3M. The land, the prior sale history, the inflation-adjusted value argument, and the income profile all support it.</li>
+    </ul>
+
+    <div class="closing-statement" style="margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(245,241,232,0.18);">
+      "$1.3M. The land alone makes the case."
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════ -->
+  <footer class="footer-bar">
+    <span class="brand">Woolcott Real Estate &nbsp;·&nbsp; RE/MAX Escarpment Realty Inc.</span>
+    <span>Prepared by Peter Woolcott, Salesperson &nbsp;·&nbsp; 905.689.9223</span>
+  </footer>
+  <div class="disclaimer">
+    The information contained in this report is provided for informational purposes only and is based on data believed to be reliable but is not guaranteed. All figures, comparisons, and projections are based on publicly available MLS data and market observations as of May 2026 and are subject to change. This report does not constitute an appraisal or legal advice. Not intended to solicit properties currently listed for sale. RE/MAX Escarpment Realty Inc., Brokerage. Each office independently owned and operated. All measurements are approximate. Buyers and their legal and financial advisors should conduct their own due diligence prior to any transaction.
+  </div>
+
+</div><!-- /page-wrap -->
+
+<script>
+  // ── LOT SIZE CHART ───────────────────────────────────────────────
+  const ctx = document.getElementById('lotSizeChart').getContext('2d');
+
+  const labels = [
+    '678 Chantler Rd (Subject)',
+    '849 River Rd (Sold $1.085M)',
+    '975 Foss Rd (Active $1.225M)',
+    '1191 Sunset Dr (Active $1.085M)',
+    '15 Mansfield Dr (Active $1.499M)',
+    '1129 Balfour St (Sold $1.04M)',
+    '19 Lampman Dr (Active $1.19M)',
+  ];
+
+  const data = [50.9, 2.09, 1.5, 0.26, 0.18, 0.17, 0.16];
+
+  const backgroundColors = [
+    '#b89443',   // gold — subject
+    '#1A3A6B',
+    '#1A3A6B',
+    '#1A3A6B',
+    '#1A3A6B',
+    '#1A3A6B',
+    '#1A3A6B',
+  ];
+
+  const borderColors = [
+    '#8B6B1F',
+    '#0f2347',
+    '#0f2347',
+    '#0f2347',
+    '#0f2347',
+    '#0f2347',
+    '#0f2347',
+  ];
+
+  Chart.defaults.font.family = "'JetBrains Mono', monospace";
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Lot Size (acres)',
+        data: data,
+        backgroundColor: backgroundColors,
+        borderColor: borderColors,
+        borderWidth: 1,
+        borderRadius: 2,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              return ' ' + context.raw.toFixed(2) + ' acres';
+            }
+          },
+          titleFont: { family: "'Manrope', sans-serif", size: 13 },
+          bodyFont: { family: "'JetBrains Mono', monospace", size: 13 },
+          backgroundColor: '#1a1a1e',
+          titleColor: '#f5f1e8',
+          bodyColor: '#f4e5c7',
+          padding: 12,
+        },
+        datalabels: { display: false }
+      },
+      scales: {
+        x: {
+          grid: {
+            color: 'rgba(26,26,30,0.07)',
+          },
+          border: {
+            color: 'rgba(26,26,30,0.15)',
+          },
+          ticks: {
+            font: { family: "'JetBrains Mono', monospace", size: 11 },
+            color: '#6b655a',
+            callback: function(value) {
+              return value + ' ac';
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        y: {
+          grid: { display: false },
+          border: { display: false },
+          ticks: {
+            font: { family: "'Manrope', sans-serif", size: 12, weight: '500' },
+            color: function(context) {
+              return context.index === 0 ? '#8B6B1F' : '#1a1a1e';
+            },
+            padding: 8,
+          }
+        }
+      },
+      animation: {
+        duration: 800,
+        easing: 'easeOutQuart'
+      }
+    },
+    plugins: [{
+      id: 'valueLabels',
+      afterDatasetsDraw(chart) {
+        const { ctx, data, scales: { x, y } } = chart;
+        ctx.save();
+        ctx.font = "500 11px 'JetBrains Mono', monospace";
+        ctx.textBaseline = 'middle';
+
+        data.datasets[0].data.forEach((value, i) => {
+          const bar = chart.getDatasetMeta(0).data[i];
+          const xPos = x.getPixelForValue(value);
+          const yPos = bar.y;
+          const label = value >= 1 ? value.toFixed(2) + ' ac' : value.toFixed(2) + ' ac';
+          const padding = 8;
+
+          ctx.fillStyle = i === 0 ? '#8B6B1F' : '#1A3A6B';
+          ctx.textAlign = 'left';
+
+          // Only draw if there's enough room; otherwise skip
+          if (xPos + padding + 50 < chart.chartArea.right + 60) {
+            ctx.fillText(label, xPos + padding, yPos);
+          }
+        });
+
+        ctx.restore();
+      }
+    }]
+  });
+</script>
+</body>
+</html>
