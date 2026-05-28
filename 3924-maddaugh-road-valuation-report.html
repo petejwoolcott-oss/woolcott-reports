@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3924 Maddaugh Road â€” Market Valuation Report</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2332;
+    --slate: #2d3a4a;
+    --gold: #c8a45c;
+    --light: #f5f2ec;
+    --white: #ffffff;
+    --muted: #7a8794;
+    --green: #2d7a4f;
+    --red: #a03030;
+    --border: #ddd8cf;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--light);
+    color: var(--slate);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* â”€â”€ HEADER â”€â”€ */
+  .report-header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 40px 48px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .report-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--gold);
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  .brand-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+  }
+  .brand-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .report-meta {
+    text-align: right;
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.6);
+  }
+  .report-meta strong { color: var(--gold); font-size: 12px; }
+  .header-address {
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+  .header-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.3px;
+  }
+  .header-verdict {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+    background: rgba(200,164,92,0.15);
+    border: 1px solid rgba(200,164,92,0.35);
+    border-radius: 6px;
+    padding: 10px 18px;
+  }
+  .verdict-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: rgba(255,255,255,0.55); }
+  .verdict-value { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--gold); }
+
+  /* â”€â”€ LAYOUT â”€â”€ */
+  .content { max-width: 1040px; margin: 0 auto; padding: 36px 32px 48px; }
+
+  /* â”€â”€ SECTION HEADING â”€â”€ */
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 19px;
+    color: var(--navy);
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--gold);
+    margin-bottom: 20px;
+    margin-top: 40px;
+  }
+  .section-title:first-child { margin-top: 0; }
+
+  /* â”€â”€ PROPERTY OVERVIEW GRID â”€â”€ */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .ov-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .ov-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .ov-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .ov-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* â”€â”€ FEATURE NOTES â”€â”€ */
+  .feature-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+  }
+  .feature-box h4 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+    color: var(--gold);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px 24px;
+  }
+  .feature-item {
+    font-size: 13px;
+    color: var(--slate);
+    padding: 3px 0;
+    border-bottom: 1px solid #f0ece5;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .feature-item::before {
+    content: 'â€”';
+    color: var(--gold);
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+
+  /* â”€â”€ SYSTEMS BOX â”€â”€ */
+  .systems-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .sys-item {
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 12.5px;
+  }
+  .sys-label { color: var(--muted); font-size: 11px; margin-bottom: 2px; }
+  .sys-value { font-weight: 600; color: var(--navy); }
+  .sys-new { color: var(--green); font-size: 11px; font-weight: 600; }
+
+  /* â”€â”€ MARKET SNAPSHOT â”€â”€ */
+  .snapshot-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .snap-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+  }
+  .snap-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .snap-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .snap-note { font-size: 11px; color: var(--slate); margin-top: 4px; }
+
+  /* â”€â”€ SOLD TABLE â”€â”€ */
+  .comp-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .comp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px;
+    background: var(--navy);
+    color: var(--white);
+  }
+  .comp-address {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+  }
+  .comp-price-tag {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .comp-body {
+    padding: 14px 18px;
+  }
+  .comp-stats {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .cstat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 2px; }
+  .cstat-value { font-size: 13px; font-weight: 600; color: var(--navy); }
+  .comp-note {
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    padding-top: 8px;
+    margin-top: 8px;
+    font-style: italic;
+  }
+  .badge-sold {
+    display: inline-block;
+    background: #e8f5ee;
+    color: var(--green);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-left: 8px;
+  }
+  .badge-pending {
+    display: inline-block;
+    background: #fff3e0;
+    color: #b06000;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-left: 8px;
+  }
+
+  /* â”€â”€ ACTIVE TABLE â”€â”€ */
+  .active-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .active-table th {
+    background: var(--navy);
+    color: var(--white);
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.9px;
+    padding: 10px 12px;
+    text-align: left;
+  }
+  .active-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #f0ece5;
+    color: var(--slate);
+  }
+  .active-table tr:last-child td { border-bottom: none; }
+  .active-table tr:nth-child(even) td { background: #faf9f7; }
+  .active-table .subject-row td {
+    background: #f0f4f8 !important;
+    font-weight: 600;
+    color: var(--navy);
+    border-left: 3px solid var(--gold);
+  }
+  .active-table .stale { color: var(--red); font-weight: 600; }
+  .active-table .fresh { color: var(--green); font-weight: 600; }
+
+  /* â”€â”€ VALUE ADJUSTMENT TABLE â”€â”€ */
+  .adj-wrapper { margin-bottom: 24px; }
+  .adj-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    background: var(--light);
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .adj-comp-price { font-size: 15px; color: var(--muted); font-weight: 500; }
+  .adj-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+    font-size: 13px;
+  }
+  .adj-table th {
+    background: var(--slate);
+    color: var(--white);
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 8px 14px;
+    text-align: left;
+  }
+  .adj-table th:last-child { text-align: right; }
+  .adj-table td {
+    padding: 8px 14px;
+    border-bottom: 1px solid #f0ece5;
+    color: var(--slate);
+  }
+  .adj-table tr:last-child td { border-bottom: none; font-weight: 700; background: #f5f2ec; color: var(--navy); }
+  .adj-table td:last-child { text-align: right; }
+  .adj-table td.adj-pos { color: var(--green); font-weight: 600; }
+  .adj-table td.adj-neg { color: var(--red); font-weight: 600; }
+  .adj-table td.adj-neutral { color: var(--muted); font-weight: 500; }
+
+  /* â”€â”€ VERDICT BOX â”€â”€ */
+  .verdict-box {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    border-left: 5px solid var(--gold);
+  }
+  .verdict-box h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .verdict-range-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .vr-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .vr-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+  .vr-value { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--gold); }
+  .vr-primary { border-color: rgba(200,164,92,0.5); background: rgba(200,164,92,0.12); }
+  .vr-primary .vr-value { font-size: 28px; }
+  .verdict-rationale { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.65; }
+  .verdict-rationale strong { color: var(--gold); }
+
+  /* â”€â”€ NOTE BOX â”€â”€ */
+  .note-box {
+    background: #f0f4f8;
+    border: 1px solid #c8d4e0;
+    border-left: 4px solid #4a7fa5;
+    border-radius: 6px;
+    padding: 14px 18px;
+    font-size: 12.5px;
+    color: var(--slate);
+    margin-top: 16px;
+  }
+  .note-box strong { color: var(--navy); }
+
+  /* â”€â”€ FOOTER â”€â”€ */
+  .report-footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    font-size: 11px;
+    padding: 18px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 48px;
+  }
+  .footer-brand { color: var(--gold); font-weight: 600; font-size: 12px; }
+
+  /* â”€â”€ PRINT â”€â”€ */
+  @media print {
+    body { background: white; }
+    .content { padding: 20px; }
+    .report-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .report-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .verdict-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .comp-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .active-table th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .adj-table th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .section-title { page-break-after: avoid; }
+    .comp-card { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="report-header">
+  <div class="header-top">
+    <div>
+      <div class="brand-name">Woolcott Real Estate</div>
+      <div class="brand-sub">RE/MAX Escarpment Realty Inc.</div>
+    </div>
+    <div class="report-meta">
+      <strong>Comparative Market Valuation</strong><br>
+      Prepared by Anita McGowan, Broker<br>
+      Date: May 28, 2026
+    </div>
+  </div>
+  <div class="header-address">3924 Maddaugh Road</div>
+  <div class="header-sub">Puslinch, Ontario &nbsp;Â·&nbsp; N0B 2J0 &nbsp;Â·&nbsp; Flamboroughâ€“Puslinch Border</div>
+  <div class="header-verdict">
+    <div>
+      <div class="verdict-label">Recommended List Price</div>
+      <div class="verdict-value">$1,749,000</div>
+    </div>
+    <div style="border-left:1px solid rgba(200,164,92,0.3);height:40px;margin:0 6px;"></div>
+    <div>
+      <div class="verdict-label">Expected Sale Range</div>
+      <div class="verdict-value" style="font-size:18px;padding-top:4px;">$1,700,000 â€“ $1,760,000</div>
+    </div>
+  </div>
+</header>
+
+<div class="content">
+
+  <!-- SECTION 1: SUBJECT PROPERTY OVERVIEW -->
+  <div class="section-title">1. Subject Property Overview</div>
+
+  <div class="overview-grid">
+    <div class="ov-card">
+      <div class="ov-label">Property Type</div>
+      <div class="ov-value">1.5 Storey</div>
+      <div class="ov-sub">Detached Â· Freehold</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Above-Grade Sqft</div>
+      <div class="ov-value">2,400 sqft</div>
+      <div class="ov-sub">Fully finished basement</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Bedrooms / Baths</div>
+      <div class="ov-value">4+2 Bed</div>
+      <div class="ov-sub">3+1 Baths Â· 2 Kitchens</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Garage</div>
+      <div class="ov-value">2-Car Attached</div>
+      <div class="ov-sub">2 GDO Â· Triple+ Driveway</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Lot Size</div>
+      <div class="ov-value">1.26 Acres</div>
+      <div class="ov-sub">240 Ã— 229 ft Â· Rectangular</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Year Built</div>
+      <div class="ov-value">2005</div>
+      <div class="ov-sub">Apx. 20 years old</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Utilities</div>
+      <div class="ov-value">Well / Septic</div>
+      <div class="ov-sub">Propane heat Â· Drilled well</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Fireplaces</div>
+      <div class="ov-value">2 Propane</div>
+      <div class="ov-sub">Main floor + Basement</div>
+    </div>
+  </div>
+
+  <div class="feature-box">
+    <h4>Interior Highlights</h4>
+    <div class="feature-grid">
+      <div class="feature-item">Cathedral ceiling with back wall of windows</div>
+      <div class="feature-item">Full-height stone fireplace with propane inset (2016) + built-ins</div>
+      <div class="feature-item">Open concept dining and kitchen with stone-clad island</div>
+      <div class="feature-item">Granite counters, tumbled marble backsplash, raised panel cabinets</div>
+      <div class="feature-item">Walk-in pantry with California closet inserts</div>
+      <div class="feature-item">Bosch dishwasher (2011), 4-door fridge (2018), B/I microwave</div>
+      <div class="feature-item">Main floor primary suite: 5pc ensuite â€” jacuzzi, shower, double vanity, skylight</div>
+      <div class="feature-item">Second floor: 3 beds, all hardwood, California shutters, skylights</div>
+      <div class="feature-item">Basement: in-law potential â€” 2 beds, kitchenette, 3pc bath, propane FP</div>
+      <div class="feature-item">Workshop + walk-up access to garage from basement</div>
+      <div class="feature-item">Laundry room with sink, stacked W/D, new CVac equipment (2023)</div>
+      <div class="feature-item">Interior garage access Â· 2 GDO with remotes</div>
+    </div>
+  </div>
+
+  <div class="feature-box">
+    <h4>Exterior Highlights</h4>
+    <div class="feature-grid">
+      <div class="feature-item">Large deck (restained 2020) + stone-clad porch with propane BBQ hookup</div>
+      <div class="feature-item">Garden house with screen, electrical (2019)</div>
+      <div class="feature-item">Landscaping and front walkway (2019)</div>
+      <div class="feature-item">Security system (monitored)</div>
+    </div>
+  </div>
+
+  <div class="feature-box">
+    <h4>Major Systems &amp; Updates</h4>
+    <div class="systems-grid">
+      <div class="sys-item"><div class="sys-label">Roof</div><div class="sys-value">2025 <span class="sys-new">âœ“ New</span></div></div>
+      <div class="sys-item"><div class="sys-label">Furnace</div><div class="sys-value">2023 <span class="sys-new">âœ“ Recent</span></div></div>
+      <div class="sys-item"><div class="sys-label">A/C</div><div class="sys-value">2019</div></div>
+      <div class="sys-item"><div class="sys-label">Hot Water (tankless, owned)</div><div class="sys-value">2025 <span class="sys-new">âœ“ New</span></div></div>
+      <div class="sys-item"><div class="sys-label">Sump Pumps (Ã—2)</div><div class="sys-value">2025 <span class="sys-new">âœ“ New</span></div></div>
+      <div class="sys-item"><div class="sys-label">Water Softener</div><div class="sys-value">2022</div></div>
+      <div class="sys-item"><div class="sys-label">Generator (Generac, whole-home)</div><div class="sys-value">Included</div></div>
+      <div class="sys-item"><div class="sys-label">Septic</div><div class="sys-value">2005 (pumped twice)</div></div>
+      <div class="sys-item"><div class="sys-label">Windows</div><div class="sys-value">2005 (some seals broken in bsmt)</div></div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: MARKET SNAPSHOT -->
+  <div class="section-title">2. Market Snapshot â€” Puslinch / Flamborough, May 2026</div>
+
+  <div class="snapshot-grid">
+    <div class="snap-card">
+      <div class="snap-num">6</div>
+      <div class="snap-label">Active Listings</div>
+      <div class="snap-note">$1.799M â€“ $2.199M</div>
+    </div>
+    <div class="snap-card">
+      <div class="snap-num">5</div>
+      <div class="snap-label">Sales / 60 Days</div>
+      <div class="snap-note">$1.720M â€“ $2.499M</div>
+    </div>
+    <div class="snap-card">
+      <div class="snap-num">0.96â€“0.99</div>
+      <div class="snap-label">Avg SP/LP Ratio</div>
+      <div class="snap-note">4â€“6% below asking</div>
+    </div>
+    <div class="snap-card">
+      <div class="snap-num">~$690</div>
+      <div class="snap-label">Avg $/Sqft (AG)</div>
+      <div class="snap-note">Similar-sized comps</div>
+    </div>
+  </div>
+
+  <div class="note-box" style="margin-top:16px;">
+    <strong>Market Conditions:</strong> The rural Puslinchâ€“Flamborough market remains balanced to slightly soft in the $1.7Mâ€“$2.2M range. Well-positioned, updated properties with 2-car garages and modern mechanicals are selling within 10â€“57 days. Larger acreage and luxury estate properties command significant premiums. The most directly comparable recent sale â€” 4436 Concession Rd 11, Moffat â€” achieved $1,720,000 in May 2026 on a 2,430 sqft home with 1.35 acres and 2-car garage, in 53 CDOM.
+  </div>
+
+  <!-- SECTION 3: RECENT COMPARABLE SALES -->
+  <div class="section-title">3. Recent Comparable Sales â€” Last 60 Days</div>
+
+  <!-- Comp 1 -->
+  <div class="comp-card">
+    <div class="comp-header">
+      <div>
+        <span class="comp-address">4436 Concession Rd 11, Moffat (Puslinch)</span>
+        <span class="badge-pending">Pending</span>
+      </div>
+      <div class="comp-price-tag">$1,720,000</div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-stats">
+        <div><div class="cstat-label">List Price</div><div class="cstat-value">$1,795,000</div></div>
+        <div><div class="cstat-label">SP/LP</div><div class="cstat-value">0.96</div></div>
+        <div><div class="cstat-label">CDOM</div><div class="cstat-value">53</div></div>
+        <div><div class="cstat-label">AG Sqft</div><div class="cstat-value">2,430</div></div>
+        <div><div class="cstat-label">Beds / Baths</div><div class="cstat-value">4 / 3</div></div>
+        <div><div class="cstat-label">Lot / Garage</div><div class="cstat-value">1.35 ac / 2-car</div></div>
+      </div>
+      <div class="comp-note">2 Storey Â· Stone fireplace Â· Cathedral ceiling Â· 2-car attached garage Â· Fully finished walkout basement Â· Drilled well / septic Â· Listed March 23, 2026; pending May 15, 2026. <strong>Most comparable sale â€” similar sqft, acreage, garage, and rural Puslinch location.</strong></div>
+    </div>
+  </div>
+
+  <!-- Comp 2 -->
+  <div class="comp-card">
+    <div class="comp-header">
+      <div>
+        <span class="comp-address">4058 Maddaugh Road, Puslinch</span>
+        <span class="badge-sold">Sold</span>
+      </div>
+      <div class="comp-price-tag">$2,499,000</div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-stats">
+        <div><div class="cstat-label">List Price</div><div class="cstat-value">$2,549,000</div></div>
+        <div><div class="cstat-label">SP/LP</div><div class="cstat-value">0.98</div></div>
+        <div><div class="cstat-label">CDOM</div><div class="cstat-value">10</div></div>
+        <div><div class="cstat-label">AG Sqft</div><div class="cstat-value">3,290</div></div>
+        <div><div class="cstat-label">Beds / Baths</div><div class="cstat-value">4+1 / 4</div></div>
+        <div><div class="cstat-label">Lot / Garage</div><div class="cstat-value">4+ ac / 3-car</div></div>
+      </div>
+      <div class="comp-note">Bungalow Â· Custom-built 2007 Â· 17 ft ceilings Â· Wolf gas range Â· Private gated entry Â· Tree-lined drive Â· Private pond Â· Closed April 2, 2026. <strong>On Maddaugh Road â€” same street. Significantly larger home, acreage, and garage; establishes upper price ceiling for the road.</strong></div>
+    </div>
+  </div>
+
+  <!-- Comp 3 -->
+  <div class="comp-card">
+    <div class="comp-header">
+      <div>
+        <span class="comp-address">55 Bridle Path, Puslinch</span>
+        <span class="badge-sold">Sold</span>
+      </div>
+      <div class="comp-price-tag">$2,025,000</div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-stats">
+        <div><div class="cstat-label">List Price</div><div class="cstat-value">$2,150,000</div></div>
+        <div><div class="cstat-label">SP/LP</div><div class="cstat-value">0.94</div></div>
+        <div><div class="cstat-label">CDOM</div><div class="cstat-value">121</div></div>
+        <div><div class="cstat-label">AG Sqft</div><div class="cstat-value">2,900</div></div>
+        <div><div class="cstat-label">Beds / Baths</div><div class="cstat-value">6 (3+3) / 4</div></div>
+        <div><div class="cstat-label">Lot / Garage</div><div class="cstat-value">1.0 ac / 2-car</div></div>
+      </div>
+      <div class="comp-note">1.5 Storey Â· Saltwater pool + pool cabana with gas FP Â· Hot tub Â· Premium Aberfoyle Creek Estates subdivision Â· Closed May 20, 2026. <strong>Premium subdivision address, pool, and outdoor amenities justify pricing above subject; good upper bound reference.</strong></div>
+    </div>
+  </div>
+
+  <!-- Comp 4 -->
+  <div class="comp-card">
+    <div class="comp-header">
+      <div>
+        <span class="comp-address">436 Concession Rd 8 E, Hamilton (Flamborough)</span>
+        <span class="badge-sold">Sold</span>
+      </div>
+      <div class="comp-price-tag">$1,950,000</div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-stats">
+        <div><div class="cstat-label">List Price</div><div class="cstat-value">$1,999,900</div></div>
+        <div><div class="cstat-label">SP/LP</div><div class="cstat-value">0.98</div></div>
+        <div><div class="cstat-label">CDOM</div><div class="cstat-value">20</div></div>
+        <div><div class="cstat-label">AG Sqft</div><div class="cstat-value">3,082</div></div>
+        <div><div class="cstat-label">Beds / Baths</div><div class="cstat-value">6 (4+2) / 5</div></div>
+        <div><div class="cstat-label">Lot / Garage</div><div class="cstat-value">~1 ac / 4-car</div></div>
+      </div>
+      <div class="comp-note">2 Storey Â· In-law suite Â· Walkout basement Â· Separate heated 50Ã—30 garage/workshop Â· Closed April 30, 2026. <strong>Larger sqft, more baths, and 4-car garage drive significant premium over subject. Strong buyer demand at this price point in Flamborough.</strong></div>
+    </div>
+  </div>
+
+  <!-- Comp 5 -->
+  <div class="comp-card">
+    <div class="comp-header">
+      <div>
+        <span class="comp-address">20 Chesswood Trail, Flamborough</span>
+        <span class="badge-pending">Pending</span>
+      </div>
+      <div class="comp-price-tag">$1,725,000</div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-stats">
+        <div><div class="cstat-label">List Price</div><div class="cstat-value">$1,799,900</div></div>
+        <div><div class="cstat-label">SP/LP</div><div class="cstat-value">0.96</div></div>
+        <div><div class="cstat-label">CDOM</div><div class="cstat-value">293</div></div>
+        <div><div class="cstat-label">AG Sqft</div><div class="cstat-value">3,040</div></div>
+        <div><div class="cstat-label">Beds / Baths</div><div class="cstat-value">4 / 3</div></div>
+        <div><div class="cstat-label">Lot / Garage</div><div class="cstat-value">3.53 ac / 3-car</div></div>
+      </div>
+      <div class="comp-note">Bungalow Â· Unfinished basement Â· Geothermal heating Â· 3.53 acres Â· Listed March 2026 after multiple prior attempts (originally $2.499M in 2025). <strong>Long listing history and unfinished basement temper pricing; confirming the low-to-mid $1.7M anchor despite larger acreage and sqft.</strong></div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: ACTIVE COMPETITION -->
+  <div class="section-title">4. Active Competition â€” As of May 28, 2026</div>
+
+  <table class="active-table">
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>List Price</th>
+        <th>Type</th>
+        <th>AG Sqft</th>
+        <th>Beds</th>
+        <th>Garage</th>
+        <th>Acres</th>
+        <th>CDOM</th>
+        <th>Key Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="subject-row">
+        <td><strong>3924 Maddaugh Rd, Puslinch</strong> (Subject)</td>
+        <td><strong>$1,749,000</strong></td>
+        <td>1.5 Storey</td>
+        <td>2,400</td>
+        <td>4+2</td>
+        <td>2-car</td>
+        <td>1.26</td>
+        <td>â€”</td>
+        <td>In-law potential Â· 2025 systems Â· Generac</td>
+      </tr>
+      <tr>
+        <td>1402 Hwy 6, Flamborough</td>
+        <td>$1,799,000</td>
+        <td>1.5 Storey</td>
+        <td>1,511</td>
+        <td>4</td>
+        <td>None</td>
+        <td>3.0</td>
+        <td class="stale">261</td>
+        <td>Estate sale Â· 2 houses + barn Â· No garage</td>
+      </tr>
+      <tr>
+        <td>26 Weneil Dr, Freelton</td>
+        <td>$1,839,000</td>
+        <td>2 Storey</td>
+        <td>2,675</td>
+        <td>4+1</td>
+        <td>Detached 2-car + loft</td>
+        <td>1.25</td>
+        <td class="fresh">24</td>
+        <td>Fully renovated Â· In-law suite Â· Backs greenbelt</td>
+      </tr>
+      <tr>
+        <td>1602 Hwy 6 N, Carlisle</td>
+        <td>$1,850,000</td>
+        <td>Raised Bungalow</td>
+        <td>1,337</td>
+        <td>3+1</td>
+        <td>1-car</td>
+        <td>8.02</td>
+        <td class="stale">591</td>
+        <td>Hobby farm Â· Workshop Â· Barn Â· 8 acres</td>
+      </tr>
+      <tr>
+        <td>12 Weyburn Way, Freelton</td>
+        <td>$1,869,900</td>
+        <td>2 Storey</td>
+        <td>2,980</td>
+        <td>4</td>
+        <td>3-car</td>
+        <td>~0.5</td>
+        <td class="stale">353</td>
+        <td>New build Â· Wildan Estates II Â· Municipal water</td>
+      </tr>
+      <tr>
+        <td>7 Appaloosa Trail, Carlisle</td>
+        <td>$1,899,000</td>
+        <td>Bungalow</td>
+        <td>2,530</td>
+        <td>4</td>
+        <td>2-car</td>
+        <td>~1.0</td>
+        <td class="fresh">23</td>
+        <td>10 ft ceilings Â· Saltwater pool + pool house Â· Municipal water</td>
+      </tr>
+      <tr>
+        <td>19 Concession 5 E, Waterdown</td>
+        <td>$1,899,999</td>
+        <td>Bungalow</td>
+        <td>2,556</td>
+        <td>3+1</td>
+        <td>2-car</td>
+        <td>1.0</td>
+        <td>34</td>
+        <td>Detached ADU (800 sqft) Â· Woolcott listing Â· Reduced from $1,950,000</td>
+      </tr>
+      <tr>
+        <td>3918 Maddaugh Rd, Puslinch</td>
+        <td>$2,199,900</td>
+        <td>2 Storey</td>
+        <td>2,868</td>
+        <td>4+1</td>
+        <td>2-car</td>
+        <td>8.5</td>
+        <td>6/76</td>
+        <td>Spring-fed pond Â· 20Ã—50 pool Â· Sauna Â· Relisted from $2,299,900</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note-box" style="margin-top:14px;">
+    <strong>Competition Summary:</strong> Four of six competing listings have been on market well over 100 days (CDOM 261, 353, 591, and 76 for the relisted neighbor). The two fresh listings â€” 7 Appaloosa Trail and 26 Weneil Drive â€” both carry pools/premium features and are priced at $1,839,000â€“$1,899,000. Positioning the subject at $1,749,000 offers demonstrably better value per square foot than the pool-equipped competition while reflecting the subject's strong mechanical upgrades, in-law potential, and genuine Maddaugh Road address.
+  </div>
+
+  <!-- SECTION 5: VALUE ADJUSTMENT ANALYSIS -->
+  <div class="section-title">5. Value Adjustment Analysis</div>
+
+  <!-- ANCHOR A -->
+  <div class="adj-wrapper">
+    <div class="adj-title">
+      <span>Anchor A: 4436 Concession Rd 11, Moffat â€” <em>Most Comparable Recent Sale</em></span>
+      <span class="adj-comp-price">Sold $1,720,000 &nbsp;Â·&nbsp; May 2026 &nbsp;Â·&nbsp; CDOM 53</span>
+    </div>
+    <table class="adj-table">
+      <colgroup><col style="width:35%"><col style="width:32%"><col style="width:33%"></colgroup>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Comparable vs. Subject</th>
+          <th>Adjustment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Base Sale Price</td>
+          <td>$1,720,000</td>
+          <td>â€”</td>
+        </tr>
+        <tr>
+          <td>AG Square Footage</td>
+          <td>2,430 vs. 2,400 sqft (comp larger by 30 sqft)</td>
+          <td class="adj-neg">âˆ’$10,000</td>
+        </tr>
+        <tr>
+          <td>Lot Size</td>
+          <td>1.35 vs. 1.26 acres (comp slightly larger)</td>
+          <td class="adj-neg">âˆ’$7,500</td>
+        </tr>
+        <tr>
+          <td>In-Law Suite / Basement</td>
+          <td>Comp: walkout rec room. Subject: full kitchenette, 2 beds, propane FP, walk-up garage access</td>
+          <td class="adj-pos">+$20,000</td>
+        </tr>
+        <tr>
+          <td>Major Mechanical Systems</td>
+          <td>Comp: older systems. Subject: 2025 roof, HWT, 2Ã— sump pumps; 2023 furnace; Generac</td>
+          <td class="adj-pos">+$20,000</td>
+        </tr>
+        <tr>
+          <td>Privacy / Setting</td>
+          <td>Con Rd 11 is more secluded/wooded; subject on main road closer to Hwy 6</td>
+          <td class="adj-neg">âˆ’$10,000</td>
+        </tr>
+        <tr>
+          <td>Fireplace / Feature Upgrades</td>
+          <td>Both have stone FP. Subject: full-height stone + propane inset (2016), cathedral ceiling with windows</td>
+          <td class="adj-neutral">Neutral</td>
+        </tr>
+        <tr>
+          <td>Garage</td>
+          <td>Both 2-car attached</td>
+          <td class="adj-neutral">Neutral</td>
+        </tr>
+        <tr>
+          <td><strong>Indicated Market Value</strong></td>
+          <td><strong>Net Adjustment: +$12,500</strong></td>
+          <td><strong>$1,732,500</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ANCHOR B -->
+  <div class="adj-wrapper">
+    <div class="adj-title">
+      <span>Anchor B: 4058 Maddaugh Road, Puslinch â€” <em>Same Street Â· Upper Boundary</em></span>
+      <span class="adj-comp-price">Sold $2,499,000 &nbsp;Â·&nbsp; April 2026 &nbsp;Â·&nbsp; CDOM 10</span>
+    </div>
+    <table class="adj-table">
+      <colgroup><col style="width:35%"><col style="width:32%"><col style="width:33%"></colgroup>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Comparable vs. Subject</th>
+          <th>Adjustment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Base Sale Price</td>
+          <td>$2,499,000</td>
+          <td>â€”</td>
+        </tr>
+        <tr>
+          <td>AG Square Footage</td>
+          <td>3,290 vs. 2,400 sqft (comp larger by 890 sqft)</td>
+          <td class="adj-neg">âˆ’$310,000</td>
+        </tr>
+        <tr>
+          <td>Lot Size / Acreage</td>
+          <td>4+ acres vs. 1.26 acres</td>
+          <td class="adj-neg">âˆ’$65,000</td>
+        </tr>
+        <tr>
+          <td>Garage</td>
+          <td>3-car vs. 2-car; comp also has private pond &amp; gated entry</td>
+          <td class="adj-neg">âˆ’$30,000</td>
+        </tr>
+        <tr>
+          <td>Custom Build Quality</td>
+          <td>4058 is a purpose-built 2007 custom bungalow with Wolf range, 17 ft ceilings, luxury finishes throughout</td>
+          <td class="adj-neg">âˆ’$40,000</td>
+        </tr>
+        <tr>
+          <td>In-Law Suite / Finished Basement</td>
+          <td>Both have finished lower level with second kitchen/suite potential</td>
+          <td class="adj-neutral">Neutral</td>
+        </tr>
+        <tr>
+          <td>Both on Maddaugh Road</td>
+          <td>Same road â€” shared location premium for Puslinch / highway access</td>
+          <td class="adj-neutral">Neutral</td>
+        </tr>
+        <tr>
+          <td><strong>Indicated Market Value</strong></td>
+          <td><strong>Net Adjustment: âˆ’$445,000</strong></td>
+          <td><strong>$2,054,000 â†’ Lower Bound from Anchor A</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note-box">
+    <strong>Analysis Note:</strong> Anchor B reinforces that 4058 Maddaugh's $2.499M sale was driven by substantially superior size (3,290 sqft), larger acreage (4+ ac), and a 3-car garage on a gated custom-built property â€” attributes the subject does not share. Anchor A ($1,720,000 â†’ indicated $1,732,500) provides the most reliable market signal given closely matching square footage, acreage, and garage count. The subject's 2025 mechanical improvements and functional in-law suite support pricing at a modest premium above the Anchor A indicated value.
+  </div>
+
+  <!-- SECTION 6: PRICE RECOMMENDATION -->
+  <div class="section-title">6. Price Recommendation</div>
+
+  <div class="verdict-box">
+    <h3>Market Value Assessment &amp; List Price Recommendation</h3>
+    <div class="verdict-range-grid">
+      <div class="vr-card">
+        <div class="vr-label">Indicated Market Value</div>
+        <div class="vr-value">$1,732,500</div>
+      </div>
+      <div class="vr-card vr-primary">
+        <div class="vr-label">Recommended List Price</div>
+        <div class="vr-value">$1,749,000</div>
+      </div>
+      <div class="vr-card">
+        <div class="vr-label">Expected Sale Range</div>
+        <div class="vr-value">$1,700K â€“ $1,760K</div>
+      </div>
+    </div>
+    <div class="verdict-rationale">
+      The data converges around a market value of approximately <strong>$1,730,000â€“$1,750,000</strong>. The anchor comparable â€” 4436 Concession Rd 11, Moffat â€” achieved $1,720,000 in May 2026 at 96% of list, on a home of virtually identical footprint, acreage, and 2-car garage configuration. After adjusting for the subject's significant advantage in mechanical systems (2025 roof, tankless HWT, twin sump pumps, Generac), and the functional in-law suite in the basement with its own kitchenette, propane fireplace, and walk-up access, an indicated value of <strong>$1,732,500</strong> is well-supported.<br><br>
+      Positioning at <strong>$1,749,000</strong> captures the full value of recent capital investment and offers clear differentiation from stale competitors (CDOM 261â€“591). The subject's main-floor primary suite with 5pc ensuite, cathedral ceiling with back wall of windows, and stone fireplace are highly marketable features in this buyer segment. At $729/sqft AG, the list price aligns with recent Puslinch transactions while reflecting a modest premium for the 2025â€“2023 upgrades. <strong>The $1,749,000 price point is the correct and well-supported launch price for this property.</strong>
+    </div>
+  </div>
+
+  <div class="note-box">
+    <strong>Disclosure Note:</strong> The property is on a drilled well with no purification equipment currently installed, and sits in a high water table / wet lands area. The two new 2025 sump pumps proactively address drainage management and should be highlighted in marketing. Buyers from municipal water backgrounds should be advised accordingly. A few basement window seals are reported broken â€” a minor item sellers may wish to address before listing.
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="report-footer">
+  <div>
+    <div class="footer-brand">Woolcott Real Estate â€” RE/MAX Escarpment Realty Inc.</div>
+    <div style="margin-top:3px;">Prepared by: Anita McGowan, Broker &nbsp;Â·&nbsp; anita.mcgowan@gmail.com</div>
+  </div>
+  <div style="text-align:right;">
+    <div>3924 Maddaugh Road, Puslinch, ON &nbsp;Â·&nbsp; May 28, 2026</div>
+    <div style="margin-top:3px;">*Information deemed reliable but not guaranteed. CoreLogic Matrix.</div>
+  </div>
+</footer>
+
+</body>
+</html>
