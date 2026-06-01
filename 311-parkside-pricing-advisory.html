@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>311 Parkside Drive — Pricing Advisory</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2332; --slate: #2d3a4a; --gold: #c8a45c;
+    --light: #f5f2ec; --white: #ffffff; --muted: #7a8794;
+    --green: #2d7a4f; --red: #a03030; --border: #ddd8cf;
+    --amber: #8a6020; --blue: #4a7fa5;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--light); color: var(--slate); font-size: 14px; line-height: 1.65; }
+
+  /* HEADER */
+  .report-header { background: var(--navy); color: var(--white); padding: 40px 48px 32px; position: relative; overflow: hidden; }
+  .report-header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: var(--gold); }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+  .brand-name { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--gold); letter-spacing: 0.5px; }
+  .brand-sub { font-size: 11px; color: rgba(255,255,255,0.55); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px; }
+  .report-meta { text-align: right; font-size: 11.5px; color: rgba(255,255,255,0.6); }
+  .report-meta strong { color: var(--gold); font-size: 12px; }
+  .header-address { font-family: 'DM Serif Display', serif; font-size: 30px; color: var(--white); line-height: 1.15; margin-bottom: 6px; }
+  .header-sub { font-size: 13px; color: rgba(255,255,255,0.65); letter-spacing: 0.3px; }
+  .header-tag { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; background: rgba(200,164,92,0.15); border: 1px solid rgba(200,164,92,0.35); border-radius: 6px; padding: 10px 18px; }
+  .tag-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: rgba(255,255,255,0.55); }
+  .tag-value { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--gold); }
+
+  /* LAYOUT */
+  .content { max-width: 1040px; margin: 0 auto; padding: 36px 32px 48px; }
+
+  /* SECTION TITLE */
+  .section-title { font-family: 'DM Serif Display', serif; font-size: 19px; color: var(--navy); padding-bottom: 8px; border-bottom: 2px solid var(--gold); margin-bottom: 20px; margin-top: 40px; }
+  .section-title:first-child { margin-top: 0; }
+
+  /* INTRO BOX */
+  .intro-box { background: var(--white); border: 1px solid var(--border); border-left: 5px solid var(--gold); border-radius: 6px; padding: 20px 24px; margin-bottom: 24px; font-size: 13.5px; line-height: 1.7; color: var(--slate); }
+  .intro-box p + p { margin-top: 10px; }
+
+  /* OVERVIEW GRID */
+  .overview-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+  .ov-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+  .ov-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); margin-bottom: 4px; }
+  .ov-value { font-size: 15px; font-weight: 600; color: var(--navy); }
+  .ov-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* FEATURE BOX */
+  .feature-box { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; margin-bottom: 16px; }
+  .feature-box h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.1px; color: var(--gold); margin-bottom: 10px; font-weight: 600; }
+  .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 24px; }
+  .feature-item { font-size: 13px; color: var(--slate); padding: 3px 0; border-bottom: 1px solid #f0ece5; display: flex; align-items: baseline; gap: 6px; }
+  .feature-item::before { content: '—'; color: var(--gold); font-size: 11px; flex-shrink: 0; }
+
+  /* COMP TABLE */
+  .comp-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); font-size: 12.5px; margin-bottom: 16px; }
+  .comp-table th { background: var(--navy); color: var(--white); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.9px; padding: 10px 12px; text-align: left; }
+  .comp-table td { padding: 9px 12px; border-bottom: 1px solid #f0ece5; color: var(--slate); vertical-align: top; }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table tr:nth-child(even) td { background: #faf9f7; }
+  .comp-table .street-row td { background: #f0f4f8 !important; font-weight: 600; border-left: 3px solid var(--gold); }
+  .price-cell { font-weight: 700; color: var(--navy); white-space: nowrap; }
+  .dom-stale { color: var(--red); font-weight: 600; }
+  .dom-fresh { color: var(--green); font-weight: 600; }
+  .note-cell { font-size: 11.5px; color: var(--muted); font-style: italic; }
+
+  /* TWO-COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+
+  /* ARGUMENT BOX */
+  .arg-box { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; }
+  .arg-box h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; font-weight: 700; }
+  .arg-box.pro h4 { color: var(--green); }
+  .arg-box.con h4 { color: var(--red); }
+  .arg-list { list-style: none; }
+  .arg-list li { font-size: 13px; padding: 5px 0; border-bottom: 1px solid #f0ece5; display: flex; gap: 8px; }
+  .arg-list li:last-child { border-bottom: none; }
+  .arg-list li::before { font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .arg-box.pro .arg-list li::before { content: '+'; color: var(--green); }
+  .arg-box.con .arg-list li::before { content: '−'; color: var(--red); }
+
+  /* ADJ TABLE */
+  .adj-wrapper { margin-bottom: 24px; }
+  .adj-title { font-size: 13px; font-weight: 700; color: var(--navy); background: var(--light); padding: 10px 16px; border: 1px solid var(--border); border-bottom: none; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center; }
+  .adj-comp-price { font-size: 14px; color: var(--muted); font-weight: 500; }
+  .adj-table { width: 100%; border-collapse: collapse; background: var(--white); border: 1px solid var(--border); border-radius: 0 0 8px 8px; overflow: hidden; font-size: 13px; }
+  .adj-table th { background: var(--slate); color: var(--white); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; padding: 8px 14px; text-align: left; }
+  .adj-table th:last-child { text-align: right; }
+  .adj-table td { padding: 8px 14px; border-bottom: 1px solid #f0ece5; color: var(--slate); }
+  .adj-table tr:last-child td { border-bottom: none; font-weight: 700; background: #f5f2ec; color: var(--navy); }
+  .adj-table td:last-child { text-align: right; }
+  .adj-table td.adj-pos { color: var(--green); font-weight: 600; }
+  .adj-table td.adj-neg { color: var(--red); font-weight: 600; }
+  .adj-table td.adj-neutral { color: var(--muted); font-weight: 500; }
+
+  /* VERDICT */
+  .verdict-box { background: var(--navy); color: var(--white); border-radius: 10px; padding: 28px 32px; margin-bottom: 20px; border-left: 5px solid var(--gold); }
+  .verdict-box h3 { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--gold); margin-bottom: 16px; }
+  .verdict-range-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 18px; }
+  .vr-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 14px 16px; text-align: center; }
+  .vr-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+  .vr-value { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--gold); }
+  .vr-primary { border-color: rgba(200,164,92,0.5); background: rgba(200,164,92,0.12); }
+  .vr-primary .vr-value { font-size: 28px; }
+  .verdict-rationale { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.65; }
+  .verdict-rationale strong { color: var(--gold); }
+
+  /* NOTE BOX */
+  .note-box { background: #f0f4f8; border: 1px solid #c8d4e0; border-left: 4px solid var(--blue); border-radius: 6px; padding: 14px 18px; font-size: 12.5px; color: var(--slate); margin-top: 14px; line-height: 1.65; }
+  .note-box strong { color: var(--navy); }
+  .warn-box { background: #fdf5ec; border: 1px solid #e8d0a8; border-left: 4px solid var(--gold); border-radius: 6px; padding: 14px 18px; font-size: 12.5px; color: var(--slate); margin-top: 14px; line-height: 1.65; }
+  .warn-box strong { color: var(--amber); }
+
+  /* FOOTNOTE */
+  .report-footer { background: var(--navy); color: rgba(255,255,255,0.5); font-size: 11px; padding: 18px 48px; display: flex; justify-content: space-between; align-items: center; margin-top: 48px; }
+  .footer-brand { color: var(--gold); font-weight: 600; font-size: 12px; }
+
+  @media print {
+    body { background: white; }
+    .report-header, .report-footer, .verdict-box, .comp-table th, .adj-table th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .section-title { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="report-header">
+  <div class="header-top">
+    <div>
+      <div class="brand-name">Woolcott Real Estate</div>
+      <div class="brand-sub">RE/MAX Escarpment Realty Inc.</div>
+    </div>
+    <div class="report-meta">
+      <strong>Pricing Advisory — Confidential</strong><br>
+      Prepared by Anita McGowan, Broker<br>
+      Date: June 1, 2026
+    </div>
+  </div>
+  <div class="header-address">311 Parkside Drive</div>
+  <div class="header-sub">Waterdown, Ontario &nbsp;·&nbsp; L0R 2H1 &nbsp;·&nbsp; Waterdown West</div>
+  <div class="header-tag">
+    <div>
+      <div class="tag-label">Agent's List Price</div>
+      <div class="tag-value">$2,250,000</div>
+    </div>
+    <div style="border-left:1px solid rgba(200,164,92,0.3);height:40px;margin:0 8px;"></div>
+    <div>
+      <div class="tag-label">Agent's Expected Sale</div>
+      <div class="tag-value" style="font-size:18px;padding-top:4px;">$2,050,000</div>
+    </div>
+    <div style="border-left:1px solid rgba(200,164,92,0.3);height:40px;margin:0 8px;"></div>
+    <div>
+      <div class="tag-label">Market-Supported Range</div>
+      <div class="tag-value" style="font-size:18px;padding-top:4px;">$1,950K – $2,100K</div>
+    </div>
+  </div>
+</header>
+
+<div class="content">
+
+  <!-- SECTION 1: PURPOSE -->
+  <div class="section-title">1. Purpose of This Advisory</div>
+
+  <div class="intro-box">
+    <p>This advisory has been prepared to provide an independent assessment of the proposed list price for 311 Parkside Drive, Waterdown, ahead of your pricing discussion with the listing agent. It is based on a thorough review of the comparable sales provided by the agent, their written narrative identifying the property's premium features, and current active market conditions in Waterdown West.</p>
+    <p>The goal is to provide you with an objective, data-grounded perspective so that any decision about list price is made with full confidence in what the market supports — and full awareness of the risks associated with entry points above that range.</p>
+  </div>
+
+  <!-- SECTION 2: PROPERTY OVERVIEW -->
+  <div class="section-title">2. Property Overview</div>
+
+  <div class="overview-grid">
+    <div class="ov-card">
+      <div class="ov-label">Property Type</div>
+      <div class="ov-value">2 Storey Custom</div>
+      <div class="ov-sub">Detached · Freehold</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Above-Grade Sqft</div>
+      <div class="ov-value">~2,900 sqft</div>
+      <div class="ov-sub">Plus finished basement</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Bedrooms / Baths</div>
+      <div class="ov-value">4 Bed / 3.5 Bath</div>
+      <div class="ov-sub">Custom ensuite finishes</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Garage / Parking</div>
+      <div class="ov-value">2-Car Attached</div>
+      <div class="ov-sub">Double driveway</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Lot</div>
+      <div class="ov-value">52.6 × 122.7 ft</div>
+      <div class="ov-sub">Backs greenspace · Private</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Builder / Age</div>
+      <div class="ov-value">Larey Homes</div>
+      <div class="ov-sub">Built 2021–22 · ~4 yrs old</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Utilities</div>
+      <div class="ov-value">Municipal</div>
+      <div class="ov-sub">Water &amp; sewer · Gas heat</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Previous Sale</div>
+      <div class="ov-value">$1,585,000</div>
+      <div class="ov-sub">May 2022 · New build</div>
+    </div>
+  </div>
+
+  <div class="feature-box">
+    <h4>Custom Upgrades — Highlights from Agent's Documentation</h4>
+    <div class="feature-grid">
+      <div class="feature-item">Hardwood flooring throughout</div>
+      <div class="feature-item">Heated kitchen floor</div>
+      <div class="feature-item">Custom European-style entry door</div>
+      <div class="feature-item">Custom kitchen cabinetry with oversized island</div>
+      <div class="feature-item">Upgraded bathroom cabinetry and tiles</div>
+      <div class="feature-item">Upgraded height doors — 96" on main floor</div>
+      <div class="feature-item">Upgraded oversized windows throughout, incl. basement</div>
+      <div class="feature-item">Custom covered patio — rear of home</div>
+      <div class="feature-item">Upgraded fireplace</div>
+      <div class="feature-item">Rigid insulation under basement slab</div>
+      <div class="feature-item">Exterior landscaping (custom)</div>
+      <div class="feature-item">12 pages of builder upgrades on record</div>
+    </div>
+  </div>
+
+  <div class="note-box">
+    <strong>Property Strengths Summary:</strong> 311 Parkside presents a genuinely compelling profile — a 4-year-old custom build with 12 pages of documented upgrades, hardwood and heated floors, premium finishes throughout, a private backyard backing greenspace, and custom homes on either side. These are real, marketable differentiators that position this property above standard resale inventory. The home is in excellent condition and will be easy to market. The question is not whether these features add value — they do — but precisely how much premium the current Waterdown buyer pool will assign to them.
+  </div>
+
+  <!-- SECTION 3: COMPARABLE SALES -->
+  <div class="section-title">3. Recent Comparable Sales — Agent's Submissions</div>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>Style</th>
+        <th>AG Sqft</th>
+        <th>Beds/Baths</th>
+        <th>Basement</th>
+        <th>List Price</th>
+        <th>Sold Price</th>
+        <th>DOM</th>
+        <th>Sold Date</th>
+        <th>Key Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>228 Mill St N</strong></td>
+        <td>2 Storey</td>
+        <td>2,458</td>
+        <td>4 / 3+1</td>
+        <td>Part. finished</td>
+        <td>$1,785,000</td>
+        <td class="price-cell">$1,785,000</td>
+        <td class="dom-fresh">6</td>
+        <td>Mar 2026</td>
+        <td class="note-cell">Heritage char. (1890s + 2010 addition). Quartz kitchen, hot tub, gas FP. Busy street. SP/LP 100%.</td>
+      </tr>
+      <tr>
+        <td><strong>136 Grindstone Way</strong></td>
+        <td>2 Storey</td>
+        <td>2,596</td>
+        <td>4+1 / 3+1</td>
+        <td>Finished W/O + ravine</td>
+        <td>$1,799,900</td>
+        <td class="price-cell">$1,790,000</td>
+        <td>24</td>
+        <td>Apr 2026</td>
+        <td class="note-cell">Backs greenspace / Bruce Trail. 1998 build, older finishes. Butler's pantry, sunken family room. SP/LP 99%.</td>
+      </tr>
+      <tr>
+        <td><strong>80 Commando Court</strong></td>
+        <td>2 Storey</td>
+        <td>2,844</td>
+        <td>4+1 / 3+1</td>
+        <td>Finished in-law suite</td>
+        <td>$1,849,900</td>
+        <td class="price-cell">$1,800,000</td>
+        <td>25</td>
+        <td>May 2025</td>
+        <td class="note-cell">Custom built. Inground pool, stone FP, heated bth floors, custom cabinetry. Cul-de-sac / ravine. SP/LP 97%.</td>
+      </tr>
+      <tr class="street-row">
+        <td><strong>380 Parkside Dr</strong> ★ Same Street</td>
+        <td>Bungalow</td>
+        <td>n/a</td>
+        <td>4 / 2</td>
+        <td>None</td>
+        <td>$1,898,000</td>
+        <td class="price-cell">$1,800,000</td>
+        <td class="dom-stale">128</td>
+        <td>Apr 2025</td>
+        <td class="note-cell">Same street. Large lot (0.5–1.99 acres). Saltwater pool + hot tub. Older home, fully updated. SP/LP 95%. Took 4+ months.</td>
+      </tr>
+      <tr>
+        <td><strong>196 Dundas St E</strong></td>
+        <td>2 Storey</td>
+        <td>3,694</td>
+        <td>4+2 / 3</td>
+        <td>Finished apt (3-unit)</td>
+        <td>$1,949,000</td>
+        <td class="price-cell">$1,750,000</td>
+        <td class="dom-stale">123</td>
+        <td>2026</td>
+        <td class="note-cell">3 self-contained suites. 0.61 acres, 3-car garage. High-traffic street. SP/LP 90%. Lengthy market time.</td>
+      </tr>
+      <tr>
+        <td><strong>116 Grindstone Way</strong></td>
+        <td>Bungaloft</td>
+        <td>2,830 AG + 1,512 BG</td>
+        <td>3+1 / 3+1</td>
+        <td>Fully finished (4,342 total)</td>
+        <td>$1,895,000</td>
+        <td class="price-cell">$1,840,000</td>
+        <td class="dom-stale">58</td>
+        <td>Feb 2026</td>
+        <td class="note-cell">Exec. Vanhoeve build. Backs ravine. Custom bar, stamped concrete, rebuilt deck. Started at $2,097,000 — reduced $202K. SP/LP 97%.</td>
+      </tr>
+      <tr>
+        <td><strong>90 Smokey Hollow Pl</strong></td>
+        <td>2 Storey</td>
+        <td>5,133</td>
+        <td>5 / 5+1</td>
+        <td>Unfinished W/O</td>
+        <td>$2,539,888</td>
+        <td class="price-cell">$2,390,000</td>
+        <td>48</td>
+        <td>2026</td>
+        <td class="note-cell">2023 new build. 5,133 sqft, 5 beds, 6 baths, $200K+ upgrades, backs greenspace. SP/LP 94%.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note-box">
+    <strong>Pattern in the Data:</strong> Six of the seven agent-provided comparables sold between $1,750,000 and $1,840,000. Two of those six took over 120 days to sell, having been priced well above market. The only sale above $2M is 90 Smokey Hollow — a 5,133 sqft brand-new 2023 build with 5 bedrooms and 6 bathrooms, nearly double the size of the subject property.
+  </div>
+
+  <!-- SECTION 4: AGENT'S CASE FOR $2.25M -->
+  <div class="section-title">4. The Agent's Argument — Strengths and Limitations</div>
+
+  <div class="two-col">
+    <div class="arg-box pro">
+      <h4>Valid Points Supporting Premium</h4>
+      <ul class="arg-list">
+        <li>Finished basement adds meaningful value not reflected in 2021 MLS listing</li>
+        <li>12 pages of documented custom upgrades — a genuinely rare level of finish</li>
+        <li>Backing greenspace is a real premium (confirmed by Grindstone Way comps)</li>
+        <li>Custom homes on either side — cohesive, high-quality streetscape</li>
+        <li>4-year-old build in excellent condition — no deferred maintenance</li>
+        <li>Heated floors, 96" doors, European entry, hardwood throughout are visible luxury cues</li>
+        <li>Well-maintained; easy to present and market quickly</li>
+      </ul>
+    </div>
+    <div class="arg-box con">
+      <h4>Limitations in the $2.25M Case</h4>
+      <ul class="arg-list">
+        <li>All 7 agent-provided comps sold below $2M except one at 5,133 sqft</li>
+        <li>116 Grindstone — same greenspace backing, executive build — started at $2,097,000 and sold at $1,840,000 after 58 DOM</li>
+        <li>Active subdivision listings (non-custom) referenced but not shared — buyer pool can see these too</li>
+        <li>573 Parkside confidential is a land value attribution, not an improved sale — not a clean comparable</li>
+        <li>No comp in the $2M–$2.2M range with similar size and location exists in the provided data</li>
+        <li>$2,250,000 at ~2,900 sqft = ~$776/sqft — no sold comp in this area approaches that $/sqft</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="warn-box">
+    <strong>The 116 Grindstone Lesson:</strong> This is the most instructive comparable in the set. 116 Grindstone Way is an executive-built bungaloft with 2,830 sqft above grade plus a <em>fully finished 1,512 sqft basement</em> (4,342 sqft total), custom bar, rebuilt deck, stamped concrete driveway, and a ravine-backing lot in the same Waterdown market. It listed at $2,097,000 in December 2025, sat on the market for 58 days, was reduced to $1,895,000, and sold at $1,840,000. Its journey provides a direct data point on where the ceiling currently sits for premium Waterdown product.
+  </div>
+
+  <!-- SECTION 5: VALUE ADJUSTMENT ANALYSIS -->
+  <div class="section-title">5. Value Adjustment Analysis</div>
+
+  <!-- Anchor A -->
+  <div class="adj-wrapper">
+    <div class="adj-title">
+      <span>Anchor A: 116 Grindstone Way — <em>Executive Build · Backs Ravine/Greenspace · Fully Finished Basement</em></span>
+      <span class="adj-comp-price">Sold $1,840,000 &nbsp;·&nbsp; Feb 2026 &nbsp;·&nbsp; CDOM 58</span>
+    </div>
+    <table class="adj-table">
+      <colgroup><col style="width:32%"><col style="width:40%"><col style="width:28%"></colgroup>
+      <thead>
+        <tr><th>Feature</th><th>Comparable vs. Subject</th><th>Adjustment</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Base Sale Price</td><td>$1,840,000</td><td>—</td></tr>
+        <tr><td>AG Square Footage</td><td>2,830 vs. ~2,900 sqft — subject marginally larger</td><td class="adj-pos">+$15,000</td></tr>
+        <tr><td>Basement</td><td>116 Grindstone: 1,512 sqft finished. Subject: finished basement (size TBC). Broadly comparable.</td><td class="adj-neutral">Neutral</td></tr>
+        <tr><td>Age &amp; Condition</td><td>Subject is newer (2021–22 vs. ~2000s) and fully custom — genuine premium over dated 1998-era finishes</td><td class="adj-pos">+$80,000</td></tr>
+        <tr><td>Custom Upgrades</td><td>Subject has 12 pages of documented upgrades: hardwood, heated floors, 96" doors, European entry, oversized windows — materially above comparable</td><td class="adj-pos">+$60,000</td></tr>
+        <tr><td>Greenspace Backing</td><td>Both back onto greenspace / ravine — comparable privacy and setting</td><td class="adj-neutral">Neutral</td></tr>
+        <tr><td>Pool</td><td>Neither has pool</td><td class="adj-neutral">Neutral</td></tr>
+        <tr><td>Street / Location</td><td>Grindstone is quieter cul-de-sac area; Parkside carries more traffic — moderate negative</td><td class="adj-neg">−$20,000</td></tr>
+        <tr><td>Style</td><td>Bungaloft vs. 2 Storey — broadly similar buyer appeal at this price point</td><td class="adj-neutral">Neutral</td></tr>
+        <tr><td><strong>Indicated Market Value</strong></td><td><strong>Net Adjustment: +$135,000</strong></td><td><strong>$1,975,000</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Anchor B -->
+  <div class="adj-wrapper">
+    <div class="adj-title">
+      <span>Anchor B: 80 Commando Court — <em>Custom Built · Finished Basement In-Law · Inground Pool</em></span>
+      <span class="adj-comp-price">Sold $1,800,000 &nbsp;·&nbsp; May 2025 &nbsp;·&nbsp; CDOM 25</span>
+    </div>
+    <table class="adj-table">
+      <colgroup><col style="width:32%"><col style="width:40%"><col style="width:28%"></colgroup>
+      <thead>
+        <tr><th>Feature</th><th>Comparable vs. Subject</th><th>Adjustment</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Base Sale Price</td><td>$1,800,000</td><td>—</td></tr>
+        <tr><td>AG Square Footage</td><td>2,844 vs. ~2,900 sqft — virtually equal</td><td class="adj-neutral">Neutral</td></tr>
+        <tr><td>Basement</td><td>80 Commando: fully finished in-law suite with wet bar. Subject: finished basement. Commando has edge on basement finish level.</td><td class="adj-neg">−$20,000</td></tr>
+        <tr><td>Pool</td><td>80 Commando has inground pool; subject does not</td><td class="adj-neg">−$40,000</td></tr>
+        <tr><td>Age &amp; Custom Level</td><td>Subject has 12 pages of upgrades including heated floors, hardwood, oversized windows — superior finish package</td><td class="adj-pos">+$80,000</td></tr>
+        <tr><td>Greenspace Backing</td><td>Subject backs greenspace; 80 Commando is ravine / cul-de-sac — broadly equivalent</td><td class="adj-neutral">Neutral</td></tr>
+        <tr><td>Age</td><td>Subject is newer (2021–22 vs. 16–30 yrs for Commando) — newer mechanical systems, current build standards</td><td class="adj-pos">+$30,000</td></tr>
+        <tr><td>Market Timing</td><td>May 2025 to June 2026 — Waterdown market flat to slightly soft</td><td class="adj-neutral">Neutral</td></tr>
+        <tr><td><strong>Indicated Market Value</strong></td><td><strong>Net Adjustment: +$50,000</strong></td><td><strong>$1,850,000</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Anchor C -->
+  <div class="adj-wrapper">
+    <div class="adj-title">
+      <span>Anchor C: 90 Smokey Hollow Place — <em>2023 New Build · Backs Greenspace · Luxury Finishes</em></span>
+      <span class="adj-comp-price">Sold $2,390,000 &nbsp;·&nbsp; 2026 &nbsp;·&nbsp; CDOM 48</span>
+    </div>
+    <table class="adj-table">
+      <colgroup><col style="width:32%"><col style="width:40%"><col style="width:28%"></colgroup>
+      <thead>
+        <tr><th>Feature</th><th>Comparable vs. Subject</th><th>Adjustment</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Base Sale Price</td><td>$2,390,000</td><td>—</td></tr>
+        <tr><td>AG Square Footage</td><td>5,133 vs. ~2,900 sqft — Smokey Hollow is 2,233 sqft larger AG</td><td class="adj-neg">−$350,000</td></tr>
+        <tr><td>Basement</td><td>Smokey Hollow: unfinished walkout. Subject: finished basement — subject has edge here</td><td class="adj-pos">+$60,000</td></tr>
+        <tr><td>Age / New Build</td><td>Both effectively new / near-new — comparable</td><td class="adj-neutral">Neutral</td></tr>
+        <tr><td>Upgrades</td><td>Smokey Hollow: $200K+ upgrades, 5 beds / 6 baths. Subject: 12 pages of custom upgrades but 4 bed / 3.5 bath — Smokey Hollow wins on sheer scale</td><td class="adj-neg">−$80,000</td></tr>
+        <tr><td>Greenspace Backing</td><td>Both back onto greenspace — equivalent</td><td class="adj-neutral">Neutral</td></tr>
+        <tr><td>Location</td><td>Smokey Hollow is quieter court; Parkside has traffic — modest negative for subject</td><td class="adj-neg">−$20,000</td></tr>
+        <tr><td><strong>Indicated Market Value</strong></td><td><strong>Net Adjustment: −$390,000</strong></td><td><strong>$2,000,000</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note-box">
+    <strong>Blended Analysis:</strong> Three independent anchors indicate values of $1,975,000 (from 116 Grindstone), $1,850,000 (from 80 Commando), and $2,000,000 (from 90 Smokey Hollow). Weighting Anchor A and C equally and discounting Anchor B somewhat (given the pool differential and older vintage), the blended market value falls in the range of <strong>$1,950,000–$2,050,000</strong>. The agent's expected sale figure of $2,050,000 sits at the upper bound of what the data supports — achievable in a strong presentation with the right buyer, but not guaranteed.
+  </div>
+
+  <!-- SECTION 6: VERDICT -->
+  <div class="section-title">6. Pricing Assessment &amp; Recommendation</div>
+
+  <div class="verdict-box">
+    <h3>Market Value Assessment</h3>
+    <div class="verdict-range-grid">
+      <div class="vr-card">
+        <div class="vr-label">Market Value Range</div>
+        <div class="vr-value">$1,950K – $2,050K</div>
+      </div>
+      <div class="vr-card vr-primary">
+        <div class="vr-label">Recommended List Price</div>
+        <div class="vr-value">$2,099,000 – $2,149,000</div>
+      </div>
+      <div class="vr-card">
+        <div class="vr-label">Agent's List Price</div>
+        <div class="vr-value" style="color:rgba(255,200,150,0.85);">$2,250,000</div>
+      </div>
+    </div>
+    <div class="verdict-rationale">
+      311 Parkside is a genuinely exceptional home that warrants a premium over the broader Waterdown resale market. The combination of a custom build, documented 12-page upgrade package, greenspace backing, and excellent maintenance puts this property in a class of its own within the active subdivision inventory. The agent is correct that <strong>standard resale comparisons understate the value</strong> — the relevant peer group is custom-finished, premium product.<br><br>
+      However, the market data places a ceiling. The most directly applicable comparable — 116 Grindstone Way, an executive build with greenspace backing and a larger total finished footprint — sold at <strong>$1,840,000</strong> after starting at $2,097,000 and sitting for 58 days. The only sold comp above $2M is nearly twice the size of 311 Parkside. The agent's expected sale figure of <strong>$2,050,000</strong> is defensible as an aspirational outcome with the right buyer — but it requires a list price that keeps the property within the range where buyers are active, not one that signals overconfidence and invites low offers after extended DOM.<br><br>
+      A list price of <strong>$2,099,000–$2,149,000</strong> positions the home at its genuine market ceiling, allows room to negotiate to $2,000,000–$2,050,000 without a damaging public price reduction, and avoids the stigma of a $200,000 cut visible to every buyer's agent. The $2,250,000 entry point asks the seller to find a buyer willing to pay a $200,000 premium above what every recent comparable supports — possible, but the cost of not finding that buyer is weeks of market exposure and a very public narrative of overpricing.
+    </div>
+  </div>
+
+  <div class="warn-box">
+    <strong>The Risk of $2,250,000:</strong> When a home lists significantly above market and then reduces, buyers interpret the reduction not as a correction but as a signal that the seller is motivated — and they offer accordingly. The goal of achieving $2,050,000 is best served by a list price that brings multiple buyers into competition, not one that filters the buyer pool down to a single speculative offer.
+  </div>
+
+  <div class="note-box" style="margin-top:14px;">
+    <strong>A Note on the 573 Parkside Confidential:</strong> The agent notes that a neighbouring property (century home, needing upgrades) was assigned a value of approximately $2,355,000. This appears to represent land value or assessed value for the site, not the sale price of an improved property in comparable condition. Land value attributions on larger or development-potential lots on Parkside Drive are not directly transferable to the market value of a finished custom home, and should not be used as a pricing anchor without understanding the lot size and full context of the assignment.
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="report-footer">
+  <div>
+    <div class="footer-brand">Woolcott Real Estate — RE/MAX Escarpment Realty Inc.</div>
+    <div style="margin-top:3px;">Prepared by: Anita McGowan, Broker &nbsp;·&nbsp; anita.mcgowan@gmail.com</div>
+  </div>
+  <div style="text-align:right;">
+    <div>311 Parkside Drive, Waterdown, ON &nbsp;·&nbsp; June 1, 2026</div>
+    <div style="margin-top:3px;">Confidential — Prepared for seller discussion purposes only. *Information deemed reliable but not guaranteed.* CoreLogic Matrix.</div>
+  </div>
+</footer>
+
+</body>
+</html>
