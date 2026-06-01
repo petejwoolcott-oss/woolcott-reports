@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Woolcott Real Estate — Team Handbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<script>
+// ┌──────────────────────────────────────────────────────────────┐
+// │  CONFIG — Change this path to wherever your master .md lives │
+// │  Can be a relative path, absolute URL, or raw GitHub link    │
+// └──────────────────────────────────────────────────────────────┘
+const HANDBOOK_SOURCE = './handbook-master.md';
+</script>
+<style>
+:root{--navy:#0a1628;--navy-light:#132240;--navy-mid:#1a2f52;--gold:#c8a44e;--gold-light:#e0c672;--gold-pale:#f5ecd4;--white:#fafaf8;--gray-50:#f4f4f2;--gray-100:#e8e8e5;--gray-200:#d1d1cc;--gray-400:#8a8a84;--gray-600:#5a5a55;--gray-800:#2a2a27;--red:#c0392b;--red-bg:#fdf2f0;--sidebar-w:300px;--header-h:64px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--white);color:var(--gray-800);line-height:1.65;font-size:15px}
+.H{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);background:var(--navy);display:flex;align-items:center;padding:0 24px;gap:16px;border-bottom:3px solid var(--gold)}
+.H .logo{font-family:'DM Serif Display',serif;color:var(--white);font-size:20px;letter-spacing:3px;text-transform:uppercase;white-space:nowrap}
+.H .logo span{color:var(--gold)}
+.H .sub{color:var(--gray-400);font-size:13px;white-space:nowrap}
+.mt{display:none;background:none;border:none;color:var(--white);font-size:22px;cursor:pointer;padding:4px 8px}
+.sw{margin-left:auto;position:relative}
+.sw input{width:220px;padding:7px 12px 7px 34px;border:1px solid var(--navy-mid);border-radius:6px;background:var(--navy-light);color:var(--white);font-size:13px;font-family:inherit;outline:none;transition:border-color .2s}
+.sw input::placeholder{color:var(--gray-400)}
+.sw input:focus{border-color:var(--gold)}
+.sw .ic{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:14px;pointer-events:none}
+.sr{display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;min-width:320px;background:var(--white);border:1px solid var(--gray-100);border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.15);max-height:360px;overflow-y:auto;z-index:200}
+.sr.a{display:block}
+.sri{padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--gray-50);font-size:13px}
+.sri:hover{background:var(--gold-pale)}
+.sri .t{font-weight:600;color:var(--navy)}
+.sri .m{color:var(--gray-600)}
+.sri mark{background:var(--gold-pale);color:var(--navy);font-weight:600;padding:0 2px;border-radius:2px}
+.S{position:fixed;top:var(--header-h);left:0;bottom:0;width:var(--sidebar-w);background:var(--gray-50);border-right:1px solid var(--gray-100);overflow-y:auto;padding:20px 0;z-index:50;transition:transform .3s ease}
+.S nav{padding:0 12px}
+.ns{margin-bottom:4px}
+.ns>a{display:block;padding:8px 12px;color:var(--gray-800);text-decoration:none;font-size:13.5px;font-weight:500;border-radius:6px;transition:all .15s;line-height:1.35}
+.ns>a:hover{background:var(--gray-100)}
+.ns>a.ac{background:var(--navy);color:var(--white)}
+.sn{display:none;padding:2px 0 6px 16px}
+.ns.ex .sn{display:block}
+.sn a{display:block;padding:5px 10px;color:var(--gray-600);text-decoration:none;font-size:12.5px;border-radius:4px;line-height:1.35;transition:all .15s}
+.sn a:hover{background:var(--gray-100);color:var(--gray-800)}
+.nn{display:inline-block;min-width:22px;color:var(--gold);font-weight:700;font-size:12px}
+.M{margin-left:var(--sidebar-w);margin-top:var(--header-h);padding:40px 48px 80px;max-width:900px}
+.lu{display:inline-block;background:var(--gold-pale);color:var(--gold);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;margin-bottom:24px;letter-spacing:.5px}
+.ca .sec{margin-bottom:48px;scroll-margin-top:calc(var(--header-h) + 20px)}
+.ca h1{font-family:'DM Serif Display',serif;font-size:32px;color:var(--navy);margin-bottom:8px;line-height:1.2}
+.ca h2{font-family:'DM Serif Display',serif;font-size:24px;color:var(--navy);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--gold);line-height:1.3;scroll-margin-top:calc(var(--header-h) + 20px)}
+.ca h3{font-size:16px;font-weight:700;color:var(--navy);margin:28px 0 10px;scroll-margin-top:calc(var(--header-h) + 20px)}
+.ca p{margin-bottom:12px}
+.ca ul,.ca ol{margin:0 0 14px 20px}
+.ca li{margin-bottom:6px}
+.ca li ul,.ca li ol{margin-top:6px;margin-bottom:0}
+.ca strong{font-weight:600}
+.ca a{color:var(--gold)}
+.ca a:hover{color:var(--gold-light)}
+.ca hr{border:none;border-top:1px solid var(--gray-100);margin:32px 0}
+.co{background:var(--navy);color:var(--white);border-left:4px solid var(--gold);padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;font-size:14px;line-height:1.6}
+.co strong{color:var(--gold)}
+.wb{background:var(--red-bg);border-left:4px solid var(--red);padding:14px 18px;border-radius:0 6px 6px 0;margin:16px 0;font-size:14px;color:#5a2018}
+.wb strong{color:var(--red)}
+.ib{background:#eef6ff;border-left:4px solid #3b82f6;padding:14px 18px;border-radius:0 6px 6px 0;margin:16px 0;font-size:14px}
+.ca table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:13px}
+.ca th{background:var(--navy);color:var(--white);font-weight:600;text-align:left;padding:10px 12px;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+.ca th:first-child{border-radius:6px 0 0 0}
+.ca th:last-child{border-radius:0 6px 0 0}
+.ca td{padding:10px 12px;border-bottom:1px solid var(--gray-100);vertical-align:top}
+.ca tr:nth-child(even) td{background:var(--gray-50)}
+.ca tr:hover td{background:var(--gold-pale)}
+.loading{margin-left:var(--sidebar-w);margin-top:calc(var(--header-h) + 60px);padding:0 48px;color:var(--gray-400);font-size:14px}
+.loading .spinner{display:inline-block;width:18px;height:18px;border:2px solid var(--gray-200);border-top-color:var(--gold);border-radius:50%;animation:spin .6s linear infinite;margin-right:10px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error-msg{margin-left:var(--sidebar-w);margin-top:calc(var(--header-h) + 60px);padding:20px 48px}
+.error-msg .box{background:var(--red-bg);border-left:4px solid var(--red);padding:20px 24px;border-radius:0 8px 8px 0;max-width:600px}
+.error-msg .box h3{color:var(--red);margin-bottom:8px;font-size:16px}
+.error-msg .box code{background:rgba(0,0,0,.06);padding:2px 6px;border-radius:3px;font-size:13px}
+@media(max-width:900px){.S{transform:translateX(-100%)}.S.open{transform:translateX(0);box-shadow:4px 0 24px rgba(0,0,0,.2)}.mt{display:block}.M,.loading,.error-msg{margin-left:0;padding-left:20px;padding-right:20px}.sw input{width:160px}.ca h1{font-size:26px}.ca h2{font-size:20px}.ca table{display:block;overflow-x:auto}}
+@media(max-width:500px){.H .sub{display:none}.sw input{width:140px}}
+</style>
+</head>
+<body>
+
+<header class="H">
+  <button class="mt" onclick="document.querySelector('.S').classList.toggle('open')">☰</button>
+  <div class="logo">Woolcott <span>Real Estate</span></div>
+  <div class="sw">
+    <span class="ic">⌕</span>
+    <input type="text" id="si" placeholder="Search handbook..." autocomplete="off">
+    <div class="sr" id="sR"></div>
+  </div>
+  <div class="sub">Team Handbook</div>
+</header>
+<aside class="S" id="sb"><nav id="sN"></nav></aside>
+
+<div class="loading" id="loadingMsg"><span class="spinner"></span>Loading handbook...</div>
+<div class="error-msg" id="errorMsg" style="display:none"></div>
+
+<main class="M" id="mainContent" style="display:none">
+  <span class="lu" id="lu"></span>
+  <div class="ca" id="cA"></div>
+</main>
+
+<script>
+(async function(){
+  // ── 1. Fetch the master markdown ──
+  let raw;
+  try {
+    const res = await fetch(HANDBOOK_SOURCE, { cache: 'no-store' });
+    if (!res.ok) throw new Error(res.status + ' ' + res.statusText);
+    raw = await res.text();
+  } catch(err) {
+    document.getElementById('loadingMsg').style.display = 'none';
+    document.getElementById('errorMsg').style.display = 'block';
+    document.getElementById('errorMsg').innerHTML =
+      '<div class="box"><h3>Could not load handbook</h3>' +
+      '<p>Failed to fetch <code>' + HANDBOOK_SOURCE + '</code></p>' +
+      '<p style="color:#888;font-size:13px;margin-top:8px">Make sure both files are in the same folder and served via a web server (not opened as a local file). Error: ' + err.message + '</p></div>';
+    return;
+  }
+  document.getElementById('loadingMsg').style.display = 'none';
+  document.getElementById('mainContent').style.display = 'block';
+
+  // ── 2. Markdown parser ──
+  function slug(t){return t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
+  function il(t){
+    t=t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+    t=t.replace(/\*(.+?)\*/g,'<em>$1</em>');
+    t=t.replace(/!\[([^\]]*)\]\(([^)]+)\)/g,'<img src="$2" alt="$1" style="max-width:100%;border-radius:8px;margin:16px 0;display:block;border:1px solid var(--gray-100);">');
+    t=t.replace(/\[(.+?)\]\((.+?)\)/g,'<a href="$2" target="_blank">$1</a>');
+    t=t.replace(/`(.+?)`/g,'<code>$1</code>');
+    return t;
+  }
+  var h='',lines=raw.split('\n'),i=0,inUl=false,inOl=false,inTbl=false,tR=[];
+  function cL(){if(inUl){h+='</ul>\n';inUl=false}if(inOl){h+='</ol>\n';inOl=false}}
+  function cT(){if(inTbl){h+='<table>\n';for(var r=0;r<tR.length;r++){if(r===1&&tR[r].every(function(c){return/^[\s\-:]+$/.test(c)}))continue;var tg=r===0?'th':'td';h+='<tr>'+tR[r].map(function(c){return'<'+tg+'>'+il(c.trim())+'</'+tg+'>'}).join('')+'</tr>\n'}h+='</table>\n';inTbl=false;tR=[]}}
+  while(i<lines.length){
+    var ln=lines[i],tr=ln.trimEnd();
+    if(tr.startsWith('|')&&tr.endsWith('|')){cL();if(!inTbl)inTbl=true;tR.push(tr.split('|').slice(1,-1));i++;continue}else{cT()}
+    if(tr.startsWith('# ')&&!tr.startsWith('## ')){cL();h+='<h1>'+il(tr.slice(2))+'</h1>\n';i++;continue}
+    if(tr.startsWith('## ')&&!tr.startsWith('### ')){cL();var tx=tr.slice(3),id='s-'+slug(tx);h+='</div><div class="sec" id="'+id+'"><h2 id="'+id+'">'+il(tx)+'</h2>\n';i++;continue}
+    if(tr.startsWith('### ')){cL();var tx=tr.slice(4),id='ss-'+slug(tx);h+='<h3 id="'+id+'">'+il(tx)+'</h3>\n';i++;continue}
+    if(tr.startsWith('>!')){cL();var c=tr.slice(2).trim();i++;while(i<lines.length&&lines[i].trim()!==''&&!lines[i].startsWith('#')){c+=' '+lines[i].trim();i++}h+='<div class="wb">'+il(c)+'</div>\n';continue}
+    if(tr.startsWith('>i')){cL();var c=tr.slice(2).trim();i++;while(i<lines.length&&lines[i].trim()!==''&&!lines[i].startsWith('#')){c+=' '+lines[i].trim();i++}h+='<div class="ib">'+il(c)+'</div>\n';continue}
+    if(tr.startsWith('> ')){cL();var c=tr.slice(2).trim();i++;while(i<lines.length&&lines[i].trim().startsWith('> ')){c+=' '+lines[i].trim().slice(2);i++}while(i<lines.length&&lines[i].trim()!==''&&!lines[i].startsWith('#')&&!lines[i].startsWith('>')&&!lines[i].startsWith('-')&&!lines[i].startsWith('|')&&!/^\d+\.\s/.test(lines[i].trim())){c+=' '+lines[i].trim();i++}h+='<div class="co">'+il(c)+'</div>\n';continue}
+    if(/^---+$/.test(tr)){cL();h+='<hr>\n';i++;continue}
+    if(/^\s*-\s/.test(ln)){if(!inUl){cT();if(inOl){h+='</ol>\n';inOl=false}h+='<ul>\n';inUl=true}h+='<li>'+il(tr.replace(/^\s*-\s+/,''))+'</li>\n';i++;continue}
+    if(/^\s*\d+\.\s/.test(ln)){if(!inOl){cT();if(inUl){h+='</ul>\n';inUl=false}h+='<ol>\n';inOl=true}h+='<li>'+il(tr.replace(/^\s*\d+\.\s+/,''))+'</li>\n';i++;continue}
+    cL();if(tr===''){i++;continue}
+    var p=tr;i++;while(i<lines.length&&lines[i].trim()!==''&&!lines[i].startsWith('#')&&!lines[i].startsWith('>')&&!lines[i].startsWith('-')&&!lines[i].startsWith('|')&&!/^\d+\.\s/.test(lines[i].trim())&&!lines[i].startsWith('---')){p+=' '+lines[i].trim();i++}
+    h+='<p>'+il(p)+'</p>\n';
+  }
+  cL();cT();
+  document.getElementById('cA').innerHTML='<div class="sec">'+h+'</div>';
+
+  // Last updated badge
+  var um=raw.match(/Last Updated:\s*(.+)/);
+  if(um) document.getElementById('lu').textContent='Last Updated: '+um[1].trim();
+
+  // ── 3. Build sidebar nav ──
+  var nav=document.getElementById('sN'),h2s=document.querySelectorAll('.ca h2'),sn=0;
+  h2s.forEach(function(h2){
+    sn++;var sec=h2.closest('.sec'),sid=h2.id;
+    var ns=document.createElement('div');ns.className='ns';ns.dataset.section=sid;
+    var ml=document.createElement('a');ml.href='#'+sid;
+    ml.innerHTML='<span class="nn">'+sn+'</span> '+h2.textContent.replace(/\s*\([IVXLCDM]+\)\s*$/,'').replace(/\s*\(\w+\)\s*$/,'').replace(/\s*\([^)]*\)\s*$/,'');
+    ns.appendChild(ml);
+    if(sec){var h3s=sec.querySelectorAll('h3');if(h3s.length){var sn2=document.createElement('div');sn2.className='sn';h3s.forEach(function(h3){var sl=document.createElement('a');sl.href='#'+h3.id;sl.textContent=h3.textContent.replace(/\s*\([^)]*\)\s*$/,'');sn2.appendChild(sl)});ns.appendChild(sn2)}}
+    nav.appendChild(ns);
+  });
+
+  // ── 4. Sidebar expand/collapse ──
+  var nss=document.querySelectorAll('.ns');
+  nss.forEach(function(n){
+    n.querySelector(':scope > a').addEventListener('click',function(){
+      nss.forEach(function(x){if(x!==n)x.classList.remove('ex')});n.classList.toggle('ex');
+      document.querySelector('.S').classList.remove('open');
+    });
+  });
+  document.querySelectorAll('.sn a').forEach(function(a){
+    a.addEventListener('click',function(){document.querySelector('.S').classList.remove('open')});
+  });
+
+  // ── 5. Scroll spy ──
+  var secs=document.querySelectorAll('.ca .sec');
+  var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var id=e.target.id;document.querySelectorAll('.ns > a').forEach(function(a){a.classList.remove('ac')});var m=document.querySelector('.ns[data-section="'+id+'"] > a');if(m){m.classList.add('ac');m.parentElement.classList.add('ex')}}})},{rootMargin:'-80px 0px -60% 0px',threshold:0});
+  secs.forEach(function(s){if(s.id)obs.observe(s)});
+
+  // ── 6. Search ──
+  var si=document.getElementById('si'),sRe=document.getElementById('sR'),sI=[];
+  secs.forEach(function(s){var hd=s.querySelector('h2');sI.push({id:s.id,title:hd?hd.textContent:'',text:s.textContent})});
+  si.addEventListener('input',function(){
+    var q=this.value.trim().toLowerCase();if(q.length<2){sRe.classList.remove('a');return}
+    var res=[];sI.forEach(function(it){var idx=it.text.toLowerCase().indexOf(q);if(idx!==-1){var st=Math.max(0,idx-40),en=Math.min(it.text.length,idx+q.length+60);var sn=(st>0?'...':'')+it.text.substring(st,en).replace(/\n/g,' ').replace(/\s+/g,' ')+(en<it.text.length?'...':'');var re=new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');sn=sn.replace(re,'<mark>$1</mark>');res.push({id:it.id,title:it.title,snippet:sn})}});
+    if(res.length){sRe.innerHTML=res.slice(0,8).map(function(r){return'<div class="sri" data-id="'+r.id+'"><div class="t">'+r.title+'</div><div class="m">'+r.snippet+'</div></div>'}).join('');sRe.classList.add('a');sRe.querySelectorAll('.sri').forEach(function(it){it.addEventListener('click',function(){var el=document.getElementById(it.dataset.id);if(el)el.scrollIntoView({behavior:'smooth'});sRe.classList.remove('a');si.value=''})})}else{sRe.innerHTML='<div class="sri"><div class="t">No results found</div></div>';sRe.classList.add('a')}
+  });
+  document.addEventListener('click',function(e){if(!e.target.closest('.sw'))sRe.classList.remove('a')});
+
+  // ── 7. Jump to hash on load ──
+  if(window.location.hash){
+    var target=document.querySelector(window.location.hash);
+    if(target) setTimeout(function(){target.scrollIntoView()},100);
+  }
+})();
+</script>
+</body>
+</html>
