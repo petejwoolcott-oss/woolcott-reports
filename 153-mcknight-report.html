@@ -1,0 +1,467 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>153 McKnight Avenue — Market Valuation Report</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2332; --slate: #2d3a4a; --gold: #c8a45c;
+    --light: #f5f2ec; --white: #ffffff; --muted: #7a8794;
+    --green: #2d7a4f; --red: #a03030; --border: #ddd8cf;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--light); color: var(--slate); font-size: 14px; line-height: 1.6; }
+
+  .report-header { background: var(--navy); color: var(--white); padding: 40px 48px 32px; position: relative; overflow: hidden; }
+  .report-header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: var(--gold); }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+  .brand-name { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--gold); }
+  .brand-sub { font-size: 11px; color: rgba(255,255,255,0.55); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px; }
+  .report-meta { text-align: right; font-size: 11.5px; color: rgba(255,255,255,0.6); }
+  .report-meta strong { color: var(--gold); font-size: 12px; }
+  .header-address { font-family: 'DM Serif Display', serif; font-size: 30px; color: var(--white); line-height: 1.15; margin-bottom: 6px; }
+  .header-sub { font-size: 13px; color: rgba(255,255,255,0.65); }
+  .header-verdict { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; background: rgba(200,164,92,0.15); border: 1px solid rgba(200,164,92,0.35); border-radius: 6px; padding: 10px 18px; flex-wrap: wrap; }
+  .verdict-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: rgba(255,255,255,0.55); }
+  .verdict-value { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--gold); }
+  .divider { border-left: 1px solid rgba(200,164,92,0.3); height: 40px; margin: 0 6px; }
+
+  .content { max-width: 1040px; margin: 0 auto; padding: 36px 32px 48px; }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: 19px; color: var(--navy); padding-bottom: 8px; border-bottom: 2px solid var(--gold); margin-bottom: 20px; margin-top: 40px; }
+  .section-title:first-child { margin-top: 0; }
+
+  .overview-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+  .ov-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+  .ov-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); margin-bottom: 4px; }
+  .ov-value { font-size: 15px; font-weight: 600; color: var(--navy); }
+  .ov-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .ov-card.highlight { border-color: var(--gold); background: #fffdf7; }
+  .ov-card.highlight .ov-value { color: var(--gold); }
+
+  .snapshot-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .snap-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 16px; text-align: center; }
+  .snap-num { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--navy); line-height: 1; margin-bottom: 4px; }
+  .snap-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .snap-note { font-size: 11px; color: var(--slate); margin-top: 4px; }
+
+  .comp-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 14px; overflow: hidden; }
+  .comp-header { display: flex; justify-content: space-between; align-items: center; padding: 11px 18px; background: var(--navy); color: var(--white); }
+  .comp-address { font-family: 'DM Serif Display', serif; font-size: 15px; }
+  .comp-price-tag { font-size: 18px; font-weight: 700; color: var(--gold); }
+  .comp-body { padding: 13px 18px; }
+  .comp-stats { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 8px; }
+  .cstat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 2px; }
+  .cstat-value { font-size: 13px; font-weight: 600; color: var(--navy); }
+  .comp-note { font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); padding-top: 8px; margin-top: 4px; font-style: italic; }
+  .badge-sold { display: inline-block; background: #e8f5ee; color: var(--green); font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; margin-left: 8px; }
+  .badge-street { display: inline-block; background: rgba(200,164,92,0.2); color: #8a6020; font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; margin-left: 6px; }
+
+  .active-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); font-size: 13px; }
+  .active-table th { background: var(--navy); color: var(--white); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.9px; padding: 10px 12px; text-align: left; }
+  .active-table td { padding: 9px 12px; border-bottom: 1px solid #f0ece5; color: var(--slate); vertical-align: top; }
+  .active-table tr:last-child td { border-bottom: none; }
+  .active-table tr:nth-child(even) td { background: #faf9f7; }
+  .active-table .subject-row td { background: #f0f4f8 !important; font-weight: 600; color: var(--navy); border-left: 3px solid var(--gold); }
+  .stale { color: var(--red); font-weight: 600; }
+  .fresh { color: var(--green); font-weight: 600; }
+
+  .adj-wrapper { margin-bottom: 24px; }
+  .adj-title { font-size: 13px; font-weight: 700; color: var(--navy); background: var(--light); padding: 10px 16px; border: 1px solid var(--border); border-bottom: none; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center; }
+  .adj-comp-price { font-size: 13px; color: var(--muted); font-weight: 500; }
+  .adj-table { width: 100%; border-collapse: collapse; background: var(--white); border: 1px solid var(--border); border-radius: 0 0 8px 8px; overflow: hidden; font-size: 13px; }
+  .adj-table th { background: var(--slate); color: var(--white); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; padding: 8px 14px; text-align: left; }
+  .adj-table th:last-child { text-align: right; }
+  .adj-table td { padding: 8px 14px; border-bottom: 1px solid #f0ece5; color: var(--slate); }
+  .adj-table tr:last-child td { border-bottom: none; font-weight: 700; background: #f5f2ec; color: var(--navy); }
+  .adj-table td:last-child { text-align: right; }
+  .adj-table td.adj-pos { color: var(--green); font-weight: 600; }
+  .adj-table td.adj-neg { color: var(--red); font-weight: 600; }
+  .adj-table td.adj-neutral { color: var(--muted); font-weight: 500; }
+
+  .verdict-box { background: var(--navy); color: var(--white); border-radius: 10px; padding: 28px 32px; margin-bottom: 20px; border-left: 5px solid var(--gold); }
+  .verdict-box h3 { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--gold); margin-bottom: 16px; }
+  .verdict-range-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 18px; }
+  .vr-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 14px 16px; text-align: center; }
+  .vr-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+  .vr-value { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--gold); }
+  .vr-primary { border-color: rgba(200,164,92,0.5); background: rgba(200,164,92,0.12); }
+  .vr-primary .vr-value { font-size: 28px; }
+  .verdict-rationale { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.65; }
+  .verdict-rationale strong { color: var(--gold); }
+
+  .note-box { background: #f0f4f8; border: 1px solid #c8d4e0; border-left: 4px solid #4a7fa5; border-radius: 6px; padding: 14px 18px; font-size: 12.5px; color: var(--slate); margin-top: 14px; line-height: 1.65; }
+  .note-box strong { color: var(--navy); }
+  .hpi-box { background: #f5f2ec; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; padding: 14px 18px; font-size: 12.5px; color: var(--slate); margin-top: 14px; line-height: 1.65; }
+  .hpi-box strong { color: var(--navy); }
+
+  .report-footer { background: var(--navy); color: rgba(255,255,255,0.5); font-size: 11px; padding: 18px 48px; display: flex; justify-content: space-between; align-items: center; margin-top: 48px; }
+  .footer-brand { color: var(--gold); font-weight: 600; font-size: 12px; }
+
+  @media print {
+    body { background: white; }
+    .report-header, .report-footer, .verdict-box, .comp-header, .active-table th, .adj-table th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .section-title { page-break-after: avoid; }
+    .comp-card, .adj-wrapper { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="report-header">
+  <div class="header-top">
+    <div>
+      <div class="brand-name">Woolcott Real Estate</div>
+      <div class="brand-sub">RE/MAX Escarpment Realty Inc.</div>
+    </div>
+    <div class="report-meta">
+      <strong>Comparative Market Valuation</strong><br>
+      Prepared by Anita McGowan, Broker<br>
+      Date: June 3, 2026
+    </div>
+  </div>
+  <div class="header-address">153 McKnight Avenue</div>
+  <div class="header-sub">Waterdown, Ontario &nbsp;·&nbsp; L0R 2H7 &nbsp;·&nbsp; Waterdown East &nbsp;·&nbsp; Backs Grindstone Creek Green Space</div>
+  <div class="header-verdict">
+    <div>
+      <div class="verdict-label">Recommended List Price</div>
+      <div class="verdict-value">$1,499,900</div>
+    </div>
+    <div class="divider"></div>
+    <div>
+      <div class="verdict-label">Expected Sale Range</div>
+      <div class="verdict-value" style="font-size:18px;padding-top:4px;">$1,450,000 – $1,500,000</div>
+    </div>
+    <div class="divider"></div>
+    <div>
+      <div class="verdict-label">CREA HPI (May 2026)</div>
+      <div class="verdict-value" style="font-size:18px;padding-top:4px;">$1,458,700</div>
+    </div>
+  </div>
+</header>
+
+<div class="content">
+
+  <!-- SECTION 1: SUBJECT PROPERTY -->
+  <div class="section-title">1. Subject Property Overview</div>
+
+  <div class="overview-grid">
+    <div class="ov-card">
+      <div class="ov-label">Property Type</div>
+      <div class="ov-value">2 Storey Detached</div>
+      <div class="ov-sub">Freehold · Built 2013</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Above-Grade Sqft</div>
+      <div class="ov-value">3,300 sqft</div>
+      <div class="ov-sub">Plus unfinished walkout basement</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Bedrooms / Baths</div>
+      <div class="ov-value">5 Bed / 3+1 Bath</div>
+      <div class="ov-sub">Main floor bed / office</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Garage / Parking</div>
+      <div class="ov-value">2-Car Attached</div>
+      <div class="ov-sub">Double wide driveway</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Lot Size</div>
+      <div class="ov-value">46.92 × 90.22 ft</div>
+      <div class="ov-sub">Backs Grindstone Creek green space</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Basement</div>
+      <div class="ov-value">Unfinished Walkout</div>
+      <div class="ov-sub">Full development potential</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Purchased</div>
+      <div class="ov-value">$1,007,000</div>
+      <div class="ov-sub">January 2019</div>
+    </div>
+    <div class="ov-card highlight">
+      <div class="ov-label">CREA HPI — May 2026</div>
+      <div class="ov-value">$1,458,700</div>
+      <div class="ov-sub">Waterdown East benchmark</div>
+    </div>
+  </div>
+
+  <div class="hpi-box">
+    <strong>CREA HPI Context:</strong> The CREA Home Price Index for Waterdown East in May 2026 sits at $1,458,700 — a statistical benchmark reflecting the aggregate mix of detached home sales in the area. For a specific property with above-average sqft (3,300 vs. the HPI average), five bedrooms, a 2-car garage, and a premium green space backing, individual market value is expected to land at or modestly above this index. The comparable sales analysis below confirms the HPI figure is aligned with current transaction evidence.
+  </div>
+
+  <!-- SECTION 2: MARKET SNAPSHOT -->
+  <div class="section-title">2. Market Snapshot — Waterdown East, June 2026</div>
+
+  <div class="snapshot-grid">
+    <div class="snap-card">
+      <div class="snap-num">3</div>
+      <div class="snap-label">Active Listings</div>
+      <div class="snap-note">$1,550,000 – $1,749,900</div>
+    </div>
+    <div class="snap-card">
+      <div class="snap-num">4</div>
+      <div class="snap-label">Recent Sales (6 mos)</div>
+      <div class="snap-note">$1,230,000 – $1,500,000</div>
+    </div>
+    <div class="snap-card">
+      <div class="snap-num">0.97–0.98</div>
+      <div class="snap-label">SP/LP Ratio</div>
+      <div class="snap-note">Balanced market</div>
+    </div>
+    <div class="snap-card">
+      <div class="snap-num">~$454</div>
+      <div class="snap-label">Avg $/Sqft AG</div>
+      <div class="snap-note">3,000–3,500 sqft range</div>
+    </div>
+  </div>
+
+  <div class="note-box" style="margin-top:16px;">
+    <strong>Market Conditions:</strong> The Waterdown East market for large detached homes (3,000–3,500 sqft) in 2026 is balanced but selective. Well-priced, updated properties are selling in the $1,350,000–$1,500,000 range within 40–90 days. Listings priced aspirationally are experiencing extended DOM and multiple price reductions — 20 Vinegar Hill took 249 cumulative days, 19 McKnight Avenue 155 days, and 195 Granite Ridge Trail (similar sqft, active) has sat 103 days. The single most important pricing lesson from recent history in this micro-market is that accurate entry price dramatically shortens time to sale and protects final outcome. The CREA HPI of $1,458,700 is well-supported by transaction evidence.
+  </div>
+
+  <!-- SECTION 3: COMPARABLE SALES -->
+  <div class="section-title">3. Recent Comparable Sales</div>
+
+  <div class="comp-card">
+    <div class="comp-header">
+      <div>
+        <span class="comp-address">205 Agro Street, Waterdown</span>
+        <span class="badge-sold">Sold</span>
+      </div>
+      <div class="comp-price-tag">$1,500,000</div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-stats">
+        <div><div class="cstat-label">List Price</div><div class="cstat-value">$1,550,000</div></div>
+        <div><div class="cstat-label">SP/LP</div><div class="cstat-value">0.97</div></div>
+        <div><div class="cstat-label">CDOM</div><div class="cstat-value">90</div></div>
+        <div><div class="cstat-label">AG Sqft</div><div class="cstat-value">3,303</div></div>
+        <div><div class="cstat-label">Beds / Baths</div><div class="cstat-value">5 / 3+1</div></div>
+        <div><div class="cstat-label">$/Sqft AG</div><div class="cstat-value">$454</div></div>
+      </div>
+      <div class="comp-note">2 Storey · Waterdown East · Grand foyer, 10-ft ceilings, office, butler's pantry, quartz kitchen, unfinished basement · 2-car garage, 8 parking · Stone and stucco exterior · Sold Feb 2026. Sold "as is" — had started at $1,650,000. <strong>Closest size and bed-count match to subject (virtually identical sqft, same bed/bath count). Subject's green space backing provides a meaningful premium over this reference.</strong></div>
+    </div>
+  </div>
+
+  <div class="comp-card">
+    <div class="comp-header">
+      <div>
+        <span class="comp-address">19 McKnight Avenue, Waterdown</span>
+        <span class="badge-sold">Sold</span>
+        <span class="badge-street">Same Street</span>
+      </div>
+      <div class="comp-price-tag">$1,230,000</div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-stats">
+        <div><div class="cstat-label">List Price</div><div class="cstat-value">$1,258,000</div></div>
+        <div><div class="cstat-label">SP/LP</div><div class="cstat-value">0.98</div></div>
+        <div><div class="cstat-label">CDOM</div><div class="cstat-value">155</div></div>
+        <div><div class="cstat-label">AG Sqft</div><div class="cstat-value">2,575</div></div>
+        <div><div class="cstat-label">Beds / Baths</div><div class="cstat-value">4 / 3+1</div></div>
+        <div><div class="cstat-label">$/Sqft AG</div><div class="cstat-value">$478</div></div>
+      </div>
+      <div class="comp-note">2 Storey · Same street · 2,575 sqft AG + 1,000 sqft partially finished basement · 4 beds · Gas fireplace · 9-ft ceilings · 2019 kitchen and bathroom updates, hardwood · Sold Mar 2026 after 155 CDOM and multiple reductions (original ask $1,449,000 Mar 2025). Had started at $1,449,000. <strong>Same street, same era — confirms the McKnight Ave price range. Subject is 725 sqft larger with one additional bedroom and premium green space backing, supporting a significant premium over this sale.</strong></div>
+    </div>
+  </div>
+
+  <div class="comp-card">
+    <div class="comp-header">
+      <div>
+        <span class="comp-address">219 Humphrey Street, Waterdown</span>
+        <span class="badge-sold">Sold</span>
+      </div>
+      <div class="comp-price-tag">$1,345,000</div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-stats">
+        <div><div class="cstat-label">List Price</div><div class="cstat-value">$1,375,000</div></div>
+        <div><div class="cstat-label">SP/LP</div><div class="cstat-value">0.98</div></div>
+        <div><div class="cstat-label">CDOM</div><div class="cstat-value">50</div></div>
+        <div><div class="cstat-label">AG Sqft</div><div class="cstat-value">3,375</div></div>
+        <div><div class="cstat-label">Beds / Baths</div><div class="cstat-value">5+3 / 5+1</div></div>
+        <div><div class="cstat-label">$/Sqft AG</div><div class="cstat-value">$399</div></div>
+      </div>
+      <div class="comp-note">2 Storey · Premium ravine lot · 3,375 sqft AG + 1,400 sqft finished basement legal apartment (2 beds, 2 baths, full kitchen, in-suite laundry) · 5 main + 3 basement beds · 10-ft main floor ceilings · Quartz countertops all baths, new flooring · Sold Apr 2026. Had previously been listed up to $1,650,000. <strong>Slightly larger footprint with finished legal basement income apartment — yet sold at $1,345,000. Market clearly supports subject's pricing in the $1,450K–$1,500K range given subject's better presentation without the income-property buyer discount.</strong></div>
+    </div>
+  </div>
+
+  <div class="comp-card">
+    <div class="comp-header">
+      <div>
+        <span class="comp-address">20 Vinegar Hill, Waterdown</span>
+        <span class="badge-sold">Sold</span>
+      </div>
+      <div class="comp-price-tag">$1,350,000</div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-stats">
+        <div><div class="cstat-label">List Price</div><div class="cstat-value">$1,388,000</div></div>
+        <div><div class="cstat-label">SP/LP</div><div class="cstat-value">0.97</div></div>
+        <div><div class="cstat-label">CDOM</div><div class="cstat-value">249</div></div>
+        <div><div class="cstat-label">AG Sqft</div><div class="cstat-value">3,029</div></div>
+        <div><div class="cstat-label">Beds / Baths</div><div class="cstat-value">4 / 3+1</div></div>
+        <div><div class="cstat-label">$/Sqft AG</div><div class="cstat-value">$446</div></div>
+      </div>
+      <div class="comp-note">2 Storey · Custom-built · 60-ft wide lot · 4 beds · 5-pc primary ensuite + private 4-pc second ensuite · Skylit landing · Separate basement entrance potential · 4-minute walk to Waterdown village · Sold Mar 2026 after 249 CDOM (had listed at $1,727,000 in May 2025). <strong>Larger lot but only 4 beds and smaller sqft than subject. Green space backing at subject is comparable to the village proximity premium here. Confirms market floor for this tier at $1,350K.</strong></div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: ACTIVE COMPETITION -->
+  <div class="section-title">4. Active Competition — As of June 3, 2026</div>
+
+  <table class="active-table">
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>List Price</th>
+        <th>AG Sqft</th>
+        <th>Beds/Baths</th>
+        <th>Bsmt</th>
+        <th>CDOM</th>
+        <th>Key Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="subject-row">
+        <td><strong>153 McKnight Ave</strong> (Subject)</td>
+        <td><strong>$1,499,900</strong></td>
+        <td>3,300</td>
+        <td>5 / 3+1</td>
+        <td>Unfin. W/O</td>
+        <td>—</td>
+        <td>Backs Grindstone Creek · 2-car garage · Built 2013</td>
+      </tr>
+      <tr>
+        <td>446 Humphrey St, Waterdown</td>
+        <td>$1,550,000</td>
+        <td>3,474</td>
+        <td>5 / 3+1</td>
+        <td>Unfinished</td>
+        <td class="fresh">25</td>
+        <td>Quartz kitchen, Samsung, servery, unfinished basement · New listing May 2026</td>
+      </tr>
+      <tr>
+        <td>195 Granite Ridge Trail, Waterdown</td>
+        <td>$1,599,900</td>
+        <td>3,468</td>
+        <td>6 / 4</td>
+        <td>Walk-up</td>
+        <td class="stale">103</td>
+        <td>10-ft ceilings, JennAir, gas cooktop, loft · Reduced from $1,625,000 · Sitting</td>
+      </tr>
+      <tr>
+        <td>72 Pond View Gate, Waterdown</td>
+        <td>$1,749,900</td>
+        <td>3,215</td>
+        <td>3+1 / 3+1</td>
+        <td>Fin. 1,000 sqft</td>
+        <td class="stale">54</td>
+        <td>Bungaloft · Custom finishes · Vaulted ceilings · Reduced from $1,799,000 · Had been trying to sell since Oct 2024 starting at $2,199,000</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note-box" style="margin-top:14px;">
+    <strong>Competitive Position:</strong> Pricing at $1,499,900 positions 153 McKnight as the best-value large detached in the active market — $50,000 below the closest fresh competitor (446 Humphrey, 174 sqft larger) and $100,000 below 195 Granite Ridge (103 CDOM, similar sqft). The green space backing onto Grindstone Creek is a genuine differentiator that neither active listing offers. At $1,499,900 the subject's $/sqft of $455 is in line with what the market has recently cleared on 3,300 sqft product.
+  </div>
+
+  <!-- SECTION 5: VALUE ADJUSTMENT ANALYSIS -->
+  <div class="section-title">5. Value Adjustment Analysis</div>
+
+  <div class="adj-wrapper">
+    <div class="adj-title">
+      <span>Anchor A: 205 Agro Street — <em>Same Sqft, Same Bed/Bath Count, Waterdown East</em></span>
+      <span class="adj-comp-price">Sold $1,500,000 &nbsp;·&nbsp; Feb 2026 &nbsp;·&nbsp; CDOM 90</span>
+    </div>
+    <table class="adj-table">
+      <colgroup><col style="width:30%"><col style="width:42%"><col style="width:28%"></colgroup>
+      <thead>
+        <tr><th>Feature</th><th>Comparable vs. Subject</th><th>Adjustment</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Base Sale Price</td><td>$1,500,000</td><td>—</td></tr>
+        <tr><td>AG Sqft</td><td>3,303 vs. 3,300 — virtually identical</td><td class="adj-neutral">Neutral</td></tr>
+        <tr><td>Bedrooms / Baths</td><td>5 / 3+1 both — identical</td><td class="adj-neutral">Neutral</td></tr>
+        <tr><td>Garage</td><td>Both 2-car attached — comparable</td><td class="adj-neutral">Neutral</td></tr>
+        <tr><td>Backing / Setting</td><td>Agro: standard backyard. Subject: backs Grindstone Creek green space — permanent privacy, natural setting, no rear neighbours</td><td class="adj-pos">+$25,000</td></tr>
+        <tr><td>Basement</td><td>Both unfinished. Subject is walkout — adds long-term development value</td><td class="adj-pos">+$10,000</td></tr>
+        <tr><td>Condition</td><td>Agro sold "as is" — suggests some unknowns. Subject condition not disclosed as-is.</td><td class="adj-pos">+$10,000</td></tr>
+        <tr><td>Market Timing</td><td>Feb 2026 to Jun 2026 — market stable to marginally softer</td><td class="adj-neg">−$5,000</td></tr>
+        <tr><td><strong>Indicated Market Value</strong></td><td><strong>Net Adjustment: +$40,000</strong></td><td><strong>$1,540,000</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="adj-wrapper">
+    <div class="adj-title">
+      <span>Anchor B: 19 McKnight Avenue — <em>Same Street · Same Era</em></span>
+      <span class="adj-comp-price">Sold $1,230,000 &nbsp;·&nbsp; Mar 2026 &nbsp;·&nbsp; CDOM 155</span>
+    </div>
+    <table class="adj-table">
+      <colgroup><col style="width:30%"><col style="width:42%"><col style="width:28%"></colgroup>
+      <thead>
+        <tr><th>Feature</th><th>Comparable vs. Subject</th><th>Adjustment</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Base Sale Price</td><td>$1,230,000</td><td>—</td></tr>
+        <tr><td>AG Sqft</td><td>2,575 vs. 3,300 — subject larger by 725 sqft</td><td class="adj-pos">+$175,000</td></tr>
+        <tr><td>Bedrooms</td><td>4 vs. 5 — subject has additional bedroom (main floor office/bed)</td><td class="adj-pos">+$15,000</td></tr>
+        <tr><td>Basement</td><td>19 McKnight: partially finished 1,000 sqft. Subject: unfinished walkout — comparable with different appeal</td><td class="adj-neutral">Neutral</td></tr>
+        <tr><td>Backing / Setting</td><td>Both street — subject's green space backing is a premium vs. 19 McKnight's standard lot</td><td class="adj-pos">+$25,000</td></tr>
+        <tr><td>Garage</td><td>Both 2-car — comparable</td><td class="adj-neutral">Neutral</td></tr>
+        <tr><td>Updates</td><td>19 McKnight had 2019 kitchen / bath / hardwood updates; subject's update level not specified — assumed comparable</td><td class="adj-neutral">Neutral</td></tr>
+        <tr><td><strong>Indicated Market Value</strong></td><td><strong>Net Adjustment: +$215,000</strong></td><td><strong>$1,445,000</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note-box">
+    <strong>Blended Analysis:</strong> Anchor A (205 Agro, virtually identical size) indicates $1,540,000. Anchor B (19 McKnight, same street, adjusted for size) indicates $1,445,000. The spread reflects the difference between a very direct size comp and an adjusted same-street reference. The CREA HPI at $1,458,700 independently corroborates the lower end of this range. Weighting the anchors and the HPI, the blended market value is approximately <strong>$1,470,000–$1,510,000</strong>. A list price of $1,499,900 sits at the midpoint, prices below the $1,550,000 active competition, and allows room to negotiate to a final sale of $1,450,000–$1,500,000.
+  </div>
+
+  <!-- SECTION 6: PRICE RECOMMENDATION -->
+  <div class="section-title">6. Price Recommendation</div>
+
+  <div class="verdict-box">
+    <h3>Market Value Assessment &amp; List Price Recommendation</h3>
+    <div class="verdict-range-grid">
+      <div class="vr-card">
+        <div class="vr-label">Indicated Market Value</div>
+        <div class="vr-value">$1,445K – $1,540K</div>
+      </div>
+      <div class="vr-card vr-primary">
+        <div class="vr-label">Recommended List Price</div>
+        <div class="vr-value">$1,499,900</div>
+      </div>
+      <div class="vr-card">
+        <div class="vr-label">Expected Sale Range</div>
+        <div class="vr-value">$1,450K – $1,500K</div>
+      </div>
+    </div>
+    <div class="verdict-rationale">
+      153 McKnight Avenue is a well-proportioned 3,300 sqft Waterdown East home with a bedroom count, garage, and walkout basement that match what buyers in this segment are actively seeking. The most distinctive feature — the backing onto Grindstone Creek green space — provides permanent privacy, natural views, and a setting that no comparable active listing can offer. At 2013 construction, the home sits in a sweet spot: established neighbourhood, solid build quality, and a lot of remaining useful life across all systems.<br><br>
+      The comparable sales and CREA HPI converge tightly around the <strong>$1,450,000–$1,500,000</strong> range for this product type. A list price of <strong>$1,499,900</strong> places the subject $50,100 below the next active competitor (446 Humphrey, slightly larger at 3,474 sqft), generating immediate buyer attention on a price-per-sqft basis. At $1,499,900, the home is also priced in alignment with the CREA HPI while the green space premium and walkout basement potential support the upper end of the expected sale range.
+    </div>
+  </div>
+
+</div>
+
+<footer class="report-footer">
+  <div>
+    <div class="footer-brand">Woolcott Real Estate — RE/MAX Escarpment Realty Inc.</div>
+    <div style="margin-top:3px;">Prepared by: Anita McGowan, Broker &nbsp;·&nbsp; anita.mcgowan@gmail.com</div>
+  </div>
+  <div style="text-align:right;">
+    <div>153 McKnight Avenue, Waterdown, ON &nbsp;·&nbsp; June 3, 2026</div>
+    <div style="margin-top:3px;">*Information deemed reliable but not guaranteed. CoreLogic Matrix.</div>
+  </div>
+</footer>
+
+</body>
+</html>
+
