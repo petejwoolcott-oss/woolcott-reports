@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>36 Edgevale Road — Market Statistics | Woolcott Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #f5f1e8; color: #1a1a1e;
+    font-family: 'Manrope', system-ui, sans-serif; line-height: 1.6; }
+  h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 700; line-height: 1.15; margin: 0; }
+  .mono { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }
+  .kicker { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace; color: #6b655a; font-weight: 500; margin-bottom: 12px; display: block; }
+  .kicker-navy { color: #1A3A6B; } .kicker-gold { color: #b89443; }
+  .kicker-red { color: #a83a1f; } .kicker-green { color: #3d5a2c; }
+  .pad { padding: 56px 48px; } .pad-lg { padding: 80px 48px; }
+  .alt { background: #ebe5d6; } .max { max-width: 1100px; margin: 0 auto; }
+  .grid { display: grid; gap: 24px; }
+  .g2 { grid-template-columns: 1fr 1fr; } .g3 { grid-template-columns: 1fr 1fr 1fr; }
+  .g4 { grid-template-columns: 1fr 1fr 1fr 1fr; } .g2-1 { grid-template-columns: 2fr 1fr; }
+  .banner-navy { background: #1A3A6B; color: #f5f1e8; }
+  .tile { background: #f5f1e8; padding: 28px; border-top: 6px solid #1A3A6B; }
+  .tile-red { border-top-color: #a83a1f; } .tile-green { border-top-color: #3d5a2c; }
+  .tile-gold { border-top-color: #b89443; } .tile-ink { background: #1a1a1e; color: #f5f1e8; border-top-color: #b89443; }
+  .tile .stat { font-family: 'Fraunces', Georgia, serif; font-size: 52px; font-weight: 700; color: #1A3A6B; line-height: 1; margin: 8px 0 4px; }
+  .tile-red .stat { color: #a83a1f; } .tile-green .stat { color: #3d5a2c; }
+  .tile-gold .stat { color: #b89443; } .tile-ink .stat { color: #b89443; }
+  .tile .label { font-size: 13px; color: #6b655a; margin-top: 6px; line-height: 1.4; }
+  .tile-ink .label { color: #ebe5d6; }
+  .pull-quote { border-left: 4px solid #1A3A6B; background: #f5f1e8; padding: 28px 32px;
+    font-family: 'Fraunces', Georgia, serif; font-size: 20px; font-style: italic; line-height: 1.45; }
+  .pill { display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  .pill-navy { background: #dde4ee; color: #1A3A6B; } .pill-red { background: #f5d4cb; color: #a83a1f; }
+  .pill-green { background: #d6e0c8; color: #3d5a2c; } .pill-gold { background: #f4e5c7; color: #8B6B1F; }
+  table.editorial { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.editorial th { font-size: 10px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #6b655a; border-bottom: 2px solid #1a1a1e; padding: 10px 10px; text-align: left; }
+  table.editorial td { padding: 11px 10px; border-bottom: 1px solid rgba(26,26,30,0.1); vertical-align: top; }
+  table.editorial tr:last-child td { border-bottom: none; }
+  table.editorial .num { font-family: 'JetBrains Mono', monospace; }
+  table.editorial tr.subject td { background: #dde4ee; font-weight: 600; }
+  table.editorial tr.sold td { background: rgba(61,90,44,0.06); }
+  .chart-frame { background: #f5f1e8; padding: 24px; border: 1px solid rgba(26,26,30,0.13); }
+  .feat-list { list-style: none; padding: 0; margin: 0; }
+  .feat-list li { padding: 9px 0; border-bottom: 1px solid rgba(26,26,30,0.1); font-size: 13px;
+    display: flex; align-items: flex-start; gap: 10px; }
+  .feat-list li:last-child { border-bottom: none; }
+  .feat-icon { color: #3d5a2c; font-weight: 700; flex-shrink: 0; }
+  .feat-icon-warn { color: #a83a1f; }
+  footer { background: #1a1a1e; color: #f5f1e8; padding: 40px 48px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.8; }
+  footer .muted { color: #6b655a; }
+  footer .footer-grid { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
+  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .dot-sold { background: #3d5a2c; } .dot-cond { background: #b89443; } .dot-active { background: #1A3A6B; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="banner-navy pad">
+  <div class="max">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:40px;">
+      <div>
+        <span class="kicker" style="color:#b89443;">Woolcott Real Estate · Westdale North Market Statistics</span>
+        <h1 style="font-size:48px; color:#f5f1e8; font-style:italic; line-height:1.1; margin-top:8px;">
+          36 Edgevale Road<br><span style="font-weight:400; font-size:32px;">Hamilton (Westdale North), Ontario</span>
+        </h1>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:12px; font-family:'JetBrains Mono',monospace; color:#b89443; opacity:0.8; margin-top:8px;">
+          Prepared June 4, 2026<br>Westdale North · L8S
+        </div>
+      </div>
+    </div>
+    <div class="grid g4">
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:20px;">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Last Sold</div>
+        <div style="font-family:'Fraunces',serif; font-size:34px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">$579,000</div>
+        <div style="font-size:12px; color:rgba(245,241,232,0.6);">August 2020 · 10 DOM</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:20px;">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Above Grade</div>
+        <div style="font-family:'Fraunces',serif; font-size:34px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">1,037</div>
+        <div style="font-size:12px; color:rgba(245,241,232,0.6);">sq ft · 2 storey detached</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:20px;">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Lot</div>
+        <div style="font-family:'Fraunces',serif; font-size:34px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">25×100</div>
+        <div style="font-size:12px; color:rgba(245,241,232,0.6);">feet · rectangular · freehold</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:20px;">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Beds / Baths</div>
+        <div style="font-family:'Fraunces',serif; font-size:34px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">3 / 2</div>
+        <div style="font-size:12px; color:rgba(245,241,232,0.6);">2+1 beds · 2 full baths</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEIGHBOURHOOD SNAPSHOT -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">Neighbourhood Snapshot</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">Westdale North — What the market looks like right now</h2>
+    <p style="font-size:15px; color:#6b655a; max-width:720px; margin-bottom:48px;">
+      Westdale North is one of Hamilton's most sought-after pockets — steps to McMaster University, Princess Point, Cootes Paradise trails, and Westdale Village. Demand is consistent; supply is tight. These stats reflect 5 active/recent comparable listings within the neighbourhood.
+    </p>
+
+    <div class="grid g4" style="margin-bottom:40px;">
+      <div class="tile">
+        <span class="kicker kicker-navy">Active Listings</span>
+        <div class="stat">2</div>
+        <div class="label">Currently for sale in Westdale North comparable set</div>
+      </div>
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">Conditional</span>
+        <div class="stat" style="font-size:44px; color:#b89443;">2</div>
+        <div class="label">Under conditional offer — market moving quickly on well-priced homes</div>
+      </div>
+      <div class="tile tile-green">
+        <span class="kicker kicker-green">Recent Sale</span>
+        <div class="stat" style="font-size:44px; color:#3d5a2c;">1</div>
+        <div class="label">132 Glen Rd — sold $765,000 in 8 days (Mar 2026)</div>
+      </div>
+      <div class="tile">
+        <span class="kicker">Avg DOM (sold/cond)</span>
+        <div class="stat">~8</div>
+        <div class="label">Days on market for homes that priced correctly (excl. 253-day outlier)</div>
+      </div>
+    </div>
+
+    <div class="grid g3">
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">Active Price Range</span>
+        <div class="stat" style="font-size:36px; color:#b89443;">$820K–$850K</div>
+        <div class="label">123 Longwood Rd N ($819,900) · 39 Paradise Rd N ($849,900)</div>
+      </div>
+      <div class="tile tile-green">
+        <span class="kicker kicker-green">Conditional Range</span>
+        <div class="stat" style="font-size:36px; color:#3d5a2c;">$585K–$739K</div>
+        <div class="label">95 Paradise Rd N ($585K, 253 DOM) · 163 Longwood Ave N ($739K, 7 DOM)</div>
+      </div>
+      <div class="tile">
+        <span class="kicker">2026 Sold (Comp)</span>
+        <div class="stat" style="font-size:36px;">$765,000</div>
+        <div class="label">132 Glen Rd — 3 bed / 3 bath · 1,424 sq ft AG · fully finished basement</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMP TABLE -->
+<section class="pad-lg alt">
+  <div class="max">
+    <span class="kicker kicker-gold">Comparable Properties</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">Side-by-side comparison</h2>
+    <p style="font-size:15px; color:#6b655a; margin-bottom:36px;">
+      All properties are 2-storey detached homes in Westdale North (Hamilton West, L8S). Subject property row highlighted.
+    </p>
+
+    <div style="overflow-x:auto;">
+      <table class="editorial">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Status</th>
+            <th>List Price</th>
+            <th>Sale Price</th>
+            <th>Beds</th>
+            <th>Baths</th>
+            <th>AG SqFt</th>
+            <th>$/SqFt</th>
+            <th>Lot (ft)</th>
+            <th>Built</th>
+            <th>DOM</th>
+            <th>Basement</th>
+            <th>Taxes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="subject">
+            <td><strong>36 Edgevale Rd ★</strong></td>
+            <td><span class="pill pill-green">Sold 2020</span></td>
+            <td class="num">$589,000</td>
+            <td class="num"><strong>$579,000</strong></td>
+            <td class="num">3 (2+1)</td>
+            <td class="num">2</td>
+            <td class="num">1,037</td>
+            <td class="num">$558</td>
+            <td class="num">25×100</td>
+            <td class="num">51–99 yrs</td>
+            <td class="num">10</td>
+            <td>Implied fin.</td>
+            <td class="num">$4,002 ('19)</td>
+          </tr>
+          <tr class="sold">
+            <td><strong>132 Glen Rd</strong></td>
+            <td><span class="pill pill-green">Sold Mar '26</span></td>
+            <td class="num">$769,900</td>
+            <td class="num"><strong>$765,000</strong></td>
+            <td class="num">3</td>
+            <td class="num">3 (2+1)</td>
+            <td class="num">1,424</td>
+            <td class="num">$537</td>
+            <td class="num">33×100</td>
+            <td class="num">1950</td>
+            <td class="num">8</td>
+            <td>Full · Finished</td>
+            <td class="num">$5,929 ('25)</td>
+          </tr>
+          <tr>
+            <td>163 Longwood Ave N</td>
+            <td><span class="pill pill-gold">Conditional</span></td>
+            <td class="num">$739,000</td>
+            <td class="num">—</td>
+            <td class="num">3</td>
+            <td class="num">1</td>
+            <td class="num">1,311</td>
+            <td class="num">$564</td>
+            <td class="num">38×100</td>
+            <td class="num">1941</td>
+            <td class="num">7</td>
+            <td>Full · Unfinished</td>
+            <td class="num">$5,959 ('25)</td>
+          </tr>
+          <tr>
+            <td>95 Paradise Rd N</td>
+            <td><span class="pill pill-gold">Conditional</span></td>
+            <td class="num">$585,000</td>
+            <td class="num">—</td>
+            <td class="num">3</td>
+            <td class="num">1</td>
+            <td class="num">1,351</td>
+            <td class="num">$433</td>
+            <td class="num">35×91</td>
+            <td class="num">1927</td>
+            <td class="num">253</td>
+            <td>Full · Unfinished</td>
+            <td class="num">$5,734 ('25)</td>
+          </tr>
+          <tr>
+            <td>123 Longwood Rd N</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$819,900</td>
+            <td class="num">—</td>
+            <td class="num">3+2</td>
+            <td class="num">2 (1+1)</td>
+            <td class="num">1,584</td>
+            <td class="num">$518</td>
+            <td class="num">32×100</td>
+            <td class="num">1942</td>
+            <td class="num">38</td>
+            <td>Part. Finished</td>
+            <td class="num">$5,593 ('25)</td>
+          </tr>
+          <tr>
+            <td>39 Paradise Rd N</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$849,900</td>
+            <td class="num">—</td>
+            <td class="num">4</td>
+            <td class="num">3 (2+1)</td>
+            <td class="num">1,404</td>
+            <td class="num">$606</td>
+            <td class="num">45×118</td>
+            <td class="num">51–99 yrs</td>
+            <td class="num">9</td>
+            <td>Part. Fin. Walk-up</td>
+            <td class="num">$6,991 ('26)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:11px; color:#6b655a; margin-top:12px; font-family:'JetBrains Mono',monospace;">★ Subject property · $/SqFt calculated on list price ÷ AG sq ft · 95 Paradise excludes from pricing averages (253 DOM — significant renovation property)</p>
+  </div>
+</section>
+
+<!-- CHARTS -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">Market Statistics</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">Price trends &amp; positioning</h2>
+    <p style="font-size:15px; color:#6b655a; margin-bottom:40px;">
+      How the neighbourhood has moved since 36 Edgevale last sold in 2020, and where comparables sit today.
+    </p>
+
+    <div class="grid g2" style="gap:32px; margin-bottom:40px;">
+      <div>
+        <span class="kicker kicker-navy" style="margin-bottom:16px;">List Price by Property</span>
+        <div class="chart-frame" style="height:300px;">
+          <canvas id="priceChart"></canvas>
+        </div>
+      </div>
+      <div>
+        <span class="kicker kicker-gold" style="margin-bottom:16px;">Price Per Sq Ft (AG)</span>
+        <div class="chart-frame" style="height:300px;">
+          <canvas id="psfChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key stats tiles -->
+    <div class="grid g4">
+      <div class="tile tile-green">
+        <span class="kicker kicker-green">Appreciation Since 2020</span>
+        <div class="stat" style="font-size:40px; color:#3d5a2c;">+32%</div>
+        <div class="label">Edgevale sold $579K in 2020. Comparable well-finished homes now trading $765K–$770K range (+~$186K in ~6 years)</div>
+      </div>
+      <div class="tile">
+        <span class="kicker">Avg AG SqFt (comps)</span>
+        <div class="stat" style="font-size:40px;">1,415</div>
+        <div class="label">Average above-grade sq ft across 5 comparable properties. Edgevale at 1,037 is smallest in set.</div>
+      </div>
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">Market Pace</span>
+        <div class="stat" style="font-size:40px; color:#b89443;">Fast</div>
+        <div class="label">163 Longwood (7 DOM), 132 Glen (8 DOM), 39 Paradise (9 DOM) — priced right = gone quickly</div>
+      </div>
+      <div class="tile tile-red">
+        <span class="kicker kicker-red">Stale Listing Risk</span>
+        <div class="stat" style="font-size:40px; color:#a83a1f;">253</div>
+        <div class="label">DOM on 95 Paradise Rd N — started at $685K, dropped to $585K. Overpricing carries real cost here.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBJECT PROPERTY DETAIL -->
+<section class="pad-lg alt">
+  <div class="max">
+    <span class="kicker kicker-navy">Subject Property Profile</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">36 Edgevale Road — What we know</h2>
+    <p style="font-size:15px; color:#6b655a; margin-bottom:40px;">Based on the most recent MLS record (sold August 2020). Taxes and assessment are from 2019 — current figures will be higher.</p>
+
+    <div class="grid g2-1" style="gap:32px; align-items:start;">
+      <div>
+        <table class="editorial">
+          <tbody>
+            <tr><td style="color:#6b655a; width:180px;">Property Type</td><td><strong>2 Storey Detached · Freehold</strong></td></tr>
+            <tr><td style="color:#6b655a;">Construction</td><td>Solid Brick</td></tr>
+            <tr><td style="color:#6b655a;">Beds / Baths</td><td><strong>3 beds (2 AG + 1 BG) · 2 full baths</strong></td></tr>
+            <tr><td style="color:#6b655a;">AG Sq Ft</td><td class="num"><strong>1,037 sq ft</strong></td></tr>
+            <tr><td style="color:#6b655a;">Lot</td><td class="num">25 ft × 100 ft · rectangular</td></tr>
+            <tr><td style="color:#6b655a;">Basement</td><td>1 bed / 1 bath (finished, implied)</td></tr>
+            <tr><td style="color:#6b655a;">Heating / Cooling</td><td>Forced Air Gas / Central Air</td></tr>
+            <tr><td style="color:#6b655a;">Parking</td><td>2 driveway spaces · no garage</td></tr>
+            <tr><td style="color:#6b655a;">Last Sold</td><td class="num"><strong>$579,000</strong> · Aug 31, 2020</td></tr>
+            <tr><td style="color:#6b655a;">Taxes (2019)</td><td class="num">$4,002 <span style="color:#6b655a; font-size:11px;">(current likely ~$5,000+)</span></td></tr>
+            <tr><td style="color:#6b655a;">Neighbourhood</td><td>Westdale North · Steps to McMaster, Princess Point, Westdale Village</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div style="background:#f5f1e8; padding:24px; margin-bottom:20px;">
+          <span class="kicker kicker-navy" style="margin-bottom:12px;">Property Notes</span>
+          <ul class="feat-list">
+            <li><span class="feat-icon">✓</span> All-brick construction — solid, low maintenance exterior</li>
+            <li><span class="feat-icon">✓</span> Open concept main floor, private deck, fenced backyard</li>
+            <li><span class="feat-icon">✓</span> Front and side entrance — flexible layout</li>
+            <li><span class="feat-icon">✓</span> Basement suite potential (1 bed, 1 bath BG)</li>
+            <li><span class="feat-icon">✓</span> Quiet street · highly walkable location</li>
+            <li><span class="feat-icon feat-icon-warn">△</span> Smallest AG sq ft in comp set (1,037 vs. avg 1,415)</li>
+            <li><span class="feat-icon feat-icon-warn">△</span> Narrowest lot in comp set (25 ft vs. avg 35+ ft)</li>
+            <li><span class="feat-icon feat-icon-warn">△</span> No garage (majority of comps also no garage)</li>
+          </ul>
+        </div>
+        <div class="pull-quote" style="font-size:16px;">
+          "Smallest footprint on the street — but brick construction, a finished lower level, and that Westdale address carry significant weight."
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE HISTORY -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-gold">Listing History</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">36 Edgevale — Full MLS history</h2>
+    <p style="font-size:15px; color:#6b655a; margin-bottom:36px;">Every recorded listing for this property going back to 1991.</p>
+
+    <table class="editorial">
+      <thead>
+        <tr><th>Year</th><th>MLS #</th><th>List Price</th><th>Result</th><th>DOM</th><th>Brokerage</th></tr>
+      </thead>
+      <tbody>
+        <tr class="sold">
+          <td><strong>2020</strong></td><td class="num">XH4077700</td>
+          <td class="num">$589,000</td>
+          <td><strong>SOLD $579,000</strong> <span class="pill pill-green" style="font-size:9px; margin-left:4px;">Aug 31/20</span></td>
+          <td class="num">10</td><td>Chase Realty Inc.</td>
+        </tr>
+        <tr>
+          <td>2008–09</td><td class="num">XH297951</td>
+          <td class="num">$229,900</td>
+          <td><span class="pill pill-red">Expired</span></td>
+          <td class="num">114</td><td>RE/MAX Escarpment Realty</td>
+        </tr>
+        <tr>
+          <td>2008</td><td class="num">XH291438</td>
+          <td class="num">$259,900</td>
+          <td><span class="pill pill-red">Expired</span></td>
+          <td class="num">62</td><td>Judy Marsales Real Estate</td>
+        </tr>
+        <tr>
+          <td>2008</td><td class="num">XH280822</td>
+          <td class="num">$259,900</td>
+          <td><span class="pill pill-red">Expired</span></td>
+          <td class="num">122</td><td>Judy Marsales Real Estate</td>
+        </tr>
+        <tr>
+          <td>2005</td><td class="num">XH214818</td>
+          <td class="num">$219,900</td>
+          <td><span class="pill pill-red">Expired/Susp.</span></td>
+          <td class="num">36</td><td>Judy Marsales Real Estate</td>
+        </tr>
+        <tr class="sold">
+          <td>1991</td><td class="num">XA119352</td>
+          <td class="num">—</td>
+          <td><strong>SOLD $162,000</strong> <span class="pill pill-green" style="font-size:9px; margin-left:4px;">Aug 23/91</span></td>
+          <td class="num">31</td><td>Barry Kelly Real Estate</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="background:#dde4ee; padding:20px 24px; border-left:4px solid #1A3A6B; margin-top:24px;">
+      <span class="kicker kicker-navy" style="margin-bottom:6px;">Price Appreciation · Long View</span>
+      <p style="margin:0; font-size:14px; line-height:1.7;">
+        Sold for <strong>$162,000 in 1991</strong> → <strong>$579,000 in 2020</strong> — a gain of <strong>$417,000 (+257%)</strong> over 29 years. The 2005–2008 listings all expired, suggesting the market wasn't ready at those prices. The 2020 sale moved in 10 days, confirming the pricing was right for that moment.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- COMP PRICE HISTORY -->
+<section class="pad-lg alt">
+  <div class="max">
+    <span class="kicker kicker-red">Comp Deep Dive · 95 Paradise Road N</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">The cautionary tale in this dataset</h2>
+    <p style="font-size:15px; color:#6b655a; margin-bottom:36px;">
+      95 Paradise Rd N has been on the market for <strong>253+ days</strong> across two listings. Started at $711,000, now at $585,000 — a <strong>$126,000 reduction</strong>. It's described as a renovation project, which explains the discount, but the trajectory is a useful data point.
+    </p>
+
+    <table class="editorial" style="max-width:700px;">
+      <thead>
+        <tr><th>Date</th><th>Event</th><th>Price</th><th>Change</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Jun 23/25</td><td>New Listing (1st attempt)</td><td class="num">$711,000</td><td>—</td></tr>
+        <tr><td>Jul 16/25</td><td>Price Decrease</td><td class="num">$695,000</td><td class="num" style="color:#a83a1f;">−$16,000</td></tr>
+        <tr><td>Sep 23/25</td><td>Expired</td><td class="num">$695,000</td><td>—</td></tr>
+        <tr><td>Sep 24/25</td><td>Re-listed</td><td class="num">$685,000</td><td class="num" style="color:#a83a1f;">−$10,000</td></tr>
+        <tr><td>Nov 6/25</td><td>Price Decrease</td><td class="num">$649,900</td><td class="num" style="color:#a83a1f;">−$35,100</td></tr>
+        <tr><td>Dec 31/25</td><td>Price Decrease</td><td class="num">$609,000</td><td class="num" style="color:#a83a1f;">−$40,900</td></tr>
+        <tr><td>Apr 6/26</td><td>Price Decrease</td><td class="num">$585,000</td><td class="num" style="color:#a83a1f;">−$24,000</td></tr>
+        <tr class="sold"><td>Apr/Jul 26</td><td>Conditional (fell through, re-cond.)</td><td class="num">$585,000</td><td>Still active</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid max">
+    <div>
+      <div style="font-size:14px; color:#f5f1e8; font-family:'Fraunces',serif; font-style:italic; margin-bottom:8px;">Woolcott Real Estate</div>
+      <div class="muted">RE/MAX Escarpment Realty Inc. · 905-689-9223</div>
+      <div class="muted" style="margin-top:4px;">Prepared by Henry (AI Assistant) · June 4, 2026</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="muted">Westdale North · Hamilton · L8S</div>
+      <div class="muted" style="margin-top:4px;">Data sourced from Cornerstone Association of REALTORS® MLS. Information deemed reliable but not guaranteed.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  Chart.defaults.font.family = "'Manrope', sans-serif";
+  Chart.defaults.font.size = 11;
+  Chart.defaults.color = "#6b655a";
+  Chart.defaults.borderColor = "rgba(26,26,30,0.1)";
+
+  // Price chart
+  new Chart(document.getElementById('priceChart'), {
+    type: 'bar',
+    data: {
+      labels: ['36 Edgevale\n(Sold 2020)', '95 Paradise\n(Cond.)', '163 Longwood\n(Cond.)', '132 Glen\n(Sold Mar\'26)', '123 Longwood\n(Active)', '39 Paradise\n(Active)'],
+      datasets: [{
+        data: [579000, 585000, 739000, 765000, 819900, 849900],
+        backgroundColor: ['#d6e0c8','#f4e5c7','#f4e5c7','#3d5a2c','#dde4ee','#dde4ee'],
+        borderColor:     ['#3d5a2c','#b89443','#b89443','#3d5a2c','#1A3A6B','#1A3A6B'],
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a1a1e', titleColor: '#b89443', bodyColor: '#f5f1e8',
+          bodyFont: { family: "'JetBrains Mono', monospace" }, cornerRadius: 0,
+          callbacks: { label: ctx => ' $' + ctx.parsed.y.toLocaleString('en-CA') }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: "'JetBrains Mono', monospace", size: 9 } } },
+        y: { grid: { color: 'rgba(26,26,30,0.07)' },
+          ticks: { font: { family: "'JetBrains Mono', monospace", size: 10 },
+            callback: v => '$' + (v/1000).toFixed(0) + 'K' }, min: 400000 }
+      }
+    }
+  });
+
+  // PSF chart
+  new Chart(document.getElementById('psfChart'), {
+    type: 'bar',
+    data: {
+      labels: ['36 Edgevale', '95 Paradise', '163 Longwood', '132 Glen', '123 Longwood', '39 Paradise'],
+      datasets: [{
+        data: [558, 433, 564, 537, 518, 606],
+        backgroundColor: ['#d6e0c8','#f4e5c7','#f4e5c7','#3d5a2c','#dde4ee','#dde4ee'],
+        borderColor:     ['#3d5a2c','#b89443','#b89443','#3d5a2c','#1A3A6B','#1A3A6B'],
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a1a1e', titleColor: '#b89443', bodyColor: '#f5f1e8',
+          bodyFont: { family: "'JetBrains Mono', monospace" }, cornerRadius: 0,
+          callbacks: { label: ctx => ' $' + ctx.parsed.y + '/sq ft' }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: "'JetBrains Mono', monospace", size: 9 } } },
+        y: { grid: { color: 'rgba(26,26,30,0.07)' },
+          ticks: { font: { family: "'JetBrains Mono', monospace", size: 10 },
+            callback: v => '$' + v }, min: 350 }
+      }
+    }
+  });
+</script>
+</body>
+</html>
