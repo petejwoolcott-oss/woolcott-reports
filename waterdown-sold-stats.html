@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>Waterdown West — Sold Statistics | Woolcott Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #f5f1e8; color: #1a1a1e;
+    font-family: 'Manrope', system-ui, sans-serif; line-height: 1.6; }
+  h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 700; line-height: 1.15; margin: 0; }
+  .kicker { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace; color: #6b655a; font-weight: 500; margin-bottom: 12px; display: block; }
+  .kicker-navy { color: #1A3A6B; } .kicker-gold { color: #b89443; }
+  .kicker-red { color: #a83a1f; } .kicker-green { color: #3d5a2c; }
+  .pad { padding: 56px 48px; } .pad-lg { padding: 80px 48px; }
+  .alt { background: #ebe5d6; } .max { max-width: 1100px; margin: 0 auto; }
+  .grid { display: grid; gap: 24px; }
+  .g2 { grid-template-columns: 1fr 1fr; } .g3 { grid-template-columns: 1fr 1fr 1fr; }
+  .g4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .banner-navy { background: #1A3A6B; color: #f5f1e8; }
+  .tile { background: #f5f1e8; padding: 28px; border-top: 6px solid #1A3A6B; }
+  .tile-red { border-top-color: #a83a1f; } .tile-green { border-top-color: #3d5a2c; }
+  .tile-gold { border-top-color: #b89443; }
+  .tile .stat { font-family: 'Fraunces', Georgia, serif; font-size: 52px; font-weight: 700; color: #1A3A6B; line-height: 1; margin: 8px 0 4px; }
+  .tile-red .stat { color: #a83a1f; } .tile-green .stat { color: #3d5a2c; } .tile-gold .stat { color: #b89443; }
+  .tile .label { font-size: 13px; color: #6b655a; margin-top: 6px; line-height: 1.4; }
+  .tile .sub { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #6b655a; margin-top: 4px; }
+  .pull-quote { border-left: 4px solid #1A3A6B; background: #f5f1e8; padding: 28px 32px;
+    font-family: 'Fraunces', Georgia, serif; font-size: 20px; font-style: italic; line-height: 1.45; }
+  .pill { display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  .pill-navy { background: #dde4ee; color: #1A3A6B; } .pill-red { background: #f5d4cb; color: #a83a1f; }
+  .pill-green { background: #d6e0c8; color: #3d5a2c; } .pill-gold { background: #f4e5c7; color: #8B6B1F; }
+  table.editorial { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.editorial th { font-size: 10px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #6b655a; border-bottom: 2px solid #1a1a1e; padding: 10px 10px; text-align: left; }
+  table.editorial td { padding: 11px 10px; border-bottom: 1px solid rgba(26,26,30,0.1); vertical-align: middle; }
+  table.editorial tr:last-child td { border-bottom: none; }
+  table.editorial .num { font-family: 'JetBrains Mono', monospace; }
+  table.editorial tr.avg-row td { background: #1A3A6B; color: #f5f1e8; font-weight: 700; }
+  table.editorial tr.avg-row .num { font-family: 'JetBrains Mono', monospace; }
+  .bar-wrap { background: rgba(26,26,30,0.08); height: 6px; border-radius: 0; margin-top: 6px; }
+  .bar-fill { height: 6px; }
+  .chart-frame { background: #f5f1e8; padding: 24px; border: 1px solid rgba(26,26,30,0.13); }
+  footer { background: #1a1a1e; color: #f5f1e8; padding: 40px 48px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.8; }
+  footer .muted { color: #6b655a; }
+  footer .footer-grid { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
+  .sp-lp-bar { display: flex; align-items: center; gap: 8px; }
+  .sp-lp-track { flex: 1; background: rgba(26,26,30,0.08); height: 8px; position: relative; }
+  .sp-lp-fill { height: 8px; }
+  .over { background: #3d5a2c; }
+  .at { background: #1A3A6B; }
+  .under { background: #a83a1f; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="banner-navy pad">
+  <div class="max">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:40px;">
+      <div>
+        <span class="kicker" style="color:#b89443;">Woolcott Real Estate · Waterdown — Recent Sold Statistics</span>
+        <h1 style="font-size:48px; color:#f5f1e8; font-style:italic; line-height:1.1; margin-top:8px;">
+          Waterdown<br><span style="font-weight:400; font-size:32px;">Hamilton (West &amp; East) · 2026 Sold Data</span>
+        </h1>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:12px; font-family:'JetBrains Mono',monospace; color:#b89443; opacity:0.8; margin-top:8px;">
+          Prepared June 4, 2026<br>5 Recent Sales · Hamilton Area 46
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 headline stats -->
+    <div class="grid g4">
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:20px;">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Avg Sold Price</div>
+        <div style="font-family:'Fraunces',serif; font-size:36px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">$833,780</div>
+        <div style="font-size:12px; color:rgba(245,241,232,0.6);">Across 5 recent Waterdown sales</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:20px;">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Avg Days on Market</div>
+        <div style="font-family:'Fraunces',serif; font-size:36px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">9.8</div>
+        <div style="font-size:12px; color:rgba(245,241,232,0.6);">Days from list to conditional / pending</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:20px;">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Avg Price / Sq Ft</div>
+        <div style="font-family:'Fraunces',serif; font-size:36px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">$521</div>
+        <div style="font-size:12px; color:rgba(245,241,232,0.6);">Per above-grade sq ft · sold price</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:20px;">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Avg SP / LP Ratio</div>
+        <div style="font-family:'Fraunces',serif; font-size:36px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">98.2%</div>
+        <div style="font-size:12px; color:rgba(245,241,232,0.6);">Sold price as % of original asking price</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY STAT TILES -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">Summary Statistics</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">What the numbers say</h2>
+    <p style="font-size:15px; color:#6b655a; max-width:720px; margin-bottom:48px;">
+      Based on 5 confirmed sales in Waterdown (Hamilton Area 46) in 2026. All are 2-storey freehold detached/semi-detached homes ranging from 1,300 to 1,870 sq ft AG.
+    </p>
+
+    <div class="grid g4" style="margin-bottom:40px;">
+      <div class="tile tile-green">
+        <span class="kicker kicker-green">Avg Sold Price</span>
+        <div class="stat" style="font-size:44px; color:#3d5a2c;">$833,780</div>
+        <div class="label">Range: $800,000 – $907,000</div>
+        <div class="sub">Median: $829,900</div>
+      </div>
+      <div class="tile">
+        <span class="kicker">Avg Days on Market</span>
+        <div class="stat" style="font-size:44px;">9.8</div>
+        <div class="label">Range: 3 – 14 days</div>
+        <div class="sub">Fastest: 24 Great Falls (3 DOM)</div>
+      </div>
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">Avg $/Sq Ft (AG)</span>
+        <div class="stat" style="font-size:44px; color:#b89443;">$521</div>
+        <div class="label">Range: $505 – $615/sq ft</div>
+        <div class="sub">Based on sold price ÷ AG sq ft</div>
+      </div>
+      <div class="tile tile-green">
+        <span class="kicker kicker-green">Avg SP/LP Ratio</span>
+        <div class="stat" style="font-size:44px; color:#3d5a2c;">98.2%</div>
+        <div class="label">1 sold over ask · 1 sold at ask · 3 sold under ask</div>
+        <div class="sub">Range: 94.2% – 100.4%</div>
+      </div>
+    </div>
+
+    <div class="grid g3">
+      <div class="tile">
+        <span class="kicker">Highest Sale</span>
+        <div class="stat" style="font-size:36px;">$907,000</div>
+        <div class="label">24 Great Falls Blvd · 4 bed · 1,870 sq ft · 3 DOM · 98.6% of ask</div>
+      </div>
+      <div class="tile tile-red">
+        <span class="kicker kicker-red">Lowest Sale</span>
+        <div class="stat" style="font-size:36px; color:#a83a1f;">$800,000</div>
+        <div class="label">13 Rusk Terrace AND 4 Harnesworth Cres · both listed in $819K–$849K range · 14 DOM each</div>
+      </div>
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">Only Sale Over Ask</span>
+        <div class="stat" style="font-size:36px; color:#b89443;">$832,000</div>
+        <div class="label">39 Harnesworth Cres · listed $829,000 · sold $832,000 · +0.4% over ask · 10 DOM</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLD TABLE -->
+<section class="pad-lg alt">
+  <div class="max">
+    <span class="kicker kicker-gold">Sold Property Detail</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">All 5 recent sales — full breakdown</h2>
+    <p style="font-size:15px; color:#6b655a; margin-bottom:36px;">
+      Sorted by list date (most recent first). Bottom row shows calculated averages across the dataset.
+    </p>
+
+    <div style="overflow-x:auto;">
+      <table class="editorial">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>List Date</th>
+            <th>Ask Price</th>
+            <th>Sold Price</th>
+            <th>SP / LP</th>
+            <th>DOM</th>
+            <th>AG SqFt</th>
+            <th>$/SqFt</th>
+            <th>Beds</th>
+            <th>Baths</th>
+            <th>Area</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>82 Fellowes Cres</strong></td>
+            <td class="num">May 26/26</td>
+            <td class="num">$829,900</td>
+            <td class="num"><strong>$829,900</strong></td>
+            <td>
+              <div class="sp-lp-bar">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:#1A3A6B;">100%</span>
+                <div class="sp-lp-track"><div class="sp-lp-fill at" style="width:100%;"></div></div>
+              </div>
+            </td>
+            <td class="num">8</td>
+            <td class="num">1,381</td>
+            <td class="num">$601</td>
+            <td class="num">3</td>
+            <td class="num">4 (2F+2H)</td>
+            <td style="font-size:11px;">Waterdown East</td>
+          </tr>
+          <tr>
+            <td><strong>39 Harnesworth Cres</strong></td>
+            <td class="num">May 11/26</td>
+            <td class="num">$829,000</td>
+            <td class="num"><strong>$832,000</strong></td>
+            <td>
+              <div class="sp-lp-bar">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:#3d5a2c;">100.4%</span>
+                <div class="sp-lp-track"><div class="sp-lp-fill over" style="width:100%;"></div></div>
+              </div>
+            </td>
+            <td class="num">10</td>
+            <td class="num">1,584</td>
+            <td class="num">$525</td>
+            <td class="num">3</td>
+            <td class="num">4 (3F+1H)</td>
+            <td style="font-size:11px;">Waterdown West</td>
+          </tr>
+          <tr>
+            <td><strong>13 Rusk Terrace</strong></td>
+            <td class="num">Apr 22/26</td>
+            <td class="num">$849,000</td>
+            <td class="num"><strong>$800,000</strong></td>
+            <td>
+              <div class="sp-lp-bar">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:#a83a1f;">94.2%</span>
+                <div class="sp-lp-track"><div class="sp-lp-fill under" style="width:94%;"></div></div>
+              </div>
+            </td>
+            <td class="num">14</td>
+            <td class="num">1,562</td>
+            <td class="num">$512</td>
+            <td class="num">3</td>
+            <td class="num">3 (2F+1H)</td>
+            <td style="font-size:11px;">Waterdown West</td>
+          </tr>
+          <tr>
+            <td><strong>24 Great Falls Blvd</strong></td>
+            <td class="num">Apr 15/26</td>
+            <td class="num">$919,900</td>
+            <td class="num"><strong>$907,000</strong></td>
+            <td>
+              <div class="sp-lp-bar">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:#b89443;">98.6%</span>
+                <div class="sp-lp-track"><div class="sp-lp-fill at" style="width:99%;"></div></div>
+              </div>
+            </td>
+            <td class="num">3</td>
+            <td class="num">1,870</td>
+            <td class="num">$485</td>
+            <td class="num">4</td>
+            <td class="num">3 (2F+1H)</td>
+            <td style="font-size:11px;">Waterdown East</td>
+          </tr>
+          <tr>
+            <td><strong>4 Harnesworth Cres</strong></td>
+            <td class="num">Mar 26/26</td>
+            <td class="num">$819,900</td>
+            <td class="num"><strong>$800,000</strong></td>
+            <td>
+              <div class="sp-lp-bar">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:#a83a1f;">97.6%</span>
+                <div class="sp-lp-track"><div class="sp-lp-fill under" style="width:98%;"></div></div>
+              </div>
+            </td>
+            <td class="num">14</td>
+            <td class="num">1,300</td>
+            <td class="num">$615</td>
+            <td class="num">3</td>
+            <td class="num">2 (1F+1H)</td>
+            <td style="font-size:11px;">Waterdown West</td>
+          </tr>
+          <tr class="avg-row">
+            <td><strong>AVERAGES</strong></td>
+            <td>—</td>
+            <td class="num">$849,540</td>
+            <td class="num"><strong>$833,780</strong></td>
+            <td class="num"><strong>98.2%</strong></td>
+            <td class="num"><strong>9.8</strong></td>
+            <td class="num">1,539</td>
+            <td class="num"><strong>$548*</strong></td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:11px; color:#6b655a; margin-top:10px; font-family:'JetBrains Mono',monospace;">*Avg $/sq ft on sold price. Individual $/sq ft values shown are sold price ÷ AG sq ft. SP/LP = sold price ÷ original asking price.</p>
+  </div>
+</section>
+
+<!-- CHARTS -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">Visual Statistics</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">Sold price · DOM · Price per sq ft</h2>
+    <p style="font-size:15px; color:#6b655a; margin-bottom:40px;">All 5 recent Waterdown sales plotted side by side.</p>
+
+    <div class="grid g3" style="gap:28px; margin-bottom:40px;">
+      <div>
+        <span class="kicker kicker-navy" style="margin-bottom:12px;">Sold Price</span>
+        <div class="chart-frame" style="height:280px;">
+          <canvas id="soldChart"></canvas>
+        </div>
+      </div>
+      <div>
+        <span class="kicker kicker-gold" style="margin-bottom:12px;">Days on Market</span>
+        <div class="chart-frame" style="height:280px;">
+          <canvas id="domChart"></canvas>
+        </div>
+      </div>
+      <div>
+        <span class="kicker kicker-green" style="margin-bottom:12px;">Price Per Sq Ft (AG)</span>
+        <div class="chart-frame" style="height:280px;">
+          <canvas id="psfChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- SP/LP chart -->
+    <span class="kicker kicker-gold" style="margin-bottom:12px;">SP / LP Ratio — Sold vs. Original Ask</span>
+    <div class="chart-frame" style="height:240px; max-width:760px;">
+      <canvas id="splpChart"></canvas>
+    </div>
+    <p style="font-size:11px; color:#6b655a; margin-top:8px; font-family:'JetBrains Mono',monospace;">Green = over asking · Blue = at asking · Red = below asking · Dashed line = 100% (full asking price)</p>
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<section class="pad-lg alt">
+  <div class="max">
+    <span class="kicker kicker-navy">Market Interpretation</span>
+    <h2 style="font-size:44px; margin-bottom:28px; font-style:italic;">What this tells us about Waterdown in 2026</h2>
+
+    <div class="grid g2" style="gap:32px;">
+      <div>
+        <div class="pull-quote">
+          "Homes that are priced right are selling in under 2 weeks at or very near asking. The market isn't frenzied — but it's healthy. Sellers who overprice are leaving money on the table."
+        </div>
+      </div>
+      <div>
+        <div style="background:#f5f1e8; padding:24px;">
+          <span class="kicker kicker-navy" style="margin-bottom:16px;">Key Takeaways</span>
+          <div style="font-size:14px; line-height:1.9;">
+            <div style="padding:8px 0; border-bottom:1px solid rgba(26,26,30,0.1);">📊 <strong>$833,780</strong> avg sold price — market range $800K–$907K</div>
+            <div style="padding:8px 0; border-bottom:1px solid rgba(26,26,30,0.1);">⏱ <strong>9.8 days</strong> avg DOM — fastest sale was 3 days, slowest 14</div>
+            <div style="padding:8px 0; border-bottom:1px solid rgba(26,26,30,0.1);">📐 <strong>$521/sq ft</strong> avg on AG sq ft — range $485–$615</div>
+            <div style="padding:8px 0; border-bottom:1px solid rgba(26,26,30,0.1);">💰 <strong>98.2% SP/LP</strong> — sellers typically getting ~$15K under ask</div>
+            <div style="padding:8px 0; border-bottom:1px solid rgba(26,26,30,0.1);">✅ Only 1 of 5 sold over ask (39 Harnesworth, +$3K)</div>
+            <div style="padding:8px 0;">🏠 Smaller homes (1,300–1,400 sq ft) achieving higher $/sq ft than larger homes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid max">
+    <div>
+      <div style="font-size:14px; color:#f5f1e8; font-family:'Fraunces',serif; font-style:italic; margin-bottom:8px;">Woolcott Real Estate</div>
+      <div class="muted">RE/MAX Escarpment Realty Inc. · 905-689-9223</div>
+      <div class="muted" style="margin-top:4px;">Prepared by Henry (AI Assistant) · June 4, 2026</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="muted">Waterdown · Hamilton Area 46 · L8B / L0R</div>
+      <div class="muted" style="margin-top:4px;">5 sales · March–June 2026 · Data from Cornerstone Association of REALTORS® MLS. Information deemed reliable but not guaranteed.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  Chart.defaults.font.family = "'Manrope', sans-serif";
+  Chart.defaults.font.size = 11;
+  Chart.defaults.color = "#6b655a";
+  Chart.defaults.borderColor = "rgba(26,26,30,0.1)";
+
+  const labels = ['82 Fellowes', '39 Harnesworth', '13 Rusk', '24 Great Falls', '4 Harnesworth'];
+
+  // Sold price
+  new Chart(document.getElementById('soldChart'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{ data: [829900, 832000, 800000, 907000, 800000],
+        backgroundColor: ['#dde4ee','#d6e0c8','#f5d4cb','#dde4ee','#f5d4cb'],
+        borderColor: ['#1A3A6B','#3d5a2c','#a83a1f','#1A3A6B','#a83a1f'], borderWidth: 2 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1a1a1e', titleColor: '#b89443',
+        bodyColor: '#f5f1e8', bodyFont: { family: "'JetBrains Mono', monospace" }, cornerRadius: 0,
+        callbacks: { label: c => ' $' + c.parsed.y.toLocaleString('en-CA') } } },
+      scales: { x: { grid: { display: false }, ticks: { font: { family: "'JetBrains Mono', monospace", size: 9 } } },
+        y: { grid: { color: 'rgba(26,26,30,0.07)' },
+          ticks: { font: { family: "'JetBrains Mono', monospace", size: 9 }, callback: v => '$'+(v/1000).toFixed(0)+'K' }, min: 700000 } } }
+  });
+
+  // DOM
+  new Chart(document.getElementById('domChart'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{ data: [8, 10, 14, 3, 14],
+        backgroundColor: ['#dde4ee','#dde4ee','#f4e5c7','#d6e0c8','#f4e5c7'],
+        borderColor: ['#1A3A6B','#1A3A6B','#b89443','#3d5a2c','#b89443'], borderWidth: 2 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1a1a1e', titleColor: '#b89443',
+        bodyColor: '#f5f1e8', bodyFont: { family: "'JetBrains Mono', monospace" }, cornerRadius: 0,
+        callbacks: { label: c => ' ' + c.parsed.y + ' days' } } },
+      scales: { x: { grid: { display: false }, ticks: { font: { family: "'JetBrains Mono', monospace", size: 9 } } },
+        y: { grid: { color: 'rgba(26,26,30,0.07)' },
+          ticks: { font: { family: "'JetBrains Mono', monospace", size: 9 }, callback: v => v + 'd' }, min: 0 } } }
+  });
+
+  // PSF
+  new Chart(document.getElementById('psfChart'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{ data: [601, 525, 512, 485, 615],
+        backgroundColor: ['#dde4ee','#dde4ee','#dde4ee','#dde4ee','#d6e0c8'],
+        borderColor: ['#1A3A6B','#1A3A6B','#1A3A6B','#1A3A6B','#3d5a2c'], borderWidth: 2 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1a1a1e', titleColor: '#b89443',
+        bodyColor: '#f5f1e8', bodyFont: { family: "'JetBrains Mono', monospace" }, cornerRadius: 0,
+        callbacks: { label: c => ' $' + c.parsed.y + '/sq ft' } } },
+      scales: { x: { grid: { display: false }, ticks: { font: { family: "'JetBrains Mono', monospace", size: 9 } } },
+        y: { grid: { color: 'rgba(26,26,30,0.07)' },
+          ticks: { font: { family: "'JetBrains Mono', monospace", size: 9 }, callback: v => '$' + v }, min: 400 } } }
+  });
+
+  // SP/LP
+  new Chart(document.getElementById('splpChart'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{ data: [100.0, 100.4, 94.2, 98.6, 97.6],
+        backgroundColor: ['#dde4ee','#d6e0c8','#f5d4cb','#dde4ee','#f5d4cb'],
+        borderColor: ['#1A3A6B','#3d5a2c','#a83a1f','#1A3A6B','#a83a1f'], borderWidth: 2 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { backgroundColor: '#1a1a1e', titleColor: '#b89443',
+          bodyColor: '#f5f1e8', bodyFont: { family: "'JetBrains Mono', monospace" }, cornerRadius: 0,
+          callbacks: { label: c => ' ' + c.parsed.y.toFixed(1) + '% of ask' } },
+        annotation: {
+          annotations: { line1: { type: 'line', yMin: 100, yMax: 100,
+            borderColor: '#1A3A6B', borderWidth: 1.5, borderDash: [4,4] } }
+        }
+      },
+      scales: { x: { grid: { display: false }, ticks: { font: { family: "'JetBrains Mono', monospace", size: 10 } } },
+        y: { grid: { color: 'rgba(26,26,30,0.07)' },
+          ticks: { font: { family: "'JetBrains Mono', monospace", size: 10 }, callback: v => v + '%' }, min: 90, max: 104 } } }
+  });
+</script>
+</body>
+</html>
