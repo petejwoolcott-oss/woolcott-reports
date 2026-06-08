@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>A305-1117 Cooke Blvd — Market Statistics | Woolcott Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #f5f1e8; color: #1a1a1e;
+    font-family: 'Manrope', system-ui, sans-serif; line-height: 1.6; }
+  h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 700; line-height: 1.15; margin: 0; }
+  .kicker { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace; color: #6b655a; font-weight: 500; margin-bottom: 12px; display: block; }
+  .kicker-navy { color: #1A3A6B; } .kicker-gold { color: #b89443; }
+  .kicker-red { color: #a83a1f; } .kicker-green { color: #3d5a2c; }
+  .pad { padding: 56px 48px; } .pad-lg { padding: 80px 48px; }
+  .alt { background: #ebe5d6; } .max { max-width: 1100px; margin: 0 auto; }
+  .grid { display: grid; gap: 24px; }
+  .g2 { grid-template-columns: 1fr 1fr; } .g3 { grid-template-columns: 1fr 1fr 1fr; }
+  .g4 { grid-template-columns: 1fr 1fr 1fr 1fr; } .g2-1 { grid-template-columns: 2fr 1fr; }
+  .banner-navy { background: #1A3A6B; color: #f5f1e8; }
+  .tile { background: #f5f1e8; padding: 28px; border-top: 6px solid #1A3A6B; }
+  .tile-red { border-top-color: #a83a1f; } .tile-green { border-top-color: #3d5a2c; }
+  .tile-gold { border-top-color: #b89443; }
+  .tile .stat { font-family: 'Fraunces', Georgia, serif; font-size: 52px; font-weight: 700; color: #1A3A6B; line-height: 1; margin: 8px 0 4px; }
+  .tile-red .stat { color: #a83a1f; } .tile-green .stat { color: #3d5a2c; } .tile-gold .stat { color: #b89443; }
+  .tile .label { font-size: 13px; color: #6b655a; margin-top: 6px; line-height: 1.4; }
+  .tile .sub { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #6b655a; margin-top: 4px; }
+  .pull-quote { border-left: 4px solid #1A3A6B; background: #f5f1e8; padding: 28px 32px;
+    font-family: 'Fraunces', Georgia, serif; font-size: 18px; font-style: italic; line-height: 1.45; }
+  .pill { display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  .pill-navy { background: #dde4ee; color: #1A3A6B; } .pill-red { background: #f5d4cb; color: #a83a1f; }
+  .pill-green { background: #d6e0c8; color: #3d5a2c; } .pill-gold { background: #f4e5c7; color: #8B6B1F; }
+  table.editorial { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  table.editorial th { font-size: 10px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #6b655a; border-bottom: 2px solid #1a1a1e; padding: 9px 9px; text-align: left; }
+  table.editorial td { padding: 10px 9px; border-bottom: 1px solid rgba(26,26,30,0.1); vertical-align: top; }
+  table.editorial tr:last-child td { border-bottom: none; }
+  table.editorial .num { font-family: 'JetBrains Mono', monospace; }
+  table.editorial tr.sold-row td { background: rgba(61,90,44,0.06); }
+  table.editorial tr.cond-row td { background: rgba(184,148,67,0.06); }
+  .chart-frame { background: #f5f1e8; padding: 24px; border: 1px solid rgba(26,26,30,0.13); }
+  footer { background: #1a1a1e; color: #f5f1e8; padding: 40px 48px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.8; }
+  footer .muted { color: #6b655a; }
+  footer .footer-grid { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="banner-navy pad">
+  <div class="max">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:40px;">
+      <div>
+        <span class="kicker" style="color:#b89443;">Woolcott Real Estate · Burlington Condo Market Statistics</span>
+        <h1 style="font-size:48px; color:#f5f1e8; font-style:italic; line-height:1.1; margin-top:8px;">
+          A305 – 1117 Cooke Blvd<br><span style="font-weight:400; font-size:30px;">Burlington, Ontario · 1-Bedroom Condo Market</span>
+        </h1>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:12px; font-family:'JetBrains Mono',monospace; color:#b89443; opacity:0.8; margin-top:8px;">
+          Prepared June 8, 2026<br>Burlington · Halton Region
+        </div>
+      </div>
+    </div>
+    <div class="grid g4">
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:20px;">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Comps Analyzed</div>
+        <div style="font-family:'Fraunces',serif; font-size:34px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">9</div>
+        <div style="font-size:12px; color:rgba(245,241,232,0.6);">1-bed condos · Burlington area · June 2026</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:20px;">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Active Range</div>
+        <div style="font-family:'Fraunces',serif; font-size:34px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">$399K–$449K</div>
+        <div style="font-size:12px; color:rgba(245,241,232,0.6);">7 active listings currently</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:20px;">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Recent Sale</div>
+        <div style="font-family:'Fraunces',serif; font-size:34px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">$365,000</div>
+        <div style="font-size:12px; color:rgba(245,241,232,0.6);">4005 Kilmer Dr #410 · 16 DOM · 98.6% SP/LP</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:20px;">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Avg Condo Fee</div>
+        <div style="font-family:'Fraunces',serif; font-size:34px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">$569/mo</div>
+        <div style="font-size:12px; color:rgba(245,241,232,0.6);">Across active comp set</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET SNAPSHOT -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">Market Snapshot</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">Burlington 1-bed condo market — June 2026</h2>
+    <p style="font-size:15px; color:#6b655a; max-width:720px; margin-bottom:48px;">
+      The Burlington 1-bedroom condo segment is well-supplied right now — 7 active listings in the $399K–$449K range, most listed within the last 2–3 weeks. The sole recent sale closed at $365,000 (below ask). No bidding wars — this is a buyer-friendly environment.
+    </p>
+
+    <div class="grid g4" style="margin-bottom:40px;">
+      <div class="tile">
+        <span class="kicker kicker-navy">Active</span>
+        <div class="stat">7</div>
+        <div class="label">Listings currently for sale in the comparable set</div>
+      </div>
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">Conditional</span>
+        <div class="stat" style="font-size:44px; color:#b89443;">1</div>
+        <div class="label">5327 Upper Middle Rd #205 — $399,999 · no escape clause</div>
+      </div>
+      <div class="tile tile-green">
+        <span class="kicker kicker-green">Recent Sale</span>
+        <div class="stat" style="font-size:44px; color:#3d5a2c;">1</div>
+        <div class="label">4005 Kilmer Dr #410 — sold $365,000 (98.6% of ask) · 16 DOM</div>
+      </div>
+      <div class="tile tile-red">
+        <span class="kicker kicker-red">Market Signal</span>
+        <div class="stat" style="font-size:40px; color:#a83a1f;">Soft</div>
+        <div class="label">High inventory, no over-ask activity. One comp showing 66–158 CDOM history.</div>
+      </div>
+    </div>
+
+    <div class="grid g3">
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">Avg List Price (active)</span>
+        <div class="stat" style="font-size:36px; color:#b89443;">$418,657</div>
+        <div class="label">Average across 7 active listings</div>
+        <div class="sub">Range: $399,000 – $449,000</div>
+      </div>
+      <div class="tile">
+        <span class="kicker">Avg SqFt (active)</span>
+        <div class="stat" style="font-size:36px;">623</div>
+        <div class="label">Average above-grade sq ft across active comp set</div>
+        <div class="sub">Range: 535 – 709 sq ft</div>
+      </div>
+      <div class="tile tile-green">
+        <span class="kicker kicker-green">Avg $/SqFt (active)</span>
+        <div class="stat" style="font-size:36px; color:#3d5a2c;">$674</div>
+        <div class="label">Average list price per sq ft across active comps</div>
+        <div class="sub">Range: $563 – $803/sq ft</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FULL COMP TABLE -->
+<section class="pad-lg alt">
+  <div class="max">
+    <span class="kicker kicker-gold">Comparable Properties</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">All 9 comparables — full breakdown</h2>
+    <p style="font-size:15px; color:#6b655a; margin-bottom:36px;">
+      All properties are 1-bedroom condominium apartments in Burlington (Halton Region). Sorted by list price.
+    </p>
+
+    <div style="overflow-x:auto;">
+      <table class="editorial">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Status</th>
+            <th>List Price</th>
+            <th>Sold</th>
+            <th>SqFt</th>
+            <th>$/SqFt</th>
+            <th>Condo Fee/mo</th>
+            <th>Taxes</th>
+            <th>DOM</th>
+            <th>Built</th>
+            <th>Parking</th>
+            <th>Locker</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="sold-row">
+            <td><strong>4005 Kilmer Dr #410</strong></td>
+            <td><span class="pill pill-green">Sold</span></td>
+            <td class="num">$370,000</td>
+            <td class="num"><strong>$365,000</strong></td>
+            <td class="num">592</td>
+            <td class="num">$617</td>
+            <td class="num">$693</td>
+            <td class="num">$1,972</td>
+            <td class="num">16</td>
+            <td>1998</td>
+            <td>1 UG</td>
+            <td>Excl</td>
+          </tr>
+          <tr>
+            <td>4015 Kilmer Dr #406</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$399,000</td>
+            <td class="num">—</td>
+            <td class="num">709</td>
+            <td class="num">$563</td>
+            <td class="num">$498</td>
+            <td class="num">$2,011</td>
+            <td class="num">4</td>
+            <td>1996–2010</td>
+            <td>1 UG</td>
+            <td>Owned</td>
+          </tr>
+          <tr>
+            <td>2081 Fairview St #1402</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$399,900</td>
+            <td class="num">—</td>
+            <td class="num">567</td>
+            <td class="num">$706</td>
+            <td class="num">$547</td>
+            <td class="num">$2,448</td>
+            <td class="num">4</td>
+            <td>2017</td>
+            <td>1 UG</td>
+            <td>Owned</td>
+          </tr>
+          <tr>
+            <td>4040 Upper Middle Rd #105</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$399,900</td>
+            <td class="num">—</td>
+            <td class="num">636</td>
+            <td class="num">$629</td>
+            <td class="num">$619</td>
+            <td class="num">$2,147</td>
+            <td class="num">4</td>
+            <td>2019</td>
+            <td>1 UG</td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <td>5327 Upper Middle Rd #205</td>
+            <td><span class="pill pill-gold">Conditional</span></td>
+            <td class="num">$399,999</td>
+            <td class="num">—</td>
+            <td class="num">640</td>
+            <td class="num">$625</td>
+            <td class="num">—</td>
+            <td class="num">—</td>
+            <td class="num">14</td>
+            <td>1996–2010</td>
+            <td>1 UG</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>1284 Guelph Line #318</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$414,900</td>
+            <td class="num">—</td>
+            <td class="num">627</td>
+            <td class="num">$662</td>
+            <td class="num">$568</td>
+            <td class="num">$2,536</td>
+            <td class="num">18</td>
+            <td>2015</td>
+            <td>1 UG</td>
+            <td>Excl</td>
+          </tr>
+          <tr>
+            <td>3200 Dakota Common #B310</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$429,900</td>
+            <td class="num">—</td>
+            <td class="num">587</td>
+            <td class="num">$732</td>
+            <td class="num">$525</td>
+            <td class="num">$2,792</td>
+            <td class="num">17</td>
+            <td>2022</td>
+            <td>1 UG</td>
+            <td>Owned</td>
+          </tr>
+          <tr>
+            <td>5010 Corporate Dr #408</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$429,900</td>
+            <td class="num">—</td>
+            <td class="num">535</td>
+            <td class="num">$803</td>
+            <td class="num">$384*</td>
+            <td class="num">$2,908</td>
+            <td class="num">5</td>
+            <td>2014</td>
+            <td>1 UG</td>
+            <td>Owned</td>
+          </tr>
+          <tr>
+            <td>4040 Upper Middle Rd #319</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$439,000</td>
+            <td class="num">—</td>
+            <td class="num">697</td>
+            <td class="num">$630</td>
+            <td class="num">$690</td>
+            <td class="num">$2,312</td>
+            <td class="num">5</td>
+            <td>2019</td>
+            <td>1 UG</td>
+            <td>Owned</td>
+          </tr>
+          <tr>
+            <td>2087 Fairview St #2002</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$449,000</td>
+            <td class="num">—</td>
+            <td class="num">620</td>
+            <td class="num">$724</td>
+            <td class="num">$595</td>
+            <td class="num">$2,652</td>
+            <td class="num">19</td>
+            <td>2017</td>
+            <td>1 UG</td>
+            <td>Owned</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:11px; color:#6b655a; margin-top:10px; font-family:'JetBrains Mono',monospace;">*5010 Corporate Dr condo fee listed as $383.95/annually in MLS — likely a data entry error, may be monthly. UG = underground parking. $/SqFt calculated on list price ÷ AG sq ft.</p>
+  </div>
+</section>
+
+<!-- CHARTS -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">Visual Statistics</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">Price, size &amp; fees at a glance</h2>
+    <p style="font-size:15px; color:#6b655a; margin-bottom:40px;">All comparables plotted — the sold comp is shown in green for easy reference.</p>
+
+    <div class="grid g2" style="gap:28px; margin-bottom:32px;">
+      <div>
+        <span class="kicker kicker-navy" style="margin-bottom:12px;">List / Sold Price</span>
+        <div class="chart-frame" style="height:300px;">
+          <canvas id="priceChart"></canvas>
+        </div>
+      </div>
+      <div>
+        <span class="kicker kicker-gold" style="margin-bottom:12px;">Price Per Sq Ft</span>
+        <div class="chart-frame" style="height:300px;">
+          <canvas id="psfChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="gap:28px;">
+      <div>
+        <span class="kicker kicker-green" style="margin-bottom:12px;">Monthly Condo Fees</span>
+        <div class="chart-frame" style="height:260px;">
+          <canvas id="feeChart"></canvas>
+        </div>
+      </div>
+      <div>
+        <span class="kicker kicker-red" style="margin-bottom:12px;">Days on Market</span>
+        <div class="chart-frame" style="height:260px;">
+          <canvas id="domChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY OBSERVATIONS -->
+<section class="pad-lg alt">
+  <div class="max">
+    <span class="kicker kicker-navy">Key Observations</span>
+    <h2 style="font-size:44px; margin-bottom:36px; font-style:italic;">What this data tells us</h2>
+
+    <div class="grid g2" style="gap:32px;">
+      <div>
+        <div style="background:#f5f1e8; padding:24px; margin-bottom:20px;">
+          <span class="kicker kicker-navy" style="margin-bottom:14px;">Market Signals</span>
+          <div style="font-size:14px; line-height:1.9;">
+            <div style="padding:8px 0; border-bottom:1px solid rgba(26,26,30,0.1);">📊 Active list prices: <strong>$399K–$449K</strong></div>
+            <div style="padding:8px 0; border-bottom:1px solid rgba(26,26,30,0.1);">💰 Only confirmed sale: <strong>$365,000</strong> — below the active range</div>
+            <div style="padding:8px 0; border-bottom:1px solid rgba(26,26,30,0.1);">📐 Size range: <strong>535–709 sq ft</strong> — most comps are 580–640 sq ft</div>
+            <div style="padding:8px 0; border-bottom:1px solid rgba(26,26,30,0.1);">📈 Price per sq ft: <strong>$563–$803</strong> — newer builds command premium</div>
+            <div style="padding:8px 0; border-bottom:1px solid rgba(26,26,30,0.1);">🏠 Condo fees: <strong>$498–$693/mo</strong> — significant variation, check what's included</div>
+            <div style="padding:8px 0; border-bottom:1px solid rgba(26,26,30,0.1);">⚠️ Several listings have high CDOM (66–158 days) — previously listed and not sold</div>
+            <div style="padding:8px 0;">🅿️ All comps include 1 underground parking space</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="pull-quote" style="margin-bottom:20px;">
+          "Sellers are asking $399K–$449K but the only recent sale cleared at $365K. Buyers have leverage — well-stocked market with no bidding war activity."
+        </div>
+        <div style="background:#dde4ee; padding:20px 24px; border-left:4px solid #1A3A6B;">
+          <span class="kicker kicker-navy" style="margin-bottom:8px;">Condo Fee Watch</span>
+          <p style="margin:0; font-size:13px; line-height:1.7;">
+            Monthly fees range from <strong>$498 to $693</strong>. Always verify what's included — some buildings include heat, hydro, and AC; others do not. This significantly affects the true monthly cost of ownership and should be factored into any offer strategy.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid max">
+    <div>
+      <div style="font-size:14px; color:#f5f1e8; font-family:'Fraunces',serif; font-style:italic; margin-bottom:8px;">Woolcott Real Estate</div>
+      <div class="muted">RE/MAX Escarpment Realty Inc. · 905-689-9223</div>
+      <div class="muted" style="margin-top:4px;">Prepared by Henry (AI Assistant) · June 8, 2026</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="muted">Burlington · Halton Region · 1-Bedroom Condo Segment</div>
+      <div class="muted" style="margin-top:4px;">9 comparables · June 2026 · Data from Cornerstone Association of REALTORS® MLS. Information deemed reliable but not guaranteed.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  Chart.defaults.font.family = "'Manrope', sans-serif";
+  Chart.defaults.font.size = 11;
+  Chart.defaults.color = "#6b655a";
+  Chart.defaults.borderColor = "rgba(26,26,30,0.1)";
+
+  const shortLabels = ['4005 Kilmer\n#410 (SOLD)','4015 Kilmer\n#406','2081 Fairview\n#1402','4040 Upper Mid\n#105','5327 Upper Mid\n#205','1284 Guelph\n#318','3200 Dakota\n#B310','5010 Corporate\n#408','4040 Upper Mid\n#319','2087 Fairview\n#2002'];
+  const colors = ['#d6e0c8','#dde4ee','#dde4ee','#dde4ee','#f4e5c7','#dde4ee','#dde4ee','#dde4ee','#dde4ee','#dde4ee'];
+  const borders = ['#3d5a2c','#1A3A6B','#1A3A6B','#1A3A6B','#b89443','#1A3A6B','#1A3A6B','#1A3A6B','#1A3A6B','#1A3A6B'];
+
+  // Price chart
+  new Chart(document.getElementById('priceChart'), {
+    type: 'bar',
+    data: {
+      labels: shortLabels,
+      datasets: [{
+        data: [365000, 399000, 399900, 399900, 399999, 414900, 429900, 429900, 439000, 449000],
+        backgroundColor: colors, borderColor: borders, borderWidth: 2
+      }]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1a1a1e', titleColor: '#b89443',
+        bodyColor: '#f5f1e8', bodyFont: { family: "'JetBrains Mono', monospace" }, cornerRadius: 0,
+        callbacks: { label: c => ' $' + c.parsed.y.toLocaleString('en-CA') } } },
+      scales: { x: { grid: { display: false }, ticks: { font: { family: "'JetBrains Mono', monospace", size: 8 } } },
+        y: { grid: { color: 'rgba(26,26,30,0.07)' }, ticks: { font: { family: "'JetBrains Mono', monospace", size: 9 },
+          callback: v => '$' + (v/1000).toFixed(0) + 'K' }, min: 330000 } } }
+  });
+
+  // PSF chart
+  new Chart(document.getElementById('psfChart'), {
+    type: 'bar',
+    data: {
+      labels: shortLabels,
+      datasets: [{ data: [617, 563, 706, 629, 625, 662, 732, 803, 630, 724],
+        backgroundColor: colors, borderColor: borders, borderWidth: 2 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1a1a1e', titleColor: '#b89443',
+        bodyColor: '#f5f1e8', bodyFont: { family: "'JetBrains Mono', monospace" }, cornerRadius: 0,
+        callbacks: { label: c => ' $' + c.parsed.y + '/sq ft' } } },
+      scales: { x: { grid: { display: false }, ticks: { font: { family: "'JetBrains Mono', monospace", size: 8 } } },
+        y: { grid: { color: 'rgba(26,26,30,0.07)' }, ticks: { font: { family: "'JetBrains Mono', monospace", size: 9 },
+          callback: v => '$' + v }, min: 450 } } }
+  });
+
+  // Condo fee chart (exclude condo without data)
+  new Chart(document.getElementById('feeChart'), {
+    type: 'bar',
+    data: {
+      labels: ['4005 Kilmer\n#410','4015 Kilmer\n#406','2081 Fairview\n#1402','4040 Upper Mid\n#105','1284 Guelph\n#318','3200 Dakota\n#B310','4040 Upper Mid\n#319','2087 Fairview\n#2002'],
+      datasets: [{ data: [693, 498, 547, 619, 568, 525, 690, 595],
+        backgroundColor: ['#d6e0c8','#dde4ee','#dde4ee','#dde4ee','#dde4ee','#dde4ee','#f5d4cb','#dde4ee'],
+        borderColor: ['#3d5a2c','#1A3A6B','#1A3A6B','#1A3A6B','#1A3A6B','#1A3A6B','#a83a1f','#1A3A6B'], borderWidth: 2 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1a1a1e', titleColor: '#b89443',
+        bodyColor: '#f5f1e8', bodyFont: { family: "'JetBrains Mono', monospace" }, cornerRadius: 0,
+        callbacks: { label: c => ' $' + c.parsed.y + '/mo' } } },
+      scales: { x: { grid: { display: false }, ticks: { font: { family: "'JetBrains Mono', monospace", size: 8 } } },
+        y: { grid: { color: 'rgba(26,26,30,0.07)' }, ticks: { font: { family: "'JetBrains Mono', monospace", size: 9 },
+          callback: v => '$' + v }, min: 400 } } }
+  });
+
+  // DOM chart
+  new Chart(document.getElementById('domChart'), {
+    type: 'bar',
+    data: {
+      labels: ['4005 Kilmer\n#410','4015 Kilmer\n#406','2081 Fairview\n#1402','4040 Upper Mid\n#105','5327 Upper Mid\n#205','1284 Guelph\n#318','3200 Dakota\n#B310','5010 Corporate\n#408','4040 Upper Mid\n#319','2087 Fairview\n#2002'],
+      datasets: [{ data: [16, 4, 4, 4, 14, 18, 17, 5, 5, 19],
+        backgroundColor: colors, borderColor: borders, borderWidth: 2 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1a1a1e', titleColor: '#b89443',
+        bodyColor: '#f5f1e8', bodyFont: { family: "'JetBrains Mono', monospace" }, cornerRadius: 0,
+        callbacks: { label: c => ' ' + c.parsed.y + ' days' } } },
+      scales: { x: { grid: { display: false }, ticks: { font: { family: "'JetBrains Mono', monospace", size: 8 } } },
+        y: { grid: { color: 'rgba(26,26,30,0.07)' }, ticks: { font: { family: "'JetBrains Mono', monospace", size: 9 },
+          callback: v => v + 'd' }, min: 0 } } }
+  });
+</script>
+</body>
+</html>
