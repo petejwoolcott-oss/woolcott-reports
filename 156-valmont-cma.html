@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>156 Valmont Street — Market Statistics | Woolcott Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #f5f1e8; color: #1a1a1e;
+    font-family: 'Manrope', system-ui, sans-serif; line-height: 1.6; }
+  h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 700; line-height: 1.15; margin: 0; }
+  .kicker { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace; color: #6b655a; font-weight: 500; margin-bottom: 12px; display: block; }
+  .kicker-navy { color: #1A3A6B; } .kicker-gold { color: #b89443; }
+  .kicker-red { color: #a83a1f; } .kicker-green { color: #3d5a2c; }
+  .pad { padding: 56px 48px; } .pad-lg { padding: 80px 48px; }
+  .alt { background: #ebe5d6; } .max { max-width: 1200px; margin: 0 auto; }
+  .grid { display: grid; gap: 24px; }
+  .g2 { grid-template-columns: 1fr 1fr; } .g3 { grid-template-columns: 1fr 1fr 1fr; }
+  .g4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .banner-navy { background: #1A3A6B; color: #f5f1e8; }
+  .tile { background: #f5f1e8; padding: 24px; border-top: 6px solid #1A3A6B; }
+  .tile-red { border-top-color: #a83a1f; } .tile-green { border-top-color: #3d5a2c; }
+  .tile-gold { border-top-color: #b89443; }
+  .tile .stat { font-family: 'Fraunces', Georgia, serif; font-size: 48px; font-weight: 700; color: #1A3A6B; line-height: 1; margin: 8px 0 4px; }
+  .tile-red .stat { color: #a83a1f; } .tile-green .stat { color: #3d5a2c; } .tile-gold .stat { color: #b89443; }
+  .tile .label { font-size: 12px; color: #6b655a; margin-top: 6px; line-height: 1.4; }
+  .tile .sub { font-size: 10px; font-family: 'JetBrains Mono', monospace; color: #6b655a; margin-top: 4px; }
+  .pull-quote { border-left: 4px solid #1A3A6B; background: #f5f1e8; padding: 24px 28px;
+    font-family: 'Fraunces', Georgia, serif; font-size: 18px; font-style: italic; line-height: 1.5; }
+  .pill { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 9px;
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  .pill-navy { background: #dde4ee; color: #1A3A6B; } .pill-red { background: #f5d4cb; color: #a83a1f; }
+  .pill-green { background: #d6e0c8; color: #3d5a2c; } .pill-gold { background: #f4e5c7; color: #8B6B1F; }
+  table.editorial { width: 100%; border-collapse: collapse; font-size: 12px; }
+  table.editorial th { font-size: 9px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #6b655a; border-bottom: 2px solid #1a1a1e; padding: 8px 8px; text-align: left; white-space: nowrap; }
+  table.editorial td { padding: 9px 8px; border-bottom: 1px solid rgba(26,26,30,0.1); vertical-align: middle; white-space: nowrap; }
+  table.editorial tr:last-child td { border-bottom: none; }
+  table.editorial .num { font-family: 'JetBrains Mono', monospace; }
+  table.editorial tr.subject-row td { background: #dde4ee; font-weight: 700; }
+  table.editorial tr.sold-row td { background: rgba(61,90,44,0.07); }
+  table.editorial tr.cond-row td { background: rgba(184,148,67,0.07); }
+  .chart-frame { background: #f5f1e8; padding: 20px; border: 1px solid rgba(26,26,30,0.13); }
+  .divider-stat { display: flex; gap: 0; border: 1px solid rgba(26,26,30,0.12); }
+  .divider-stat-item { flex: 1; padding: 20px 22px; border-right: 1px solid rgba(26,26,30,0.12); }
+  .divider-stat-item:last-child { border-right: none; }
+  .divider-stat-item .val { font-family: 'Fraunces', Georgia, serif; font-size: 30px; font-weight: 700; color: #1A3A6B; margin: 4px 0 2px; }
+  .divider-stat-item .lbl { font-size: 11px; color: #6b655a; }
+  footer { background: #1a1a1e; color: #f5f1e8; padding: 36px 48px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.8; }
+  footer .muted { color: #6b655a; }
+  footer .footer-grid { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="banner-navy pad">
+  <div class="max">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:40px;">
+      <div>
+        <span class="kicker" style="color:#b89443;">Woolcott Real Estate · Ancaster Residential Market Statistics</span>
+        <h1 style="font-size:46px; color:#f5f1e8; font-style:italic; line-height:1.1; margin-top:8px;">
+          156 Valmont Street<br><span style="font-weight:400; font-size:28px;">Ancaster, Hamilton, Ontario · L9G 4Z9</span>
+        </h1>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:12px; font-family:'JetBrains Mono',monospace; color:#b89443; opacity:0.8; margin-top:8px;">
+          Prepared June 8, 2026<br>Ancaster · Hamilton Area 43
+        </div>
+      </div>
+    </div>
+    <div class="grid g4">
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:18px;">
+        <div style="font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">List Price</div>
+        <div style="font-family:'Fraunces',serif; font-size:32px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">$1,650,000</div>
+        <div style="font-size:11px; color:rgba(245,241,232,0.6);">Active · 14 DOM</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:18px;">
+        <div style="font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Above Grade</div>
+        <div style="font-family:'Fraunces',serif; font-size:32px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">3,141 sq ft</div>
+        <div style="font-size:11px; color:rgba(245,241,232,0.6);">2-storey detached · 4 bed / 3 bath</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:18px;">
+        <div style="font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">$/Sq Ft</div>
+        <div style="font-family:'Fraunces',serif; font-size:32px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">$525</div>
+        <div style="font-size:11px; color:rgba(245,241,232,0.6);">vs. active comp avg $579/sq ft</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:18px;">
+        <div style="font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Built</div>
+        <div style="font-family:'Fraunces',serif; font-size:32px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">2001</div>
+        <div style="font-size:11px; color:rgba(245,241,232,0.6);">$9,182 taxes · freehold</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBJECT PROFILE -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">Subject Property</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">156 Valmont Street, Ancaster</h2>
+    <p style="font-size:15px; color:#6b655a; max-width:720px; margin-bottom:36px;">
+      Active listing in the Valmont / Ancaster Heights area. At 3,141 sq ft above grade, it is one of the largest homes in the comparable set and is priced at the mid-point of the active market range. At $525/sq ft it represents below-average pricing per sq ft for the area.
+    </p>
+
+    <div class="grid g2" style="gap:28px; margin-bottom:28px;">
+      <div>
+        <table class="editorial">
+          <tbody>
+            <tr><td style="color:#6b655a; width:160px;">Property Type</td><td><strong>2 Storey Detached · Freehold</strong></td></tr>
+            <tr><td style="color:#6b655a;">Status</td><td><span class="pill pill-navy">Active</span> · 14 DOM</td></tr>
+            <tr><td style="color:#6b655a;">List Price</td><td class="num"><strong>$1,650,000</strong></td></tr>
+            <tr><td style="color:#6b655a;">Beds / Baths</td><td>4 (all AG) / 3 (2 full + 1 half)</td></tr>
+            <tr><td style="color:#6b655a;">AG Sq Ft</td><td class="num"><strong>3,141</strong> — 2nd largest in comp set</td></tr>
+            <tr><td style="color:#6b655a;">$/Sq Ft</td><td class="num">$525 — below comp avg of $579</td></tr>
+            <tr><td style="color:#6b655a;">Year Built</td><td>2001</td></tr>
+            <tr><td style="color:#6b655a;">Taxes</td><td class="num">$9,181.91 (2026)</td></tr>
+            <tr><td style="color:#6b655a;">Neighbourhood</td><td>Hamilton Area 43 · Ancaster</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <!-- Valmont street comps -->
+        <div style="background:#ebe5d6; padding:24px;">
+          <span class="kicker kicker-navy" style="margin-bottom:12px;">Same Street / Immediate Area</span>
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div style="background:#f5f1e8; padding:14px 16px;">
+              <div style="font-size:9px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; color:#1A3A6B; margin-bottom:4px;">156 Valmont St ★ Subject · Active</div>
+              <div style="font-family:'Fraunces',serif; font-size:20px; font-weight:700;">$1,650,000</div>
+              <div style="font-size:12px; color:#6b655a; margin-top:3px;">4 bed · 3,141 sq ft · $525/sq ft · 14 DOM · Built 2001</div>
+            </div>
+            <div style="background:#f5f1e8; padding:14px 16px;">
+              <div style="font-size:9px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; color:#6b655a; margin-bottom:4px;">178 Valmont Ct · Active · 31 DOM</div>
+              <div style="font-family:'Fraunces',serif; font-size:20px; font-weight:700;">$1,799,900</div>
+              <div style="font-size:12px; color:#6b655a; margin-top:3px;">4 bed · 3,100 sq ft · $581/sq ft · Built 2001 · $10,146 taxes</div>
+            </div>
+          </div>
+          <div style="margin-top:14px; font-size:13px; color:#1a1a1e; line-height:1.7;">
+            Two Valmont-area listings active simultaneously — both 2001 builds, nearly identical sq ft. Subject asks $149,900 less for a virtually equivalent home, giving the buyer a clear value advantage.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET SNAPSHOT -->
+<section class="pad-lg alt">
+  <div class="max">
+    <span class="kicker kicker-gold">Market Snapshot — 16 Listings · Ancaster Detached</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">Ancaster $1.4M–$1.8M detached market</h2>
+    <p style="font-size:15px; color:#6b655a; max-width:720px; margin-bottom:40px;">
+      The Ancaster luxury detached segment is well-supplied. One confirmed sale in the dataset — 150 Mansfield Drive sold over asking at $1,465,000 in just 2 days. Most other listings have been sitting significantly longer.
+    </p>
+
+    <div class="grid g4" style="margin-bottom:32px;">
+      <div class="tile">
+        <span class="kicker kicker-navy">Active Listings</span>
+        <div class="stat">12</div>
+        <div class="label">Currently for sale in the Ancaster comp set</div>
+        <div class="sub">$1,449,000 – $1,799,900</div>
+      </div>
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">Conditional</span>
+        <div class="stat" style="font-size:40px; color:#b89443;">1</div>
+        <div class="label">64 Miller Dr — $1,499,000 · no escape clause · 7 DOM</div>
+      </div>
+      <div class="tile tile-green">
+        <span class="kicker kicker-green">Confirmed Sale</span>
+        <div class="stat" style="font-size:40px; color:#3d5a2c;">1</div>
+        <div class="label">150 Mansfield Dr — $1,465,000 · 101% SP/LP · 2 DOM</div>
+      </div>
+      <div class="tile tile-red">
+        <span class="kicker kicker-red">Stale Inventory</span>
+        <div class="stat" style="font-size:40px; color:#a83a1f;">4</div>
+        <div class="label">Listings with 60+ DOM — including one at 203 DOM</div>
+        <div class="sub">Signs of overpricing in upper range</div>
+      </div>
+    </div>
+
+    <div class="divider-stat">
+      <div class="divider-stat-item">
+        <span class="kicker kicker-navy" style="margin-bottom:4px;">Avg List Price (active)</span>
+        <div class="val">$1,619,050</div>
+        <div class="lbl">12 active listings · subject is near average</div>
+      </div>
+      <div class="divider-stat-item">
+        <span class="kicker kicker-gold" style="margin-bottom:4px;">Avg $/Sq Ft (active)</span>
+        <div class="val" style="color:#b89443;">$579</div>
+        <div class="lbl">Subject at $525/sq ft — 9% below avg · good value</div>
+      </div>
+      <div class="divider-stat-item">
+        <span class="kicker kicker-green" style="margin-bottom:4px;">Only Sale: SP/LP</span>
+        <div class="val" style="color:#3d5a2c;">101%</div>
+        <div class="lbl">150 Mansfield: list $1,449K · sold $1,465K · 2 DOM</div>
+      </div>
+      <div class="divider-stat-item">
+        <span class="kicker kicker-red" style="margin-bottom:4px;">Avg DOM (active)</span>
+        <div class="val" style="color:#a83a1f;">54</div>
+        <div class="lbl">Subject at 14 DOM — well below average</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMP TABLE -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">All 16 Listings — Complete Comparable Set</span>
+    <h2 style="font-size:40px; margin-bottom:12px; font-style:italic;">Full market data</h2>
+    <p style="font-size:14px; color:#6b655a; margin-bottom:24px;">Subject property highlighted in blue. Two new-build/lot listings included for context — excluded from price averages. Sorted by DOM.</p>
+
+    <div style="overflow-x:auto;">
+      <table class="editorial">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Status</th>
+            <th>List Price</th>
+            <th>Sold</th>
+            <th>SP/LP</th>
+            <th>Beds (AG+BG)</th>
+            <th>Baths</th>
+            <th>AG SqFt</th>
+            <th>$/SqFt</th>
+            <th>DOM</th>
+            <th>Built</th>
+            <th>Taxes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="sold-row">
+            <td><strong>150 Mansfield Dr</strong></td>
+            <td><span class="pill pill-green">Sold</span></td>
+            <td class="num">$1,449,000</td>
+            <td class="num"><strong>$1,465,000</strong></td>
+            <td class="num" style="color:#3d5a2c;"><strong>101%</strong></td>
+            <td class="num">3+0</td><td class="num">3</td>
+            <td class="num">1,923</td><td class="num">$762*</td>
+            <td class="num">2</td><td>1957</td><td class="num">$8,549</td>
+          </tr>
+          <tr>
+            <td>28 Deerview Ave</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$1,795,000</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">3+1</td><td class="num">4(3F+1H)</td>
+            <td class="num">2,700</td><td class="num">$665</td>
+            <td class="num">5 (80)</td><td>1988</td><td class="num">$10,300</td>
+          </tr>
+          <tr>
+            <td>39 Maureen Ave</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$1,799,900</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">4+0</td><td class="num">3(2F+1H)</td>
+            <td class="num">2,449</td><td class="num">$735</td>
+            <td class="num">7</td><td>51-99yr</td><td class="num">$8,000</td>
+          </tr>
+          <tr>
+            <td>53 Lovers Lane</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$1,650,000</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">3+0</td><td class="num">2(1F+1H)</td>
+            <td class="num">1,510</td><td class="num">$1,093</td>
+            <td class="num">7</td><td>1954</td><td class="num">$7,710</td>
+          </tr>
+          <tr class="cond-row">
+            <td>64 Miller Dr</td>
+            <td><span class="pill pill-gold">Conditional</span></td>
+            <td class="num">$1,499,000</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">3+1</td><td class="num">3F</td>
+            <td class="num">1,888</td><td class="num">$794</td>
+            <td class="num">7</td><td>1956</td><td class="num">$6,200</td>
+          </tr>
+          <tr>
+            <td>81 Reding Rd</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$1,529,900</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">3+1</td><td class="num">4(3F+1H)</td>
+            <td class="num">2,962</td><td class="num">$516</td>
+            <td class="num">12 (61)</td><td>1983</td><td class="num">$10,633</td>
+          </tr>
+          <tr class="subject-row">
+            <td><strong>156 Valmont St ★</strong></td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num"><strong>$1,650,000</strong></td><td class="num">—</td><td class="num">—</td>
+            <td class="num"><strong>4+0</strong></td><td class="num"><strong>3(2F+1H)</strong></td>
+            <td class="num"><strong>3,141</strong></td><td class="num"><strong>$525</strong></td>
+            <td class="num"><strong>14</strong></td><td><strong>2001</strong></td><td class="num">$9,182</td>
+          </tr>
+          <tr>
+            <td>178 Valmont Ct</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$1,799,900</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">4+0</td><td class="num">4(3F+1H)</td>
+            <td class="num">3,100</td><td class="num">$581</td>
+            <td class="num">31</td><td>2001</td><td class="num">$10,146</td>
+          </tr>
+          <tr>
+            <td>405 Valridge Dr</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$1,499,900</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">4+1</td><td class="num">4(3F+1H)</td>
+            <td class="num">2,780</td><td class="num">$540</td>
+            <td class="num">35 (68)</td><td>2010</td><td class="num">$9,549</td>
+          </tr>
+          <tr class="sold-row">
+            <td>400 Hamilton Dr</td>
+            <td><span class="pill pill-green">Sold</span></td>
+            <td class="num">$1,799,900</td>
+            <td class="num"><strong>$1,650,000</strong></td>
+            <td class="num" style="color:#a83a1f;">91.7%</td>
+            <td class="num">4+1</td><td class="num">5(4F+1H)</td>
+            <td class="num">3,200</td><td class="num">$516*</td>
+            <td class="num">45</td><td>2013</td><td class="num">$10,456</td>
+          </tr>
+          <tr>
+            <td>483 Valridge Dr</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$1,699,999</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">4+0</td><td class="num">4(3F+1H)</td>
+            <td class="num">2,682</td><td class="num">$634</td>
+            <td class="num">59</td><td>16-30yr</td><td class="num">$10,157</td>
+          </tr>
+          <tr>
+            <td>63 Cait Ct</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$1,499,900</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">4+0</td><td class="num">3F</td>
+            <td class="num">2,400</td><td class="num">$625</td>
+            <td class="num">61</td><td>1957</td><td class="num">$9,771</td>
+          </tr>
+          <tr>
+            <td>49 Roselawn Ave</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$1,795,000</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">4+0</td><td class="num">5(4F+1H)</td>
+            <td class="num">3,381</td><td class="num">$531</td>
+            <td class="num">63</td><td>New</td><td class="num">—</td>
+          </tr>
+          <tr>
+            <td>138 Miller Dr</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$1,525,000</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">4+0</td><td class="num">4(3F+1H)</td>
+            <td class="num">2,587</td><td class="num">$589</td>
+            <td class="num">76</td><td>1990</td><td class="num">$7,686</td>
+          </tr>
+          <tr>
+            <td>456 Valridge Dr</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$1,449,000</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">4+0</td><td class="num">4(3F+1H)</td>
+            <td class="num">2,920</td><td class="num">$496</td>
+            <td class="num">108</td><td>2009</td><td class="num">$9,470</td>
+          </tr>
+          <tr>
+            <td>Lot 11 Miller Dr</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$1,495,000</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">3+0</td><td class="num">2F</td>
+            <td class="num">1,550</td><td class="num">$965</td>
+            <td class="num">203 (327)</td><td>New</td><td class="num">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:11px; color:#6b655a; margin-top:10px; font-family:'JetBrains Mono',monospace;">★ Subject property. *$/SqFt on sold price for closed properties; list price for active. New-build lots (49 Roselawn, Lot 11 Miller) excluded from $/sq ft and DOM averages. DOM shown as current/CDOM where different.</p>
+  </div>
+</section>
+
+<!-- CHARTS -->
+<section class="pad-lg alt">
+  <div class="max">
+    <span class="kicker kicker-navy">Visual Statistics</span>
+    <h2 style="font-size:40px; margin-bottom:28px; font-style:italic;">Price, size &amp; market pace</h2>
+
+    <div class="grid g2" style="gap:24px; margin-bottom:24px;">
+      <div>
+        <span class="kicker kicker-navy" style="margin-bottom:10px;">List / Sold Prices — All 16 Listings</span>
+        <div class="chart-frame" style="height:300px;"><canvas id="priceChart"></canvas></div>
+      </div>
+      <div>
+        <span class="kicker kicker-gold" style="margin-bottom:10px;">Price Per Sq Ft (List / Sold)</span>
+        <div class="chart-frame" style="height:300px;"><canvas id="psfChart"></canvas></div>
+      </div>
+    </div>
+    <div class="grid g2" style="gap:24px;">
+      <div>
+        <span class="kicker kicker-red" style="margin-bottom:10px;">Days on Market — Active Listings</span>
+        <div class="chart-frame" style="height:240px;"><canvas id="domChart"></canvas></div>
+      </div>
+      <div>
+        <span class="kicker kicker-green" style="margin-bottom:10px;">AG Sq Ft — How Subject Compares</span>
+        <div class="chart-frame" style="height:240px;"><canvas id="sqftChart"></canvas></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANALYSIS -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">Market Analysis</span>
+    <h2 style="font-size:40px; margin-bottom:28px; font-style:italic;">Positioning &amp; context</h2>
+
+    <div class="grid g2" style="gap:28px;">
+      <div>
+        <div style="background:#ebe5d6; padding:24px; margin-bottom:20px;">
+          <span class="kicker kicker-navy" style="margin-bottom:14px;">Subject at a Glance</span>
+          <table class="editorial">
+            <tbody>
+              <tr><td style="color:#6b655a;">List Price vs. Active Avg</td><td class="num">$1,650,000 vs. $1,619,050</td></tr>
+              <tr><td style="color:#6b655a;">$/SqFt vs. Active Avg</td><td class="num">$525 vs. $579 (9% below)</td></tr>
+              <tr><td style="color:#6b655a;">AG SqFt vs. Active Avg</td><td class="num">3,141 vs. 2,575 (22% larger)</td></tr>
+              <tr><td style="color:#6b655a;">DOM vs. Active Avg</td><td class="num">14 vs. 54 days (ahead of market)</td></tr>
+              <tr><td style="color:#6b655a;">Taxes vs. Active Avg</td><td class="num">$9,182 vs. $9,261 (at avg)</td></tr>
+              <tr><td style="color:#6b655a;">Valmont Ct comp (same era)</td><td class="num">$1,799,900 · 3,100 sq ft · $581/sq ft</td></tr>
+              <tr><td style="color:#6b655a;">Only confirmed sale</td><td class="num">$1,465,000 · 101% SP/LP · 2 DOM</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="pull-quote" style="margin-bottom:20px;">
+          "156 Valmont is the largest 2001-built home on the market — 3,141 sq ft at $525/sq ft when the nearest comparable (178 Valmont Ct) asks $581/sq ft for effectively the same home."
+        </div>
+        <div style="background:#ebe5d6; padding:20px 22px; border-left:4px solid #1A3A6B;">
+          <span class="kicker kicker-navy" style="margin-bottom:8px;">Market Context</span>
+          <p style="margin:0; font-size:13px; line-height:1.7;">
+            The one confirmed sale (150 Mansfield Dr) sold <strong>over asking at $1,465,000 in 2 days</strong> — well-priced homes are moving fast. The stale listings (60–200+ DOM) are concentrated at the upper end where pricing has been aspirational. At 14 DOM, 156 Valmont is still in its early window.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid max">
+    <div>
+      <div style="font-size:14px; color:#f5f1e8; font-family:'Fraunces',serif; font-style:italic; margin-bottom:8px;">Woolcott Real Estate</div>
+      <div class="muted">RE/MAX Escarpment Realty Inc. · 905-689-9223</div>
+      <div class="muted" style="margin-top:4px;">Prepared by Henry (AI Assistant) · June 8, 2026</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="muted">Ancaster · Hamilton Area 43 · Detached $1.4M–$1.8M</div>
+      <div class="muted" style="margin-top:4px;">16 listings · June 2026 · Cornerstone Association of REALTORS® MLS. Information deemed reliable but not guaranteed.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  Chart.defaults.font.family = "'Manrope', sans-serif";
+  Chart.defaults.font.size = 10;
+  Chart.defaults.color = "#6b655a";
+
+  const labels = ['150 Mansfield\n(SOLD)','28 Deerview','39 Maureen','53 Lovers Ln','64 Miller\n(Cond)','81 Reding','156 Valmont★','178 Valmont Ct','405 Valridge','400 Hamilton\n(SOLD)','483 Valridge','63 Cait Ct','49 Roselawn','138 Miller','456 Valridge','Lot 11 Miller'];
+  const prices = [1465000,1795000,1799900,1650000,1499000,1529900,1650000,1799900,1499900,1650000,1699999,1499900,1795000,1525000,1449000,1495000];
+  const pColors = prices.map((_,i) => {
+    if(i===0||i===9) return '#d6e0c8';
+    if(i===6) return '#1A3A6B';
+    if(i===4) return '#f4e5c7';
+    return '#dde4ee';
+  });
+
+  new Chart(document.getElementById('priceChart'), {
+    type: 'bar',
+    data: { labels, datasets: [{ data: prices, backgroundColor: pColors, borderColor: pColors, borderWidth: 1.5 }] },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend:{display:false}, tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',bodyFont:{family:"'JetBrains Mono', monospace"},cornerRadius:0,callbacks:{label:c=>' $'+c.parsed.y.toLocaleString('en-CA')}} },
+      scales: { x:{grid:{display:false},ticks:{font:{size:8},maxRotation:45}}, y:{grid:{color:'rgba(26,26,30,0.06)'},ticks:{callback:v=>'$'+(v/1000000).toFixed(2)+'M'},min:1300000} } }
+  });
+
+  const psf = [762,665,735,1093,794,516,525,581,540,516,634,625,531,589,496,965];
+  const psfColors = psf.map((_,i)=>i===6?'#1A3A6B':i===0||i===9?'#d6e0c8':i===4?'#f4e5c7':'#dde4ee');
+  new Chart(document.getElementById('psfChart'), {
+    type: 'bar',
+    data: { labels, datasets: [{ data: psf, backgroundColor: psfColors, borderColor: psfColors, borderWidth: 1.5 }] },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend:{display:false}, tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',bodyFont:{family:"'JetBrains Mono', monospace"},cornerRadius:0,callbacks:{label:c=>' $'+c.parsed.y+'/sq ft'}} },
+      scales: { x:{grid:{display:false},ticks:{font:{size:8},maxRotation:45}}, y:{grid:{color:'rgba(26,26,30,0.06)'},ticks:{callback:v=>'$'+v},min:400} } }
+  });
+
+  // DOM — active only, sorted
+  const domLabels = ['Lot 11 Miller','456 Valridge','49 Roselawn','138 Miller','63 Cait Ct','483 Valridge','400 Hamilton','81 Reding','178 Valmont Ct','405 Valridge','156 Valmont★','64 Miller','53 Lovers Ln','39 Maureen','28 Deerview'];
+  const domVals   = [203,108,63,76,61,59,45,12,31,35,14,7,7,7,5];
+  const dColors = domVals.map((_,i)=>domLabels[i]==='156 Valmont★'?'#1A3A6B':domVals[i]>=60?'#f5d4cb':domVals[i]>=30?'#f4e5c7':'#dde4ee');
+  new Chart(document.getElementById('domChart'), {
+    type: 'bar', indexAxis: 'y',
+    data: { labels: domLabels, datasets: [{ data: domVals, backgroundColor: dColors, borderColor: dColors, borderWidth: 1.5 }] },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend:{display:false}, tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',bodyFont:{family:"'JetBrains Mono', monospace"},cornerRadius:0,callbacks:{label:c=>' '+c.parsed.x+' days'}} },
+      scales: { y:{grid:{display:false},ticks:{font:{size:9}}}, x:{grid:{color:'rgba(26,26,30,0.06)'},ticks:{callback:v=>v+'d'}} } }
+  });
+
+  // SqFt
+  const sqftLabels = ['53 Lovers Ln','Lot 11 Miller','150 Mansfield','64 Miller','2093 Fairview','405 Valridge','405 Valridge','39 Maureen','138 Miller','28 Deerview','63 Cait Ct','456 Valridge','483 Valridge','81 Reding','178 Valmont Ct','156 Valmont★','49 Roselawn','400 Hamilton'];
+  const sqftSorted = [{l:'53 Lovers Ln',v:1510},{l:'Lot 11 Miller',v:1550},{l:'150 Mansfield',v:1923},{l:'64 Miller',v:1888},{l:'39 Maureen',v:2449},{l:'63 Cait Ct',v:2400},{l:'138 Miller',v:2587},{l:'483 Valridge',v:2682},{l:'405 Valridge',v:2780},{l:'28 Deerview',v:2700},{l:'456 Valridge',v:2920},{l:'81 Reding',v:2962},{l:'178 Valmont Ct',v:3100},{l:'156 Valmont★',v:3141},{l:'49 Roselawn',v:3381},{l:'400 Hamilton',v:3200}].sort((a,b)=>a.v-b.v);
+  new Chart(document.getElementById('sqftChart'), {
+    type: 'bar',
+    data: { labels: sqftSorted.map(d=>d.l), datasets: [{ data: sqftSorted.map(d=>d.v), backgroundColor: sqftSorted.map(d=>d.l==='156 Valmont★'?'#1A3A6B':'#dde4ee'), borderColor: sqftSorted.map(d=>d.l==='156 Valmont★'?'#1A3A6B':'rgba(26,26,30,0.2)'), borderWidth: 1.5 }] },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend:{display:false}, tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',bodyFont:{family:"'JetBrains Mono', monospace"},cornerRadius:0,callbacks:{label:c=>' '+c.parsed.y.toLocaleString()+' sq ft'}} },
+      scales: { x:{grid:{display:false},ticks:{font:{size:8},maxRotation:45}}, y:{grid:{color:'rgba(26,26,30,0.06)'},ticks:{callback:v=>v.toLocaleString()}} } }
+  });
+</script>
+</body>
+</html>
