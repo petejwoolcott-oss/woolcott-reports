@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>B418-5240 Dundas St — Market Statistics | Woolcott Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #f5f1e8; color: #1a1a1e;
+    font-family: 'Manrope', system-ui, sans-serif; line-height: 1.6; }
+  h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 700; line-height: 1.15; margin: 0; }
+  .kicker { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace; color: #6b655a; font-weight: 500; margin-bottom: 12px; display: block; }
+  .kicker-navy { color: #1A3A6B; } .kicker-gold { color: #b89443; }
+  .kicker-red { color: #a83a1f; } .kicker-green { color: #3d5a2c; }
+  .pad { padding: 56px 48px; } .pad-lg { padding: 80px 48px; }
+  .alt { background: #ebe5d6; } .max { max-width: 1200px; margin: 0 auto; }
+  .grid { display: grid; gap: 24px; }
+  .g2 { grid-template-columns: 1fr 1fr; } .g3 { grid-template-columns: 1fr 1fr 1fr; }
+  .g4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .banner-navy { background: #1A3A6B; color: #f5f1e8; }
+  .tile { background: #f5f1e8; padding: 24px; border-top: 6px solid #1A3A6B; }
+  .tile-red { border-top-color: #a83a1f; } .tile-green { border-top-color: #3d5a2c; }
+  .tile-gold { border-top-color: #b89443; }
+  .tile .stat { font-family: 'Fraunces', Georgia, serif; font-size: 48px; font-weight: 700; color: #1A3A6B; line-height: 1; margin: 8px 0 4px; }
+  .tile-red .stat { color: #a83a1f; } .tile-green .stat { color: #3d5a2c; } .tile-gold .stat { color: #b89443; }
+  .tile .label { font-size: 12px; color: #6b655a; margin-top: 6px; line-height: 1.4; }
+  .tile .sub { font-size: 10px; font-family: 'JetBrains Mono', monospace; color: #6b655a; margin-top: 4px; }
+  .pull-quote { border-left: 4px solid #1A3A6B; background: #f5f1e8; padding: 24px 28px;
+    font-family: 'Fraunces', Georgia, serif; font-size: 18px; font-style: italic; line-height: 1.5; }
+  .pill { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 9px;
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  .pill-navy { background: #dde4ee; color: #1A3A6B; } .pill-red { background: #f5d4cb; color: #a83a1f; }
+  .pill-green { background: #d6e0c8; color: #3d5a2c; } .pill-gold { background: #f4e5c7; color: #8B6B1F; }
+  table.editorial { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+  table.editorial th { font-size: 9px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #6b655a; border-bottom: 2px solid #1a1a1e; padding: 8px 7px; text-align: left; white-space: nowrap; }
+  table.editorial td { padding: 8px 7px; border-bottom: 1px solid rgba(26,26,30,0.1); vertical-align: middle; white-space: nowrap; }
+  table.editorial tr:last-child td { border-bottom: none; }
+  table.editorial .num { font-family: 'JetBrains Mono', monospace; }
+  table.editorial tr.subject-row td { background: #dde4ee; font-weight: 700; }
+  table.editorial tr.sold-row td { background: rgba(61,90,44,0.07); }
+  table.editorial tr.cond-row td { background: rgba(184,148,67,0.07); }
+  .chart-frame { background: #f5f1e8; padding: 20px; border: 1px solid rgba(26,26,30,0.13); }
+  .divider-stat { display: flex; gap: 0; border: 1px solid rgba(26,26,30,0.12); }
+  .divider-stat-item { flex: 1; padding: 20px 24px; border-right: 1px solid rgba(26,26,30,0.12); }
+  .divider-stat-item:last-child { border-right: none; }
+  .divider-stat-item .val { font-family: 'Fraunces', Georgia, serif; font-size: 28px; font-weight: 700; color: #1A3A6B; margin: 4px 0 2px; }
+  .divider-stat-item .lbl { font-size: 11px; color: #6b655a; }
+  footer { background: #1a1a1e; color: #f5f1e8; padding: 36px 48px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.8; }
+  footer .muted { color: #6b655a; }
+  footer .footer-grid { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="banner-navy pad">
+  <div class="max">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:40px;">
+      <div>
+        <span class="kicker" style="color:#b89443;">Woolcott Real Estate · Burlington Condo Market Statistics</span>
+        <h1 style="font-size:46px; color:#f5f1e8; font-style:italic; line-height:1.1; margin-top:8px;">
+          B418 – 5240 Dundas Street<br><span style="font-weight:400; font-size:28px;">Burlington, Ontario · Orchard Community · LINK Building</span>
+        </h1>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:12px; font-family:'JetBrains Mono',monospace; color:#b89443; opacity:0.8; margin-top:8px;">
+          Prepared June 8, 2026<br>MLS# 40817494 · Listing: Drew Woolcott / John Summach
+        </div>
+      </div>
+    </div>
+    <div class="grid g4">
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:18px;">
+        <div style="font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Current List Price</div>
+        <div style="font-family:'Fraunces',serif; font-size:32px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">$417,000</div>
+        <div style="font-size:11px; color:rgba(245,241,232,0.6);">Reduced from $429,000 · 65 DOM</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:18px;">
+        <div style="font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Size</div>
+        <div style="font-family:'Fraunces',serif; font-size:32px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">530 sq ft</div>
+        <div style="font-size:11px; color:rgba(245,241,232,0.6);">1 bed · 1 bath · south exposure · 4th floor</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:18px;">
+        <div style="font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Condo Fee</div>
+        <div style="font-family:'Fraunces',serif; font-size:32px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">$445/mo</div>
+        <div style="font-size:11px; color:rgba(245,241,232,0.6);">+ $74.60/mo rental costs · incl. bldg ins, common, water</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:18px;">
+        <div style="font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">$/Sq Ft</div>
+        <div style="font-family:'Fraunces',serif; font-size:32px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">$787</div>
+        <div style="font-size:11px; color:rgba(245,241,232,0.6);">vs. active comp avg $683</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBJECT PROFILE -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">Subject Property Profile</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">5240 Dundas St, Unit B418</h2>
+    <p style="font-size:15px; color:#6b655a; max-width:720px; margin-bottom:36px;">
+      Listed April 4, 2026 — originally at $429,000, reduced $12,000 to $417,000 after 65 days. Orchard neighbourhood, LINK building, south-facing courtyard unit with enclosed balcony. Woolcott listing.
+    </p>
+
+    <div class="grid g2" style="gap:28px; margin-bottom:28px;">
+      <div>
+        <table class="editorial">
+          <tbody>
+            <tr><td style="color:#6b655a; width:160px;">Address</td><td><strong>B418 – 5240 Dundas St, Burlington L7L 0J6</strong></td></tr>
+            <tr><td style="color:#6b655a;">MLS #</td><td class="num">40817494</td></tr>
+            <tr><td style="color:#6b655a;">Status</td><td><span class="pill pill-navy">Active</span> 65 DOM</td></tr>
+            <tr><td style="color:#6b655a;">Original Ask</td><td class="num">$429,000 <span style="color:#a83a1f; font-size:11px;">(reduced $12K)</span></td></tr>
+            <tr><td style="color:#6b655a;">Current Ask</td><td class="num"><strong>$417,000</strong></td></tr>
+            <tr><td style="color:#6b655a;">Sq Ft (AG)</td><td class="num">530</td></tr>
+            <tr><td style="color:#6b655a;">$/Sq Ft</td><td class="num">$787</td></tr>
+            <tr><td style="color:#6b655a;">Beds / Baths</td><td>1 / 1</td></tr>
+            <tr><td style="color:#6b655a;">Storey</td><td>4th floor · 1 storey apt</td></tr>
+            <tr><td style="color:#6b655a;">Exposure</td><td>South · courtyard views</td></tr>
+            <tr><td style="color:#6b655a;">Balcony</td><td>Enclosed</td></tr>
+            <tr><td style="color:#6b655a;">Condo Fee</td><td class="num">$444.80/mo + $74.60/mo rental</td></tr>
+            <tr><td style="color:#6b655a;">Fees Include</td><td>Building insurance, common elements, water</td></tr>
+            <tr><td style="color:#6b655a;">Taxes</td><td class="num">$2,672 (2025)</td></tr>
+            <tr><td style="color:#6b655a;">Parking</td><td>1 underground (owned, #286)</td></tr>
+            <tr><td style="color:#6b655a;">Locker</td><td>Owned #327</td></tr>
+            <tr><td style="color:#6b655a;">Year Built</td><td>6–15 years (approx 2011–2020)</td></tr>
+            <tr><td style="color:#6b655a;">Condo Corp</td><td>HSCC 681 · CPO Management</td></tr>
+            <tr><td style="color:#6b655a;">Listing Agent</td><td>Drew Woolcott / John Summach · RE/MAX Escarpment</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div style="background:#ebe5d6; padding:24px; margin-bottom:20px;">
+          <span class="kicker kicker-navy" style="margin-bottom:12px;">Building Amenities — LINK</span>
+          <div style="font-size:13px; line-height:1.9; color:#1a1a1e;">
+            Underground parking · Storage locker · Visitor parking<br>
+            Fitness centre · Sauna &amp; steam rooms · Plunge pools<br>
+            Landscaped courtyard · Lounge area · BBQ facilities<br>
+            Party room · Elevator · Concierge
+          </div>
+        </div>
+        <div style="background:#ebe5d6; padding:24px;">
+          <span class="kicker kicker-gold" style="margin-bottom:12px;">Location — Orchard, Burlington</span>
+          <div style="font-size:13px; line-height:1.9; color:#1a1a1e;">
+            Steps from Bronte Provincial Park trails<br>
+            QEW · 403 · 407 · Hwy 5 access<br>
+            Restaurants, gyms, groceries, shops nearby<br>
+            Cross street: Dundas &amp; Sutton Dr
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Same building comp -->
+    <div style="background:#dde4ee; padding:20px 24px; border-left:4px solid #1A3A6B;">
+      <span class="kicker kicker-navy" style="margin-bottom:10px;">Same Building Comparable</span>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:12px;">
+        <div style="background:#f5f1e8; padding:16px;">
+          <div style="font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; color:#1A3A6B; margin-bottom:6px;">5240 Dundas St #B418 ★ Subject</div>
+          <div style="font-family:'Fraunces',serif; font-size:22px; font-weight:700;">$417,000</div>
+          <div style="font-size:12px; color:#6b655a; margin-top:4px;">1 bed · 530 sq ft · $787/sq ft · 65 DOM · $445/mo fees · Reduced from $429K</div>
+        </div>
+        <div style="background:#f5f1e8; padding:16px;">
+          <div style="font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; color:#6b655a; margin-bottom:6px;">5240 Dundas St #604 · Active</div>
+          <div style="font-family:'Fraunces',serif; font-size:22px; font-weight:700;">$425,900</div>
+          <div style="font-size:12px; color:#6b655a; margin-top:4px;">1+den · 572 sq ft · $745/sq ft · 53 DOM · $475/mo fees</div>
+        </div>
+      </div>
+      <div style="margin-top:14px; font-size:13px; color:#1a1a1e;">
+        Two units active in the same building simultaneously — both 65 DOM+ at time of preparation. The 1+den unit (#604) is asking $8,900 more for 42 extra sq ft and a den. Subject is the better value per sq ft of the two.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET SNAPSHOT -->
+<section class="pad-lg alt">
+  <div class="max">
+    <span class="kicker kicker-gold">Market Snapshot — 38 Burlington 1-Bed Condos</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">Where the market stands</h2>
+    <p style="font-size:15px; color:#6b655a; max-width:720px; margin-bottom:40px;">
+      Burlington's 1-bedroom condo segment is heavily supplied — 30 active listings, 3 conditional, 3 confirmed sales. Every sale has come in below asking. This is a buyer's market.
+    </p>
+
+    <div class="grid g4" style="margin-bottom:32px;">
+      <div class="tile">
+        <span class="kicker kicker-navy">Active Listings</span>
+        <div class="stat">30</div>
+        <div class="label">In the Burlington 1-bed condo set</div>
+        <div class="sub">$359,500 – $450,000</div>
+      </div>
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">Conditional</span>
+        <div class="stat" style="font-size:40px; color:#b89443;">3</div>
+        <div class="label">Under offer · incl. 1 with no escape clause</div>
+        <div class="sub">$399,999 – $475,000</div>
+      </div>
+      <div class="tile tile-green">
+        <span class="kicker kicker-green">Confirmed Sales</span>
+        <div class="stat" style="font-size:40px; color:#3d5a2c;">3</div>
+        <div class="label">All sold below asking · avg 95.6% SP/LP</div>
+        <div class="sub">$365K · $410K · $450K</div>
+      </div>
+      <div class="tile tile-red">
+        <span class="kicker kicker-red">Avg DOM (active)</span>
+        <div class="stat" style="font-size:40px; color:#a83a1f;">28</div>
+        <div class="label">Days on market · subject at 65 is well above average</div>
+        <div class="sub">Range: 4–62 days</div>
+      </div>
+    </div>
+
+    <!-- Inline stat row -->
+    <div class="divider-stat">
+      <div class="divider-stat-item">
+        <span class="kicker kicker-navy" style="margin-bottom:4px;">Avg List Price</span>
+        <div class="val">$415,660</div>
+        <div class="lbl">Active listings · subject asks $417K — near average</div>
+      </div>
+      <div class="divider-stat-item">
+        <span class="kicker kicker-gold" style="margin-bottom:4px;">Avg $/Sq Ft</span>
+        <div class="val" style="color:#b89443;">$683</div>
+        <div class="lbl">Active set · subject at $787/sq ft — above average</div>
+      </div>
+      <div class="divider-stat-item">
+        <span class="kicker kicker-green" style="margin-bottom:4px;">Avg Sale Price</span>
+        <div class="val" style="color:#3d5a2c;">$408,333</div>
+        <div class="lbl">3 confirmed sales · avg $19,667 below ask</div>
+      </div>
+      <div class="divider-stat-item">
+        <span class="kicker kicker-red" style="margin-bottom:4px;">Avg SP/LP</span>
+        <div class="val" style="color:#a83a1f;">95.6%</div>
+        <div class="lbl">Sellers receiving ~4.4% below their ask on average</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMP TABLE — ACTIVE -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">Active Market — All 30 Listings</span>
+    <h2 style="font-size:40px; margin-bottom:12px; font-style:italic;">Full comparable set</h2>
+    <p style="font-size:14px; color:#6b655a; margin-bottom:24px;">Subject property highlighted. Sorted by DOM — longest exposure first.</p>
+
+    <div style="overflow-x:auto;">
+      <table class="editorial">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>List Price</th>
+            <th>Orig Ask</th>
+            <th>SqFt</th>
+            <th>$/SqFt</th>
+            <th>Beds</th>
+            <th>Condo Fee</th>
+            <th>Taxes</th>
+            <th>DOM</th>
+            <th>Built</th>
+            <th>Parking</th>
+            <th>Locker</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>3210 Dakota Common #A504</td><td class="num">$399,900</td><td class="num">$399,900</td><td class="num">497</td><td class="num">$805</td><td>1</td><td class="num">$466</td><td class="num">$2,371</td><td class="num">62</td><td>2023</td><td>1 UG</td><td>✓</td></tr>
+          <tr><td>1431 Walkers Line #208</td><td class="num">$390,000</td><td class="num">$390,000</td><td class="num">600</td><td class="num">$650</td><td>1+den</td><td class="num">$437</td><td class="num">$2,121</td><td class="num">56</td><td>16-30yr</td><td>1 surf</td><td>✓</td></tr>
+          <tr><td>5240 Dundas St #604</td><td class="num">$425,900</td><td class="num">$425,900</td><td class="num">572</td><td class="num">$745</td><td>1+den</td><td class="num">$475</td><td class="num">$2,925</td><td class="num">53</td><td>2018</td><td>1 UG</td><td>✓</td></tr>
+          <tr><td>5220 Dundas St #D619</td><td class="num">$379,900</td><td class="num">$379,900</td><td class="num">558</td><td class="num">$681</td><td>1</td><td class="num">$474</td><td class="num">$2,545</td><td class="num">52</td><td>2017</td><td>1 UG</td><td>✓</td></tr>
+          <tr><td>3060 Rotary Way #226</td><td class="num">$439,900</td><td class="num">$439,900</td><td class="num">689</td><td class="num">$639</td><td>1+den</td><td class="num">$544</td><td class="num">$2,604</td><td class="num">45</td><td>6-15yr</td><td>2</td><td>✓</td></tr>
+          <tr class="subject-row"><td><strong>5240 Dundas St #B418 ★</strong></td><td class="num"><strong>$417,000</strong></td><td class="num" style="color:#a83a1f;">$429,000</td><td class="num">530</td><td class="num">$787</td><td><strong>1</strong></td><td class="num">$445</td><td class="num">$2,672</td><td class="num"><strong>65</strong></td><td>6-15yr</td><td>1 UG</td><td>✓</td></tr>
+          <tr><td>1119 Cooke Blvd #B121</td><td class="num">$359,500</td><td class="num">$359,500</td><td class="num">453</td><td class="num">$793</td><td>1</td><td class="num">$583</td><td class="num">$2,244</td><td class="num">38 (135)</td><td>2021</td><td>1 UG</td><td>✓</td></tr>
+          <tr><td>1117 Cooke Blvd #A305</td><td class="num">$379,900</td><td class="num">$379,900</td><td class="num">529</td><td class="num">$718</td><td>1</td><td class="num">$606</td><td class="num">$2,575</td><td class="num">38</td><td>2021</td><td>1 UG</td><td>✓</td></tr>
+          <tr><td>4005 Kilmer Dr #406</td><td class="num">$399,999</td><td class="num">$399,999</td><td class="num">637</td><td class="num">$628</td><td>1+den</td><td class="num">$728</td><td class="num">$2,099</td><td class="num">38</td><td>1998</td><td>1 surf</td><td>✓</td></tr>
+          <tr><td>1117 Cooke Blvd #A410</td><td class="num">$389,900</td><td class="num">$389,900</td><td class="num">593</td><td class="num">$658</td><td>1+den</td><td class="num">$678</td><td class="num">$2,847</td><td class="num">36</td><td>6-15yr</td><td>1 cov</td><td>✓</td></tr>
+          <tr><td>2087 Fairview St #2002</td><td class="num">$449,000</td><td class="num">$449,000</td><td class="num">620</td><td class="num">$724</td><td>1</td><td class="num">$595</td><td class="num">$2,652</td><td class="num">19</td><td>2017</td><td>1 UG</td><td>✓</td></tr>
+          <tr><td>1284 Guelph Line #318</td><td class="num">$414,900</td><td class="num">$414,900</td><td class="num">627</td><td class="num">$662</td><td>1+den</td><td class="num">$568</td><td class="num">$2,536</td><td class="num">18</td><td>2015</td><td>1 UG</td><td>✓</td></tr>
+          <tr><td>3200 Dakota Common #B310</td><td class="num">$429,900</td><td class="num">$429,900</td><td class="num">587</td><td class="num">$732</td><td>1+den</td><td class="num">$525</td><td class="num">$2,792</td><td class="num">17</td><td>2022</td><td>1 UG</td><td>✓</td></tr>
+          <tr><td>5317 Upper Middle Rd #312</td><td class="num">$450,000</td><td class="num">$450,000</td><td class="num">709</td><td class="num">$635</td><td>1</td><td class="num">$633</td><td class="num">$2,924</td><td class="num">25</td><td>2013</td><td>1 UG</td><td>✓</td></tr>
+          <tr><td>1284 Guelph Line #305</td><td class="num">$415,000</td><td class="num">$415,000</td><td class="num">611</td><td class="num">$679</td><td>1+den</td><td class="num">$509</td><td class="num">$2,569</td><td class="num">26</td><td>2015</td><td>1 UG</td><td>—</td></tr>
+          <tr><td>2093 Fairview St #709</td><td class="num">$399,900</td><td class="num">$399,900</td><td class="num">515</td><td class="num">$777</td><td>1</td><td class="num">$499</td><td class="num">$2,556</td><td class="num">26</td><td>6-15yr</td><td>1 UG</td><td>✓</td></tr>
+          <tr><td>4878 Powers Common #126</td><td class="num">$449,000</td><td class="num">$449,000</td><td class="num">546</td><td class="num">$822</td><td>1</td><td class="num">—</td><td class="num">—</td><td class="num">24</td><td>New</td><td>1 UG</td><td>—</td></tr>
+          <tr><td>4040 Upper Middle Rd #319</td><td class="num">$439,000</td><td class="num">$439,000</td><td class="num">697</td><td class="num">$630</td><td>1+den</td><td class="num">$690</td><td class="num">$2,312</td><td class="num">5</td><td>2019</td><td>1 UG</td><td>✓</td></tr>
+          <tr><td>5010 Corporate Dr #408</td><td class="num">$429,900</td><td class="num">$429,900</td><td class="num">535</td><td class="num">$803</td><td>1</td><td class="num">$384*</td><td class="num">$2,908</td><td class="num">5</td><td>2014</td><td>1 UG</td><td>✓</td></tr>
+          <tr><td>4015 Kilmer Dr #406</td><td class="num">$399,000</td><td class="num">$399,000</td><td class="num">709</td><td class="num">$563</td><td>1+den</td><td class="num">$498</td><td class="num">$2,011</td><td class="num">4</td><td>1996-10</td><td>1 UG</td><td>✓</td></tr>
+          <tr><td>2081 Fairview St #1402</td><td class="num">$399,900</td><td class="num">$399,900</td><td class="num">567</td><td class="num">$706</td><td>1</td><td class="num">$547</td><td class="num">$2,448</td><td class="num">4</td><td>2017</td><td>1 UG</td><td>✓</td></tr>
+          <tr><td>4040 Upper Middle Rd #105</td><td class="num">$399,900</td><td class="num">$399,900</td><td class="num">636</td><td class="num">$629</td><td>1+den</td><td class="num">$619</td><td class="num">$2,147</td><td class="num">4</td><td>2019</td><td>1 UG</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:11px; color:#6b655a; margin-top:10px; font-family:'JetBrains Mono',monospace;">★ Subject property. *5010 Corporate Dr fee may be monthly, not annual. $/SqFt = list price ÷ AG sq ft. UG = underground.</p>
+  </div>
+</section>
+
+<!-- SOLD TABLE -->
+<section class="pad-lg alt">
+  <div class="max">
+    <span class="kicker kicker-green">Confirmed Sales</span>
+    <h2 style="font-size:40px; margin-bottom:12px; font-style:italic;">3 recent Burlington 1-bed condo transactions</h2>
+    <p style="font-size:14px; color:#6b655a; margin-bottom:24px;">Every confirmed sale came in below asking. Average discount: $19,667.</p>
+
+    <div style="overflow-x:auto;">
+      <table class="editorial">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>List Price</th>
+            <th>Sold Price</th>
+            <th>SP / LP</th>
+            <th>$ Gap</th>
+            <th>SqFt</th>
+            <th>$/SqFt (sold)</th>
+            <th>DOM</th>
+            <th>Condo Fee</th>
+            <th>Close</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="sold-row">
+            <td><strong>4005 Kilmer Dr #410</strong></td>
+            <td class="num">$370,000</td><td class="num"><strong>$365,000</strong></td>
+            <td class="num">98.6%</td><td class="num" style="color:#a83a1f;">−$5,000</td>
+            <td class="num">592</td><td class="num">$617</td><td class="num">16</td><td class="num">$693</td><td>Sep 11/26</td>
+          </tr>
+          <tr class="sold-row">
+            <td><strong>340 Plains Rd E #202</strong></td>
+            <td class="num">$439,000</td><td class="num"><strong>$410,000</strong></td>
+            <td class="num">93.4%</td><td class="num" style="color:#a83a1f;">−$29,000</td>
+            <td class="num">752</td><td class="num">$545</td><td class="num">30</td><td class="num">$622</td><td>Jun 12/26</td>
+          </tr>
+          <tr class="sold-row">
+            <td><strong>1225 North Shore Blvd E #307</strong></td>
+            <td class="num">$475,000</td><td class="num"><strong>$450,000</strong></td>
+            <td class="num">94.7%</td><td class="num" style="color:#a83a1f;">−$25,000</td>
+            <td class="num">910</td><td class="num">$495</td><td class="num">27</td><td class="num">$655</td><td>Jul 22/26</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:#f5f1e8; padding:24px; border-top:4px solid #3d5a2c;">
+        <span class="kicker kicker-green" style="margin-bottom:10px;">Sale Averages</span>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div><div style="font-family:'Fraunces',serif; font-size:28px; font-weight:700; color:#3d5a2c;">$408,333</div><div style="font-size:11px; color:#6b655a;">Avg sale price</div></div>
+          <div><div style="font-family:'Fraunces',serif; font-size:28px; font-weight:700; color:#a83a1f;">95.6%</div><div style="font-size:11px; color:#6b655a;">Avg SP/LP ratio</div></div>
+          <div><div style="font-family:'Fraunces',serif; font-size:28px; font-weight:700; color:#a83a1f;">$19,667</div><div style="font-size:11px; color:#6b655a;">Avg discount from ask</div></div>
+          <div><div style="font-family:'Fraunces',serif; font-size:28px; font-weight:700; color:#1A3A6B;">24 days</div><div style="font-size:11px; color:#6b655a;">Avg DOM at sale</div></div>
+        </div>
+      </div>
+      <div class="pull-quote">
+        At current market conditions, a unit asking $417,000 is likely to trade in the <strong>$395,000–$405,000 range</strong> based on the 95.6% SP/LP average. The $12,000 reduction already made signals the seller has room to move.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHARTS -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">Visual Statistics</span>
+    <h2 style="font-size:40px; margin-bottom:28px; font-style:italic;">Market data — charted</h2>
+
+    <div class="grid g2" style="gap:24px; margin-bottom:24px;">
+      <div>
+        <span class="kicker kicker-navy" style="margin-bottom:10px;">Active Prices — All 30 Listings</span>
+        <div class="chart-frame" style="height:280px;"><canvas id="priceChart"></canvas></div>
+      </div>
+      <div>
+        <span class="kicker kicker-gold" style="margin-bottom:10px;">Price Per Sq Ft (Active)</span>
+        <div class="chart-frame" style="height:280px;"><canvas id="psfChart"></canvas></div>
+      </div>
+    </div>
+    <div class="grid g2" style="gap:24px;">
+      <div>
+        <span class="kicker kicker-red" style="margin-bottom:10px;">Days on Market (Active)</span>
+        <div class="chart-frame" style="height:240px;"><canvas id="domChart"></canvas></div>
+      </div>
+      <div>
+        <span class="kicker kicker-green" style="margin-bottom:10px;">Ask vs. Sold — 3 Recent Sales</span>
+        <div class="chart-frame" style="height:240px;"><canvas id="soldChart"></canvas></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid max">
+    <div>
+      <div style="font-size:14px; color:#f5f1e8; font-family:'Fraunces',serif; font-style:italic; margin-bottom:8px;">Woolcott Real Estate</div>
+      <div class="muted">RE/MAX Escarpment Realty Inc. · 905-689-9223</div>
+      <div class="muted" style="margin-top:4px;">Prepared by Henry (AI Assistant) · June 8, 2026</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="muted">Burlington · Halton Region · 1-Bedroom Condo Segment</div>
+      <div class="muted" style="margin-top:4px;">38 listings · June 2026 · Cornerstone Association of REALTORS® MLS. Information deemed reliable but not guaranteed.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  Chart.defaults.font.family = "'Manrope', sans-serif";
+  Chart.defaults.font.size = 10;
+  Chart.defaults.color = "#6b655a";
+
+  // Price — subject is index 5 (65 DOM sorted by DOM)
+  const priceVals = [399900,390000,425900,379900,439900,417000,359500,379900,399999,389900,449000,414900,429900,450000,415000,399900,449000,439000,429900,399000,399900,399900];
+  const pColors = priceVals.map((_,i) => i===5 ? '#1A3A6B' : '#dde4ee');
+  new Chart(document.getElementById('priceChart'), {
+    type: 'bar',
+    data: { labels: priceVals.map((_,i)=>i===5?'B418★':''), datasets: [{ data: priceVals, backgroundColor: pColors, borderColor: pColors, borderWidth: 1.5 }] },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend: {display:false}, tooltip: { backgroundColor:'#1a1a1e', titleColor:'#b89443', bodyColor:'#f5f1e8', bodyFont:{family:"'JetBrains Mono', monospace"}, cornerRadius:0, callbacks:{label:c=>' $'+c.parsed.y.toLocaleString('en-CA')} } },
+      scales: { x:{grid:{display:false},ticks:{maxRotation:0}}, y:{grid:{color:'rgba(26,26,30,0.06)'},ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'K'},min:330000} } }
+  });
+
+  const psfVals = [805,650,745,681,639,787,793,718,628,658,724,662,732,635,679,777,822,630,803,563,706,629];
+  const psfColors = psfVals.map((_,i)=>i===5?'#1A3A6B':'#dde4ee');
+  new Chart(document.getElementById('psfChart'), {
+    type: 'bar',
+    data: { labels: psfVals.map((_,i)=>i===5?'B418★':''), datasets: [{ data: psfVals, backgroundColor: psfColors, borderColor: psfColors, borderWidth: 1.5 }] },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend:{display:false}, tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',bodyFont:{family:"'JetBrains Mono', monospace"},cornerRadius:0,callbacks:{label:c=>' $'+c.parsed.y+'/sq ft'}} },
+      scales: { x:{grid:{display:false},ticks:{maxRotation:0}}, y:{grid:{color:'rgba(26,26,30,0.06)'},ticks:{callback:v=>'$'+v},min:450} } }
+  });
+
+  const domVals = [62,56,53,52,45,65,38,38,38,36,19,18,17,25,26,26,24,5,5,4,4,4];
+  const dColors = domVals.map((_,i)=>i===5?'#1A3A6B':domVals[i]>=38?'#f5d4cb':domVals[i]>=20?'#f4e5c7':'#dde4ee');
+  new Chart(document.getElementById('domChart'), {
+    type: 'bar',
+    data: { labels: domVals.map((_,i)=>i===5?'B418★':domVals[i]+'d'), datasets: [{ data: domVals, backgroundColor: dColors, borderColor: dColors, borderWidth: 1.5 }] },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend:{display:false}, tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',bodyFont:{family:"'JetBrains Mono', monospace"},cornerRadius:0,callbacks:{label:c=>' '+c.parsed.y+' days'}} },
+      scales: { x:{grid:{display:false}}, y:{grid:{color:'rgba(26,26,30,0.06)'},ticks:{callback:v=>v+'d'},min:0} } }
+  });
+
+  new Chart(document.getElementById('soldChart'), {
+    type: 'bar',
+    data: {
+      labels: ['4005 Kilmer #410','340 Plains Rd #202','1225 N Shore #307'],
+      datasets: [
+        {label:'Ask', data:[370000,439000,475000], backgroundColor:'rgba(26,58,107,0.18)', borderColor:'#1A3A6B', borderWidth:2},
+        {label:'Sold', data:[365000,410000,450000], backgroundColor:'#d6e0c8', borderColor:'#3d5a2c', borderWidth:2}
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend:{display:true,labels:{font:{family:"'JetBrains Mono', monospace",size:10}}}, tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',cornerRadius:0,callbacks:{label:c=>' $'+c.parsed.y.toLocaleString('en-CA')}} },
+      scales: { x:{grid:{display:false}}, y:{grid:{color:'rgba(26,26,30,0.06)'},ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'K'},min:300000} } }
+  });
+</script>
+</body>
+</html>
