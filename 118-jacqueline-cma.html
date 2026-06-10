@@ -107,7 +107,7 @@
     <span class="kicker kicker-navy">Pricing Recommendation</span>
     <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">Where to list — and what to expect</h2>
     <p style="font-size:15px; color:#6b655a; max-width:720px; margin-bottom:36px;">
-      Based on 13 comparable properties — 7 active, 1 conditional, 5 recently sold/pending — in Hamilton Mountain's Jerome/Ryckman's Corners neighbourhood. Well-priced homes in this area are generating strong buyer interest and competitive activity.
+      Based on 11 comparable properties — 7 active, 1 conditional, 3 recently sold — in Hamilton Mountain's Jerome/Ryckman's Corners neighbourhood. Well-priced homes in this area are generating strong buyer interest and competitive activity.
     </p>
 
     <div class="grid g2" style="margin-bottom:32px; max-width:800px;">
@@ -199,9 +199,9 @@
 
     <div class="grid g4" style="margin-bottom:32px;">
       <div class="tile tile-green">
-        <span class="kicker kicker-green">Avg SP/LP (5 sales)</span>
-        <div class="stat" style="font-size:40px; color:#3d5a2c;">96.1%</div>
-        <div class="label">Buyers paying avg 3.9% below asking · range: 93%–102%</div>
+        <span class="kicker kicker-green">Avg SP/LP (3 sales)</span>
+        <div class="stat" style="font-size:40px; color:#3d5a2c;">95.4%</div>
+        <div class="label">Buyers paying avg 4.6% below asking · range: 90%–99%</div>
         <div class="sub">Based on original list price</div>
       </div>
       <div class="tile tile-red">
@@ -212,8 +212,8 @@
       <div class="tile tile-gold">
         <span class="kicker kicker-gold">Avg Sold Price</span>
         <div class="stat" style="font-size:36px; color:#b89443;">$957,100</div>
-        <div class="label">Average of 5 confirmed sales — range $800K–$1.245M</div>
-        <div class="sub">Excl. outlier new-build at $1.245M: avg $883,875</div>
+        <div class="label">Average of 3 comparable sales — range $800K–$940K</div>
+        <div class="sub">Avg $866,500 excl. newer-built homes</div>
       </div>
       <div class="tile">
         <span class="kicker">Active Supply</span>
@@ -250,9 +250,9 @@
 <!-- FULL COMP TABLE -->
 <section class="pad-lg alt">
   <div class="max">
-    <span class="kicker kicker-navy">All 13 Comparables</span>
+    <span class="kicker kicker-navy">All 11 Comparables</span>
     <h2 style="font-size:40px; margin-bottom:12px; font-style:italic;">Complete market data</h2>
-    <p style="font-size:14px; color:#6b655a; margin-bottom:24px;">Subject property historical data highlighted. Sold rows in green. Sorted by status then DOM.</p>
+    <p style="font-size:14px; color:#6b655a; margin-bottom:24px;">Subject property historical data highlighted. Sold rows in green. Newer-built homes excluded. Sorted by status then DOM.</p>
 
     <div style="overflow-x:auto;">
       <table class="editorial">
@@ -477,7 +477,7 @@
     </div>
     <div style="text-align:right;">
       <div class="muted">Hamilton Mountain · Jerome/Ryckman's Corners · Area 18</div>
-      <div class="muted" style="margin-top:4px;">13 comparables · June 2026 · Cornerstone Association of REALTORS® MLS. Information deemed reliable but not guaranteed.</div>
+      <div class="muted" style="margin-top:4px;">11 comparables · June 2026 · Cornerstone Association of REALTORS® MLS. Information deemed reliable but not guaranteed.</div>
     </div>
   </div>
 </footer>
@@ -491,10 +491,10 @@
   new Chart(document.getElementById('soldChart'), {
     type: 'bar',
     data: {
-      labels: ['419 DiCenzo\n(14 DOM)','87 Aquasanta\n(60 DOM)','31 Republic\n(35 DOM)','237 Homebrook\n(7 DOM)','8316 Twenty Rd\n(11 DOM)','11 Jacqueline\n(35 DOM)','466 DiCenzo\n(63 DOM)'],
+      labels: ['31 Republic\n(35 DOM)','237 Homebrook\n(7 DOM)','8316 Twenty Rd\n(11 DOM)','11 Jacqueline\n(35 DOM)','466 DiCenzo\n(63 DOM)'],
       datasets: [
-        { label:'Ask', data:[1089000,1399900,949900,949900,819500,829900,1049000], backgroundColor:'rgba(26,58,107,0.15)', borderColor:'#1A3A6B', borderWidth:2 },
-        { label:'Sold', data:[1060000,1245000,860000,940000,800000,805500,930000], backgroundColor:'#d6e0c8', borderColor:'#3d5a2c', borderWidth:2 }
+        { label:'Ask', data:[949900,949900,819500,829900,1049000], backgroundColor:'rgba(26,58,107,0.15)', borderColor:'#1A3A6B', borderWidth:2 },
+        { label:'Sold', data:[860000,940000,800000,805500,930000], backgroundColor:'#d6e0c8', borderColor:'#3d5a2c', borderWidth:2 }
       ]
     },
     options: { responsive:true, maintainAspectRatio:false,
@@ -506,10 +506,10 @@
   new Chart(document.getElementById('splpChart'), {
     type: 'bar',
     data: {
-      labels: ['419 DiCenzo','87 Aquasanta','31 Republic','237 Homebrook','8316 Twenty Rd','11 Jacqueline','466 DiCenzo'],
-      datasets: [{ data:[97.3,88.9,90.5,98.9,97.6,97.0,88.7],
-        backgroundColor:['#d6e0c8','#dde4ee','#f5d4cb','#d6e0c8','#d6e0c8','#dde4ee','#f5d4cb'],
-        borderColor:['#3d5a2c','#1A3A6B','#a83a1f','#3d5a2c','#3d5a2c','#1A3A6B','#a83a1f'], borderWidth:2 }]
+      labels: ['31 Republic','237 Homebrook','8316 Twenty Rd','11 Jacqueline','466 DiCenzo'],
+      datasets: [{ data:[90.5,98.9,97.6,97.0,88.7],
+        backgroundColor:['#f5d4cb','#d6e0c8','#d6e0c8','#dde4ee','#f5d4cb'],
+        borderColor:['#a83a1f','#3d5a2c','#3d5a2c','#1A3A6B','#a83a1f'], borderWidth:2 }]
     },
     options: { responsive:true, maintainAspectRatio:false,
       plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',cornerRadius:0,callbacks:{label:c=>' '+c.parsed.y+'%'}} },
@@ -534,10 +534,10 @@
   new Chart(document.getElementById('domChart'), {
     type: 'bar',
     data: {
-      labels: ['237 Homebrook\n(SOLD)','8316 Twenty\n(SOLD)','419 DiCenzo\n(SOLD)','78 Christopher\n(Active)','459 DiCenzo\n(Active)','126 Bastille\n(Active)','31 Republic\n(SOLD)','11 Jacqueline\n(SOLD)','27 Trieste\n(Active)','69 Jacqueline\n(Active)','87 Aquasanta\n(SOLD)','466 DiCenzo\n(SOLD)'],
-      datasets: [{ data:[7,11,14,1,18,25,35,35,57,47,60,63],
-        backgroundColor:['#d6e0c8','#d6e0c8','#d6e0c8','#dde4ee','#dde4ee','#dde4ee','#d6e0c8','#d6e0c8','#f5d4cb','#f4e5c7','#d6e0c8','#f5d4cb'],
-        borderColor:['#3d5a2c','#3d5a2c','#3d5a2c','#1A3A6B','#1A3A6B','#1A3A6B','#3d5a2c','#3d5a2c','#a83a1f','#b89443','#3d5a2c','#a83a1f'], borderWidth:2 }]
+      labels: ['237 Homebrook\n(SOLD)','8316 Twenty\n(SOLD)','78 Christopher\n(Active)','459 DiCenzo\n(Active)','126 Bastille\n(Active)','31 Republic\n(SOLD)','11 Jacqueline\n(SOLD)','27 Trieste\n(Active)','69 Jacqueline\n(Active)','466 DiCenzo\n(SOLD)'],
+      datasets: [{ data:[7,11,1,18,25,35,35,57,47,63],
+        backgroundColor:['#d6e0c8','#d6e0c8','#dde4ee','#dde4ee','#dde4ee','#d6e0c8','#d6e0c8','#f5d4cb','#f4e5c7','#f5d4cb'],
+        borderColor:['#3d5a2c','#3d5a2c','#1A3A6B','#1A3A6B','#1A3A6B','#3d5a2c','#3d5a2c','#a83a1f','#b89443','#a83a1f'], borderWidth:2 }]
     },
     options: { responsive:true, maintainAspectRatio:false,
       plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',cornerRadius:0,callbacks:{label:c=>' '+c.parsed.y+' days'}} },
