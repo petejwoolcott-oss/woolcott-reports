@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=1280" />
 <title>118 Jacqueline Blvd — CMA | Woolcott Real Estate</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: #f5f1e8; color: #1a1a1e;
@@ -400,34 +399,7 @@
   </div>
 </section>
 
-<!-- CHARTS -->
-<section class="pad-lg">
-  <div class="max">
-    <span class="kicker kicker-navy">Visual Statistics</span>
-    <h2 style="font-size:40px; margin-bottom:28px; font-style:italic;">What buyers are paying — charted</h2>
 
-    <div class="grid g2" style="gap:24px; margin-bottom:24px;">
-      <div>
-        <span class="kicker kicker-green" style="margin-bottom:10px;">Sold Prices — 7 Recent Sales</span>
-        <div class="chart-frame" style="height:280px;"><canvas id="soldChart"></canvas></div>
-      </div>
-      <div>
-        <span class="kicker kicker-red" style="margin-bottom:10px;">SP/LP Ratio — All Sales</span>
-        <div class="chart-frame" style="height:280px;"><canvas id="splpChart"></canvas></div>
-      </div>
-    </div>
-    <div class="grid g2" style="gap:24px;">
-      <div>
-        <span class="kicker kicker-navy" style="margin-bottom:10px;">Active List Prices</span>
-        <div class="chart-frame" style="height:240px;"><canvas id="activeChart"></canvas></div>
-      </div>
-      <div>
-        <span class="kicker kicker-gold" style="margin-bottom:10px;">Days on Market — Active vs. Sold</span>
-        <div class="chart-frame" style="height:240px;"><canvas id="domChart"></canvas></div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ANALYSIS -->
 <section class="pad-lg alt">
@@ -482,67 +454,5 @@
   </div>
 </footer>
 
-<script>
-  Chart.defaults.font.family = "'Manrope', sans-serif";
-  Chart.defaults.font.size = 10;
-  Chart.defaults.color = "#6b655a";
-
-  // Sold prices
-  new Chart(document.getElementById('soldChart'), {
-    type: 'bar',
-    data: {
-      labels: ['31 Republic\n(35 DOM)','237 Homebrook\n(7 DOM)','8316 Twenty Rd\n(11 DOM)','11 Jacqueline\n(35 DOM)','466 DiCenzo\n(63 DOM)'],
-      datasets: [
-        { label:'Ask', data:[949900,949900,819500,829900,1049000], backgroundColor:'rgba(26,58,107,0.15)', borderColor:'#1A3A6B', borderWidth:2 },
-        { label:'Sold', data:[860000,940000,800000,805500,930000], backgroundColor:'#d6e0c8', borderColor:'#3d5a2c', borderWidth:2 }
-      ]
-    },
-    options: { responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{display:true,labels:{font:{family:"'JetBrains Mono', monospace",size:10}}}, tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',cornerRadius:0,callbacks:{label:c=>' $'+c.parsed.y.toLocaleString('en-CA')}} },
-      scales:{ x:{grid:{display:false},ticks:{font:{size:8},maxRotation:0}}, y:{grid:{color:'rgba(26,26,30,0.06)'},ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'K'},min:700000} } }
-  });
-
-  // SP/LP
-  new Chart(document.getElementById('splpChart'), {
-    type: 'bar',
-    data: {
-      labels: ['31 Republic','237 Homebrook','8316 Twenty Rd','11 Jacqueline','466 DiCenzo'],
-      datasets: [{ data:[90.5,98.9,97.6,97.0,88.7],
-        backgroundColor:['#f5d4cb','#d6e0c8','#d6e0c8','#dde4ee','#f5d4cb'],
-        borderColor:['#a83a1f','#3d5a2c','#3d5a2c','#1A3A6B','#a83a1f'], borderWidth:2 }]
-    },
-    options: { responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',cornerRadius:0,callbacks:{label:c=>' '+c.parsed.y+'%'}} },
-      scales:{ x:{grid:{display:false},ticks:{font:{size:9}}}, y:{grid:{color:'rgba(26,26,30,0.06)'},ticks:{callback:v=>v+'%'},min:82,max:104} } }
-  });
-
-  // Active
-  new Chart(document.getElementById('activeChart'), {
-    type: 'bar',
-    data: {
-      labels: ['78 Christopher','187 Alderlea','27 Trieste','459 DiCenzo','126 Bastille','62 Como','69 Jacqueline'],
-      datasets: [{ data:[799900,749000,989900,915000,859900,782000,899000],
-        backgroundColor:['#dde4ee','#dde4ee','#f5d4cb','#dde4ee','#dde4ee','#dde4ee','#dde4ee'],
-        borderColor:['#1A3A6B','#1A3A6B','#a83a1f','#1A3A6B','#1A3A6B','#1A3A6B','#1A3A6B'], borderWidth:2 }]
-    },
-    options: { responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',cornerRadius:0,callbacks:{label:c=>' $'+c.parsed.y.toLocaleString('en-CA')}} },
-      scales:{ x:{grid:{display:false},ticks:{font:{size:8},maxRotation:45}}, y:{grid:{color:'rgba(26,26,30,0.06)'},ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'K'},min:650000} } }
-  });
-
-  // DOM
-  new Chart(document.getElementById('domChart'), {
-    type: 'bar',
-    data: {
-      labels: ['237 Homebrook\n(SOLD)','8316 Twenty\n(SOLD)','78 Christopher\n(Active)','459 DiCenzo\n(Active)','126 Bastille\n(Active)','31 Republic\n(SOLD)','11 Jacqueline\n(SOLD)','27 Trieste\n(Active)','69 Jacqueline\n(Active)','466 DiCenzo\n(SOLD)'],
-      datasets: [{ data:[7,11,1,18,25,35,35,57,47,63],
-        backgroundColor:['#d6e0c8','#d6e0c8','#dde4ee','#dde4ee','#dde4ee','#d6e0c8','#d6e0c8','#f5d4cb','#f4e5c7','#f5d4cb'],
-        borderColor:['#3d5a2c','#3d5a2c','#1A3A6B','#1A3A6B','#1A3A6B','#3d5a2c','#3d5a2c','#a83a1f','#b89443','#a83a1f'], borderWidth:2 }]
-    },
-    options: { responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',cornerRadius:0,callbacks:{label:c=>' '+c.parsed.y+' days'}} },
-      scales:{ x:{grid:{display:false},ticks:{font:{size:8},maxRotation:0}}, y:{grid:{color:'rgba(26,26,30,0.06)'},ticks:{callback:v=>v+'d'}} } }
-  });
-</script>
 </body>
 </html>
