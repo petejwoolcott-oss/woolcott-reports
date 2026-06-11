@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>162 Westcott Road — Market Analysis | Woolcott Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #f5f1e8; color: #1a1a1e;
+    font-family: 'Manrope', system-ui, sans-serif; line-height: 1.6; }
+  h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 700; line-height: 1.15; margin: 0; }
+  .kicker { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace; color: #6b655a; font-weight: 500; margin-bottom: 12px; display: block; }
+  .kicker-navy { color: #1A3A6B; } .kicker-gold { color: #b89443; }
+  .kicker-red { color: #a83a1f; } .kicker-green { color: #3d5a2c; }
+  .pad { padding: 56px 48px; } .pad-lg { padding: 80px 48px; }
+  .alt { background: #ebe5d6; } .max { max-width: 1200px; margin: 0 auto; }
+  .grid { display: grid; gap: 24px; }
+  .g2 { grid-template-columns: 1fr 1fr; } .g3 { grid-template-columns: 1fr 1fr 1fr; }
+  .g4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .banner-navy { background: #1A3A6B; color: #f5f1e8; }
+  .tile { background: #f5f1e8; padding: 24px; border-top: 6px solid #1A3A6B; }
+  .tile-red { border-top-color: #a83a1f; } .tile-green { border-top-color: #3d5a2c; }
+  .tile-gold { border-top-color: #b89443; }
+  .tile .stat { font-family: 'Fraunces', Georgia, serif; font-size: 48px; font-weight: 700; color: #1A3A6B; line-height: 1; margin: 8px 0 4px; }
+  .tile-red .stat { color: #a83a1f; } .tile-green .stat { color: #3d5a2c; } .tile-gold .stat { color: #b89443; }
+  .tile .label { font-size: 12px; color: #6b655a; margin-top: 6px; line-height: 1.4; }
+  .tile .sub { font-size: 10px; font-family: 'JetBrains Mono', monospace; color: #6b655a; margin-top: 4px; }
+  .pull-quote { border-left: 4px solid #1A3A6B; background: #f5f1e8; padding: 24px 28px;
+    font-family: 'Fraunces', Georgia, serif; font-size: 18px; font-style: italic; line-height: 1.5; }
+  .pull-quote-gold { border-left-color: #b89443; background: #f4e5c7; }
+  .pill { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 9px;
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  .pill-navy { background: #dde4ee; color: #1A3A6B; } .pill-red { background: #f5d4cb; color: #a83a1f; }
+  .pill-green { background: #d6e0c8; color: #3d5a2c; } .pill-gold { background: #f4e5c7; color: #8B6B1F; }
+  table.editorial { width: 100%; border-collapse: collapse; font-size: 12px; }
+  table.editorial th { font-size: 9px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #6b655a; border-bottom: 2px solid #1a1a1e; padding: 8px 8px; text-align: left; white-space: nowrap; }
+  table.editorial td { padding: 9px 8px; border-bottom: 1px solid rgba(26,26,30,0.1); vertical-align: middle; }
+  table.editorial tr:last-child td { border-bottom: none; }
+  table.editorial .num { font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+  table.editorial tr.subject-row td { background: #dde4ee; font-weight: 700; }
+  table.editorial tr.expired-row td { background: rgba(168,58,31,0.06); }
+  .chart-frame { background: #f5f1e8; padding: 20px; border: 1px solid rgba(26,26,30,0.13); }
+  .divider-stat { display: flex; gap: 0; border: 1px solid rgba(26,26,30,0.12); }
+  .divider-stat-item { flex: 1; padding: 20px 22px; border-right: 1px solid rgba(26,26,30,0.12); }
+  .divider-stat-item:last-child { border-right: none; }
+  .divider-stat-item .val { font-family: 'Fraunces', Georgia, serif; font-size: 30px; font-weight: 700; color: #1A3A6B; margin: 4px 0 2px; }
+  .divider-stat-item .lbl { font-size: 11px; color: #6b655a; }
+  footer { background: #1a1a1e; color: #f5f1e8; padding: 36px 48px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.8; }
+  footer .muted { color: #6b655a; }
+  footer .footer-grid { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="banner-navy pad">
+  <div class="max">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:40px;">
+      <div>
+        <span class="kicker" style="color:#b89443;">Woolcott Real Estate · West Welland Market Analysis</span>
+        <h1 style="font-size:46px; color:#f5f1e8; font-style:italic; line-height:1.1; margin-top:8px;">
+          162 Westcott Road<br><span style="font-weight:400; font-size:28px;">Welland, Ontario · L3C 0K9 · Cancelled Apr 2026</span>
+        </h1>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:12px; font-family:'JetBrains Mono',monospace; color:#b89443; opacity:0.8; margin-top:8px;">
+          Prepared June 10, 2026<br>Niagara · Welland · West Welland (770)
+        </div>
+      </div>
+    </div>
+    <div class="grid g4">
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:18px;">
+        <div style="font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Last Listed At</div>
+        <div style="font-family:'Fraunces',serif; font-size:32px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">$1,359,900</div>
+        <div style="font-size:11px; color:rgba(245,241,232,0.6);">Cancelled Apr 22/26 · 64 DOM</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:18px;">
+        <div style="font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Size</div>
+        <div style="font-family:'Fraunces',serif; font-size:32px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">2,054 sq ft</div>
+        <div style="font-size:11px; color:rgba(245,241,232,0.6);">AG · Bungalow · 2 bed / 3 bath · New build</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:18px;">
+        <div style="font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">$/Sq Ft</div>
+        <div style="font-family:'Fraunces',serif; font-size:32px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">$662</div>
+        <div style="font-size:11px; color:rgba(245,241,232,0.6);">vs. comp range $357–$623/sq ft</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:18px;">
+        <div style="font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Builder Upgrades</div>
+        <div style="font-family:'Fraunces',serif; font-size:32px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">$155K+</div>
+        <div style="font-size:11px; color:rgba(245,241,232,0.6);">Premium upgrades · accessibility-forward design</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBJECT PROFILE -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">Subject Property</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">162 Westcott Road — Full profile</h2>
+    <p style="font-size:15px; color:#6b655a; max-width:720px; margin-bottom:36px;">
+      A newly built, accessibility-forward bungalow in West Welland with over $155,000 in builder upgrades. Listed February 17, 2026 at $1,359,900 — cancelled April 22, 2026 after 64 days with no sale. The market is telling a clear story here.
+    </p>
+
+    <div class="grid g2" style="gap:28px; margin-bottom:28px;">
+      <div>
+        <table class="editorial">
+          <tbody>
+            <tr><td style="color:#6b655a; width:160px;">Address</td><td><strong>162 Westcott Rd, Welland, ON L3C 0K9</strong></td></tr>
+            <tr><td style="color:#6b655a;">Style</td><td>Bungalow · Detached · Freehold</td></tr>
+            <tr><td style="color:#6b655a;">Status</td><td><span class="pill pill-red">Cancelled</span> · Apr 22, 2026 · 64 DOM</td></tr>
+            <tr><td style="color:#6b655a;">Listed</td><td class="num">$1,359,900 · Feb 17, 2026</td></tr>
+            <tr><td style="color:#6b655a;">Beds / Baths</td><td>2 AG / 3 (2 full + 1 half) — all main floor</td></tr>
+            <tr><td style="color:#6b655a;">AG Sq Ft</td><td class="num">2,054 sq ft (builder)</td></tr>
+            <tr><td style="color:#6b655a;">Basement</td><td>Full · Unfinished · Walk-up · Rough-in ready</td></tr>
+            <tr><td style="color:#6b655a;">Year Built</td><td>0–5 years (new construction)</td></tr>
+            <tr><td style="color:#6b655a;">Lot</td><td class="num">50.00 ft × 110.99 ft · 515 sq ft lot</td></tr>
+            <tr><td style="color:#6b655a;">Garage</td><td>1-car attached · double-wide driveway</td></tr>
+            <tr><td style="color:#6b655a;">Taxes (2025)</td><td class="num">$1,293 <span style="color:#6b655a; font-size:10px;">(new build — will increase significantly)</span></td></tr>
+            <tr><td style="color:#6b655a;">Builder Upgrades</td><td>$155,000+ — quartz, full-height backsplash, 10-ft ceilings, frameless ensuite, zero-curb design, EV rough-in, 200-amp</td></tr>
+            <tr><td style="color:#6b655a;">Accessibility</td><td>Wide doorways, pocket doors, wheelchair-accessible entry</td></tr>
+            <tr><td style="color:#6b655a;">Neighbourhood</td><td>Niagara / Welland / 770 - West Welland</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div style="background:#f5d4cb; padding:24px; border-left:4px solid #a83a1f; margin-bottom:20px;">
+          <span class="kicker kicker-red" style="margin-bottom:10px;">Why It Cancelled</span>
+          <p style="margin:0; font-size:13px; line-height:1.8; color:#1a1a1e;">
+            At $1,359,900, this home was priced <strong>$510,000–$530,000 above</strong> the active comp set in West Welland ($824K–$849K range). Even accounting for the premium upgrades and newer build, the gap is too wide for the local market to absorb. The $662/sq ft ask compares to a comp range of $357–$623/sq ft — it was the most expensive per-sq-ft listing in the area by a significant margin.
+          </p>
+        </div>
+        <div class="pull-quote pull-quote-gold" style="font-size:15px;">
+          "The upgrades are real — but the market ceiling in West Welland doesn't support $1.36M for a 2-bedroom bungalow, regardless of finish quality."
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET SNAPSHOT -->
+<section class="pad-lg alt">
+  <div class="max">
+    <span class="kicker kicker-gold">Market Snapshot — West Welland Detached</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">What the market looks like right now</h2>
+    <p style="font-size:15px; color:#6b655a; max-width:720px; margin-bottom:40px;">
+      The West Welland new-build and near-new detached market is heavily supplied and slow-moving. No confirmed sales in the comparable set — every listing has significant DOM history and multiple price reductions.
+    </p>
+
+    <div class="grid g4" style="margin-bottom:32px;">
+      <div class="tile tile-red">
+        <span class="kicker kicker-red">Confirmed Sales</span>
+        <div class="stat" style="font-size:40px; color:#a83a1f;">0</div>
+        <div class="label">No sold comparables in the dataset — market absorption is very slow</div>
+      </div>
+      <div class="tile">
+        <span class="kicker">Active Listings</span>
+        <div class="stat" style="font-size:40px;">4</div>
+        <div class="label">All 4 comps currently active — significant supply with no sales</div>
+        <div class="sub">$824,888 – $849,900</div>
+      </div>
+      <div class="tile tile-red">
+        <span class="kicker kicker-red">Avg DOM (active)</span>
+        <div class="stat" style="font-size:40px; color:#a83a1f;">69</div>
+        <div class="label">Average days on market across 4 active listings · longest: 170 DOM</div>
+      </div>
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">Active Price Range</span>
+        <div class="stat" style="font-size:36px; color:#b89443;">$825K–$850K</div>
+        <div class="label">Tight band — market ceiling appears to be around $850K for this product type</div>
+      </div>
+    </div>
+
+    <div class="divider-stat">
+      <div class="divider-stat-item">
+        <span class="kicker kicker-navy" style="margin-bottom:4px;">Avg List Price (active)</span>
+        <div class="val">$838,647</div>
+        <div class="lbl">Across 4 active comps · subject was $521K above this</div>
+      </div>
+      <div class="divider-stat-item">
+        <span class="kicker kicker-gold" style="margin-bottom:4px;">Avg $/Sq Ft (active)</span>
+        <div class="val" style="color:#b89443;">$490</div>
+        <div class="lbl">Range $357–$623 · Subject at $662 was highest in market</div>
+      </div>
+      <div class="divider-stat-item">
+        <span class="kicker kicker-red" style="margin-bottom:4px;">Price Reduction History</span>
+        <div class="val" style="color:#a83a1f;">All 4</div>
+        <div class="lbl">Every active comparable has reduced price at least once — some multiple times</div>
+      </div>
+      <div class="divider-stat-item">
+        <span class="kicker kicker-red" style="margin-bottom:4px;">Market Temp</span>
+        <div class="val" style="color:#a83a1f;">Cold</div>
+        <div class="lbl">No sales, heavy inventory, extended DOM · buyer has significant leverage</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMP TABLE -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">Complete Comparable Set</span>
+    <h2 style="font-size:40px; margin-bottom:12px; font-style:italic;">All 5 properties — side by side</h2>
+    <p style="font-size:14px; color:#6b655a; margin-bottom:24px;">Subject property shown in red (cancelled). All comparables currently active. Sorted by DOM.</p>
+
+    <div style="overflow-x:auto;">
+      <table class="editorial">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Status</th>
+            <th>Orig Ask</th>
+            <th>Current Ask</th>
+            <th>$/SqFt</th>
+            <th>Beds</th>
+            <th>Baths</th>
+            <th>AG SqFt</th>
+            <th>DOM</th>
+            <th>Built</th>
+            <th>Bsmt</th>
+            <th>Garage</th>
+            <th>Taxes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="expired-row">
+            <td><strong>162 Westcott Rd ★</strong></td>
+            <td><span class="pill pill-red">Cancelled</span></td>
+            <td class="num">$1,359,900</td>
+            <td class="num" style="color:#a83a1f;">Never sold</td>
+            <td class="num" style="color:#a83a1f;">$662</td>
+            <td class="num">2</td><td class="num">3(2F+1H)</td>
+            <td class="num">2,054</td>
+            <td class="num" style="color:#a83a1f;">64</td>
+            <td>0–5yr</td><td>Unfin · W/U</td><td>1-car</td>
+            <td class="num">$1,293</td>
+          </tr>
+          <tr>
+            <td>14 Willowbrook Dr</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$1,050,000</td>
+            <td class="num">$849,900</td>
+            <td class="num">$401</td>
+            <td class="num">3+1</td><td class="num">5(3F+2H)</td>
+            <td class="num">2,119</td>
+            <td class="num">170 (546)</td>
+            <td>2019</td><td>Full · Fin</td><td>2-car</td>
+            <td class="num">$6,979</td>
+          </tr>
+          <tr>
+            <td>118 Willowbrook Dr</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$879,900</td>
+            <td class="num">$849,900</td>
+            <td class="num">$623</td>
+            <td class="num">2+0</td><td class="num">2F</td>
+            <td class="num">1,365</td>
+            <td class="num">69 (183)</td>
+            <td>2025</td><td>Full · Unfin</td><td>2-car</td>
+            <td class="num">—</td>
+          </tr>
+          <tr>
+            <td>28 Silverwood Ave</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$975,000</td>
+            <td class="num">$824,888</td>
+            <td class="num">$375</td>
+            <td class="num">5+1</td><td class="num">4(3F+1H)</td>
+            <td class="num">2,198</td>
+            <td class="num">24 (multi yr)</td>
+            <td>2015</td><td>Full · Fin</td><td>2-car</td>
+            <td class="num">$6,846</td>
+          </tr>
+          <tr>
+            <td>141 Crow St</td>
+            <td><span class="pill pill-navy">Active</span></td>
+            <td class="num">$829,900</td>
+            <td class="num">$829,900</td>
+            <td class="num">$348</td>
+            <td class="num">4+0</td><td class="num">3(2F+1H)</td>
+            <td class="num">2,385</td>
+            <td class="num">14 (82)</td>
+            <td>2019</td><td>Full · Unfin</td><td>2-car</td>
+            <td class="num">$7,453</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:11px; color:#6b655a; margin-top:10px; font-family:'JetBrains Mono',monospace;">★ Subject property (cancelled). $/SqFt = list price ÷ AG sq ft. DOM shown as current/CDOM where different. 14 Willowbrook has been listed in various forms since 2024.</p>
+  </div>
+</section>
+
+<!-- PRICING ANALYSIS -->
+<section class="pad-lg alt">
+  <div class="max">
+    <span class="kicker kicker-navy">Pricing Analysis</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">Where should 162 Westcott be priced?</h2>
+    <p style="font-size:15px; color:#6b655a; max-width:720px; margin-bottom:36px;">
+      The market ceiling for West Welland detached homes appears to be around $850K. The subject's builder upgrades, accessibility features, and single-floor living premium can justify a modest premium — but not the $510K premium that was previously attempted.
+    </p>
+
+    <div class="grid g3" style="margin-bottom:32px;">
+      <div style="background:#ebe5d6; padding:28px; border-top:6px solid #a83a1f;">
+        <span class="kicker kicker-red" style="margin-bottom:8px;">Floor</span>
+        <div style="font-family:'Fraunces',serif; font-size:40px; font-weight:700; color:#a83a1f; line-height:1; margin:8px 0;">$899,000</div>
+        <div style="font-size:13px; color:#6b655a; line-height:1.7; margin-top:8px;">
+          Anchored on the $825K–$850K active comp range plus a premium for new build quality, 10-ft ceilings, and accessibility features. Would need to compete on value vs. larger 4-bed homes at similar prices.
+        </div>
+      </div>
+      <div style="background:#1A3A6B; padding:28px;">
+        <span class="kicker" style="color:#b89443; margin-bottom:8px;">Recommended Range</span>
+        <div style="font-family:'Fraunces',serif; font-size:40px; font-weight:700; color:#f5f1e8; line-height:1; margin:8px 0;">$949K–$999K</div>
+        <div style="font-size:13px; color:rgba(245,241,232,0.8); line-height:1.7; margin-top:8px;">
+          Justified by: new build quality, $155K in upgrades, bungalow premium (accessibility + single level), 2,054 sq ft, walk-up basement potential. At $490/sq ft (market avg), 2,054 sq ft = ~$1,006,460 — $999K is well-supported. Expected to take 30–60 days.
+        </div>
+      </div>
+      <div style="background:#ebe5d6; padding:28px; border-top:6px solid #3d5a2c;">
+        <span class="kicker kicker-green" style="margin-bottom:8px;">Ceiling</span>
+        <div style="font-family:'Fraunces',serif; font-size:40px; font-weight:700; color:#3d5a2c; line-height:1; margin:8px 0;">$1,099,000</div>
+        <div style="font-size:13px; color:#6b655a; line-height:1.7; margin-top:8px;">
+          Only if marketed specifically to accessibility/aging-in-place buyers willing to pay a niche premium. Expect 60–90+ DOM at this price. The $1.36M attempt showed the market has a hard ceiling well below that.
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#dde4ee; padding:20px 24px; border-left:4px solid #1A3A6B;">
+      <span class="kicker kicker-navy" style="margin-bottom:8px;">Key Pricing Considerations</span>
+      <table class="editorial">
+        <tbody>
+          <tr><td style="color:#6b655a; width:240px;">Previous list vs. market ceiling</td><td>$1,359,900 vs. ~$850K market · gap of $510K is untenable. Any re-list must accept this reality.</td></tr>
+          <tr><td style="color:#6b655a;">Bungalow premium</td><td>Single-floor living commands a modest premium over 2-storey — but only within the local range, not $500K above it.</td></tr>
+          <tr><td style="color:#6b655a;">118 Willowbrook (closest match)</td><td>2 bed / 2 bath new-build bungalow asking $849,900 for 1,365 sq ft · 69 DOM · no sale. Subject has 689 more sq ft and more bathrooms — justifies a premium over this, but market is not moving.</td></tr>
+          <tr><td style="color:#6b655a;">Upgrade premium reality</td><td>$155K in upgrades does NOT translate to $155K in resale value. Buyers don't pay dollar-for-dollar for builder upgrades in secondary market.</td></tr>
+          <tr><td style="color:#6b655a;">Re-list strategy</td><td>If coming back to market: lead with the accessibility story and target specific buyer profiles (retirees, mobility needs). Wide net at $999K; niche/targeted at $1,049K–$1,099K.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CHARTS -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">Visual Statistics</span>
+    <h2 style="font-size:40px; margin-bottom:28px; font-style:italic;">Market data — charted</h2>
+
+    <div class="grid g2" style="gap:24px; margin-bottom:24px;">
+      <div>
+        <span class="kicker kicker-navy" style="margin-bottom:10px;">List Prices — Subject vs. Comps</span>
+        <div class="chart-frame" style="height:280px;"><canvas id="priceChart"></canvas></div>
+      </div>
+      <div>
+        <span class="kicker kicker-gold" style="margin-bottom:10px;">Price Per Sq Ft (AG)</span>
+        <div class="chart-frame" style="height:280px;"><canvas id="psfChart"></canvas></div>
+      </div>
+    </div>
+    <div>
+      <span class="kicker kicker-red" style="margin-bottom:10px;">Days on Market — Active Listings</span>
+      <div class="chart-frame" style="height:220px; max-width:760px;"><canvas id="domChart"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE HISTORY DEEP DIVE -->
+<section class="pad-lg alt">
+  <div class="max">
+    <span class="kicker kicker-red">Market Warning Signs</span>
+    <h2 style="font-size:40px; margin-bottom:12px; font-style:italic;">The comps are telling a cautionary story</h2>
+    <p style="font-size:14px; color:#6b655a; margin-bottom:24px;">Every comparable property has been significantly reduced from its original ask. Some have been listed and relisted multiple times over 1–2 years.</p>
+
+    <table class="editorial">
+      <thead>
+        <tr><th>Address</th><th>First List Price</th><th>Current Price</th><th>Total Reduction</th><th>Listing History</th></tr>
+      </thead>
+      <tbody>
+        <tr class="expired-row">
+          <td><strong>162 Westcott Rd ★ (Subject)</strong></td>
+          <td class="num">$1,359,900</td>
+          <td class="num" style="color:#a83a1f;">Cancelled — no sale</td>
+          <td class="num" style="color:#a83a1f;">Market rejected price</td>
+          <td>Listed Feb 2026 · cancelled Apr 2026 · 64 DOM</td>
+        </tr>
+        <tr>
+          <td>14 Willowbrook Dr</td>
+          <td class="num">$1,050,000 (Oct 2024)</td>
+          <td class="num">$849,900</td>
+          <td class="num" style="color:#a83a1f;">−$200,100 (−19%)</td>
+          <td>6+ listing attempts since Oct 2024 · 546 CDOM</td>
+        </tr>
+        <tr>
+          <td>118 Willowbrook Dr</td>
+          <td class="num">$879,900 (Nov 2025)</td>
+          <td class="num">$849,900</td>
+          <td class="num" style="color:#a83a1f;">−$30,000 (−3.4%)</td>
+          <td>Expired Nov 2025 · re-listed Apr 2026 · price increased then decreased · 183 CDOM</td>
+        </tr>
+        <tr>
+          <td>28 Silverwood Ave</td>
+          <td class="num">$975,000 (Oct 2022)</td>
+          <td class="num">$824,888</td>
+          <td class="num" style="color:#a83a1f;">−$150,112 (−15.4%)</td>
+          <td>Listed/expired/re-listed multiple times since 2022 · original ask $975K in 2022</td>
+        </tr>
+        <tr>
+          <td>141 Crow St</td>
+          <td class="num">$799,900 (Mar 2026)</td>
+          <td class="num">$829,900</td>
+          <td class="num" style="color:#3d5a2c;">+$30,000 (price increase)</td>
+          <td>Cancelled first listing · re-listed at higher price · 82 CDOM · market test</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid max">
+    <div>
+      <div style="font-size:14px; color:#f5f1e8; font-family:'Fraunces',serif; font-style:italic; margin-bottom:8px;">Woolcott Real Estate</div>
+      <div class="muted">RE/MAX Escarpment Realty Inc. · 905-689-9223</div>
+      <div class="muted" style="margin-top:4px;">Prepared by Henry (AI Assistant) · June 10, 2026</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="muted">West Welland · Niagara Region · L3C</div>
+      <div class="muted" style="margin-top:4px;">5 listings (1 cancelled + 4 active) · June 2026 · Cornerstone Association of REALTORS® MLS. Information deemed reliable but not guaranteed.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  Chart.defaults.font.family = "'Manrope', sans-serif";
+  Chart.defaults.font.size = 10;
+  Chart.defaults.color = "#6b655a";
+
+  new Chart(document.getElementById('priceChart'), {
+    type: 'bar',
+    data: {
+      labels: ['162 Westcott\n(Cancelled)','14 Willowbrook\n(Active)','118 Willowbrook\n(Active)','28 Silverwood\n(Active)','141 Crow St\n(Active)'],
+      datasets: [
+        { label:'Original Ask', data:[1359900,1050000,879900,975000,829900], backgroundColor:'rgba(168,58,31,0.15)', borderColor:'#a83a1f', borderWidth:2 },
+        { label:'Current/Final', data:[1359900,849900,849900,824888,829900], backgroundColor:['#f5d4cb','#dde4ee','#dde4ee','#dde4ee','#dde4ee'], borderColor:['#a83a1f','#1A3A6B','#1A3A6B','#1A3A6B','#1A3A6B'], borderWidth:2 }
+      ]
+    },
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:true,labels:{font:{family:"'JetBrains Mono', monospace",size:10}}}, tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',cornerRadius:0,callbacks:{label:c=>' $'+c.parsed.y.toLocaleString('en-CA')}} },
+      scales:{ x:{grid:{display:false},ticks:{font:{size:8},maxRotation:0}}, y:{grid:{color:'rgba(26,26,30,0.06)'},ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'K'},min:700000} } }
+  });
+
+  new Chart(document.getElementById('psfChart'), {
+    type: 'bar',
+    data: {
+      labels: ['162 Westcott★','14 Willowbrook','118 Willowbrook','28 Silverwood','141 Crow St'],
+      datasets: [{ data:[662,401,623,375,348], backgroundColor:['#f5d4cb','#dde4ee','#dde4ee','#dde4ee','#dde4ee'], borderColor:['#a83a1f','#1A3A6B','#1A3A6B','#1A3A6B','#1A3A6B'], borderWidth:2 }]
+    },
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',cornerRadius:0,callbacks:{label:c=>' $'+c.parsed.y+'/sq ft'}} },
+      scales:{ x:{grid:{display:false}}, y:{grid:{color:'rgba(26,26,30,0.06)'},ticks:{callback:v=>'$'+v},min:250} } }
+  });
+
+  new Chart(document.getElementById('domChart'), {
+    type: 'bar',
+    data: {
+      labels: ['162 Westcott\n(Cancelled)','141 Crow\n(Active)','28 Silverwood\n(Active)','118 Willowbrook\n(Active)','14 Willowbrook\n(Active)'],
+      datasets: [{ data:[64,14,24,69,170], backgroundColor:['#f5d4cb','#d6e0c8','#f4e5c7','#f5d4cb','#f5d4cb'], borderColor:['#a83a1f','#3d5a2c','#b89443','#a83a1f','#a83a1f'], borderWidth:2 }]
+    },
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',cornerRadius:0,callbacks:{label:c=>' '+c.parsed.y+' days'}} },
+      scales:{ x:{grid:{display:false},ticks:{font:{size:9},maxRotation:0}}, y:{grid:{color:'rgba(26,26,30,0.06)'},ticks:{callback:v=>v+'d'}} } }
+  });
+</script>
+</body>
+</html>
