@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>826 Millgrove Side Road — Market Valuation Report</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2332; --slate: #2d3a4a; --gold: #c8a45c;
+    --light: #f5f2ec; --white: #ffffff; --muted: #7a8794;
+    --green: #2d7a4f; --red: #a03030; --border: #ddd8cf;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--light); color: var(--slate); font-size: 14px; line-height: 1.6; }
+
+  .report-header { background: var(--navy); color: var(--white); padding: 40px 48px 32px; position: relative; overflow: hidden; }
+  .report-header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: var(--gold); }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+  .brand-name { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--gold); }
+  .brand-sub { font-size: 11px; color: rgba(255,255,255,0.55); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px; }
+  .report-meta { text-align: right; font-size: 11.5px; color: rgba(255,255,255,0.6); }
+  .report-meta strong { color: var(--gold); font-size: 12px; }
+  .header-address { font-family: 'DM Serif Display', serif; font-size: 30px; color: var(--white); line-height: 1.15; margin-bottom: 6px; }
+  .header-sub { font-size: 13px; color: rgba(255,255,255,0.65); }
+  .header-verdict { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; background: rgba(200,164,92,0.15); border: 1px solid rgba(200,164,92,0.35); border-radius: 6px; padding: 10px 18px; flex-wrap: wrap; }
+  .verdict-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: rgba(255,255,255,0.55); }
+  .verdict-value { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--gold); }
+  .divider { border-left: 1px solid rgba(200,164,92,0.3); height: 40px; margin: 0 6px; }
+
+  .content { max-width: 1040px; margin: 0 auto; padding: 36px 32px 48px; }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: 19px; color: var(--navy); padding-bottom: 8px; border-bottom: 2px solid var(--gold); margin-bottom: 20px; margin-top: 40px; }
+  .section-title:first-child { margin-top: 0; }
+
+  .overview-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+  .ov-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+  .ov-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); margin-bottom: 4px; }
+  .ov-value { font-size: 15px; font-weight: 600; color: var(--navy); }
+  .ov-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .ov-card.highlight { border-color: var(--gold); background: #fffdf7; }
+  .ov-card.highlight .ov-value { color: #9a7030; }
+
+  .snapshot-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .snap-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 16px; text-align: center; }
+  .snap-num { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--navy); line-height: 1; margin-bottom: 4px; }
+  .snap-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .snap-note { font-size: 11px; color: var(--slate); margin-top: 4px; }
+
+  .comp-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 14px; overflow: hidden; }
+  .comp-header { display: flex; justify-content: space-between; align-items: center; padding: 11px 18px; background: var(--navy); color: var(--white); }
+  .comp-address { font-family: 'DM Serif Display', serif; font-size: 15px; }
+  .comp-price-tag { font-size: 18px; font-weight: 700; color: var(--gold); }
+  .comp-body { padding: 13px 18px; }
+  .comp-stats { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 8px; }
+  .cstat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 2px; }
+  .cstat-value { font-size: 13px; font-weight: 600; color: var(--navy); }
+  .comp-note { font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); padding-top: 8px; margin-top: 4px; font-style: italic; }
+  .badge-sold { display: inline-block; background: #e8f5ee; color: var(--green); font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; margin-left: 8px; }
+  .badge-active { display: inline-block; background: rgba(200,164,92,0.15); color: #8a6020; font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; margin-left: 6px; }
+  .badge-stale { display: inline-block; background: #fdecea; color: var(--red); font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; margin-left: 6px; }
+
+  .active-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); font-size: 13px; }
+  .active-table th { background: var(--navy); color: var(--white); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.9px; padding: 10px 12px; text-align: left; }
+  .active-table td { padding: 9px 12px; border-bottom: 1px solid #f0ece5; color: var(--slate); vertical-align: top; }
+  .active-table tr:last-child td { border-bottom: none; }
+  .active-table tr:nth-child(even) td { background: #faf9f7; }
+  .active-table .subject-row td { background: #f0f4f8 !important; font-weight: 600; color: var(--navy); border-left: 3px solid var(--gold); }
+  .stale { color: var(--red); font-weight: 600; }
+  .fresh { color: var(--green); font-weight: 600; }
+
+  .adj-wrapper { margin-bottom: 24px; }
+  .adj-title { font-size: 13px; font-weight: 700; color: var(--navy); background: var(--light); padding: 10px 16px; border: 1px solid var(--border); border-bottom: none; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center; }
+  .adj-comp-price { font-size: 13px; color: var(--muted); font-weight: 500; }
+  .adj-table { width: 100%; border-collapse: collapse; background: var(--white); border: 1px solid var(--border); border-radius: 0 0 8px 8px; overflow: hidden; font-size: 13px; }
+  .adj-table th { background: var(--slate); color: var(--white); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; padding: 8px 14px; text-align: left; }
+  .adj-table th:last-child { text-align: right; }
+  .adj-table td { padding: 8px 14px; border-bottom: 1px solid #f0ece5; color: var(--slate); }
+  .adj-table tr:last-child td { border-bottom: none; font-weight: 700; background: #f5f2ec; color: var(--navy); }
+  .adj-table td:last-child { text-align: right; }
+  .adj-table td.adj-pos { color: var(--green); font-weight: 600; }
+  .adj-table td.adj-neg { color: var(--red); font-weight: 600; }
+
+  .pricing-box { background: var(--navy); color: var(--white); border-radius: 10px; padding: 28px 32px; margin-top: 28px; }
+  .pricing-box-title { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--gold); margin-bottom: 18px; }
+  .pricing-range { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .pr-cell { text-align: center; }
+  .pr-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+  .pr-value { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--white); }
+  .pr-value.mid { font-size: 30px; color: var(--gold); }
+  .pricing-note { font-size: 12px; color: rgba(255,255,255,0.55); border-top: 1px solid rgba(255,255,255,0.12); padding-top: 14px; line-height: 1.6; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .feature-list { list-style: none; }
+  .feature-list li { padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 13px; display: flex; justify-content: space-between; }
+  .feature-list li:last-child { border-bottom: none; }
+  .feature-list .fl-label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; }
+  .feature-list .fl-val { font-weight: 500; color: var(--slate); text-align: right; }
+
+  .notes-box { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; font-size: 13px; line-height: 1.75; color: var(--slate); }
+  .notes-box p { margin-bottom: 10px; }
+  .notes-box p:last-child { margin-bottom: 0; }
+
+  .highlight-callout { background: #fffdf5; border: 1px solid #e8d8aa; border-left: 4px solid var(--gold); border-radius: 6px; padding: 14px 18px; font-size: 13px; color: var(--slate); margin-bottom: 16px; }
+  .highlight-callout strong { color: var(--navy); }
+
+  .footer { background: var(--navy); color: rgba(255,255,255,0.45); text-align: center; padding: 20px 32px; font-size: 11px; margin-top: 48px; }
+  .footer a { color: var(--gold); text-decoration: none; }
+
+  @media (max-width: 768px) {
+    .report-header { padding: 24px 20px; }
+    .content { padding: 24px 16px; }
+    .overview-grid { grid-template-columns: repeat(2, 1fr); }
+    .snapshot-grid { grid-template-columns: repeat(2, 1fr); }
+    .comp-stats { grid-template-columns: repeat(3, 1fr); }
+    .two-col { grid-template-columns: 1fr; }
+    .pricing-range { grid-template-columns: 1fr; }
+    .header-top { flex-direction: column; gap: 12px; }
+    .report-meta { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ HEADER ═══════════════════════════ -->
+<div class="report-header">
+  <div class="header-top">
+    <div>
+      <div class="brand-name">Woolcott Real Estate</div>
+      <div class="brand-sub">RE/MAX Escarpment Realty Inc.</div>
+    </div>
+    <div class="report-meta">
+      <div>Prepared by <strong>David Balsdon</strong></div>
+      <div>June 10, 2026</div>
+      <div style="margin-top:4px;">Confidential — Clients: Becky &amp; Andy Galer</div>
+    </div>
+  </div>
+  <div class="header-address">826 Millgrove Side Road</div>
+  <div class="header-sub">Millgrove, Ontario · Flamborough West · 4-Level Side Split on 0.345 Acres · Well &amp; Septic</div>
+  <div class="header-verdict">
+    <div>
+      <div class="verdict-label">Estimated Market Value</div>
+      <div class="verdict-value">$1,025,000 – $1,075,000</div>
+    </div>
+    <div class="divider"></div>
+    <div>
+      <div class="verdict-label">Suggested List Price</div>
+      <div class="verdict-value">$1,049,000</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ CONTENT ═══════════════════════════ -->
+<div class="content">
+
+  <!-- PROPERTY SNAPSHOT -->
+  <div class="section-title">Property Snapshot — 826 Millgrove Side Road</div>
+
+  <div class="overview-grid">
+    <div class="ov-card">
+      <div class="ov-label">Style</div>
+      <div class="ov-value">4-Level Side Split</div>
+      <div class="ov-sub">Detached · Freehold</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Bedrooms / Baths</div>
+      <div class="ov-value">3 Bed · 1.5 Bath</div>
+      <div class="ov-sub">Primary suite w/ large walk-in</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Total Finished Space</div>
+      <div class="ov-value">~1,400–1,600 sq ft</div>
+      <div class="ov-sub">MPAC 854 sq ft understated (addition)</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Lot Size</div>
+      <div class="ov-value">0.345 Acres</div>
+      <div class="ov-sub">Backs onto farmland · Fenced</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Garage</div>
+      <div class="ov-value">3-Car Capacity</div>
+      <div class="ov-sub">2-door; one side 2-cars deep</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Parking</div>
+      <div class="ov-value">9–10 Cars</div>
+      <div class="ov-sub">Paved driveway</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Water / Sewer</div>
+      <div class="ov-value">Well &amp; Septic</div>
+      <div class="ov-sub">Septic lines upgraded 2000 · WH owned</div>
+    </div>
+    <div class="ov-card highlight">
+      <div class="ov-label">Purchased</div>
+      <div class="ov-value">2000 — Private Sale</div>
+      <div class="ov-sub">No prior MLS listing history</div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;">
+    <div class="snapshot-grid">
+      <div class="snap-card">
+        <div class="snap-num">2025</div>
+        <div class="snap-label">Furnace &amp; A/C</div>
+        <div class="snap-note">Brand new — major ticket item done</div>
+      </div>
+      <div class="snap-card">
+        <div class="snap-num">~9 yrs</div>
+        <div class="snap-label">Kitchen</div>
+        <div class="snap-note">Granite · Miele ovens · Bosch DW · Gas PF · Island</div>
+      </div>
+      <div class="snap-card">
+        <div class="snap-num">5 yrs</div>
+        <div class="snap-label">Roof</div>
+        <div class="snap-note">9-yr windows · Sump pump · 3 gas FPs + 1 electric</div>
+      </div>
+      <div class="snap-card">
+        <div class="snap-num">2 yrs</div>
+        <div class="snap-label">Hot Tub</div>
+        <div class="snap-note">Stone patio · Shed w/ hydro · Farm views</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROPERTY DETAILS -->
+  <div class="section-title">Interior Details</div>
+
+  <div class="two-col">
+    <div>
+      <ul class="feature-list">
+        <li><span class="fl-label">Kitchen</span><span class="fl-val">9 yrs · Granite · Huge eat-in · Miele double wall ovens · Gas PF · Island for 4 · Walk-in pantry · Bosch DW · Fridge 2024</span></li>
+        <li><span class="fl-label">Family Room</span><span class="fl-val">Carpet · Bright backyard views · Custom built-ins · Gas FP</span></li>
+        <li><span class="fl-label">Primary Bedroom</span><span class="fl-val">Good size · Walk-in w/ custom cabinets · Wall cabinets outside closet · Electric FP · Carpet</span></li>
+        <li><span class="fl-label">Bedroom 2</span><span class="fl-val">Carpet · Std closet (no doors) · Built-in cabinets</span></li>
+        <li><span class="fl-label">Bedroom 3</span><span class="fl-val">Std · Carpet</span></li>
+        <li><span class="fl-label">Main Bath</span><span class="fl-val">Original · Std tub config · Ceramic floors — not updated</span></li>
+        <li><span class="fl-label">Powder Room (B1)</span><span class="fl-val">Standard</span></li>
+      </ul>
+    </div>
+    <div>
+      <ul class="feature-list">
+        <li><span class="fl-label">Laundry (B1)</span><span class="fl-val">Entry from backyard · Bright</span></li>
+        <li><span class="fl-label">Salon (B2)</span><span class="fl-val">~8×8 · Ceramic floors · Closet</span></li>
+        <li><span class="fl-label">Rec Room (B2)</span><span class="fl-val">Smaller · Carpet &amp; tile · Gas FP</span></li>
+        <li><span class="fl-label">Utilities (B2)</span><span class="fl-val">In closet</span></li>
+        <li><span class="fl-label">Outdoor</span><span class="fl-val">Stone patio · 2-yr hot tub · Fenced yard · Shed w/ hydro · Farm views backing Andy's parents' land</span></li>
+        <li><span class="fl-label">Fireplaces</span><span class="fl-val">3 gas + 1 electric</span></li>
+        <li><span class="fl-label">Notable</span><span class="fl-val">Sump pump · Owned water heater · Septic lines upgraded 2000 · Septic in back, well in front</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- STRENGTHS / NOTES -->
+  <div class="section-title">Agent Notes &amp; Positioning</div>
+
+  <div class="highlight-callout">
+    <strong>Key Strengths:</strong> High-end kitchen (Miele ovens alone are a $5K–$8K value), brand-new HVAC 2025, exceptional 3-car garage / 9-car parking, rare farmland views with family-owned land behind — zero rear neighbour pressure ever. Hot tub 2 yrs old. Strong mechanical package (roof 5 yrs, windows 9 yrs, furnace &amp; A/C 2025, owned water heater).
+  </div>
+  <div class="highlight-callout">
+    <strong>Considerations:</strong> Main bathroom is original and will register as dated. Carpet in bedrooms and rec room is common for the era but buyers will factor it in. MPAC square footage (854 sq ft) is materially understated — the addition brings true finished space to the ~1,400–1,600 sq ft range, which is important context for pricing. Salon room adds flexible space value. No prior MLS listing.
+  </div>
+  <div class="highlight-callout">
+    <strong>Market Context:</strong> Millgrove sits in Flamborough West (sub-area 043), tightly correlated to Greensville (040) and Beverly (045) markets. Active comparable at 25 Carey St (Millgrove — same street community) sold $835K at 0.95 LP/SP ratio on a similar-era side split, but smaller and less upgraded. Premium comps in Greensville/Flamborough are trading $1.06M–$1.35M depending on sq footage and lot quality. This property's kitchen, garage, and outdoor package command a meaningful premium over entry-level comparables.
+  </div>
+
+  <!-- COMPARABLE SALES -->
+  <div class="section-title">Comparable Sales — Closed &amp; Pending</div>
+
+  <!-- COMP 1: 25 Carey St -->
+  <div class="comp-card">
+    <div class="comp-header">
+      <div>
+        <div class="comp-address">25 Carey Street, Waterdown (Millgrove) <span class="badge-sold">Sold</span></div>
+      </div>
+      <div class="comp-price-tag">$835,000</div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-stats">
+        <div><div class="cstat-label">List Price</div><div class="cstat-value">$879,900</div></div>
+        <div><div class="cstat-label">SP/LP</div><div class="cstat-value">0.95</div></div>
+        <div><div class="cstat-label">DOM</div><div class="cstat-value">51</div></div>
+        <div><div class="cstat-label">AG Sq Ft</div><div class="cstat-value">1,474</div></div>
+        <div><div class="cstat-label">Beds / Baths</div><div class="cstat-value">3 / 2</div></div>
+        <div><div class="cstat-label">Lot</div><div class="cstat-value">0.35 Acres</div></div>
+      </div>
+      <div class="comp-note">Same Millgrove community, same lot size, same-era 4-level side split. Sold June 2026. Notably similar profile — drilled well, septic, paved driveway, attached garage (1 bay), 3 beds. Upgrades include hardwood floors, sun-room addition, updated bath. Key differences vs. subject: subject has significantly superior kitchen, 3-car garage, 4 gas/electric fireplaces, hot tub, and deeper lot backing farmland. Subject should command a meaningful premium here — est. +$160K–$200K above this sale.</div>
+    </div>
+  </div>
+
+  <!-- COMP 2: 348 Sydenham Rd (Active) -->
+  <div class="comp-card">
+    <div class="comp-header">
+      <div>
+        <div class="comp-address">348 Sydenham Road, Dundas <span class="badge-stale">Active 62 DOM / 193 CDOM</span></div>
+      </div>
+      <div class="comp-price-tag">$1,224,900</div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-stats">
+        <div><div class="cstat-label">Original List</div><div class="cstat-value">$1,224,900</div></div>
+        <div><div class="cstat-label">CDOM</div><div class="cstat-value stale">193</div></div>
+        <div><div class="cstat-label">AG Sq Ft</div><div class="cstat-value">1,427</div></div>
+        <div><div class="cstat-label">BG Sq Ft</div><div class="cstat-value">235</div></div>
+        <div><div class="cstat-label">Beds / Baths</div><div class="cstat-value">3 / 3</div></div>
+        <div><div class="cstat-label">Lot</div><div class="cstat-value">0.50–1.99 Ac</div></div>
+      </div>
+      <div class="comp-note">4-level side split in Greensville (Flamborough), drilled well, septic. Extensively updated since 2022: windows 2024, engineered hardwood throughout, updated kitchen, 4-pc ensuite, above-ground pool 2025. 3 full baths vs. subject's 1.5. More bathrooms &amp; newer finishes explain the price premium. However, 193 cumulative DOM is a red flag — market is telling you it's overpriced. Last sold $1,060,000 in June 2022 (competing peak market). This comp sets a ceiling but confirms a buyer-friendly valuation for subject nearer to $1.0–$1.1M range given fewer baths and carpet in bedrooms.</div>
+    </div>
+  </div>
+
+  <!-- COMP 3: 56 Kirby Ave (Sold) -->
+  <div class="comp-card">
+    <div class="comp-header">
+      <div>
+        <div class="comp-address">56 Kirby Avenue, Dundas <span class="badge-sold">Sold $1,350,000</span></div>
+      </div>
+      <div class="comp-price-tag">$1,350,000</div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-stats">
+        <div><div class="cstat-label">List Price</div><div class="cstat-value">$1,375,000</div></div>
+        <div><div class="cstat-label">SP/LP</div><div class="cstat-value fresh">0.98</div></div>
+        <div><div class="cstat-label">DOM</div><div class="cstat-value fresh">13</div></div>
+        <div><div class="cstat-label">AG Sq Ft</div><div class="cstat-value">2,516</div></div>
+        <div><div class="cstat-label">Beds / Baths</div><div class="cstat-value">4 / 3</div></div>
+        <div><div class="cstat-label">Lot</div><div class="cstat-value">0.50–1.99 Ac</div></div>
+      </div>
+      <div class="comp-note">Strong sale April 2026 — but materially different profile: 2,516 sq ft AG (nearly double subject), 4 beds/3 baths including ensuite, inground saltwater pool, backs Christie Lake Conservation Area (privacy premium), new roof 2023. This is a ceiling comp. At $536/sq ft AG, it confirms the market rewards size and outdoor amenity significantly. Subject's square footage and bath count place it well below this price point, but the kitchen quality and farmland setting narrow the gap somewhat.</div>
+    </div>
+  </div>
+
+  <!-- COMP 4: 1 Thorncrest Blvd (Sold) -->
+  <div class="comp-card">
+    <div class="comp-header">
+      <div>
+        <div class="comp-address">1 Thorncrest Boulevard, Dundas <span class="badge-sold">Sold $1,225,000</span></div>
+      </div>
+      <div class="comp-price-tag">$1,225,000</div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-stats">
+        <div><div class="cstat-label">List Price</div><div class="cstat-value">$1,299,000</div></div>
+        <div><div class="cstat-label">SP/LP</div><div class="cstat-value">0.94</div></div>
+        <div><div class="cstat-label">DOM</div><div class="cstat-value">26</div></div>
+        <div><div class="cstat-label">AG Sq Ft</div><div class="cstat-value">1,110</div></div>
+        <div><div class="cstat-label">Beds / Baths</div><div class="cstat-value">3 / 1</div></div>
+        <div><div class="cstat-label">Lot</div><div class="cstat-value">&lt;0.5 Ac</div></div>
+      </div>
+      <div class="comp-note">Sold May 2026 — 3 bed/1 bath side split, only 1,110 sq ft AG, municipal water (!), partial basement. Premium was entirely driven by its rare panoramic escarpment view overlooking Royal Botanical Gardens. Priced at $863/sq ft AG — entirely view-justified. Not directly comparable in feature set, but illustrates that unique locational attributes command significant premiums in Flamborough. Subject's farmland backing and large garage are its analog to a "unique" premium.</div>
+    </div>
+  </div>
+
+  <!-- COMP 5: 123 Hillcrest Ave (Sold) -->
+  <div class="comp-card">
+    <div class="comp-header">
+      <div>
+        <div class="comp-address">123 Hillcrest Avenue, Hamilton (Greensville) <span class="badge-sold">Sold $1,195,000</span></div>
+      </div>
+      <div class="comp-price-tag">$1,195,000</div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-stats">
+        <div><div class="cstat-label">List Price</div><div class="cstat-value">$1,199,000</div></div>
+        <div><div class="cstat-label">SP/LP</div><div class="cstat-value fresh">1.00</div></div>
+        <div><div class="cstat-label">DOM</div><div class="cstat-value fresh">9</div></div>
+        <div><div class="cstat-label">Total Sq Ft</div><div class="cstat-value">2,731</div></div>
+        <div><div class="cstat-label">Beds / Baths</div><div class="cstat-value">5 / 2</div></div>
+        <div><div class="cstat-label">Lot</div><div class="cstat-value">0.46 Acres</div></div>
+      </div>
+      <div class="comp-note">Raised bungalow (not side split but comparable lifestyle and market segment). 2,731 total sq ft, 3 gas fireplaces, covered balcony 22'×20', 5 beds, in-law potential, drilled well, Ecoflo septic. Sold in 9 DOM at near full ask — extremely hot sale May 2026. At $438/total sq ft. Subject has less total space and fewer beds/baths, which places it below this comp, but both share the Flamborough/Greensville rural premium buyer pool.</div>
+    </div>
+  </div>
+
+  <!-- ACTIVE LISTINGS TABLE -->
+  <div class="section-title">Active Competition</div>
+
+  <table class="active-table">
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>List Price</th>
+        <th>Beds/Baths</th>
+        <th>AG Sq Ft</th>
+        <th>DOM/CDOM</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>22 Rosebough St, Dundas</td>
+        <td>$1,229,000</td>
+        <td>4 / 3</td>
+        <td>1,682</td>
+        <td class="stale">104 / 104</td>
+        <td>Fully renovated · Quartz kitchen · Main floor primary w/ 5-pc ensuite · 2 price drops since $1,349,000 · Stale listing, motivated</td>
+      </tr>
+      <tr>
+        <td>175 Concession 5 E, Waterdown</td>
+        <td>$1,249,999</td>
+        <td>4 / 2</td>
+        <td>1,851</td>
+        <td>33 / 33</td>
+        <td>2.64 acres · 4-level side split · Radiant heat/heat pump · Original condition · Price drop from $1,299,900 · Much more land</td>
+      </tr>
+      <tr>
+        <td>348 Sydenham Rd, Dundas</td>
+        <td>$1,224,900</td>
+        <td>3 / 3</td>
+        <td>1,427</td>
+        <td class="stale">62 / 193</td>
+        <td>Updated 2022–2024 · 3 full baths · AG pool 2025 · Sitting unsold since Oct 2025 (was $1,329,900)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:12px;color:var(--muted);margin-top:10px;">Active listings as of June 10, 2026. Three competitors are overpriced or stale relative to market — subject property should enter priced to move quickly.</p>
+
+  <!-- ADJUSTMENTS -->
+  <div class="section-title">Adjusted Value Analysis</div>
+
+  <p style="font-size:13px;color:var(--slate);margin-bottom:20px;">Using the most relevant comparables and adjusting for key feature differences. Anchoring to the two best-fit recent sales (25 Carey St and 348 Sydenham Rd history). Adjustments are conservative and directional — this is a pricing guide, not an appraisal.</p>
+
+  <!-- ADJ 1 — 25 Carey St -->
+  <div class="adj-wrapper">
+    <div class="adj-title">
+      <span>Adjustment from: 25 Carey Street, Millgrove — Sold $835,000</span>
+      <span class="adj-comp-price">Most Similar Location</span>
+    </div>
+    <table class="adj-table">
+      <thead>
+        <tr><th>Feature</th><th>Comp</th><th>Subject</th><th>Adjustment</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Kitchen Quality</td><td>Updated (9 yr ago basic)</td><td>Miele ovens, granite, gas PF, island — significantly superior</td><td class="adj-pos">+$40,000</td></tr>
+        <tr><td>Garage</td><td>1-car attached</td><td>3-car capacity (2-door deep)</td><td class="adj-pos">+$25,000</td></tr>
+        <tr><td>Fireplaces</td><td>1 (main floor only)</td><td>3 gas + 1 electric</td><td class="adj-pos">+$10,000</td></tr>
+        <tr><td>Hot Tub + Stone Patio</td><td>None</td><td>2-yr hot tub · stone patio</td><td class="adj-pos">+$15,000</td></tr>
+        <tr><td>Shed w/ Hydro</td><td>2 sheds, no hydro listed</td><td>Shed with hydro</td><td class="adj-pos">+$5,000</td></tr>
+        <tr><td>Rear Privacy / Farm views</td><td>Treed lot, cul-de-sac</td><td>Farmland backing — Andy's parents' land (permanent view protection)</td><td class="adj-pos">+$20,000</td></tr>
+        <tr><td>Main Bath (original)</td><td>Updated 2-pc bath in lower</td><td>Original, not updated</td><td class="adj-neg">–$15,000</td></tr>
+        <tr><td>Carpet in Bedrooms</td><td>Hardwood throughout upper</td><td>Carpet in all beds</td><td class="adj-neg">–$10,000</td></tr>
+        <tr><td>HVAC</td><td>Gas forced air (age unknown)</td><td>Furnace &amp; A/C 2025 (new)</td><td class="adj-pos">+$10,000</td></tr>
+        <tr><td><strong>Adjusted Value</strong></td><td></td><td></td><td><strong>~$935,000</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ADJ 2 — 348 Sydenham last sold 2022 -->
+  <div class="adj-wrapper">
+    <div class="adj-title">
+      <span>Reference: 348 Sydenham Road — Last Sold $1,060,000 (June 2022)</span>
+      <span class="adj-comp-price">Similar Format / Adjusted for Market</span>
+    </div>
+    <table class="adj-table">
+      <thead>
+        <tr><th>Feature</th><th>Comp</th><th>Subject</th><th>Adjustment</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Market Timing</td><td>June 2022 (peak)</td><td>June 2026 (normalized)</td><td class="adj-neg">–$60,000 (market adj.)</td></tr>
+        <tr><td>Bathrooms</td><td>3 full baths (incl. ensuite)</td><td>1.5 baths</td><td class="adj-neg">–$40,000</td></tr>
+        <tr><td>Kitchen</td><td>Updated (engineered HW, modern)</td><td>Superior (Miele, granite, island)</td><td class="adj-pos">+$20,000</td></tr>
+        <tr><td>Garage</td><td>1-car</td><td>3-car capacity</td><td class="adj-pos">+$25,000</td></tr>
+        <tr><td>Lot / Backing</td><td>Farmland views</td><td>Farmland backing — family-owned permanently</td><td class="adj-pos">+$10,000</td></tr>
+        <tr><td>HVAC</td><td>Age unknown</td><td>2025 new</td><td class="adj-pos">+$8,000</td></tr>
+        <tr><td>Carpet / Dated Bath</td><td>Engineered HW throughout</td><td>Carpet in beds, original bath</td><td class="adj-neg">–$20,000</td></tr>
+        <tr><td><strong>Adjusted Value</strong></td><td></td><td></td><td><strong>~$1,003,000</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PRICING RECOMMENDATION -->
+  <div class="pricing-box">
+    <div class="pricing-box-title">Pricing Recommendation — 826 Millgrove Side Road</div>
+    <div class="pricing-range">
+      <div class="pr-cell">
+        <div class="pr-label">Conservative Floor</div>
+        <div class="pr-value">$985,000</div>
+      </div>
+      <div class="pr-cell">
+        <div class="pr-label">Recommended List Price</div>
+        <div class="pr-value mid">$1,049,000</div>
+      </div>
+      <div class="pr-cell">
+        <div class="pr-label">Optimistic Ceiling</div>
+        <div class="pr-value">$1,099,000</div>
+      </div>
+    </div>
+    <div class="pricing-note">
+      <strong style="color:var(--gold);">Rationale:</strong> The adjusted comparable analysis anchors value in the $935K–$1,003K range from the two best-fit comps. The subject carries meaningful premiums above the Carey St comp (garage, kitchen, fireplaces, hot tub, farm views) and a discount to 348 Sydenham (fewer baths, dated main bath). Placing it at <strong style="color:var(--white);">$1,049,000</strong> positions it as priced-to-sell against the stale competition ($1.2M+ listings sitting 100–193 DOM), while capturing the full value of the kitchen, HVAC, and outdoor package. This price level should attract motivated buyers in the Flamborough rural segment without requiring multiple price reductions. Expected SP/LP ratio based on current market: <strong style="color:var(--white);">0.96–0.99</strong>, suggesting a likely sale in the <strong style="color:var(--white);">$1,007,000–$1,038,000</strong> range.
+      <br><br>
+      <strong style="color:rgba(255,255,255,0.7);">Note on MPAC:</strong> The 854 sq ft MPAC figure is significantly understated due to the addition. Ensure accurate square footage is documented before listing — buyers and agents will calculate $/sq ft and a corrected figure will support the price.
+    </div>
+  </div>
+
+  <!-- MARKET SUMMARY -->
+  <div class="section-title">Market Summary — Flamborough Rural Segment</div>
+
+  <div class="notes-box">
+    <p>The Flamborough rural market (sub-areas 040 Greensville, 043 Flamborough West, 044 Flamborough East, 045 Beverly) remains active but is showing clear signs of price sensitivity. Properties that entered the market in Q4 2025 at peak-era pricing (e.g., 348 Sydenham at $1,329,900) have struggled, while well-priced, updated homes in Q1–Q2 2026 (56 Kirby at $1,375,000, 123 Hillcrest at $1,199,000, 15 Orkney at $1,175,000) are selling quickly at 0.98–1.03 SP/LP ratios with days-on-market in the single digits to low twenties.</p>
+    <p>The message is clear: <strong>price it right and it sells fast. Overprice it and it sits.</strong> Three of the current active listings have cumulative days-on-market of 33–193 days and have all dropped price at least once. Subject property has a genuinely differentiated offering (kitchen package, 3-car garage, farmland backing) that should generate real buyer interest — but needs to be priced to make the shortlist, not to anchor high.</p>
+    <p>Buyer profile in this segment: families and move-up buyers seeking more space and rural lifestyle while staying within 15–25 minutes of Hamilton, Burlington, and Waterdown. The 3-car garage and massive parking for 9–10 vehicles will resonate strongly with this demographic. The kitchen is a legitimate showstopper.</p>
+  </div>
+
+</div>
+
+<div class="footer">
+  Prepared by David Balsdon, Salesperson · Woolcott Real Estate | RE/MAX Escarpment Realty Inc. · June 10, 2026<br>
+  Confidential — for Becky &amp; Andy Galer · 826 Millgrove Side Road, Millgrove, Ontario<br>
+  Information based on MLS data deemed reliable but not guaranteed · This is not a formal appraisal
+</div>
+
+</body>
+</html>
