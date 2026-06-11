@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>66 Merlin Street — Pricing Strategy Report · Woolcott Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #f5f1e8; color: #1a1a1e; font-family: 'Manrope', system-ui, sans-serif; }
+  :root {
+    --cream: #f5f1e8; --cream-alt: #ebe5d6; --ink: #1a1a1e; --muted: #6b655a;
+    --navy: #1A3A6B; --navy-lt: #dde4ee; --red: #a83a1f; --red-lt: #f5d4cb;
+    --green: #3d5a2c; --green-lt: #d6e0c8; --gold: #b89443; --gold-lt: #f4e5c7; --gold-dk: #8B6B1F;
+  }
+  .serif { font-family: 'Fraunces', Georgia, serif; }
+  .mono  { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }
+  .kicker { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 12px; display: block; }
+  .kicker-navy  { color: var(--navy); }
+  .kicker-red   { color: var(--red); }
+  .kicker-gold  { color: var(--gold-dk); }
+  .kicker-green { color: var(--green); }
+  .pad    { padding: 56px 48px; }
+  .pad-lg { padding: 80px 48px; }
+  .alt    { background: var(--cream-alt); }
+  .banner-navy { background: var(--navy); color: var(--cream); }
+  .banner-ink  { background: var(--ink);  color: var(--cream); }
+  .max-w { max-width: 1200px; margin: 0 auto; }
+  .grid { display: grid; gap: 24px; }
+  .g2   { grid-template-columns: 1fr 1fr; }
+  .g3   { grid-template-columns: 1fr 1fr 1fr; }
+  .g4   { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .g2-1 { grid-template-columns: 2fr 1fr; }
+  .g1-2 { grid-template-columns: 1fr 2fr; }
+  @media(max-width:900px){.g2,.g3,.g4,.g2-1,.g1-2{grid-template-columns:1fr;}}
+  .tile { background: var(--cream); padding: 28px; border-top: 6px solid var(--navy); }
+  .tile-red   { border-top-color: var(--red); }
+  .tile-green { border-top-color: var(--green); }
+  .tile-gold  { border-top-color: var(--gold); }
+  .tile-ink   { background: var(--ink); color: var(--cream); border-top-color: var(--gold); }
+  .tile .stat { font-family: 'Fraunces', Georgia, serif; font-size: 52px; font-weight: 700; color: var(--navy); line-height: 1; margin: 10px 0 8px; }
+  .tile-red .stat   { color: var(--red); }
+  .tile-green .stat { color: var(--green); }
+  .tile-gold .stat  { color: var(--gold-dk); }
+  .tile-ink .stat   { color: var(--gold); }
+  .tile .label  { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .tile-ink .label { color: #b0a898; }
+  .tile .sublabel { font-size: 11px; color: var(--muted); margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+  .mini-bar-wrap { margin-top: 16px; background: rgba(26,26,30,0.1); height: 6px; }
+  .mini-bar { height: 6px; background: var(--navy); }
+  .mini-bar.red   { background: var(--red); }
+  .mini-bar.green { background: var(--green); }
+  .mini-bar.gold  { background: var(--gold); }
+  .pull-quote { border-left: 4px solid var(--navy); background: var(--cream); padding: 28px 32px; font-family: 'Fraunces', Georgia, serif; font-size: 21px; font-style: italic; line-height: 1.5; }
+  .pull-quote-navy { background: var(--navy); color: var(--cream); padding: 40px 48px; font-family: 'Fraunces', Georgia, serif; font-size: 28px; font-style: italic; line-height: 1.45; }
+  .pill { display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
+  .pill-navy  { background: var(--navy-lt); color: var(--navy); }
+  .pill-red   { background: var(--red-lt);  color: var(--red); }
+  .pill-green { background: var(--green-lt);color: var(--green); }
+  .pill-gold  { background: var(--gold-lt); color: var(--gold-dk); }
+  .chart-frame { background: var(--cream); padding: 24px; border: 1px solid rgba(26,26,30,0.13); }
+  .chart-h-sm { height: 200px; }
+  .chart-h-md { height: 320px; }
+  .chart-h-lg { height: 420px; }
+  table.editorial { width: 100%; border-collapse: collapse; }
+  table.editorial th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); padding: 10px 12px; border-bottom: 2px solid var(--ink); text-align: left; }
+  table.editorial td { font-size: 13px; padding: 11px 12px; border-bottom: 1px solid rgba(26,26,30,0.1); }
+  table.editorial td.num { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }
+  table.editorial tr.subject td { background: var(--navy-lt); font-weight: 700; }
+  table.editorial tr.best-comp td { background: var(--green-lt); }
+  table.editorial tr.overpriced td { background: var(--red-lt); }
+  h1 { font-family: 'Fraunces', Georgia, serif; font-size: 60px; font-weight: 700; line-height: 1.1; margin: 0 0 20px; }
+  h2 { font-family: 'Fraunces', Georgia, serif; font-size: 44px; font-weight: 700; line-height: 1.15; margin: 0 0 16px; }
+  h3 { font-family: 'Fraunces', Georgia, serif; font-size: 26px; font-weight: 600; margin: 0 0 12px; }
+  p  { line-height: 1.7; color: var(--muted); margin: 0 0 16px; }
+  p.lead { font-size: 17px; color: var(--ink); }
+  .divider { border: none; border-top: 1px solid rgba(26,26,30,0.1); margin: 0; }
+  .warning-box { border-left: 6px solid var(--red); background: var(--red-lt); padding: 20px 24px; }
+  .warning-box p { color: #7a2010; margin: 0; }
+  .success-box { border-left: 6px solid var(--green); background: var(--green-lt); padding: 20px 24px; }
+  .success-box p { color: #2a3d1a; margin: 0; }
+  /* Timeline */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: rgba(26,26,30,0.12); }
+  .timeline-item { position: relative; margin-bottom: 24px; }
+  .timeline-item::before { content: ''; position: absolute; left: -26px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--muted); border: 2px solid var(--cream); }
+  .timeline-item.red::before { background: var(--red); }
+  .timeline-item.gold::before { background: var(--gold); }
+  .timeline-item .t-date { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
+  .timeline-item .t-label { font-weight: 700; font-size: 14px; color: var(--ink); margin: 2px 0 4px; }
+  .timeline-item .t-note { font-size: 13px; color: var(--muted); }
+  /* Recommendation box */
+  .rec-box { background: var(--navy); color: var(--cream); padding: 48px; }
+  .rec-box .rec-price { font-family: 'Fraunces', Georgia, serif; font-size: 80px; font-weight: 700; color: var(--gold); line-height: 1; margin: 12px 0; }
+  .rec-box .rec-range { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: rgba(245,241,232,0.6); margin-top: 8px; }
+  .rec-box p { color: rgba(245,241,232,0.75); }
+  footer { background: var(--ink); color: #6b655a; padding: 36px 48px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-align: center; }
+  footer a { color: #9a9490; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="banner-navy pad-lg">
+  <div class="max-w">
+    <span class="kicker" style="color: rgba(245,241,232,0.5);">Woolcott Real Estate · Pricing Analysis · June 11, 2026</span>
+    <h1 style="color: #f5f1e8; max-width: 760px;">66 Merlin Street<br><em style="font-weight: 400;">Oakville — GO Glenorchy</em></h1>
+    <p style="color: rgba(245,241,232,0.7); font-size: 17px; max-width: 580px; margin-top: 16px;">Property-specific pricing strategy, comp analysis, and recommendation based on current active and sold data in the Glenorchy pocket.</p>
+    <div style="margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap;">
+      <span class="pill pill-gold">5 Bed · 4+1 Bath · 3,196 SQFT</span>
+      <span class="pill" style="background: rgba(255,255,255,0.1); color: var(--cream);">Detached · 2-Storey · 2021 Build</span>
+      <span class="pill pill-red">Terminated — 89 DOM</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROPERTY QUICK FACTS -->
+<section class="pad-lg">
+  <div class="max-w">
+    <span class="kicker kicker-navy">Subject Property</span>
+    <h2>The Property at a Glance</h2>
+    <p class="lead">Treasure Hill Baymont Five, Elevation C — 4,500+ sqft finished including basement. 5 beds, 5 baths, finished basement, 10ft main floor, 2-car garage with EV rough-in. Strong bones. The problem has never been the house.</p>
+
+    <div class="grid g4" style="margin-top: 36px;">
+      <div class="tile">
+        <span class="kicker">Above Grade</span>
+        <div class="stat">3,196</div>
+        <div class="label">SQFT · MPAC</div>
+        <div class="sublabel">4,500+ sqft total finished</div>
+      </div>
+      <div class="tile">
+        <span class="kicker">Bedrooms</span>
+        <div class="stat">5+1</div>
+        <div class="label">5 upper + 1 basement</div>
+        <div class="sublabel">Primary suite w/ 5-pc ensuite</div>
+      </div>
+      <div class="tile tile-red">
+        <span class="kicker kicker-red">Days on Market</span>
+        <div class="stat">89</div>
+        <div class="label">Last listing (Jan–Apr 2026)</div>
+        <div class="sublabel">Cumulative market time: ~10 months</div>
+      </div>
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">Lot Size</span>
+        <div class="stat" style="font-size: 36px;">41×90</div>
+        <div class="label">41.07 ft front · 90.05 ft depth</div>
+        <div class="sublabel">North-facing · Post Rd &amp; Merlin</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- LISTING HISTORY -->
+<section class="pad-lg alt">
+  <div class="max-w">
+    <span class="kicker kicker-red">Listing History</span>
+    <h2>10 Months on the Market.<br><em>The Story So Far.</em></h2>
+    <p class="lead">This property has been chasing the market down for nearly a year. Every price reduction came too late — buyers had already moved on. This history is now visible to every buyer and agent who searches the address.</p>
+
+    <div class="grid g2-1" style="margin-top: 40px; align-items: start; gap: 48px;">
+      <div>
+        <div class="chart-frame">
+          <div class="chart-h-md"><canvas id="priceHistory"></canvas></div>
+        </div>
+        <p style="font-size: 11px; margin-top: 10px; font-family: 'JetBrains Mono', monospace; color: var(--muted);">66 Merlin St — price history across 3 MLS listings</p>
+      </div>
+      <div>
+        <div class="timeline" style="margin-top: 8px;">
+          <div class="timeline-item">
+            <div class="t-date">Jul 31, 2025</div>
+            <div class="t-label">Listed at $2,100,000</div>
+            <div class="t-note">MLS# W12318368 — market entry. No offers.</div>
+          </div>
+          <div class="timeline-item red">
+            <div class="t-date">Oct 1, 2025</div>
+            <div class="t-label" style="color:var(--red);">Price drop → $2,088,000</div>
+            <div class="t-note">$12K reduction. Still no traction.</div>
+          </div>
+          <div class="timeline-item red">
+            <div class="t-date">Oct 31, 2025</div>
+            <div class="t-label" style="color:var(--red);">Expired → Re-listed $1,998,000</div>
+            <div class="t-note">MLS# W12498240. New listing, same buyers watching.</div>
+          </div>
+          <div class="timeline-item red">
+            <div class="t-date">Nov 21, 2025</div>
+            <div class="t-label" style="color:var(--red);">Price drop → $1,998,000</div>
+            <div class="t-note">Intra-listing adjustment. Minimal impact.</div>
+          </div>
+          <div class="timeline-item red">
+            <div class="t-date">Jan 9, 2026</div>
+            <div class="t-label" style="color:var(--red);">Terminated → Re-listed $1,998,000</div>
+            <div class="t-note">MLS# W12680926. Third attempt.</div>
+          </div>
+          <div class="timeline-item red">
+            <div class="t-date">Mar 15, 2026</div>
+            <div class="t-label" style="color:var(--red);">Price drop → $1,870,000</div>
+            <div class="t-note">Biggest single cut: $128,000. Didn't move it.</div>
+          </div>
+          <div class="timeline-item red">
+            <div class="t-date">Apr 8, 2026</div>
+            <div class="t-label" style="color:var(--red);">Terminated</div>
+            <div class="t-note">89 DOM on last listing. Total market exposure: ~10 months.</div>
+          </div>
+        </div>
+
+        <div class="warning-box" style="margin-top: 24px;">
+          <p><strong style="display:block; margin-bottom: 6px;">Total price erosion: $230,000</strong>
+          From original ask of $2,100,000 to final list of $1,870,000 — without a single accepted offer. Each re-list reset the DOM counter but didn't reset buyer memory.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- COMP ANALYSIS -->
+<section class="pad-lg">
+  <div class="max-w">
+    <span class="kicker kicker-navy">Comparable Sales & Active Competition</span>
+    <h2>What the Market Is Actually Paying</h2>
+    <p class="lead">18 sold comparables in Glenorchy. The clearest signal: <strong>62 Merlin Street</strong> — same street, same builder pocket, 5 bedrooms — listed at $1,999,000 and sold at $1,840,000 in April 2026. That's the floor.</p>
+
+    <div style="margin-top: 40px; margin-bottom: 32px;">
+      <h3>Sold Comparables — Glenorchy Detached (2025–2026)</h3>
+      <table class="editorial">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Beds</th>
+            <th>List Price</th>
+            <th>Sold Price</th>
+            <th>Sale/List %</th>
+            <th>Date</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="best-comp">
+            <td><strong>62 Merlin Street ★</strong></td>
+            <td class="num">5</td>
+            <td class="num">$1,999,000</td>
+            <td class="num"><strong>$1,840,000</strong></td>
+            <td class="num" style="color:var(--red);">92.0%</td>
+            <td class="num">Apr 2026</td>
+            <td style="font-size:12px; color: var(--green);">Same street — closest comp</td>
+          </tr>
+          <tr>
+            <td>3128 Parsonage Cres.</td>
+            <td class="num">4</td>
+            <td class="num">$1,978,000</td>
+            <td class="num">$2,028,000</td>
+            <td class="num" style="color:var(--green);">102.5%</td>
+            <td class="num">May 2026</td>
+            <td style="font-size:12px;">Over asking — priced right</td>
+          </tr>
+          <tr>
+            <td>3191 Daniel Way</td>
+            <td class="num">4</td>
+            <td class="num">$1,995,000</td>
+            <td class="num">$1,980,000</td>
+            <td class="num" style="color:var(--green);">99.2%</td>
+            <td class="num">Apr 2026</td>
+            <td style="font-size:12px;">Near ask — properly priced</td>
+          </tr>
+          <tr>
+            <td>3171 Daniel Way</td>
+            <td class="num">4</td>
+            <td class="num">$2,099,000</td>
+            <td class="num">$1,910,000</td>
+            <td class="num" style="color:var(--red);">91.0%</td>
+            <td class="num">May 2026</td>
+            <td style="font-size:12px;">$189K below ask</td>
+          </tr>
+          <tr>
+            <td>74 Boulton Trail</td>
+            <td class="num">4+1</td>
+            <td class="num">$1,879,900</td>
+            <td class="num">$1,963,000</td>
+            <td class="num" style="color:var(--green);">104.4%</td>
+            <td class="num">Apr 2026</td>
+            <td style="font-size:12px;">Over ask — aggressive pricing works</td>
+          </tr>
+          <tr>
+            <td>3379 Post Road</td>
+            <td class="num">4+1</td>
+            <td class="num">$1,749,000</td>
+            <td class="num">$1,660,000</td>
+            <td class="num" style="color:var(--red);">94.9%</td>
+            <td class="num">Feb 2026</td>
+            <td style="font-size:12px;">4-bed, smaller — lower ceiling</td>
+          </tr>
+          <tr>
+            <td>91 Hallaran Road</td>
+            <td class="num">4</td>
+            <td class="num">$1,850,000</td>
+            <td class="num">$1,710,000</td>
+            <td class="num" style="color:var(--red);">92.4%</td>
+            <td class="num">Jan 2026</td>
+            <td style="font-size:12px;">$140K below ask</td>
+          </tr>
+          <tr>
+            <td>3250 Millicent Ave.</td>
+            <td class="num">4</td>
+            <td class="num">$1,699,000</td>
+            <td class="num">$1,590,000</td>
+            <td class="num" style="color:var(--red);">93.6%</td>
+            <td class="num">Feb 2026</td>
+            <td style="font-size:12px;">4-bed comparator</td>
+          </tr>
+          <tr>
+            <td>3100 Daniel Way</td>
+            <td class="num">4+1</td>
+            <td class="num">$2,499,000</td>
+            <td class="num">$2,300,000</td>
+            <td class="num" style="color:var(--red);">92.0%</td>
+            <td class="num">Feb 2026</td>
+            <td style="font-size:12px;">Larger — establishes ceiling</td>
+          </tr>
+          <tr>
+            <td>3124 Daniel Way</td>
+            <td class="num">4+1</td>
+            <td class="num">$2,549,900</td>
+            <td class="num">$2,430,000</td>
+            <td class="num" style="color:var(--red);">95.3%</td>
+            <td class="num">May 2026</td>
+            <td style="font-size:12px;">Larger — upper end</td>
+          </tr>
+          <tr class="subject">
+            <td>66 Merlin St. ← SUBJECT</td>
+            <td class="num">5+1</td>
+            <td class="num">$1,870,000</td>
+            <td class="num">TERMINATED</td>
+            <td class="num">—</td>
+            <td class="num">Apr 2026</td>
+            <td style="font-size:12px;">89 DOM · $230K price erosion</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Sale/List ratio chart -->
+    <div class="chart-frame" style="margin-top: 32px;">
+      <div style="margin-bottom: 16px;">
+        <span class="kicker kicker-navy">Sale-to-List Ratio</span>
+        <p style="margin: 0; font-size: 13px;">What buyers actually pay vs. asking price — Glenorchy sold comps</p>
+      </div>
+      <div class="chart-h-md"><canvas id="saleListChart"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ACTIVE COMPETITION -->
+<section class="pad-lg alt">
+  <div class="max-w">
+    <span class="kicker kicker-red">Active Competition</span>
+    <h2>27 Homes Actively Competing Right Now</h2>
+    <p class="lead">The active inventory in Glenorchy runs from $1,299,000 to $2,599,000. For a 5-bedroom property, the relevant band is $1,895,000–$2,250,000. That's where 66 Merlin needs to enter strategically — not match or exceed this range.</p>
+
+    <div class="grid g2" style="margin-top: 36px; align-items: start;">
+      <div>
+        <div class="chart-frame">
+          <div class="chart-h-lg"><canvas id="activeInv"></canvas></div>
+        </div>
+        <p style="font-size: 11px; margin-top: 10px; font-family: 'JetBrains Mono', monospace; color: var(--muted);">Active listings by price band — Glenorchy (June 2026)</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div class="tile">
+          <span class="kicker">Competing 5-Bed Active Listings</span>
+          <div class="stat" style="font-size: 38px;">3</div>
+          <div class="label">Homes asking $1,895K–$2,249K<br>All 5-bed detached in Glenorchy</div>
+          <div class="sublabel">3242 Millicent $1,895K · 3196 Ernest Appelbe $1,899K · 3329 Vernon Powell $2,249K</div>
+        </div>
+        <div class="tile tile-red">
+          <span class="kicker kicker-red">The Problem With $1,870,000+</span>
+          <p style="font-size: 14px; color: var(--ink); margin: 0; line-height: 1.65;">At $1.87M+, the subject competes with fresh listings and no stigma. Buyers who saw the previous three attempts are not coming back at the same price. The only way to generate new showings is to undercut the competition meaningfully.</p>
+        </div>
+        <div class="tile tile-green">
+          <span class="kicker kicker-green">The Opportunity</span>
+          <p style="font-size: 14px; color: var(--ink); margin: 0; line-height: 1.65;">Priced at $1,799,000–$1,849,000, this is the best-value 5-bedroom in the pocket. Buyers actively comparing 4-bed homes near $1.6M will stretch for the extra bedroom. The Daniel Way and Post Road 4-beds all cleared between $1.66M–$1.96M.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- WHY HISTORY HURTS -->
+<section class="pad-lg">
+  <div class="max-w">
+    <span class="kicker kicker-red">The Stigma Factor</span>
+    <h2>Buyers Have a Long Memory.<br><em>History Follows This Address.</em></h2>
+
+    <div class="grid g2" style="margin-top: 36px; align-items: start;">
+      <div>
+        <p class="lead">Every buyer's agent who pulls 66 Merlin Street sees the full history: listed at $2.1M in July 2025, still unsold 10 months later. That history signals one of two things to a buyer:</p>
+        <ul style="line-height: 2; color: var(--muted); padding-left: 20px; font-size: 14px;">
+          <li>The sellers are unrealistic — negotiations will be difficult</li>
+          <li>Something is wrong with the property that isn't showing in the listing</li>
+        </ul>
+        <p>Neither is true — but perception is reality. The only way to break through this stigma is a price that makes buyers stop and think: <em>"this is actually a deal."</em></p>
+        <div class="warning-box" style="margin-top: 24px;">
+          <p><strong>Going back at $1,870,000 or higher</strong> puts the property right back where it failed. The market has already spoken at that price — loudly and repeatedly.</p>
+        </div>
+      </div>
+      <div>
+        <div class="tile tile-ink" style="margin-bottom: 24px;">
+          <span class="kicker" style="color: rgba(245,241,232,0.5);">Buyer Psychology</span>
+          <p style="color: #b0a898; font-size: 14px; line-height: 1.7; margin: 12px 0 0;">"If this house has been sitting for 10 months and just keeps dropping, they'll take less. Let's lowball them."</p>
+          <p style="color: #7a7068; font-size: 12px; margin-top: 8px;">— What every buyer's agent is thinking when they pull this address</p>
+        </div>
+        <div class="pull-quote">
+          "At the right price, this stigma becomes the seller's advantage. A motivated buyer sees a 5-bedroom in The Oakes priced below market and moves fast."
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- RECOMMENDATION -->
+<section class="pad-lg alt">
+  <div class="max-w">
+    <span class="kicker kicker-green">Pricing Recommendation</span>
+    <h2>The Number That Gets This Sold</h2>
+
+    <div class="grid g2" style="margin-top: 36px; align-items: start; gap: 40px;">
+      <div class="rec-box">
+        <span class="kicker" style="color: rgba(245,241,232,0.5);">Recommended List Price</span>
+        <div class="rec-price">$1,799,000</div>
+        <div class="rec-range">Acceptable range: $1,799,000 – $1,849,000</div>
+        <p style="margin-top: 24px;">This positions 66 Merlin as the best-value 5-bedroom in Glenorchy. Below 62 Merlin's $1,840,000 sold price. Psychologically below the $1.8M threshold. Priced to drive immediate showings and cut through the stigma with urgency.</p>
+        <div style="margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap;">
+          <span class="pill pill-green">$41K below next 5-bed comp</span>
+          <span class="pill" style="background: rgba(255,255,255,0.1); color: var(--cream);">Below $1.8M psychological floor</span>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div class="success-box">
+          <p><strong style="display: block; margin-bottom: 6px;">Why $1,799,000 works:</strong>
+          62 Merlin (same street, 5-bed) sold at $1,840,000 in April. A fresh listing at $1,799,000 gives buyers a reason to move now — they're getting a better deal than the last comp. Expected sold price: $1,800,000–$1,860,000.</p>
+        </div>
+
+        <div class="tile">
+          <span class="kicker">Expected Outcome at $1,799,000</span>
+          <div class="grid g2" style="gap: 16px; margin-top: 8px;">
+            <div>
+              <div style="font-family:'Fraunces',Georgia,serif; font-size: 28px; font-weight:700; color: var(--green);">14–28</div>
+              <div style="font-size: 12px; color: var(--muted);">Days on market</div>
+            </div>
+            <div>
+              <div style="font-family:'Fraunces',Georgia,serif; font-size: 28px; font-weight:700; color: var(--navy);">$1.80M–1.86M</div>
+              <div style="font-size: 12px; color: var(--muted);">Expected sold range</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tile tile-red">
+          <span class="kicker kicker-red">If Listed at $1,870,000+</span>
+          <div class="grid g2" style="gap: 16px; margin-top: 8px;">
+            <div>
+              <div style="font-family:'Fraunces',Georgia,serif; font-size: 28px; font-weight:700; color: var(--red);">60–90+</div>
+              <div style="font-size: 12px; color: var(--muted);">Expected DOM</div>
+            </div>
+            <div>
+              <div style="font-family:'Fraunces',Georgia,serif; font-size: 28px; font-weight:700; color: var(--red);">$1.72M–1.78M</div>
+              <div style="font-size: 12px; color: var(--muted);">Likely sold range after cuts</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 3 PRICES -->
+<section class="pad-lg">
+  <div class="max-w">
+    <span class="kicker kicker-navy">The 3-Price Framework</span>
+    <h2>Three Paths Forward for the Sellers</h2>
+
+    <div class="grid g3" style="margin-top: 36px;">
+      <div style="background: var(--green-lt); border-top: 4px solid var(--green); padding: 28px;">
+        <span class="kicker kicker-green">Option A — Aggressive</span>
+        <div style="font-family:'Fraunces',Georgia,serif; font-size: 44px; font-weight:700; color: var(--green); line-height:1; margin: 10px 0 16px;">$1,749,000</div>
+        <p style="font-size: 13px; color: var(--ink); margin-bottom: 12px;">Creates immediate urgency. Highest probability of multiple offers. Likely to sell $1,790,000–$1,840,000 in under 2 weeks.</p>
+        <div style="font-size: 12px; color: var(--green); font-weight: 700;">Best for: Sellers who want certainty and speed</div>
+      </div>
+      <div style="background: var(--navy-lt); border-top: 4px solid var(--navy); padding: 28px;">
+        <span class="kicker kicker-navy">Option B — Recommended ★</span>
+        <div style="font-family:'Fraunces',Georgia,serif; font-size: 44px; font-weight:700; color: var(--navy); line-height:1; margin: 10px 0 16px;">$1,799,000</div>
+        <p style="font-size: 13px; color: var(--ink); margin-bottom: 12px;">Best value 5-bed in pocket. Below 62 Merlin's sold price. High showings, 14–28 day close. Expected outcome: $1,800,000–$1,860,000.</p>
+        <div style="font-size: 12px; color: var(--navy); font-weight: 700;">Best for: Maximum net proceeds + reasonable timeline</div>
+      </div>
+      <div style="background: var(--red-lt); border-top: 4px solid var(--red); padding: 28px;">
+        <span class="kicker kicker-red">Option C — Risk Zone</span>
+        <div style="font-family:'Fraunces',Georgia,serif; font-size: 44px; font-weight:700; color: var(--red); line-height:1; margin: 10px 0 16px;">$1,870,000+</div>
+        <p style="font-size: 13px; color: var(--ink); margin-bottom: 12px;">Return to the price that already failed twice. Active competition at this level has no stigma. Likely result: 60–90+ DOM, forced price cut, weakened negotiating position.</p>
+        <div style="font-size: 12px; color: var(--red); font-weight: 700;">Risk: Selling for less than Option B after months of carrying costs</div>
+      </div>
+    </div>
+
+    <div class="pull-quote-navy" style="margin-top: 40px;">
+      "Is there a sale I missed that justifies going back above $1,870,000?"<br>
+      <span style="font-size: 18px; opacity: 0.7; font-style: normal;">— The only question worth asking the sellers.</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- BOTTOM BAR -->
+<section class="pad-lg banner-navy">
+  <div class="max-w">
+    <div class="grid g2" style="align-items: center; gap: 60px;">
+      <div>
+        <span class="kicker" style="color: rgba(245,241,232,0.5);">Prepared for Joe Sequeira</span>
+        <h2 style="color: var(--cream);">The house isn't the problem.<br><em>Price it right and it sells.</em></h2>
+        <p style="color: rgba(245,241,232,0.7);">The Treasure Hill Baymont Five is a strong product in a desirable community. Buyers know it. The market has told you the number — $1,799,000 gets it done.</p>
+      </div>
+      <div>
+        <div style="background: rgba(255,255,255,0.07); padding: 32px; border: 1px solid rgba(255,255,255,0.15);">
+          <div style="font-family:'JetBrains Mono',monospace; font-size: 12px; color: rgba(245,241,232,0.5); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.12em;">Analysis Summary</div>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div style="display:flex; justify-content:space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">
+              <span style="font-size:13px; color: rgba(245,241,232,0.7);">Closest comparable (62 Merlin)</span>
+              <span style="font-family:'JetBrains Mono',monospace; color: var(--cream); font-size:13px;">$1,840,000</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">
+              <span style="font-size:13px; color: rgba(245,241,232,0.7);">Recommended list price</span>
+              <span style="font-family:'JetBrains Mono',monospace; color: var(--gold); font-size:13px; font-weight:700;">$1,799,000</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">
+              <span style="font-size:13px; color: rgba(245,241,232,0.7);">Expected sold range</span>
+              <span style="font-family:'JetBrains Mono',monospace; color: var(--cream); font-size:13px;">$1.80M–$1.86M</span>
+            </div>
+            <div style="display:flex; justify-content:space-between;">
+              <span style="font-size:13px; color: rgba(245,241,232,0.7);">Expected DOM</span>
+              <span style="font-family:'JetBrains Mono',monospace; color: var(--green-lt); font-size:13px;">14–28 days</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="max-w">
+    <p style="margin: 0 0 6px;">Woolcott Real Estate · Hamilton &amp; Burlington · <a href="https://woolcott.ca">woolcott.ca</a></p>
+    <p style="margin: 0;">Prepared by Henry for Joe Sequeira · June 11, 2026 · Data: PropTx MLS® / RAHB · For agent use only</p>
+  </div>
+</footer>
+
+<script>
+Chart.defaults.font.family = "'Manrope', sans-serif";
+Chart.defaults.font.size = 11;
+Chart.defaults.color = "#6b655a";
+Chart.defaults.borderColor = "rgba(26,26,30,0.1)";
+
+const tooltipDefaults = {
+  backgroundColor: '#1a1a1e',
+  titleColor: '#f5f1e8',
+  bodyColor: '#b0a898',
+  bodyFont: { family: "'JetBrains Mono', monospace" },
+  cornerRadius: 0
+};
+
+// Price History Chart
+new Chart(document.getElementById('priceHistory').getContext('2d'), {
+  type: 'line',
+  data: {
+    labels: ['Jul 2025\n(Listed)', 'Oct 1\n(Drop)', 'Oct 31\n(Re-listed)', 'Nov 21\n(Drop)', 'Jan 9\n(Re-listed)', 'Mar 15\n(Drop)', 'Apr 8\n(Terminated)'],
+    datasets: [{
+      label: 'List Price',
+      data: [2100000, 2088000, 1998000, 1998000, 1998000, 1870000, 1870000],
+      borderColor: '#a83a1f',
+      backgroundColor: 'rgba(168,58,31,0.08)',
+      tension: 0.1,
+      fill: true,
+      borderWidth: 3,
+      pointRadius: 6,
+      pointBackgroundColor: '#a83a1f',
+      pointBorderColor: '#f5f1e8',
+      pointBorderWidth: 2
+    }, {
+      label: 'Recommended Price',
+      data: [null, null, null, null, null, null, 1799000],
+      borderColor: '#3d5a2c',
+      backgroundColor: 'transparent',
+      borderWidth: 2,
+      borderDash: [8, 4],
+      pointRadius: 8,
+      pointBackgroundColor: '#3d5a2c',
+      pointBorderColor: '#f5f1e8',
+      pointBorderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: true, position: 'top' },
+      tooltip: { ...tooltipDefaults, callbacks: { label: ctx => ' $' + ctx.parsed.y.toLocaleString() } }
+    },
+    scales: {
+      x: { grid: { display: false } },
+      y: {
+        grid: { color: 'rgba(26,26,30,0.07)' },
+        ticks: { font: { family: "'JetBrains Mono', monospace" }, callback: v => '$' + (v/1000000).toFixed(2) + 'M' },
+        min: 1700000, max: 2200000
+      }
+    }
+  }
+});
+
+// Sale/List Ratio Chart
+new Chart(document.getElementById('saleListChart').getContext('2d'), {
+  type: 'bar',
+  data: {
+    labels: ['62 Merlin\n5-bed', '3128 Parsonage\n4-bed', '3191 Daniel\n4-bed', '74 Boulton\n4+1', '3171 Daniel\n4-bed', '91 Hallaran\n4-bed', '3379 Post Rd\n4+1', '3100 Daniel\n4+1'],
+    datasets: [{
+      label: 'Sale/List %',
+      data: [92.0, 102.5, 99.2, 104.4, 91.0, 92.4, 94.9, 92.0],
+      backgroundColor: (ctx) => {
+        const v = ctx.parsed.y;
+        if (v >= 100) return '#3d5a2c';
+        if (v >= 95) return '#1A3A6B';
+        return '#a83a1f';
+      },
+      borderWidth: 0
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { ...tooltipDefaults, callbacks: { label: ctx => ' ' + ctx.parsed.y + '%' } }
+    },
+    scales: {
+      x: { grid: { display: false } },
+      y: {
+        grid: { color: 'rgba(26,26,30,0.07)' },
+        ticks: { font: { family: "'JetBrains Mono', monospace" }, callback: v => v + '%' },
+        min: 88, max: 107
+      }
+    }
+  }
+});
+
+// Active Inventory Distribution
+new Chart(document.getElementById('activeInv').getContext('2d'), {
+  type: 'bar',
+  data: {
+    labels: ['$1.3M–$1.5M', '$1.5M–$1.7M', '$1.7M–$1.9M', '$1.9M–$2.1M', '$2.1M+'],
+    datasets: [{
+      label: 'Active Listings',
+      data: [2, 7, 7, 6, 5],
+      backgroundColor: ['#1A3A6B','#1A3A6B','#b89443','#a83a1f','#a83a1f'],
+      borderWidth: 0
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    indexAxis: 'y',
+    plugins: {
+      legend: { display: false },
+      tooltip: { ...tooltipDefaults, callbacks: { label: ctx => ' ' + ctx.parsed.x + ' listings' } }
+    },
+    scales: {
+      x: { grid: { color: 'rgba(26,26,30,0.07)' }, ticks: { font: { family: "'JetBrains Mono', monospace" } } },
+      y: { grid: { display: false } }
+    }
+  }
+});
+</script>
+</body>
+</html>
