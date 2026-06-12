@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>3205 Highpoint Court — Luxury Estate Report · Woolcott Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #f5f1e8; color: #1a1a1e; font-family: 'Manrope', system-ui, sans-serif; }
+  :root {
+    --cream: #f5f1e8; --cream-alt: #ebe5d6; --ink: #1a1a1e; --muted: #6b655a;
+    --navy: #1A3A6B; --navy-lt: #dde4ee; --red: #a83a1f; --red-lt: #f5d4cb;
+    --green: #3d5a2c; --green-lt: #d6e0c8; --gold: #b89443; --gold-lt: #f4e5c7; --gold-dk: #8B6B1F;
+  }
+  .serif  { font-family: 'Fraunces', Georgia, serif; }
+  .mono   { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }
+  .kicker { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 12px; display: block; }
+  .kicker-navy  { color: var(--navy); }
+  .kicker-red   { color: var(--red); }
+  .kicker-gold  { color: var(--gold-dk); }
+  .kicker-green { color: var(--green); }
+  .pad    { padding: 56px 48px; }
+  .pad-lg { padding: 80px 48px; }
+  .alt    { background: var(--cream-alt); }
+  .banner-navy { background: var(--navy); color: var(--cream); }
+  .banner-ink  { background: var(--ink);  color: var(--cream); }
+  .max-w { max-width: 1200px; margin: 0 auto; }
+  .grid { display: grid; gap: 24px; }
+  .g2   { grid-template-columns: 1fr 1fr; }
+  .g3   { grid-template-columns: 1fr 1fr 1fr; }
+  .g4   { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .g2-1 { grid-template-columns: 2fr 1fr; }
+  .g1-2 { grid-template-columns: 1fr 2fr; }
+  @media(max-width:900px){.g2,.g3,.g4,.g2-1,.g1-2{grid-template-columns:1fr;}}
+  .tile { background: var(--cream); padding: 28px; border-top: 6px solid var(--navy); }
+  .tile-red   { border-top-color: var(--red); }
+  .tile-green { border-top-color: var(--green); }
+  .tile-gold  { border-top-color: var(--gold); }
+  .tile-ink   { background: var(--ink); color: var(--cream); border-top-color: var(--gold); }
+  .tile .stat { font-family: 'Fraunces', Georgia, serif; font-size: 52px; font-weight: 700; color: var(--navy); line-height: 1; margin: 10px 0 8px; }
+  .tile-red .stat   { color: var(--red); }
+  .tile-green .stat { color: var(--green); }
+  .tile-gold .stat  { color: var(--gold-dk); }
+  .tile-ink .stat   { color: var(--gold); }
+  .tile .label  { font-size: 13px; color: var(--muted); line-height: 1.55; }
+  .tile-ink .label  { color: #b0a898; }
+  .tile .sublabel   { font-size: 11px; color: var(--muted); margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+  .mini-bar-wrap { margin-top: 16px; background: rgba(26,26,30,0.1); height: 6px; }
+  .mini-bar { height: 6px; background: var(--navy); }
+  .mini-bar.gold  { background: var(--gold); }
+  .mini-bar.green { background: var(--green); }
+  .mini-bar.red   { background: var(--red); }
+  .pull-quote { border-left: 4px solid var(--navy); background: var(--cream); padding: 28px 32px; font-family: 'Fraunces', Georgia, serif; font-size: 21px; font-style: italic; line-height: 1.5; }
+  .pull-quote-navy { background: var(--navy); color: var(--cream); padding: 40px 48px; font-family: 'Fraunces', Georgia, serif; font-size: 26px; font-style: italic; line-height: 1.45; }
+  .pill { display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
+  .pill-navy  { background: var(--navy-lt); color: var(--navy); }
+  .pill-red   { background: var(--red-lt);  color: var(--red); }
+  .pill-green { background: var(--green-lt);color: var(--green); }
+  .pill-gold  { background: var(--gold-lt); color: var(--gold-dk); }
+  .chart-frame { background: var(--cream); padding: 24px; border: 1px solid rgba(26,26,30,0.13); }
+  .chart-h-sm { height: 200px; }
+  .chart-h-md { height: 300px; }
+  .chart-h-lg { height: 400px; }
+  table.editorial { width: 100%; border-collapse: collapse; }
+  table.editorial th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); padding: 10px 12px; border-bottom: 2px solid var(--ink); text-align: left; }
+  table.editorial td { font-size: 13px; padding: 11px 12px; border-bottom: 1px solid rgba(26,26,30,0.1); vertical-align: top; }
+  table.editorial td.num { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }
+  table.editorial tr.subject td { background: var(--navy-lt); font-weight: 700; }
+  table.editorial tr.notable td { background: var(--gold-lt); }
+  h1 { font-family: 'Fraunces', Georgia, serif; font-size: 60px; font-weight: 700; line-height: 1.1; margin: 0 0 20px; }
+  h2 { font-family: 'Fraunces', Georgia, serif; font-size: 44px; font-weight: 700; line-height: 1.15; margin: 0 0 16px; }
+  h3 { font-family: 'Fraunces', Georgia, serif; font-size: 26px; font-weight: 600; margin: 0 0 12px; }
+  p  { line-height: 1.7; color: var(--muted); margin: 0 0 16px; }
+  p.lead { font-size: 17px; color: var(--ink); }
+  .divider { border: none; border-top: 1px solid rgba(26,26,30,0.1); margin: 0; }
+  .success-box { border-left: 6px solid var(--green); background: var(--green-lt); padding: 20px 24px; }
+  .success-box p { color: #2a3d1a; margin: 0; }
+  .warning-box { border-left: 6px solid var(--red); background: var(--red-lt); padding: 20px 24px; }
+  .warning-box p { color: #7a2010; margin: 0; }
+  .note-box { border-left: 6px solid var(--gold); background: var(--gold-lt); padding: 20px 24px; }
+  .note-box p { color: var(--gold-dk); margin: 0; }
+  /* Feature list */
+  .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .feature-item { padding: 14px 0; border-bottom: 1px solid rgba(26,26,30,0.1); display: flex; gap: 12px; align-items: flex-start; }
+  .feature-item .fi-icon { width: 8px; height: 8px; background: var(--navy); border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+  .feature-item .fi-text strong { display: block; font-size: 13px; color: var(--ink); }
+  .feature-item .fi-text span { font-size: 12px; color: var(--muted); }
+  /* Rec box */
+  .rec-box { background: var(--navy); color: var(--cream); padding: 48px; }
+  .rec-box .rec-price { font-family: 'Fraunces', Georgia, serif; font-size: 72px; font-weight: 700; color: var(--gold); line-height: 1; margin: 12px 0; }
+  .rec-box p { color: rgba(245,241,232,0.75); }
+  footer { background: var(--ink); color: #6b655a; padding: 36px 48px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-align: center; }
+  footer a { color: #9a9490; text-decoration: none; }
+  /* Gold accent rule */
+  .gold-rule { height: 4px; background: var(--gold); width: 60px; margin: 20px 0 32px; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="banner-ink pad-lg">
+  <div class="max-w">
+    <span class="kicker" style="color: rgba(245,241,232,0.4);">Woolcott Real Estate · Estate Report · June 12, 2026</span>
+    <h1 style="color: #f5f1e8; max-width: 800px;">3205 Highpoint Court<br><em style="font-weight: 400; color: var(--gold);">Burlington, Ontario</em></h1>
+    <div class="gold-rule"></div>
+    <p style="color: rgba(245,241,232,0.65); font-size: 17px; max-width: 620px; margin-top: 0;">Fully renovated luxury estate bungalow · 2 acres · Coach house · Saltwater pool complex · Rare Burlington offering at $6,799,000</p>
+    <div style="margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap;">
+      <span class="pill pill-gold">MLS# W13237516 · Active</span>
+      <span class="pill" style="background: rgba(255,255,255,0.08); color: rgba(245,241,232,0.85);">RE/MAX Escarpment · 3+3 Bed · 7 Bath</span>
+      <span class="pill" style="background: rgba(255,255,255,0.08); color: rgba(245,241,232,0.85);">6,354 SQFT · 2 Acres</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROPERTY SNAPSHOT -->
+<section class="pad-lg">
+  <div class="max-w">
+    <span class="kicker kicker-gold">Property Overview</span>
+    <h2>An Estate You Can't Replicate in Burlington</h2>
+    <p class="lead">3205 Highpoint Court is not a house — it's a compound. Fully renovated bungalow with over 6,000 sq ft of finished living, a separate coach house with its own kitchen and bath, saltwater pool, outdoor kitchen, hot tub, and lower-level parking for 5+ vehicles. On 2 acres within Burlington city limits.</p>
+
+    <div class="grid g4" style="margin-top: 40px;">
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">List Price</span>
+        <div class="stat mono" style="font-size: 36px;">$6.799M</div>
+        <div class="label">MLS# W13237516<br>RE/MAX Escarpment</div>
+        <div class="sublabel">Active · Burlington</div>
+      </div>
+      <div class="tile">
+        <span class="kicker">Finished Living Space</span>
+        <div class="stat">6,354</div>
+        <div class="label">Square feet · Main + lower<br>+ separate coach house</div>
+        <div class="sublabel">One of Burlington's largest</div>
+      </div>
+      <div class="tile">
+        <span class="kicker">Bedrooms / Baths</span>
+        <div class="stat">3+3</div>
+        <div class="label">7 bathrooms total<br>Spa ensuite · Coach house suite</div>
+        <div class="sublabel">Flexible multi-generational layout</div>
+      </div>
+      <div class="tile tile-green">
+        <span class="kicker kicker-green">Land</span>
+        <div class="stat">2 ac</div>
+        <div class="label">2 full acres · Burlington city limits<br>Private · Landscaped grounds</div>
+        <div class="sublabel">Exceptionally rare in the city</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- FEATURE BREAKDOWN -->
+<section class="pad-lg alt">
+  <div class="max-w">
+    <span class="kicker kicker-navy">What You're Buying</span>
+    <h2>Every Detail Matters at This Level</h2>
+    <p class="lead">At $6.8M, buyers are buying a lifestyle, not just square footage. Here's what makes 3205 Highpoint Court stand apart from every other luxury listing in the Burlington market.</p>
+
+    <div class="grid g2" style="margin-top: 40px; gap: 48px; align-items: start;">
+      <div>
+        <h3>The Main Residence</h3>
+        <div class="feature-grid">
+          <div class="feature-item"><div class="fi-icon"></div><div class="fi-text"><strong>Chef's Kitchen</strong><span>Wolf & SubZero appliances, large multi-function island, separate prep kitchen with walkout</span></div></div>
+          <div class="feature-item"><div class="fi-icon"></div><div class="fi-text"><strong>Primary Suite</strong><span>Main level, spa-like ensuite — true single-floor living capability</span></div></div>
+          <div class="feature-item"><div class="fi-icon"></div><div class="fi-text"><strong>Lower Level</strong><span>3 additional bedrooms, gym, large rec room with custom bar</span></div></div>
+          <div class="feature-item"><div class="fi-icon"></div><div class="fi-text"><strong>Garage Parking</strong><span>Lower-level garage for 5 vehicles + attached garage + large driveway</span></div></div>
+          <div class="feature-item"><div class="fi-icon"></div><div class="fi-text"><strong>Open Concept Living</strong><span>Bright living and dining areas with natural flow for daily life and entertaining</span></div></div>
+          <div class="feature-item"><div class="fi-icon"></div><div class="fi-text"><strong>Private Office</strong><span>Dedicated main floor office — functional for remote work or client meetings</span></div></div>
+        </div>
+      </div>
+      <div>
+        <h3>The Grounds & Coach House</h3>
+        <div class="feature-grid">
+          <div class="feature-item"><div class="fi-icon" style="background: var(--gold);"></div><div class="fi-text"><strong>Saltwater Pool</strong><span>Fully landscaped with multiple cabanas, hot tub, and outdoor fireplace</span></div></div>
+          <div class="feature-item"><div class="fi-icon" style="background: var(--gold);"></div><div class="fi-text"><strong>Outdoor Kitchen</strong><span>Full outdoor entertaining setup — a true extension of the living space</span></div></div>
+          <div class="feature-item"><div class="fi-icon" style="background: var(--gold);"></div><div class="fi-text"><strong>2 Acres</strong><span>Expansive grass and treed areas — rare privacy within Burlington city limits</span></div></div>
+          <div class="feature-item"><div class="fi-icon" style="background: var(--gold);"></div><div class="fi-text"><strong>Coach House</strong><span>Fully separate — own kitchen, bedroom, and bathrooms. Ideal for family, guests, or live-in help</span></div></div>
+          <div class="feature-item"><div class="fi-icon" style="background: var(--gold);"></div><div class="fi-text"><strong>Elevated Patio</strong><span>Walkout from prep kitchen overlooking pool and landscaped grounds</span></div></div>
+          <div class="feature-item"><div class="fi-icon" style="background: var(--gold);"></div><div class="fi-text"><strong>Privacy</strong><span>A setting that is hard to find within the city — truly estate-calibre</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pull-quote" style="margin-top: 40px;">
+      "A beautifully finished estate property offering space, privacy, and a level of functionality that is rarely available within the city."
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- MARKET CONTEXT -->
+<section class="pad-lg">
+  <div class="max-w">
+    <span class="kicker kicker-navy">Burlington Luxury Market Context</span>
+    <h2>Understanding the $5M+ Tier in Burlington</h2>
+    <p class="lead">Properties above $5M in Burlington trade in a class of their own. Comp data is thin by design — there are fewer than a handful of transactions per year at this price point. This is not a weakness; it reflects the rarity of what's being offered.</p>
+
+    <div class="grid g3" style="margin-top: 40px;">
+      <div class="tile">
+        <span class="kicker">Burlington Avg. Price (Apr 2026)</span>
+        <div class="stat mono" style="font-size: 38px;">$1.04M</div>
+        <div class="label">Overall Burlington market<br>WOWA / RAHB · April 2026</div>
+        <div class="sublabel">↓ 11.5% year-over-year</div>
+        <div class="mini-bar-wrap"><div class="mini-bar" style="width: 15%"></div></div>
+      </div>
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">Subject Property Premium</span>
+        <div class="stat mono" style="font-size: 38px;">6.5×</div>
+        <div class="label">vs. Burlington average<br>$6.799M vs. $1.04M avg</div>
+        <div class="sublabel">Ultra-luxury tier · Different buyer pool</div>
+        <div class="mini-bar-wrap"><div class="mini-bar gold" style="width: 100%"></div></div>
+      </div>
+      <div class="tile">
+        <span class="kicker">Transactions Above $4M/yr</span>
+        <div class="stat mono" style="font-size: 38px;">&lt;10</div>
+        <div class="label">Estimated Burlington-wide<br>annually at $4M+</div>
+        <div class="sublabel">Comp pool is intentionally thin</div>
+        <div class="mini-bar-wrap"><div class="mini-bar" style="width: 8%"></div></div>
+      </div>
+    </div>
+
+    <div class="note-box" style="margin-top: 36px;">
+      <p><strong style="display: block; margin-bottom: 6px;">A Note on Comparable Sales at This Level</strong>
+      At $6.8M, traditional "apples-to-apples" CMA methodology doesn't fully apply. The Burlington luxury market trades infrequently above $4M — buyers and agents at this tier use a combination of replacement cost analysis, land value, global luxury benchmarks, and comparable estate sales across the broader GTA. The subject property's value is partly in its irreplaceability within Burlington city limits.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- COMP TABLE -->
+<section class="pad-lg alt">
+  <div class="max-w">
+    <span class="kicker kicker-navy">Comparable Active Listings — Burlington Luxury Tier</span>
+    <h2>Current Competition in the $5M+ Range</h2>
+    <p class="lead">Thin inventory at this level means every active listing matters. Here's how 3205 Highpoint stacks up against the other properties competing for the same buyer pool right now.</p>
+
+    <div style="margin-top: 36px;">
+      <table class="editorial">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>List Price</th>
+            <th>Bed/Bath</th>
+            <th>SQFT</th>
+            <th>Type</th>
+            <th>Brokerage</th>
+            <th>Differentiator vs. Subject</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="subject">
+            <td><strong>3205 Highpoint Ct ← SUBJECT</strong></td>
+            <td class="num">$6,799,000</td>
+            <td class="num">3+3 / 7</td>
+            <td class="num">6,354</td>
+            <td>Bungalow Estate</td>
+            <td>RE/MAX Escarpment</td>
+            <td>2 acres · Coach house · Pool complex · 5-car garage · Only estate of this type on market</td>
+          </tr>
+          <tr class="notable">
+            <td>597 Old York Road</td>
+            <td class="num">$6,999,000</td>
+            <td class="num">5+1 / 7</td>
+            <td class="num">9,764</td>
+            <td>Detached Estate</td>
+            <td>RE/MAX Escarpment</td>
+            <td>Larger sqft, higher ask — different product, different buyer</td>
+          </tr>
+          <tr>
+            <td>121 Edgecliffe Place</td>
+            <td class="num">$6,490,000</td>
+            <td class="num">4 / 5</td>
+            <td class="num">2,000+</td>
+            <td>Detached</td>
+            <td>Century 21 Miller</td>
+            <td>Lower SQFT, no acreage, no coach house — priced below subject</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid g2" style="margin-top: 36px; gap: 24px;">
+      <div class="success-box">
+        <p><strong style="display: block; margin-bottom: 6px;">Subject Property Advantages</strong>
+        Only 2-acre estate bungalow with coach house, saltwater pool complex, and 5+ vehicle garage in the Burlington market. The Edgecliffe listing can't match the land or amenity package. The Old York Road listing has more square footage but asks more and is a different product type.</p>
+      </div>
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">The Right Buyer</span>
+        <p style="font-size: 14px; color: var(--ink); margin: 0; line-height: 1.7;">At $6.8M, you're not selling to a typical Burlington buyer. Target profile: GTA executive or entrepreneur seeking estate privacy without leaving the city; multi-generational family needing coach house; buyer with need for significant vehicle or storage capacity. Patience is part of the strategy at this level.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- LUXURY DOM REALITY -->
+<section class="pad-lg">
+  <div class="max-w">
+    <span class="kicker kicker-red">Market Reality Check</span>
+    <h2>Luxury Properties Sell on a Different Timeline</h2>
+    <p class="lead">Setting expectations correctly is critical at this price point. The $6M+ tier in Burlington does not behave like the general market. DOM is naturally longer — and that's normal, not a red flag.</p>
+
+    <div class="grid g2" style="margin-top: 36px; align-items: start;">
+      <div>
+        <div class="chart-frame">
+          <div class="chart-h-md"><canvas id="domTier"></canvas></div>
+        </div>
+        <p style="font-size: 11px; margin-top: 10px; font-family: 'JetBrains Mono', monospace; color: var(--muted);">Typical days on market by price tier · Burlington/GTA luxury segment</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div class="tile">
+          <span class="kicker">Typical DOM at $5M+</span>
+          <div class="stat mono">90–180</div>
+          <div class="label">Days on market · GTA luxury segment<br>Varies widely by property uniqueness</div>
+          <div class="sublabel">Rare properties can sit 6–12+ months</div>
+        </div>
+        <div class="pull-quote">
+          "The right buyer for a $6.8M estate isn't scrolling Realtor.ca at 10pm. They're being qualified, introduced, and brought in personally."
+        </div>
+        <div class="note-box">
+          <p><strong style="display: block; margin-bottom: 6px;">Strategy at This Level</strong>
+          Marketing to $6M+ buyers means GTA-wide outreach, luxury publication placement, and personal agent-to-agent networking. The listing needs to reach the right audience — not just generate impressions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PRICING POSITION -->
+<section class="pad-lg alt">
+  <div class="max-w">
+    <span class="kicker kicker-gold">Pricing Position</span>
+    <h2>Is $6,799,000 the Right Number?</h2>
+    <p class="lead">With limited sold comps in Burlington above $5M, pricing this property requires a different framework. Here's how to think about the current ask and what the data supports.</p>
+
+    <div class="grid g3" style="margin-top: 36px;">
+      <div style="background: var(--green-lt); border-top: 4px solid var(--green); padding: 28px;">
+        <span class="kicker kicker-green">What Supports the Price</span>
+        <ul style="padding-left: 18px; margin: 12px 0 0; color: var(--ink); font-size: 14px; line-height: 2.1;">
+          <li>2 acres within Burlington city limits — irreplaceable land value</li>
+          <li>Fully renovated — no buyer capital outlay required</li>
+          <li>Coach house adds genuine income/family flexibility</li>
+          <li>Wolf/SubZero/pool/outdoor kitchen = $800K+ in finishes alone</li>
+          <li>5-vehicle lower garage — virtually impossible to find in Burlington</li>
+          <li>597 Old York Rd asks $6,999,000 — validates the range</li>
+        </ul>
+      </div>
+      <div style="background: var(--navy-lt); border-top: 4px solid var(--navy); padding: 28px;">
+        <span class="kicker kicker-navy">Pricing Framework</span>
+        <div style="font-family: 'Fraunces', Georgia, serif; font-size: 34px; font-weight: 700; color: var(--navy); line-height: 1; margin: 14px 0 16px;">$6.5M–$6.8M</div>
+        <p style="font-size: 13px; color: var(--ink); margin: 0; line-height: 1.65;">The current ask of $6,799,000 sits within a defensible range. At this level, a motivated buyer will negotiate — expect a 3–7% discount off list as the norm. Achievable sold price: <strong>$6,300,000–$6,600,000</strong>.</p>
+      </div>
+      <div style="background: var(--gold-lt); border-top: 4px solid var(--gold); padding: 28px;">
+        <span class="kicker kicker-gold">Buyer Mindset</span>
+        <p style="font-size: 13px; color: var(--ink); margin: 0; line-height: 1.7;">At $6.8M, buyers expect to negotiate. They will not offer full ask without significant pressure from competing offers. The listing price needs to leave room for that negotiation while not being so high it deters early engagement. Current pricing achieves this balance.</p>
+      </div>
+    </div>
+
+    <!-- Price band chart -->
+    <div class="chart-frame" style="margin-top: 40px;">
+      <span class="kicker kicker-navy">Active Burlington Luxury Listings · Price Positioning</span>
+      <div class="chart-h-sm"><canvas id="pricePos"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- STRATEGY -->
+<section class="pad-lg">
+  <div class="max-w">
+    <span class="kicker kicker-navy">Selling Strategy</span>
+    <h2>How to Move a $6.8M Listing in Burlington</h2>
+
+    <div class="grid g2" style="margin-top: 36px; gap: 40px; align-items: start;">
+      <div>
+        <div style="counter-reset: step; display: flex; flex-direction: column; gap: 0;">
+          <div style="display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid rgba(26,26,30,0.1);">
+            <div style="font-family:'Fraunces',Georgia,serif; font-size: 40px; font-weight:700; color: var(--gold); line-height:1; flex-shrink:0; width:40px;">1</div>
+            <div><strong style="display:block; font-size:15px; color:var(--ink); margin-bottom:5px;">Professional Luxury Photography & Video</strong><span style="font-size:13px; color:var(--muted);">Drone, twilight shots, pool/grounds in season. This property needs to stop a scroll the moment a qualified buyer sees it.</span></div>
+          </div>
+          <div style="display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid rgba(26,26,30,0.1);">
+            <div style="font-family:'Fraunces',Georgia,serif; font-size: 40px; font-weight:700; color: var(--gold); line-height:1; flex-shrink:0; width:40px;">2</div>
+            <div><strong style="display:block; font-size:15px; color:var(--ink); margin-bottom:5px;">GTA-Wide Luxury Agent Outreach</strong><span style="font-size:13px; color:var(--muted);">The buyer may not be in Burlington. Reach Yorkville/Rosedale agents, Oakville luxury specialists, and GTA ultra-high-net-worth buyer's agents directly.</span></div>
+          </div>
+          <div style="display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid rgba(26,26,30,0.1);">
+            <div style="font-family:'Fraunces',Georgia,serif; font-size: 40px; font-weight:700; color: var(--gold); line-height:1; flex-shrink:0; width:40px;">3</div>
+            <div><strong style="display:block; font-size:15px; color:var(--ink); margin-bottom:5px;">Target the Multi-Generational Buyer</strong><span style="font-size:13px; color:var(--muted);">The coach house is the key differentiator. Market specifically to buyers who need space for aging parents, adult children, or live-in support — a growing and underserved buyer pool.</span></div>
+          </div>
+          <div style="display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid rgba(26,26,30,0.1);">
+            <div style="font-family:'Fraunces',Georgia,serif; font-size: 40px; font-weight:700; color: var(--gold); line-height:1; flex-shrink:0; width:40px;">4</div>
+            <div><strong style="display:block; font-size:15px; color:var(--ink); margin-bottom:5px;">Luxury Publication Placement</strong><span style="font-size:13px; color:var(--muted);">Sotheby's, Luxury Portfolio, Globe & Mail luxury real estate section, RE/MAX Collection. This listing belongs in print as much as digital.</span></div>
+          </div>
+          <div style="display: flex; gap: 20px; padding: 20px 0;">
+            <div style="font-family:'Fraunces',Georgia,serif; font-size: 40px; font-weight:700; color: var(--gold); line-height:1; flex-shrink:0; width:40px;">5</div>
+            <div><strong style="display:block; font-size:15px; color:var(--ink); margin-bottom:5px;">Patience Is Part of the Strategy</strong><span style="font-size:13px; color:var(--muted);">Expect 90–180+ days to find the right buyer. That is not a failure — it is the nature of ultra-luxury. The worst outcome is a premature price cut that signals desperation to the exact buyers you're trying to attract.</span></div>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <div class="rec-box">
+          <span class="kicker" style="color: rgba(245,241,232,0.5);">Estimated Sold Range</span>
+          <div class="rec-price">$6.3M–$6.6M</div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:13px; color:rgba(245,241,232,0.5); margin-top:6px;">At current list of $6,799,000</div>
+          <p style="margin-top: 20px;">Based on 3–7% luxury market discount off list, comparable Burlington estate inventory, and land + improvement value analysis. The $6,799,000 ask is within the right range — don't cut early.</p>
+        </div>
+        <div class="tile tile-ink">
+          <span class="kicker" style="color:rgba(245,241,232,0.45);">The Bottom Line</span>
+          <p style="color: #b0a898; font-size: 14px; line-height: 1.7; margin: 8px 0 0;">This is one of the most unique properties in Burlington. The 2-acre estate with coach house, pool complex, and 5-car garage is irreplaceable. It will sell to the right buyer at a strong number — if marketed correctly and if sellers hold their position.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CTA -->
+<section class="pad-lg banner-ink">
+  <div class="max-w">
+    <div class="grid g2" style="align-items: center; gap: 60px;">
+      <div>
+        <span class="kicker" style="color: rgba(245,241,232,0.4);">Prepared for Joe Sequeira · Woolcott Real Estate</span>
+        <div class="gold-rule" style="margin-top: 16px;"></div>
+        <h2 style="color: var(--cream);">Rare. Renovated.<br><em style="color: var(--gold);">Irreplaceable.</em></h2>
+        <p style="color: rgba(245,241,232,0.65);">3205 Highpoint Court isn't competing with Burlington's general market. It's in a category of one — and the buyer who recognizes that will pay accordingly.</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.04); padding: 36px; border: 1px solid rgba(255,255,255,0.1);">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:rgba(245,241,232,0.4); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:24px;">Report Summary</div>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.07); padding-bottom:12px;">
+            <span style="font-size:13px; color:rgba(245,241,232,0.65);">List price</span>
+            <span style="font-family:'JetBrains Mono',monospace; color:var(--gold); font-size:13px; font-weight:700;">$6,799,000</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.07); padding-bottom:12px;">
+            <span style="font-size:13px; color:rgba(245,241,232,0.65);">Estimated sold range</span>
+            <span style="font-family:'JetBrains Mono',monospace; color:var(--cream); font-size:13px;">$6.3M–$6.6M</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.07); padding-bottom:12px;">
+            <span style="font-size:13px; color:rgba(245,241,232,0.65);">Expected DOM</span>
+            <span style="font-family:'JetBrains Mono',monospace; color:var(--cream); font-size:13px;">90–180+ days</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.07); padding-bottom:12px;">
+            <span style="font-size:13px; color:rgba(245,241,232,0.65);">Active competing listings</span>
+            <span style="font-family:'JetBrains Mono',monospace; color:var(--cream); font-size:13px;">2 in $6M+ tier</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:rgba(245,241,232,0.65);">Pricing position</span>
+            <span style="font-family:'JetBrains Mono',monospace; color:var(--green-lt); font-size:13px;">Defensible ✓</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="max-w">
+    <p style="margin: 0 0 6px;">Woolcott Real Estate · Hamilton &amp; Burlington · <a href="https://woolcott.ca">woolcott.ca</a></p>
+    <p style="margin: 0;">Prepared by Henry for Joe Sequeira · June 12, 2026 · MLS# W13237516 · RE/MAX Escarpment · For agent use only · Data: WOWA / RAHB / Public MLS</p>
+  </div>
+</footer>
+
+<script>
+Chart.defaults.font.family = "'Manrope', sans-serif";
+Chart.defaults.font.size = 11;
+Chart.defaults.color = "#6b655a";
+Chart.defaults.borderColor = "rgba(26,26,30,0.1)";
+
+const tt = {
+  backgroundColor: '#1a1a1e', titleColor: '#f5f1e8', bodyColor: '#b0a898',
+  bodyFont: { family: "'JetBrains Mono', monospace" }, cornerRadius: 0
+};
+
+// DOM by Price Tier
+new Chart(document.getElementById('domTier').getContext('2d'), {
+  type: 'bar',
+  data: {
+    labels: ['Under $1M', '$1M–$2M', '$2M–$4M', '$4M–$6M', '$6M+'],
+    datasets: [{
+      label: 'Typical DOM',
+      data: [28, 42, 65, 110, 150],
+      backgroundColor: ['#3d5a2c', '#1A3A6B', '#1A3A6B', '#b89443', '#b89443'],
+      borderWidth: 0
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { ...tt, callbacks: { label: c => ' ~' + c.parsed.y + ' days typical' } } },
+    scales: {
+      x: { grid: { display: false } },
+      y: { grid: { color: 'rgba(26,26,30,0.07)' }, ticks: { font: { family: "'JetBrains Mono', monospace" }, callback: v => v + 'd' } }
+    }
+  }
+});
+
+// Price Positioning
+new Chart(document.getElementById('pricePos').getContext('2d'), {
+  type: 'bar',
+  data: {
+    labels: ['121 Edgecliffe Pl\n(Century 21)', '3205 Highpoint Ct\n★ SUBJECT', '597 Old York Rd\n(RE/MAX Escarpment)'],
+    datasets: [{
+      label: 'List Price',
+      data: [6490000, 6799000, 6999000],
+      backgroundColor: ['#6b655a', '#b89443', '#1A3A6B'],
+      borderWidth: 0
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    indexAxis: 'y',
+    plugins: { legend: { display: false }, tooltip: { ...tt, callbacks: { label: c => ' $' + (c.parsed.x/1000000).toFixed(3) + 'M' } } },
+    scales: {
+      x: { grid: { color: 'rgba(26,26,30,0.07)' }, ticks: { font: { family: "'JetBrains Mono', monospace" }, callback: v => '$' + (v/1000000).toFixed(1) + 'M' }, min: 6200000, max: 7200000 },
+      y: { grid: { display: false } }
+    }
+  }
+});
+</script>
+</body>
+</html>
