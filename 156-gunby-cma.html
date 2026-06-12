@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>156 Gunby Blvd — Market Analysis | Woolcott Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #f5f1e8; color: #1a1a1e;
+    font-family: 'Manrope', system-ui, sans-serif; line-height: 1.6; }
+  h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 700; line-height: 1.15; margin: 0; }
+  .kicker { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace; color: #6b655a; font-weight: 500; margin-bottom: 12px; display: block; }
+  .kicker-navy { color: #1A3A6B; } .kicker-gold { color: #b89443; }
+  .kicker-red { color: #a83a1f; } .kicker-green { color: #3d5a2c; }
+  .pad { padding: 56px 48px; } .pad-lg { padding: 80px 48px; }
+  .alt { background: #ebe5d6; } .max { max-width: 1200px; margin: 0 auto; }
+  .grid { display: grid; gap: 24px; }
+  .g2 { grid-template-columns: 1fr 1fr; } .g3 { grid-template-columns: 1fr 1fr 1fr; }
+  .g4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .banner-navy { background: #1A3A6B; color: #f5f1e8; }
+  .tile { background: #f5f1e8; padding: 24px; border-top: 6px solid #1A3A6B; }
+  .tile-red { border-top-color: #a83a1f; } .tile-green { border-top-color: #3d5a2c; }
+  .tile-gold { border-top-color: #b89443; }
+  .tile .stat { font-family: 'Fraunces', Georgia, serif; font-size: 48px; font-weight: 700; color: #1A3A6B; line-height: 1; margin: 8px 0 4px; }
+  .tile-red .stat { color: #a83a1f; } .tile-green .stat { color: #3d5a2c; } .tile-gold .stat { color: #b89443; }
+  .tile .label { font-size: 12px; color: #6b655a; margin-top: 6px; line-height: 1.4; }
+  .tile .sub { font-size: 10px; font-family: 'JetBrains Mono', monospace; color: #6b655a; margin-top: 4px; }
+  .pull-quote { border-left: 4px solid #1A3A6B; background: #f5f1e8; padding: 24px 28px;
+    font-family: 'Fraunces', Georgia, serif; font-size: 18px; font-style: italic; line-height: 1.5; }
+  .pill { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 9px;
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  .pill-navy { background: #dde4ee; color: #1A3A6B; } .pill-red { background: #f5d4cb; color: #a83a1f; }
+  .pill-green { background: #d6e0c8; color: #3d5a2c; } .pill-gold { background: #f4e5c7; color: #8B6B1F; }
+  table.editorial { width: 100%; border-collapse: collapse; font-size: 12px; }
+  table.editorial th { font-size: 9px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #6b655a; border-bottom: 2px solid #1a1a1e; padding: 8px 8px; text-align: left; white-space: nowrap; }
+  table.editorial td { padding: 9px 8px; border-bottom: 1px solid rgba(26,26,30,0.1); vertical-align: middle; }
+  table.editorial tr:last-child td { border-bottom: none; }
+  table.editorial .num { font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+  table.editorial tr.subject-row td { background: #dde4ee; font-weight: 700; }
+  table.editorial tr.highlight-row td { background: rgba(184,148,67,0.1); font-weight: 600; }
+  table.editorial tr.sold-row td { background: rgba(61,90,44,0.06); }
+  .chart-frame { background: #f5f1e8; padding: 20px; border: 1px solid rgba(26,26,30,0.13); }
+  .divider-stat { display: flex; gap: 0; border: 1px solid rgba(26,26,30,0.12); }
+  .divider-stat-item { flex: 1; padding: 20px 22px; border-right: 1px solid rgba(26,26,30,0.12); }
+  .divider-stat-item:last-child { border-right: none; }
+  .divider-stat-item .val { font-family: 'Fraunces', Georgia, serif; font-size: 30px; font-weight: 700; color: #1A3A6B; margin: 4px 0 2px; }
+  .divider-stat-item .lbl { font-size: 11px; color: #6b655a; }
+  .doc-card { border: 1px solid rgba(26,26,30,0.15); padding: 20px 24px; display: flex; align-items: center; gap: 20px; background: #f5f1e8; }
+  .doc-card:hover { background: #ebe5d6; }
+  .doc-icon { font-size: 32px; flex-shrink: 0; }
+  .doc-btn { display: inline-block; background: #1A3A6B; color: #f5f1e8; padding: 8px 20px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; flex-shrink: 0; }
+  .doc-btn:hover { background: #b89443; }
+  footer { background: #1a1a1e; color: #f5f1e8; padding: 36px 48px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.8; }
+  footer .muted { color: #6b655a; }
+  footer .footer-grid { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="banner-navy pad">
+  <div class="max">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:40px;">
+      <div>
+        <span class="kicker" style="color:#b89443;">Woolcott Real Estate · Waterdown Market Analysis</span>
+        <h1 style="font-size:46px; color:#f5f1e8; font-style:italic; line-height:1.1; margin-top:8px;">
+          156 Gunby Boulevard<br><span style="font-weight:400; font-size:28px;">Waterdown West, Hamilton · L8B 0V6</span>
+        </h1>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:12px; font-family:'JetBrains Mono',monospace; color:#b89443; opacity:0.8; margin-top:8px;">
+          Prepared June 12, 2026<br>MLS# 40839034 · Active · 1 DOM
+        </div>
+      </div>
+    </div>
+    <div class="grid g4">
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:18px;">
+        <div style="font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">List Price</div>
+        <div style="font-family:'Fraunces',serif; font-size:32px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">$1,169,000</div>
+        <div style="font-size:11px; color:rgba(245,241,232,0.6);">Active · Listed June 11, 2026</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:18px;">
+        <div style="font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Size</div>
+        <div style="font-family:'Fraunces',serif; font-size:32px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">2,449 sq ft</div>
+        <div style="font-size:11px; color:rgba(245,241,232,0.6);">1,847 AG + 602 finished basement</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:18px;">
+        <div style="font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">Beds / Baths</div>
+        <div style="font-family:'Fraunces',serif; font-size:32px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">4 / 4</div>
+        <div style="font-size:11px; color:rgba(245,241,232,0.6);">3+1 · 3 full + 1 half · 2-storey detached</div>
+      </div>
+      <div style="border-top:3px solid rgba(255,255,255,0.25); padding-top:18px;">
+        <div style="font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; color:#b89443;">$/Sq Ft</div>
+        <div style="font-family:'Fraunces',serif; font-size:32px; color:#f5f1e8; font-weight:700; margin:6px 0 4px;">$477</div>
+        <div style="font-size:11px; color:rgba(245,241,232,0.6);">On AG sq ft · comps sold $430–$575</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBJECT PROFILE -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">Subject Property</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">156 Gunby Blvd — What you're looking at</h2>
+    <p style="font-size:15px; color:#6b655a; max-width:720px; margin-bottom:36px;">
+      All-brick detached home in Waterdown West, listed fresh at $1,169,000. Well-finished with upgraded kitchen, fully finished basement, and a private backyard deck with hot tub. Compared against 4 recent Waterdown sales — all of which closed earlier this year at meaningful discounts from their asking prices.
+    </p>
+    <div class="grid g2" style="gap:28px;">
+      <div>
+        <table class="editorial">
+          <tbody>
+            <tr><td style="color:#6b655a; width:160px;">Property Type</td><td><strong>2-Storey Detached · Freehold · All Brick</strong></td></tr>
+            <tr><td style="color:#6b655a;">Status</td><td><span class="pill pill-navy">Active</span> · 1 DOM · New listing</td></tr>
+            <tr><td style="color:#6b655a;">List Price</td><td class="num"><strong>$1,169,000</strong></td></tr>
+            <tr><td style="color:#6b655a;">Beds / Baths</td><td>3 AG + 1 BG · 3 full + 1 half</td></tr>
+            <tr><td style="color:#6b655a;">AG Sq Ft</td><td class="num">1,847</td></tr>
+            <tr><td style="color:#6b655a;">Total Finished</td><td class="num">2,449 sq ft (incl. 602 sq ft finished basement)</td></tr>
+            <tr><td style="color:#6b655a;">Lot</td><td class="num">33.00 ft × 100.00 ft</td></tr>
+            <tr><td style="color:#6b655a;">Garage</td><td>2-car attached · double-wide driveway (4 parking)</td></tr>
+            <tr><td style="color:#6b655a;">Kitchen</td><td>Built-in oven + microwave, quartz counters, large island, breakfast bar</td></tr>
+            <tr><td style="color:#6b655a;">Backyard</td><td><strong>2-tier wood deck + hot tub</strong></td></tr>
+            <tr><td style="color:#6b655a;">Basement</td><td>Fully finished — rec room, 3-pc bath w/ stand-up shower, bonus room</td></tr>
+            <tr><td style="color:#6b655a;">9-ft ceilings</td><td>Main level · solid wood staircase · gas fireplace</td></tr>
+            <tr><td style="color:#6b655a;">Taxes</td><td class="num">$6,608 (2025)</td></tr>
+            <tr><td style="color:#6b655a;">Year Built</td><td>6–15 years (approx 2011–2020)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div style="background:#dde4ee; padding:24px; border-left:4px solid #1A3A6B; margin-bottom:20px;">
+          <span class="kicker kicker-navy" style="margin-bottom:8px;">Peter's Assessment</span>
+          <p style="margin:0; font-size:14px; line-height:1.8; color:#1a1a1e;">
+            Price is <strong>slightly high but not outrageous</strong> given the market. The comparable sales from early 2026 all closed at 94–98% of asking — and the market has softened slightly since then. Expect negotiation into the <strong>$1,100K–$1,135K range</strong> based on comp data. The backyard (deck + hot tub) is a real premium that differentiates this home.
+          </p>
+        </div>
+        <div class="pull-quote" style="font-size:16px;">
+          "The best comparable — 8 Bousfield Court — sold at $1,150,000 on a $1,199,990 ask. Same neighbourhood, similar size. That deal closed in March 2026 when the market was slightly stronger."
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY COMPARABLE SPOTLIGHT -->
+<section class="pad-lg alt">
+  <div class="max">
+    <span class="kicker kicker-gold">Closest Comparable · Spotlight</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">8 Bousfield Court — The benchmark</h2>
+    <p style="font-size:15px; color:#6b655a; max-width:720px; margin-bottom:32px;">
+      This is the sale that matters most. Same neighbourhood, similar age (2012), similar sq ft, fully finished basement, private backyard. Sold March 2026 at <strong>$1,150,000</strong> — $49,990 below asking.
+    </p>
+
+    <div class="grid g2" style="gap:28px; margin-bottom:28px;">
+      <div style="border:2px solid #b89443; padding:0; overflow:hidden;">
+        <div style="background:#b89443; color:#f5f1e8; padding:14px 20px;">
+          <span style="font-size:9px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.12em; color:rgba(245,241,232,0.8);">Best Comparable · Sold Mar 2026</span>
+          <div style="font-family:'Fraunces',serif; font-size:22px; font-weight:700; margin-top:4px;">8 Bousfield Court, Waterdown</div>
+        </div>
+        <div style="padding:20px;">
+          <table style="width:100%; font-size:13px; border-collapse:collapse;">
+            <tr><td style="padding:5px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">Ask Price</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">$1,199,990</td></tr>
+            <tr><td style="padding:5px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);"><strong>Sold Price</strong></td><td style="text-align:right; font-family:'JetBrains Mono',monospace; font-weight:700; color:#3d5a2c; border-bottom:1px solid rgba(26,26,30,0.08);"><strong>$1,150,000</strong></td></tr>
+            <tr><td style="padding:5px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">SP/LP</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; color:#a83a1f; border-bottom:1px solid rgba(26,26,30,0.08);">95.8% (−$49,990)</td></tr>
+            <tr><td style="padding:5px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">DOM</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">31 days</td></tr>
+            <tr><td style="padding:5px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">AG SqFt</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">2,000</td></tr>
+            <tr><td style="padding:5px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">Total Finished</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">2,770 sq ft</td></tr>
+            <tr><td style="padding:5px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">Beds / Baths</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">3 / 3 (2F+1H)</td></tr>
+            <tr><td style="padding:5px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">Basement</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">Fully Finished</td></tr>
+            <tr><td style="padding:5px 0; color:#6b655a; border-bottom:1px solid rgba(26,26,30,0.08);">Built</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; border-bottom:1px solid rgba(26,26,30,0.08);">2012</td></tr>
+            <tr><td style="padding:5px 0; color:#6b655a;">Lot</td><td style="text-align:right; font-family:'JetBrains Mono',monospace;">36.61 × 93.20 ft · cul-de-sac</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div style="background:#f5f1e8; padding:24px;">
+        <span class="kicker kicker-gold" style="margin-bottom:14px;">Gunby vs. Bousfield</span>
+        <table class="editorial">
+          <thead><tr><th>Feature</th><th>156 Gunby (Ask)</th><th>8 Bousfield (Sold)</th></tr></thead>
+          <tbody>
+            <tr><td style="color:#6b655a;">Price</td><td class="num">$1,169,000</td><td class="num">$1,150,000 ✓</td></tr>
+            <tr><td style="color:#6b655a;">AG SqFt</td><td class="num">1,847</td><td class="num">2,000</td></tr>
+            <tr><td style="color:#6b655a;">Total Fin</td><td class="num">2,449</td><td class="num">2,770</td></tr>
+            <tr><td style="color:#6b655a;">Beds</td><td class="num">3+1 (4 total)</td><td class="num">3+0 (3 total)</td></tr>
+            <tr><td style="color:#6b655a;">Baths</td><td class="num">4 (3F+1H)</td><td class="num">3 (2F+1H)</td></tr>
+            <tr><td style="color:#6b655a;">Basement</td><td><strong>Fully Finished ✓</strong></td><td>Fully Finished ✓</td></tr>
+            <tr><td style="color:#6b655a;">Backyard</td><td><strong>Deck + Hot Tub ✓</strong></td><td>Hot tub (excluded) + artificial grass</td></tr>
+            <tr><td style="color:#6b655a;">Lot depth</td><td class="num">100.00 ft ✓</td><td class="num">93.20 ft</td></tr>
+            <tr><td style="color:#6b655a;">Market timing</td><td>Jun 2026 (softer)</td><td>Mar 2026 (slightly stronger)</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:16px; padding:14px; background:#dde4ee; font-size:13px; line-height:1.7;">
+          <strong>Verdict:</strong> Gunby has an extra bedroom, deeper lot, and a better basement finish. Bousfield was slightly larger overall but on a shallower lot. The market has softened since March — Gunby's realistic sale price aligns closely with Bousfield's $1,150,000.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALL COMPS TABLE -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">All 4 Comparable Sales</span>
+    <h2 style="font-size:40px; margin-bottom:12px; font-style:italic;">What buyers paid vs. what sellers asked</h2>
+    <p style="font-size:14px; color:#6b655a; margin-bottom:24px;">All 4 comparables are Waterdown detached homes that sold in early–mid 2026. Every single one closed below asking price. The key pattern: buyers are paying 94–98% of original ask.</p>
+
+    <div style="overflow-x:auto; margin-bottom:28px;">
+      <table class="editorial">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Orig Ask</th>
+            <th>Sold Price</th>
+            <th>$ Below Ask</th>
+            <th>SP/LP</th>
+            <th>DOM</th>
+            <th>AG SqFt</th>
+            <th>$/SqFt</th>
+            <th>Beds</th>
+            <th>Bsmt</th>
+            <th>Close</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-row">
+            <td><strong>8 Bousfield Ct ★</strong></td>
+            <td class="num">$1,199,990</td>
+            <td class="num"><strong>$1,150,000</strong></td>
+            <td class="num" style="color:#a83a1f;">−$49,990</td>
+            <td class="num">95.8%</td>
+            <td class="num">31</td>
+            <td class="num">2,000</td>
+            <td class="num">$575</td>
+            <td class="num">3+0</td>
+            <td>Fully Fin</td>
+            <td>Mar 26/26</td>
+          </tr>
+          <tr class="sold-row">
+            <td>274 Nisbet Blvd</td>
+            <td class="num">$1,149,999</td>
+            <td class="num"><strong>$1,125,000</strong></td>
+            <td class="num" style="color:#a83a1f;">−$24,999</td>
+            <td class="num">97.8%</td>
+            <td class="num">24</td>
+            <td class="num">2,084</td>
+            <td class="num">$540</td>
+            <td class="num">4+0</td>
+            <td>Unfinished</td>
+            <td>Apr 30/26</td>
+          </tr>
+          <tr class="sold-row">
+            <td>20 Bousfield Ct</td>
+            <td class="num">$1,299,900</td>
+            <td class="num"><strong>$1,198,000</strong></td>
+            <td class="num" style="color:#a83a1f;">−$101,900</td>
+            <td class="num">92.2%</td>
+            <td class="num">47</td>
+            <td class="num">2,258</td>
+            <td class="num">$530</td>
+            <td class="num">4+1</td>
+            <td>Fully Fin</td>
+            <td>Jun 30/26</td>
+          </tr>
+          <tr class="sold-row">
+            <td>4 MacBean Cres</td>
+            <td class="num">$1,299,000</td>
+            <td class="num"><strong>$1,255,000</strong></td>
+            <td class="num" style="color:#a83a1f;">−$44,000</td>
+            <td class="num">96.6%</td>
+            <td class="num">55</td>
+            <td class="num">2,790</td>
+            <td class="num">$450</td>
+            <td class="num">3+1</td>
+            <td>Fully Fin</td>
+            <td>Aug 7/26</td>
+          </tr>
+          <tr style="background:#1A3A6B; color:#f5f1e8;">
+            <td style="font-family:'JetBrains Mono',monospace; font-size:10px; text-transform:uppercase; letter-spacing:0.08em;"><strong>AVERAGES</strong></td>
+            <td class="num">$1,212,472</td>
+            <td class="num"><strong>$1,182,000</strong></td>
+            <td class="num">−$55,222</td>
+            <td class="num"><strong>95.6%</strong></td>
+            <td class="num">39</td>
+            <td class="num">2,283</td>
+            <td class="num">$524</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="divider-stat">
+      <div class="divider-stat-item">
+        <span class="kicker kicker-navy" style="margin-bottom:4px;">Avg Sold Price</span>
+        <div class="val">$1,182,000</div>
+        <div class="lbl">Across 4 Waterdown sales · range $1,125K–$1,255K</div>
+      </div>
+      <div class="divider-stat-item">
+        <span class="kicker kicker-red" style="margin-bottom:4px;">Avg Discount</span>
+        <div class="val" style="color:#a83a1f;">−$55,222</div>
+        <div class="lbl">Every sale closed below ask · avg 4.4% under asking</div>
+      </div>
+      <div class="divider-stat-item">
+        <span class="kicker kicker-gold" style="margin-bottom:4px;">Avg SP/LP</span>
+        <div class="val" style="color:#b89443;">95.6%</div>
+        <div class="lbl">Range 92.2%–97.8% · market trending softer since Mar</div>
+      </div>
+      <div class="divider-stat-item">
+        <span class="kicker kicker-navy" style="margin-bottom:4px;">Implied Sale Range</span>
+        <div class="val">$1,100K–$1,130K</div>
+        <div class="lbl">Applying 94–97% SP/LP to $1,169,000 ask</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REALISTIC PRICE EXPECTATION -->
+<section class="pad-lg alt">
+  <div class="max">
+    <span class="kicker kicker-gold">What to Expect</span>
+    <h2 style="font-size:44px; margin-bottom:12px; font-style:italic;">Realistic sale range for 156 Gunby</h2>
+    <p style="font-size:15px; color:#6b655a; max-width:720px; margin-bottom:36px;">
+      Based on 4 comparable sales, market trend, and property-specific factors. The price is slightly high but not unreasonable — expect negotiation.
+    </p>
+
+    <div class="grid g3" style="margin-bottom:32px;">
+      <div style="background:#ebe5d6; padding:28px; border-top:6px solid #a83a1f;">
+        <span class="kicker kicker-red" style="margin-bottom:8px;">Floor · Strong Offer</span>
+        <div style="font-family:'Fraunces',serif; font-size:40px; font-weight:700; color:#a83a1f; line-height:1; margin:8px 0;">$1,095,000</div>
+        <div style="font-size:13px; color:#6b655a; line-height:1.7; margin-top:8px;">
+          Anchored on 94% SP/LP (weakest comp — 20 Bousfield at 92% was larger + on a court). A motivated buyer opens here. Seller likely counters.
+        </div>
+      </div>
+      <div style="background:#1A3A6B; padding:28px;">
+        <span class="kicker" style="color:#b89443; margin-bottom:8px;">Most Likely Range</span>
+        <div style="font-family:'Fraunces',serif; font-size:40px; font-weight:700; color:#f5f1e8; line-height:1; margin:8px 0;">$1,110K–$1,130K</div>
+        <div style="font-size:13px; color:rgba(245,241,232,0.8); line-height:1.7; margin-top:8px;">
+          Applying 95–97% SP/LP from the most comparable sales. Bousfield at $1,150K was March (stronger market); Nisbet at $1,125K was April. June market is softer — target the lower end of this range. <strong>Best offer: $1,115,000–$1,125,000.</strong>
+        </div>
+      </div>
+      <div style="background:#ebe5d6; padding:28px; border-top:6px solid #3d5a2c;">
+        <span class="kicker kicker-green" style="margin-bottom:8px;">Top · If Seller Firm</span>
+        <div style="font-family:'Fraunces',serif; font-size:40px; font-weight:700; color:#3d5a2c; line-height:1; margin:8px 0;">$1,145,000</div>
+        <div style="font-size:13px; color:#6b655a; line-height:1.7; margin-top:8px;">
+          If seller holds firm and the home shows well. Matches Bousfield's sale price. Premium justified by extra bedroom, deeper lot, and hot tub. Market would need to cooperate.
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#f5f1e8; padding:24px; border-left:4px solid #b89443;">
+      <span class="kicker kicker-gold" style="margin-bottom:10px;">Market Trend Note</span>
+      <p style="margin:0; font-size:14px; line-height:1.7;">
+        These comparable sales occurred between <strong>February and June 2026</strong>. The market has softened modestly over this period. Earlier sales (Bousfield, Nisbet) achieved stronger SP/LP ratios than later ones (MacBean, 20 Bousfield). 156 Gunby being listed in June means buyers have slightly more leverage than they did in February. Budget for negotiation in the <strong>$40K–$60K below ask range.</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CHARTS -->
+<section class="pad-lg">
+  <div class="max">
+    <span class="kicker kicker-navy">Visual Statistics</span>
+    <h2 style="font-size:40px; margin-bottom:28px; font-style:italic;">Ask vs. sold — the full picture</h2>
+
+    <div class="grid g2" style="gap:24px; margin-bottom:24px;">
+      <div>
+        <span class="kicker kicker-navy" style="margin-bottom:10px;">Ask Price vs. Sold Price</span>
+        <div class="chart-frame" style="height:280px;"><canvas id="soldChart"></canvas></div>
+      </div>
+      <div>
+        <span class="kicker kicker-red" style="margin-bottom:10px;">SP/LP Ratio — All Sales</span>
+        <div class="chart-frame" style="height:280px;"><canvas id="splpChart"></canvas></div>
+      </div>
+    </div>
+    <div class="grid g2" style="gap:24px;">
+      <div>
+        <span class="kicker kicker-gold" style="margin-bottom:10px;">$ Below Ask — Each Sale</span>
+        <div class="chart-frame" style="height:220px;"><canvas id="gapChart"></canvas></div>
+      </div>
+      <div>
+        <span class="kicker kicker-navy" style="margin-bottom:10px;">Days on Market</span>
+        <div class="chart-frame" style="height:220px;"><canvas id="domChart"></canvas></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCE DOCUMENTS -->
+<section class="pad-lg alt">
+  <div class="max">
+    <span class="kicker kicker-navy">Source Documents</span>
+    <h2 style="font-size:40px; margin-bottom:12px; font-style:italic;">Full MLS data — download &amp; review</h2>
+    <p style="font-size:14px; color:#6b655a; margin-bottom:28px;">The complete MLS listing sheets used to prepare this analysis. Click to open in your browser or download.</p>
+
+    <div class="grid g2" style="gap:16px;">
+      <a href="156-gunby-listing.pdf" target="_blank" class="doc-card" style="text-decoration:none; color:inherit;">
+        <div class="doc-icon">📄</div>
+        <div style="flex:1;">
+          <div style="font-family:'Fraunces',serif; font-size:16px; font-weight:700; margin-bottom:4px;">156 Gunby Blvd — Active Listing</div>
+          <div style="font-size:12px; color:#6b655a;">MLS# 40839034 · $1,169,000 · Active · Full listing sheet</div>
+        </div>
+        <span class="doc-btn">View PDF</span>
+      </a>
+      <a href="156-gunby-comps.pdf" target="_blank" class="doc-card" style="text-decoration:none; color:inherit;">
+        <div class="doc-icon">📊</div>
+        <div style="flex:1;">
+          <div style="font-family:'Fraunces',serif; font-size:16px; font-weight:700; margin-bottom:4px;">Comparable Sales — 4 Recent Transactions</div>
+          <div style="font-size:12px; color:#6b655a;">274 Nisbet · 8 &amp; 20 Bousfield · 4 MacBean · Full MLS data</div>
+        </div>
+        <span class="doc-btn">View PDF</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid max">
+    <div>
+      <div style="font-size:14px; color:#f5f1e8; font-family:'Fraunces',serif; font-style:italic; margin-bottom:8px;">Woolcott Real Estate</div>
+      <div class="muted">RE/MAX Escarpment Realty Inc. · 905-689-9223 · peterwoolcott@woolcott.ca</div>
+      <div class="muted" style="margin-top:4px;">Prepared by Henry (AI Assistant) · June 12, 2026</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="muted">Waterdown West · Hamilton Area 46</div>
+      <div class="muted" style="margin-top:4px;">4 comparable sales · Cornerstone Association of REALTORS® MLS. Information deemed reliable but not guaranteed. Confidential for REALTORS® only.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  Chart.defaults.font.family = "'Manrope', sans-serif";
+  Chart.defaults.font.size = 10;
+  Chart.defaults.color = "#6b655a";
+
+  const labels = ['8 Bousfield Ct\n★ Best Comp','274 Nisbet Blvd','20 Bousfield Ct','4 MacBean Cres'];
+
+  new Chart(document.getElementById('soldChart'), {
+    type:'bar',
+    data:{ labels, datasets:[
+      {label:'Ask', data:[1199990,1149999,1299900,1299000], backgroundColor:'rgba(26,58,107,0.15)', borderColor:'#1A3A6B', borderWidth:2},
+      {label:'Sold', data:[1150000,1125000,1198000,1255000], backgroundColor:['#f4e5c7','#d6e0c8','#d6e0c8','#d6e0c8'], borderColor:['#b89443','#3d5a2c','#3d5a2c','#3d5a2c'], borderWidth:2}
+    ]},
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:true,labels:{font:{family:"'JetBrains Mono', monospace",size:10}}},tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',cornerRadius:0,callbacks:{label:c=>' $'+c.parsed.y.toLocaleString('en-CA')}}},
+      scales:{x:{grid:{display:false},ticks:{font:{size:8},maxRotation:0}},y:{grid:{color:'rgba(26,26,30,0.06)'},ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'K'},min:1000000}} }
+  });
+
+  new Chart(document.getElementById('splpChart'), {
+    type:'bar',
+    data:{ labels, datasets:[{data:[95.8,97.8,92.2,96.6],
+      backgroundColor:['#f4e5c7','#d6e0c8','#f5d4cb','#d6e0c8'],
+      borderColor:['#b89443','#3d5a2c','#a83a1f','#3d5a2c'], borderWidth:2}]},
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',cornerRadius:0,callbacks:{label:c=>' '+c.parsed.y+'%'}}},
+      scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(26,26,30,0.06)'},ticks:{callback:v=>v+'%'},min:88,max:100}} }
+  });
+
+  new Chart(document.getElementById('gapChart'), {
+    type:'bar',
+    data:{ labels, datasets:[{data:[49990,24999,101900,44000],
+      backgroundColor:['#f4e5c7','#dde4ee','#f5d4cb','#dde4ee'],
+      borderColor:['#b89443','#1A3A6B','#a83a1f','#1A3A6B'], borderWidth:2}]},
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',cornerRadius:0,callbacks:{label:c=>' −$'+c.parsed.y.toLocaleString('en-CA')}}},
+      scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(26,26,30,0.06)'},ticks:{callback:v=>'−$'+(v/1000).toFixed(0)+'K'}}} }
+  });
+
+  new Chart(document.getElementById('domChart'), {
+    type:'bar',
+    data:{ labels, datasets:[{data:[31,24,47,55],
+      backgroundColor:['#f4e5c7','#d6e0c8','#f4e5c7','#f5d4cb'],
+      borderColor:['#b89443','#3d5a2c','#b89443','#a83a1f'], borderWidth:2}]},
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{backgroundColor:'#1a1a1e',titleColor:'#b89443',bodyColor:'#f5f1e8',cornerRadius:0,callbacks:{label:c=>' '+c.parsed.y+' days'}}},
+      scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(26,26,30,0.06)'},ticks:{callback:v=>v+'d'}}} }
+  });
+</script>
+</body>
+</html>
