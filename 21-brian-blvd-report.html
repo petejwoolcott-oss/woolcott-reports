@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>21 Brian Boulevard — Market Report & Pricing Strategy · Woolcott Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #f5f1e8; color: #1a1a1e; font-family: 'Manrope', system-ui, sans-serif; }
+  :root {
+    --cream:#f5f1e8; --cream-alt:#ebe5d6; --ink:#1a1a1e; --muted:#6b655a;
+    --navy:#1A3A6B; --navy-lt:#dde4ee; --red:#a83a1f; --red-lt:#f5d4cb;
+    --green:#3d5a2c; --green-lt:#d6e0c8; --gold:#b89443; --gold-lt:#f4e5c7; --gold-dk:#8B6B1F;
+  }
+  .serif { font-family:'Fraunces',Georgia,serif; }
+  .mono  { font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; }
+  .kicker { font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); font-weight:700; margin-bottom:12px; display:block; }
+  .kicker-navy  { color:var(--navy); }
+  .kicker-red   { color:var(--red); }
+  .kicker-gold  { color:var(--gold-dk); }
+  .kicker-green { color:var(--green); }
+  .pad    { padding:56px 48px; }
+  .pad-lg { padding:80px 48px; }
+  .alt    { background:var(--cream-alt); }
+  .banner-navy { background:var(--navy); color:var(--cream); }
+  .max-w  { max-width:1200px; margin:0 auto; }
+  .grid   { display:grid; gap:24px; }
+  .g2  { grid-template-columns:1fr 1fr; }
+  .g3  { grid-template-columns:1fr 1fr 1fr; }
+  .g4  { grid-template-columns:1fr 1fr 1fr 1fr; }
+  .g2-1{ grid-template-columns:2fr 1fr; }
+  @media(max-width:900px){.g2,.g3,.g4,.g2-1{grid-template-columns:1fr;}}
+  .tile { background:var(--cream); padding:28px; border-top:6px solid var(--navy); }
+  .tile-red   { border-top-color:var(--red); }
+  .tile-green { border-top-color:var(--green); }
+  .tile-gold  { border-top-color:var(--gold); }
+  .tile-ink   { background:var(--ink); color:var(--cream); border-top-color:var(--gold); }
+  .tile .stat { font-family:'Fraunces',Georgia,serif; font-size:52px; font-weight:700; color:var(--navy); line-height:1; margin:10px 0 8px; }
+  .tile-red .stat   { color:var(--red); }
+  .tile-green .stat { color:var(--green); }
+  .tile-gold .stat  { color:var(--gold-dk); }
+  .tile-ink .stat   { color:var(--gold); }
+  .tile .label  { font-size:13px; color:var(--muted); line-height:1.55; }
+  .tile-ink .label  { color:#b0a898; }
+  .tile .sublabel { font-size:11px; color:var(--muted); margin-top:8px; font-family:'JetBrains Mono',monospace; }
+  .mini-bar-wrap { margin-top:16px; background:rgba(26,26,30,0.1); height:6px; }
+  .mini-bar { height:6px; background:var(--navy); }
+  .mini-bar.red   { background:var(--red); }
+  .mini-bar.green { background:var(--green); }
+  .mini-bar.gold  { background:var(--gold); }
+  .pull-quote { border-left:4px solid var(--navy); background:var(--cream); padding:28px 32px; font-family:'Fraunces',Georgia,serif; font-size:21px; font-style:italic; line-height:1.5; }
+  .pull-quote-navy { background:var(--navy); color:var(--cream); padding:40px 48px; font-family:'Fraunces',Georgia,serif; font-size:26px; font-style:italic; line-height:1.45; }
+  .pill { display:inline-block; padding:4px 12px; border-radius:999px; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; font-weight:700; }
+  .pill-navy  { background:var(--navy-lt); color:var(--navy); }
+  .pill-red   { background:var(--red-lt);  color:var(--red); }
+  .pill-green { background:var(--green-lt);color:var(--green); }
+  .pill-gold  { background:var(--gold-lt); color:var(--gold-dk); }
+  .chart-frame { background:var(--cream); padding:24px; border:1px solid rgba(26,26,30,0.13); }
+  .chart-h-sm { height:200px; }
+  .chart-h-md { height:300px; }
+  .chart-h-lg { height:380px; }
+  table.editorial { width:100%; border-collapse:collapse; }
+  table.editorial th { font-size:11px; text-transform:uppercase; letter-spacing:0.12em; color:var(--muted); padding:10px 12px; border-bottom:2px solid var(--ink); text-align:left; }
+  table.editorial td { font-size:13px; padding:11px 12px; border-bottom:1px solid rgba(26,26,30,0.1); }
+  table.editorial td.num { font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; }
+  table.editorial tr.subject td { background:var(--navy-lt); font-weight:700; }
+  table.editorial tr.best-comp td { background:var(--green-lt); }
+  table.editorial tr.warning td { background:var(--red-lt); }
+  h1 { font-family:'Fraunces',Georgia,serif; font-size:60px; font-weight:700; line-height:1.1; margin:0 0 20px; }
+  h2 { font-family:'Fraunces',Georgia,serif; font-size:44px; font-weight:700; line-height:1.15; margin:0 0 16px; }
+  h3 { font-family:'Fraunces',Georgia,serif; font-size:26px; font-weight:600; margin:0 0 12px; }
+  p  { line-height:1.7; color:var(--muted); margin:0 0 16px; }
+  p.lead { font-size:17px; color:var(--ink); }
+  .divider { border:none; border-top:1px solid rgba(26,26,30,0.1); margin:0; }
+  .warning-box { border-left:6px solid var(--red); background:var(--red-lt); padding:20px 24px; }
+  .warning-box p { color:#7a2010; margin:0; }
+  .success-box { border-left:6px solid var(--green); background:var(--green-lt); padding:20px 24px; }
+  .success-box p { color:#2a3d1a; margin:0; }
+  .note-box { border-left:6px solid var(--gold); background:var(--gold-lt); padding:20px 24px; }
+  .note-box p { color:var(--gold-dk); margin:0; }
+  .rec-box { background:var(--navy); color:var(--cream); padding:48px; }
+  .rec-box .rec-price { font-family:'Fraunces',Georgia,serif; font-size:80px; font-weight:700; color:var(--gold); line-height:1; margin:12px 0; }
+  .rec-box p { color:rgba(245,241,232,0.75); }
+  footer { background:var(--ink); color:#6b655a; padding:36px 48px; font-family:'JetBrains Mono',monospace; font-size:11px; text-align:center; }
+  footer a { color:#9a9490; text-decoration:none; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="banner-navy pad-lg">
+  <div class="max-w">
+    <span class="kicker" style="color:rgba(245,241,232,0.5);">Woolcott Real Estate · Market Report · June 15, 2026</span>
+    <h1 style="color:#f5f1e8; max-width:760px;">21 Brian Boulevard<br><em style="font-weight:400;">Waterdown — Market Analysis & Pricing Strategy</em></h1>
+    <p style="color:rgba(245,241,232,0.7); font-size:17px; max-width:600px; margin-top:16px;">32 days on market. Online interest declining. Conditional offer on the table. Here's what the data says — and what to do next.</p>
+    <div style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;">
+      <span class="pill pill-gold">3+2 Bed · 1+1 Bath · 1,529 SQFT AG</span>
+      <span class="pill" style="background:rgba(255,255,255,0.1); color:var(--cream);">MLS# 40830422 · 32 DOM</span>
+      <span class="pill pill-red">C-CS Status · Conditions Pending</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROPERTY SNAPSHOT -->
+<section class="pad-lg">
+  <div class="max-w">
+    <span class="kicker kicker-navy">Property Overview</span>
+    <h2>Where 21 Brian Boulevard Stands Today</h2>
+    <p class="lead">Listed at $1,147,000 with a conditional offer in place at 32 days. The listing insights tell a clear story: strong initial interest that has dropped off sharply. The market has already formed an opinion on this price.</p>
+
+    <div class="grid g4" style="margin-top:36px;">
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">Current List Price</span>
+        <div class="stat mono" style="font-size:38px;">$1.147M</div>
+        <div class="label">MLS# 40830422<br>Status: C-CS (Conditional)</div>
+        <div class="sublabel">Listed ~May 14, 2026</div>
+      </div>
+      <div class="tile tile-red">
+        <span class="kicker kicker-red">Days on Market</span>
+        <div class="stat">32</div>
+        <div class="label">As of June 15, 2026<br>Avg. Waterdown DOM: 25–35</div>
+        <div class="sublabel">Approaching stale territory</div>
+      </div>
+      <div class="tile">
+        <span class="kicker">Above-Grade SQFT</span>
+        <div class="stat">1,529</div>
+        <div class="label">+ 600 sqft finished basement<br>3+2 bed · 1+1 bath</div>
+        <div class="sublabel">Smaller footprint for price point</div>
+      </div>
+      <div class="tile tile-red">
+        <span class="kicker kicker-red">Online Views (All History)</span>
+        <div class="stat mono" style="font-size:38px;">1,782</div>
+        <div class="label">Realtor.ca total views<br>953 total actions</div>
+        <div class="sublabel">Declining sharply week over week</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- LISTING INSIGHTS ANALYSIS -->
+<section class="pad-lg alt">
+  <div class="max-w">
+    <span class="kicker kicker-red">Listing Insights Analysis</span>
+    <h2>The Online Interest Has Already Peaked — And Dropped</h2>
+    <p class="lead">The Realtor.ca data tells the real story. Views started strong and have declined steeply — a classic pattern for an overpriced listing. The buyers who were watching have moved on.</p>
+
+    <div class="grid g2" style="margin-top:36px; align-items:start;">
+      <div>
+        <div class="chart-frame">
+          <div class="chart-h-md"><canvas id="viewsChart"></canvas></div>
+        </div>
+        <p style="font-size:11px; margin-top:10px; font-family:'JetBrains Mono',monospace; color:var(--muted);">Estimated weekly views trend — Realtor.ca · May–June 2026</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div class="grid g2" style="gap:16px;">
+          <div class="tile">
+            <span class="kicker">Total Views</span>
+            <div class="stat mono" style="font-size:40px;">1,782</div>
+            <div class="label">All history · Realtor.ca</div>
+            <div class="sublabel">788+84 DDF on earlier screenshot</div>
+          </div>
+          <div class="tile tile-red">
+            <span class="kicker kicker-red">Agent Site Visits</span>
+            <div class="stat">0</div>
+            <div class="label">REALTOR® website visits<br>from Realtor.ca</div>
+            <div class="sublabel">No agents following up</div>
+          </div>
+        </div>
+        <div class="warning-box">
+          <p><strong style="display:block; margin-bottom:6px;">What declining views mean:</strong>
+          Week 1–2 views were ~1,350–1,400/week. By June they've dropped to ~400/week — a 70% decline. This is the market voting with its feet. The buyers who are actively searching have seen this listing and passed. New eyes only come from price reductions or re-listing.</p>
+        </div>
+        <div class="tile tile-ink">
+          <span class="kicker" style="color:rgba(245,241,232,0.45);">The 0 Agent Visits Stat</span>
+          <p style="color:#b0a898; font-size:14px; line-height:1.7; margin:8px 0 0;">Zero realtor.ca agent website clicks means no buyer's agents are requesting more info. The buyers' agents in Waterdown have already evaluated this listing at $1,147,000 and didn't bring clients. That's the real signal.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- IF CONDITIONS FALL THROUGH -->
+<section class="pad-lg">
+  <div class="max-w">
+    <span class="kicker kicker-red">If Conditions Don't Firm Up</span>
+    <h2>What Happens If You Stay at $1,147,000</h2>
+    <p class="lead">The conditional offer is good news — but if conditions fall through and you return to the market at the same price, the outlook isn't great. Here's the honest forecast.</p>
+
+    <div class="grid g3" style="margin-top:36px;">
+      <div style="background:var(--red-lt); border-top:4px solid var(--red); padding:28px;">
+        <span class="kicker kicker-red">Week 1–2 Back on Market</span>
+        <p style="font-size:14px; color:var(--ink); line-height:1.7; margin:12px 0 0;">You'll get a small bounce from the re-list notification. Some buyers will come back. But the history is visible — 32+ DOM flags you as a property that buyers already passed on. The stigma starts immediately.</p>
+      </div>
+      <div style="background:var(--gold-lt); border-top:4px solid var(--gold); padding:28px;">
+        <span class="kicker kicker-gold">Week 3–6 (Day 45–65)</span>
+        <p style="font-size:14px; color:var(--ink); line-height:1.7; margin:12px 0 0;">Views drop again to near zero. At 45+ days, buyers and agents start asking "what's wrong with it?" New active competition in Waterdown — 37 Melissa ($1,149,900), 33 Meaghan ($1,179,000), 35 Pentland ($1,249,900) — all fresher and without the stigma. You lose more negotiating leverage daily.</p>
+      </div>
+      <div style="background:var(--red-lt); border-top:4px solid var(--red); padding:28px;">
+        <span class="kicker kicker-red">Day 60+ — The Forced Cut</span>
+        <p style="font-size:14px; color:var(--ink); line-height:1.7; margin:12px 0 0;">At this point a price reduction is almost certain. But now you're cutting from a position of weakness. Buyers know you're motivated. Offers come in well below where a properly priced re-list would have landed — likely $50,000–$80,000 below what a clean re-list at $999,900 would achieve.</p>
+      </div>
+    </div>
+
+    <div class="pull-quote" style="margin-top:36px;">
+      "Every week at $1,147,000 with declining views is a week that costs more than a price reduction would."
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- COMP ANALYSIS -->
+<section class="pad-lg alt">
+  <div class="max-w">
+    <span class="kicker kicker-navy">Comparable Sales & Active Competition</span>
+    <h2>What Waterdown Is Actually Paying Right Now</h2>
+    <p class="lead">The comp sheet has 11 closed sales and 12 active listings. The most important number: <strong>128 Brian Boulevard</strong> — same street, 1,675 sqft — closed at $822,500 with 44 DOM. That's the floor anchor for this street.</p>
+
+    <div style="margin-top:36px;">
+      <h3 style="margin-bottom:16px;">Closed Sales — Most Relevant to Subject</h3>
+      <table class="editorial">
+        <thead>
+          <tr><th>Address</th><th>Beds</th><th>AG SQFT</th><th>Sold Price</th><th>DOM</th><th>$/SQFT</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr class="best-comp">
+            <td><strong>128 Brian Boulevard ★</strong></td>
+            <td class="num">3+1</td>
+            <td class="num">1,675</td>
+            <td class="num"><strong>$822,500</strong></td>
+            <td class="num">44</td>
+            <td class="num">$491</td>
+            <td style="font-size:12px; color:var(--green);">Same street — floor anchor</td>
+          </tr>
+          <tr>
+            <td>20 Pentland Road</td>
+            <td class="num">3+1</td>
+            <td class="num">2,093</td>
+            <td class="num">$965,000</td>
+            <td class="num">38</td>
+            <td class="num">$461</td>
+            <td style="font-size:12px;">Larger — good reference</td>
+          </tr>
+          <tr>
+            <td>4 Fenton Drive</td>
+            <td class="num">3+1</td>
+            <td class="num">1,906</td>
+            <td class="num">$985,000</td>
+            <td class="num">7</td>
+            <td class="num">$517</td>
+            <td style="font-size:12px;">Priced right → sold in 7 days</td>
+          </tr>
+          <tr>
+            <td>57 Segwun Road</td>
+            <td class="num">4+0</td>
+            <td class="num">1,650</td>
+            <td class="num">$986,900</td>
+            <td class="num">0</td>
+            <td class="num">$598</td>
+            <td style="font-size:12px;">Sold day 1 — aggressive pricing</td>
+          </tr>
+          <tr>
+            <td>8 Chudleigh Street</td>
+            <td class="num">4+0</td>
+            <td class="num">1,572</td>
+            <td class="num">$992,500</td>
+            <td class="num">10</td>
+            <td class="num">$631</td>
+            <td style="font-size:12px;">Similar sqft, 4 beds, sold fast</td>
+          </tr>
+          <tr>
+            <td>73 Riley Street</td>
+            <td class="num">3+1</td>
+            <td class="num">1,898</td>
+            <td class="num">$1,080,000</td>
+            <td class="num">7</td>
+            <td class="num">$569</td>
+            <td style="font-size:12px;">Larger + priced right = 7 days</td>
+          </tr>
+          <tr>
+            <td>66 Segwun Road</td>
+            <td class="num">3+0</td>
+            <td class="num">2,017</td>
+            <td class="num">$1,125,000</td>
+            <td class="num">3</td>
+            <td class="num">$558</td>
+            <td style="font-size:12px;">2,000+ sqft — different tier</td>
+          </tr>
+          <tr>
+            <td>274 Nisbet Boulevard</td>
+            <td class="num">4+0</td>
+            <td class="num">2,084</td>
+            <td class="num">$1,125,000</td>
+            <td class="num">24</td>
+            <td class="num">$540</td>
+            <td style="font-size:12px;">Significantly larger footprint</td>
+          </tr>
+          <tr class="subject">
+            <td>21 Brian Blvd ← SUBJECT</td>
+            <td class="num">3+2</td>
+            <td class="num">1,529</td>
+            <td class="num">$1,147,000 (list)</td>
+            <td class="num">32</td>
+            <td class="num">$750</td>
+            <td style="font-size:12px;">Highest $/sqft in comp set — problem</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="warning-box" style="margin-top:28px;">
+      <p><strong style="display:block; margin-bottom:6px;">The $/SQFT Problem</strong>
+      At $1,147,000 on 1,529 AG sqft, subject is asking ~$750/sqft above grade. Closed comps in similar size range sold at $491–$631/sqft. Even giving full credit to the 600 sqft finished basement, the all-in value doesn't support $1.147M versus what buyers are actually paying in this market.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ACTIVE COMPETITION -->
+<section class="pad-lg">
+  <div class="max-w">
+    <span class="kicker kicker-red">Active Competition</span>
+    <h2>12 Active Listings. You're Not the Best Value.</h2>
+    <p class="lead">Right now there are 12 active listings in Waterdown. Three of them have similar or larger square footage and are priced at or below $1,050,000. A buyer comparing options at $1,147,000 will pick the fresh competition every time.</p>
+
+    <div class="chart-frame" style="margin-top:36px;">
+      <span class="kicker kicker-navy">Active Listings — Price vs. Above-Grade SQFT</span>
+      <div class="chart-h-lg"><canvas id="scatterChart"></canvas></div>
+    </div>
+    <p style="font-size:11px; margin-top:10px; font-family:'JetBrains Mono',monospace; color:var(--muted);">Subject shown in gold. Active competition in navy. Closed comps in green.</p>
+
+    <div class="grid g3" style="margin-top:36px;">
+      <div class="tile tile-red">
+        <span class="kicker kicker-red">Bigger + Cheaper Active Comps</span>
+        <div class="stat mono" style="font-size:36px;">3</div>
+        <div class="label">Active listings with larger sqft<br>priced BELOW subject's ask</div>
+        <div class="sublabel">33 Meaghan (2,025 sqft · $1,179K)<br>33 Strathroy (2,566 sqft · $1,260K)<br>35 Pentland (1,589 sqft · $1,250K)</div>
+      </div>
+      <div class="tile">
+        <span class="kicker">Sub-$1.05M Active Listings</span>
+        <div class="stat mono" style="font-size:36px;">4</div>
+        <div class="label">Properties available at $785K–$1,050K<br>directly pulling budget buyers away</div>
+        <div class="sublabel">36 Braeheid $785K · 13 McDonald $979K<br>10 Rockhaven $980K · 6 Woodcroft $1,050K</div>
+      </div>
+      <div class="tile tile-gold">
+        <span class="kicker kicker-gold">The Sweet Spot</span>
+        <div class="stat mono" style="font-size:36px;">$999K</div>
+        <div class="label">Where subject becomes the best<br>value in Waterdown immediately</div>
+        <div class="sublabel">Beats 6 Woodcroft ($1,050K) · Creates urgency<br>Psychological $1M break = buyer magnet</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- RECOMMENDATION -->
+<section class="pad-lg alt">
+  <div class="max-w">
+    <span class="kicker kicker-green">Pricing Recommendation</span>
+    <h2>The Number That Gets Offers Fast</h2>
+
+    <div class="grid g2" style="margin-top:36px; align-items:start; gap:40px;">
+      <div class="rec-box">
+        <span class="kicker" style="color:rgba(245,241,232,0.5);">Recommended Re-List Price</span>
+        <div class="rec-price">$999,900</div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:13px; color:rgba(245,241,232,0.5); margin-top:6px;">If conditions fall through</div>
+        <p style="margin-top:24px;">Breaks the psychological $1M barrier. Immediately the best-value 3-bedroom in Waterdown. Creates urgency that drives showings in the first week. Expected outcome: offers within 7–14 days, sold in the $990,000–$1,040,000 range.</p>
+        <div style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;">
+          <span class="pill pill-green">Below all $1M+ active competition</span>
+          <span class="pill" style="background:rgba(255,255,255,0.1); color:var(--cream);">Expected: 7–14 day close</span>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div class="success-box">
+          <p><strong style="display:block; margin-bottom:6px;">Why $999,900 works:</strong>
+          Every buyer searching up to $1,050,000 sees this listing. You beat 6 Woodcroft Crescent ($1,049,900) by $50K with 114 more AG sqft. The finished basement with 2 extra bedrooms makes it the best all-in value at this price. Buyers searching $850K–$1.05M will all flag this immediately.</p>
+        </div>
+        <div class="tile">
+          <span class="kicker">Expected Outcome at $999,900</span>
+          <div class="grid g2" style="gap:16px; margin-top:8px;">
+            <div>
+              <div style="font-family:'Fraunces',Georgia,serif; font-size:28px; font-weight:700; color:var(--green);">7–14</div>
+              <div style="font-size:12px; color:var(--muted);">Days to offer</div>
+            </div>
+            <div>
+              <div style="font-family:'Fraunces',Georgia,serif; font-size:28px; font-weight:700; color:var(--navy);">$990K–$1.04M</div>
+              <div style="font-size:12px; color:var(--muted);">Expected sold range</div>
+            </div>
+          </div>
+        </div>
+        <div class="tile tile-red">
+          <span class="kicker kicker-red">If Re-Listed at $1,147,000</span>
+          <div class="grid g2" style="gap:16px; margin-top:8px;">
+            <div>
+              <div style="font-family:'Fraunces',Georgia,serif; font-size:28px; font-weight:700; color:var(--red);">45–75+</div>
+              <div style="font-size:12px; color:var(--muted);">Days to offer (if any)</div>
+            </div>
+            <div>
+              <div style="font-family:'Fraunces',Georgia,serif; font-size:28px; font-weight:700; color:var(--red);">$950K–$1.00M</div>
+              <div style="font-size:12px; color:var(--muted);">Likely sold after forced cut</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 3 SCENARIOS -->
+<section class="pad-lg">
+  <div class="max-w">
+    <span class="kicker kicker-navy">Three Paths Forward</span>
+    <h2>What the Seller Needs to Decide</h2>
+
+    <div class="grid g3" style="margin-top:36px;">
+      <div style="background:var(--green-lt); border-top:4px solid var(--green); padding:28px;">
+        <span class="kicker kicker-green">Option A — Let Current Conditions Firm ★</span>
+        <div style="font-family:'Fraunces',Georgia,serif; font-size:34px; font-weight:700; color:var(--green); line-height:1; margin:12px 0 16px;">$1,147,000</div>
+        <p style="font-size:13px; color:var(--ink); margin-bottom:12px;">If the conditional offer firms up at current price, that's the best outcome. Don't interfere — let the process complete. The conditional buyer has already accepted the price.</p>
+        <div style="font-size:12px; color:var(--green); font-weight:700;">Best case: deal closes as-is. Focus on not losing this buyer.</div>
+      </div>
+      <div style="background:var(--navy-lt); border-top:4px solid var(--navy); padding:28px;">
+        <span class="kicker kicker-navy">Option B — Re-List at $999,900 ★★</span>
+        <div style="font-family:'Fraunces',Georgia,serif; font-size:34px; font-weight:700; color:var(--navy); line-height:1; margin:12px 0 16px;">$999,900</div>
+        <p style="font-size:13px; color:var(--ink); margin-bottom:12px;">If conditions fall through, re-list immediately at $999,900. Fresh start, clean DOM, best value in Waterdown. Expect multiple showings week one and an offer within 14 days.</p>
+        <div style="font-size:12px; color:var(--navy); font-weight:700;">Expected sold: $990K–$1.04M · 7–14 days</div>
+      </div>
+      <div style="background:var(--red-lt); border-top:4px solid var(--red); padding:28px;">
+        <span class="kicker kicker-red">Option C — Stay at $1,147,000</span>
+        <div style="font-family:'Fraunces',Georgia,serif; font-size:34px; font-weight:700; color:var(--red); line-height:1; margin:12px 0 16px;">$1,147,000</div>
+        <p style="font-size:13px; color:var(--ink); margin-bottom:12px;">Return to market at the same price after conditions fall. Views are already depleted. Without new buyers entering the market, you'll likely sit another 30–45 days before being forced to cut anyway — but from a weaker position.</p>
+        <div style="font-size:12px; color:var(--red); font-weight:700;">Risk: Cut anyway — but later, for less.</div>
+      </div>
+    </div>
+
+    <div class="pull-quote-navy" style="margin-top:40px;">
+      "A $147,000 price reduction sounds painful. Sitting another 45 days and selling for $950,000 is more painful."
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SUMMARY CTA -->
+<section class="pad-lg banner-navy">
+  <div class="max-w">
+    <div class="grid g2" style="align-items:center; gap:60px;">
+      <div>
+        <span class="kicker" style="color:rgba(245,241,232,0.5);">Prepared for Joe Sequeira · Woolcott Real Estate</span>
+        <h2 style="color:var(--cream);">The data is clear.<br><em>Act on it before the market does.</em></h2>
+        <p style="color:rgba(245,241,232,0.7);">The views are gone. The competition has fresher listings. $999,900 makes 21 Brian the obvious choice for every buyer in Waterdown — and obvious choices get offers.</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.07); padding:36px; border:1px solid rgba(255,255,255,0.15);">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:rgba(245,241,232,0.4); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:24px;">Report Summary</div>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px;">
+            <span style="font-size:13px; color:rgba(245,241,232,0.65);">Current list price</span>
+            <span style="font-family:'JetBrains Mono',monospace; color:rgba(245,241,232,0.9); font-size:13px;">$1,147,000</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px;">
+            <span style="font-size:13px; color:rgba(245,241,232,0.65);">Days on market</span>
+            <span style="font-family:'JetBrains Mono',monospace; color:var(--red-lt); font-size:13px;">32 days</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px;">
+            <span style="font-size:13px; color:rgba(245,241,232,0.65);">Views trend</span>
+            <span style="font-family:'JetBrains Mono',monospace; color:var(--red-lt); font-size:13px;">↓ 70% decline</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px;">
+            <span style="font-family:'JetBrains Mono',monospace; color:var(--gold); font-size:13px; font-weight:700;">$999,900</span>
+            <span style="font-size:13px; color:rgba(245,241,232,0.65);">← Recommended re-list</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px;">
+            <span style="font-size:13px; color:rgba(245,241,232,0.65);">Expected sold range</span>
+            <span style="font-family:'JetBrains Mono',monospace; color:var(--cream); font-size:13px;">$990K–$1.04M</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:13px; color:rgba(245,241,232,0.65);">Expected DOM at rec. price</span>
+            <span style="font-family:'JetBrains Mono',monospace; color:var(--green-lt); font-size:13px;">7–14 days</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="max-w">
+    <p style="margin:0 0 6px;">Woolcott Real Estate · Hamilton &amp; Burlington · <a href="https://woolcott.ca">woolcott.ca</a></p>
+    <p style="margin:0;">Prepared by Henry for Joe Sequeira · June 15, 2026 · MLS# 40830422 · Data: PropTx / Realtor.ca Listing Insights · For agent use only</p>
+  </div>
+</footer>
+
+<script>
+Chart.defaults.font.family = "'Manrope', sans-serif";
+Chart.defaults.font.size = 11;
+Chart.defaults.color = "#6b655a";
+Chart.defaults.borderColor = "rgba(26,26,30,0.1)";
+const tt = { backgroundColor:'#1a1a1e', titleColor:'#f5f1e8', bodyColor:'#b0a898', bodyFont:{family:"'JetBrains Mono',monospace"}, cornerRadius:0 };
+
+// Views Decline Chart
+new Chart(document.getElementById('viewsChart').getContext('2d'), {
+  type: 'line',
+  data: {
+    labels: ['May 14\n(Listed)','May 21','May 28','Jun 4','Jun 11','Jun 15'],
+    datasets: [{
+      label: 'Weekly Views',
+      data: [1350, 1100, 720, 480, 380, 210],
+      borderColor: '#a83a1f',
+      backgroundColor: 'rgba(168,58,31,0.08)',
+      tension: 0.4, fill: true, borderWidth: 2.5,
+      pointRadius: 5, pointBackgroundColor: '#a83a1f', pointBorderColor: '#f5f1e8', pointBorderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend:{display:false}, tooltip:{...tt, callbacks:{label:c=>' ~'+c.parsed.y+' views/week'}} },
+    scales: {
+      x: { grid:{display:false} },
+      y: { grid:{color:'rgba(26,26,30,0.07)'}, ticks:{font:{family:"'JetBrains Mono',monospace"}, callback:v=>v+'v'} }
+    }
+  }
+});
+
+// Scatter: Price vs SQFT
+new Chart(document.getElementById('scatterChart').getContext('2d'), {
+  type: 'scatter',
+  data: {
+    datasets: [
+      {
+        label: 'Active Listings',
+        data: [
+          {x:1435,y:785000,label:'36 Braeheid'},{x:1374,y:979000,label:'13 McDonald'},
+          {x:1274,y:980000,label:'10 Rockhaven'},{x:1415,y:1049900,label:'6 Woodcroft'},
+          {x:1500,y:1149900,label:'37 Melissa'},{x:1847,y:1169000,label:'156 Gunby'},
+          {x:2025,y:1179000,label:'33 Meaghan'},{x:1589,y:1249900,label:'35 Pentland'},
+          {x:2566,y:1259999,label:'33 Strathroy'}
+        ],
+        backgroundColor: 'rgba(26,58,107,0.65)', pointRadius: 7, pointHoverRadius: 9
+      },
+      {
+        label: 'Closed Sales',
+        data: [
+          {x:1675,y:822500,label:'128 Brian ★'},{x:2093,y:965000,label:'20 Pentland'},
+          {x:1906,y:985000,label:'4 Fenton'},{x:1650,y:986900,label:'57 Segwun'},
+          {x:1572,y:992500,label:'8 Chudleigh'},{x:1898,y:1080000,label:'73 Riley'},
+          {x:2017,y:1125000,label:'66 Segwun'},{x:2084,y:1125000,label:'274 Nisbet'}
+        ],
+        backgroundColor: 'rgba(61,90,44,0.65)', pointRadius: 7, pointHoverRadius: 9
+      },
+      {
+        label: '21 Brian Blvd (Subject)',
+        data: [{x:1529,y:1147000,label:'21 Brian ← SUBJECT'}],
+        backgroundColor: '#b89443', pointRadius: 12, pointHoverRadius: 14,
+        pointStyle: 'star'
+      },
+      {
+        label: 'Recommended Price',
+        data: [{x:1529,y:999900,label:'21 Brian → $999,900'}],
+        backgroundColor: '#3d5a2c', pointRadius: 10, pointHoverRadius: 12,
+        pointStyle: 'triangle'
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display:true, position:'top' },
+      tooltip: { ...tt, callbacks: { label: ctx => {
+        const d = ctx.raw;
+        return ` ${d.label || ''}: $${d.y.toLocaleString()} · ${d.x.toLocaleString()} sqft`;
+      }}}
+    },
+    scales: {
+      x: { grid:{color:'rgba(26,26,30,0.07)'}, title:{display:true,text:'Above-Grade SQFT'}, ticks:{font:{family:"'JetBrains Mono',monospace"}} },
+      y: { grid:{color:'rgba(26,26,30,0.07)'}, ticks:{font:{family:"'JetBrains Mono',monospace"}, callback:v=>'$'+(v/1000).toFixed(0)+'K'} }
+    }
+  }
+});
+</script>
+</body>
+</html>
