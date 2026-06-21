@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Report — 407-4006 Kilmer Drive, Burlington</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1a2332;
+    --slate:#2d3a4a;
+    --gold:#c8a45c;
+    --light:#e8d5a0;
+    --bg:#f5f2ec;
+    --white:#ffffff;
+    --red:#c44040;
+    --green:#3a8a5c;
+    --muted:#7a8694;
+    --border:#ddd5c8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    font-family:'DM Sans',system-ui,sans-serif;
+    color:var(--slate);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    padding:32px 16px;
+  }
+  .report{
+    max-width:900px;
+    margin:0 auto;
+    background:var(--white);
+    box-shadow:0 2px 40px rgba(26,35,50,0.10);
+  }
+  h1,h2,h3,.serif{font-family:'DM Serif Display',Georgia,serif;font-weight:400;}
+
+  /* ---------- HEADER ---------- */
+  header.masthead{
+    background:var(--navy);
+    color:var(--white);
+    padding:48px 48px 40px;
+    position:relative;
+  }
+  header.masthead .eyebrow{
+    font-size:12px;letter-spacing:0.28em;text-transform:uppercase;
+    color:var(--gold);font-weight:600;margin-bottom:18px;
+  }
+  header.masthead h1{
+    font-size:40px;line-height:1.1;color:var(--white);margin-bottom:6px;
+  }
+  header.masthead .sub{
+    font-size:17px;color:#c3ccd6;font-weight:300;margin-bottom:24px;
+  }
+  .header-meta{
+    display:flex;flex-wrap:wrap;gap:28px;
+    border-top:1px solid rgba(200,164,92,0.30);
+    padding-top:22px;margin-top:4px;
+  }
+  .header-meta .item .label{
+    font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;
+  }
+  .header-meta .item .val{font-size:18px;color:var(--white);font-weight:500;}
+  .header-meta .item .val .accent{color:var(--gold);}
+
+  /* ---------- KEY STATS BAR ---------- */
+  .statsbar{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    background:var(--slate);
+  }
+  .statsbar .stat{
+    padding:22px 20px;text-align:center;border-right:1px solid rgba(255,255,255,0.08);
+  }
+  .statsbar .stat:last-child{border-right:none;}
+  .statsbar .stat .num{font-family:'DM Serif Display',serif;font-size:27px;color:var(--gold);line-height:1;}
+  .statsbar .stat .cap{font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#aeb8c4;margin-top:8px;}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:44px 48px;border-bottom:1px solid var(--border);}
+  .sec-eyebrow{
+    font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px;
+  }
+  h2.sec-title{font-size:28px;color:var(--navy);margin-bottom:8px;line-height:1.15;}
+  .sec-lede{font-size:15.5px;color:var(--slate);max-width:62ch;margin-bottom:8px;}
+  p{margin-bottom:14px;}
+  p:last-child{margin-bottom:0;}
+  .small{font-size:13px;color:var(--muted);}
+
+  /* ---------- SUBJECT SNAPSHOT ---------- */
+  .subject-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);margin-top:24px;
+  }
+  .subject-grid .cell{
+    padding:16px 20px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);
+  }
+  .subject-grid .cell:nth-child(2n){border-right:none;}
+  .subject-grid .cell .k{font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+  .subject-grid .cell .v{font-size:16px;color:var(--navy);font-weight:500;}
+  .pill{display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.04em;padding:3px 10px;border-radius:2px;text-transform:uppercase;}
+  .pill.adv{background:rgba(58,138,92,0.12);color:var(--green);}
+  .pill.lim{background:rgba(196,64,64,0.10);color:var(--red);}
+  .edge-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
+
+  /* ---------- BAR CHART ---------- */
+  .chart{margin-top:26px;}
+  .chart-scale{position:relative;height:18px;margin-left:188px;border-bottom:1px solid var(--border);margin-bottom:10px;}
+  .chart-scale span{position:absolute;top:0;font-size:10.5px;color:var(--muted);transform:translateX(-50%);}
+  .barrow{display:grid;grid-template-columns:188px 1fr;align-items:center;gap:0;margin-bottom:7px;position:relative;}
+  .barrow .blabel{font-size:12.5px;color:var(--slate);text-align:right;padding-right:14px;line-height:1.25;}
+  .barrow .blabel small{display:block;color:var(--muted);font-size:10.5px;}
+  .bartrack{position:relative;height:26px;background:linear-gradient(90deg,rgba(221,213,200,0.25),rgba(221,213,200,0.10));}
+  .bar{position:absolute;left:0;top:0;height:26px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:var(--white);font-size:12px;font-weight:600;border-radius:0 2px 2px 0;}
+  .bar.sold{background:var(--slate);}
+  .bar.pending{background:var(--gold);color:var(--navy);}
+  .bar.subject{background:var(--red);}
+  .subjectline{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--red);z-index:5;}
+  .subjectline::after{content:"SUBJECT $470K";position:absolute;top:-20px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:9.5px;letter-spacing:0.10em;font-weight:700;color:var(--red);background:var(--white);padding:1px 5px;}
+  .chart-legend{display:flex;gap:22px;margin-top:18px;font-size:12px;color:var(--slate);flex-wrap:wrap;}
+  .chart-legend .li{display:flex;align-items:center;gap:7px;}
+  .chart-legend .sw{width:14px;height:14px;border-radius:2px;display:inline-block;}
+
+  /* ---------- TIER / COMP CARDS ---------- */
+  .tier-head{margin-top:34px;margin-bottom:4px;display:flex;align-items:baseline;gap:12px;}
+  .tier-head .tnum{font-family:'DM Serif Display',serif;font-size:20px;color:var(--gold);}
+  .tier-head h3{font-size:20px;color:var(--navy);}
+  .tier-sub{font-size:13.5px;color:var(--muted);margin-bottom:18px;max-width:64ch;}
+  .tier-head:first-of-type{margin-top:8px;}
+
+  .comp{border:1px solid var(--border);border-left:3px solid var(--slate);margin-bottom:16px;background:#fcfbf8;}
+  .comp.pending{border-left-color:var(--gold);}
+  .comp-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:16px 20px 12px;flex-wrap:wrap;}
+  .comp-top .addr{font-family:'DM Serif Display',serif;font-size:18px;color:var(--navy);line-height:1.2;}
+  .comp-top .addr small{display:block;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--muted);font-weight:400;margin-top:2px;letter-spacing:0.02em;}
+  .comp-price{text-align:right;white-space:nowrap;}
+  .comp-price .sp{font-family:'DM Serif Display',serif;font-size:22px;color:var(--navy);line-height:1;}
+  .comp-price .lp{font-size:11.5px;color:var(--muted);margin-top:3px;}
+  .status{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;padding:3px 9px;border-radius:2px;margin-bottom:6px;}
+  .status.sold{background:var(--slate);color:#fff;}
+  .status.pending{background:var(--gold);color:var(--navy);}
+  .comp-stats{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--border);}
+  .comp-stats .cs{padding:9px 16px;border-right:1px solid var(--border);flex:1;min-width:88px;}
+  .comp-stats .cs:last-child{border-right:none;}
+  .comp-stats .cs .csk{font-size:9.5px;letter-spacing:0.10em;text-transform:uppercase;color:var(--muted);}
+  .comp-stats .cs .csv{font-size:14px;color:var(--navy);font-weight:600;margin-top:2px;}
+  .comp-stats .cs .csv.flag{color:var(--red);}
+  .comp-stats .cs .csv.good{color:var(--green);}
+  .comp-why{padding:13px 20px 16px;font-size:13.5px;color:var(--slate);line-height:1.55;}
+  .comp-why strong{color:var(--navy);font-weight:600;}
+
+  /* ---------- ACTIVE INVENTORY ---------- */
+  .active-stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);margin-top:24px;background:#fcfbf8;}
+  .active-stats .as{padding:18px 16px;text-align:center;border-right:1px solid var(--border);}
+  .active-stats .as:last-child{border-right:none;}
+  .active-stats .as .num{font-family:'DM Serif Display',serif;font-size:24px;color:var(--navy);line-height:1;}
+  .active-stats .as .cap{font-size:10px;letter-spacing:0.10em;text-transform:uppercase;color:var(--muted);margin-top:7px;}
+
+  .history-callout{margin-top:24px;background:rgba(196,64,64,0.06);border:1px solid rgba(196,64,64,0.30);border-left:3px solid var(--red);padding:18px 20px;border-radius:3px;}
+  .history-callout .hc-k{font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:8px;}
+  .history-callout .hc-addr{font-family:'DM Serif Display',serif;font-size:18px;color:var(--navy);margin-bottom:6px;}
+  .history-callout p{font-size:13.5px;color:var(--slate);line-height:1.55;margin:0;}
+  .history-callout strong{color:var(--navy);font-weight:600;}
+  .hist-chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 4px;}
+  .hist-chips .hchip{font-size:11px;font-weight:600;color:var(--red);background:var(--white);border:1px solid rgba(196,64,64,0.30);padding:3px 9px;border-radius:2px;}
+
+  .active-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px;}
+  .acomp{border:1px solid var(--border);border-left:3px solid var(--muted);background:#fcfbf8;padding:14px 16px;border-radius:2px;display:flex;flex-direction:column;}
+  .acomp.below{border-left-color:var(--gold);}
+  .acomp.cond{border-left-color:var(--green);}
+  .acomp.subj{border-left-color:var(--red);background:rgba(196,64,64,0.05);}
+  .acomp.alt{border-left-color:var(--slate);}
+  .acomp-h{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:7px;}
+  .acomp-price{font-family:'DM Serif Display',serif;font-size:20px;color:var(--navy);line-height:1;white-space:nowrap;}
+  .acomp-price small{display:block;font-family:'DM Sans',sans-serif;font-size:10.5px;color:var(--muted);font-weight:400;text-align:right;margin-top:2px;}
+  .acomp .status{margin-bottom:0;}
+  .status.active{background:var(--slate);color:#fff;}
+  .status.cond{background:var(--green);color:#fff;}
+  .status.subj{background:var(--red);color:#fff;}
+  .status.alt{background:#6b5a8a;color:#fff;}
+  .acomp-addr{font-family:'DM Serif Display',serif;font-size:15.5px;color:var(--navy);line-height:1.2;}
+  .acomp-addr small{display:block;font-family:'DM Sans',sans-serif;font-size:11px;color:var(--muted);font-weight:400;margin-top:2px;}
+  .acomp-spec{font-size:11.5px;color:var(--slate);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);letter-spacing:0.01em;}
+  .acomp-spec b{color:var(--navy);font-weight:600;}
+  .acomp-note{font-size:12.5px;color:var(--slate);line-height:1.5;margin-top:9px;}
+  .acomp-note strong{color:var(--navy);font-weight:600;}
+  .acomp-note .down{color:var(--red);font-weight:600;}
+  .undercut{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--gold);background:rgba(200,164,92,0.14);padding:2px 7px;border-radius:2px;margin-top:9px;align-self:flex-start;}
+  .dom-read{margin-top:24px;background:var(--slate);color:#e7ebf0;padding:20px 22px;border-radius:3px;}
+  .dom-read .dr-k{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:9px;}
+  .dom-read p{font-size:13.5px;line-height:1.6;margin:0;color:#dfe4ea;}
+  .dom-read strong{color:#fff;font-weight:600;}
+
+  /* ---------- VALUATION PANEL ---------- */
+  .val-panel{border:1px solid var(--border);margin-top:24px;background:#fcfbf8;}
+  .val-ppsf{display:grid;grid-template-columns:repeat(3,1fr);}
+  .val-ppsf .vp{padding:20px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center;}
+  .val-ppsf .vp:last-child{border-right:none;}
+  .val-ppsf .vp .num{font-family:'DM Serif Display',serif;font-size:25px;color:var(--navy);line-height:1;}
+  .val-ppsf .vp .cap{font-size:10.5px;letter-spacing:0.10em;text-transform:uppercase;color:var(--muted);margin-top:7px;}
+  .val-body{padding:24px;}
+  .rangebar-wrap{margin:30px 0 8px;}
+  .rangebar{position:relative;height:46px;background:linear-gradient(90deg,#eee7d8,#eee7d8);border-radius:3px;}
+  .range-fill{position:absolute;top:0;height:46px;background:rgba(200,164,92,0.38);border-left:2px solid var(--gold);border-right:2px solid var(--gold);}
+  .range-marker{position:absolute;top:-8px;bottom:-8px;width:2px;}
+  .range-marker .mlabel{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:10px;font-weight:700;letter-spacing:0.04em;padding:1px 6px;border-radius:2px;}
+  .range-marker.target{background:var(--green);}
+  .range-marker.target .mlabel{top:-22px;color:#fff;background:var(--green);}
+  .range-marker.list{background:var(--red);}
+  .range-marker.list .mlabel{bottom:-22px;color:#fff;background:var(--red);}
+  .range-axis{display:flex;justify-content:space-between;margin-top:24px;font-size:11px;color:var(--muted);}
+  .reco{margin-top:26px;background:var(--navy);color:#fff;padding:22px 24px;border-radius:3px;}
+  .reco .rk{font-size:11px;letter-spacing:0.20em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+  .reco .rv{font-family:'DM Serif Display',serif;font-size:26px;color:#fff;line-height:1.15;margin-bottom:8px;}
+  .reco .rv span{color:var(--gold);}
+  .reco p{color:#c9d1da;font-size:14px;margin:0;}
+
+  /* ---------- TAKEAWAYS ---------- */
+  section.takeaways{background:var(--navy);border-bottom:none;color:#fff;}
+  section.takeaways .sec-eyebrow{color:var(--gold);}
+  section.takeaways h2.sec-title{color:#fff;}
+  .tk-list{margin-top:22px;list-style:none;padding:0;}
+  .tk-list li{display:flex;gap:16px;padding:15px 0;border-top:1px solid rgba(200,164,92,0.22);}
+  .tk-list li:last-child{border-bottom:1px solid rgba(200,164,92,0.22);}
+  .tk-list .tk-n{font-family:'DM Serif Display',serif;font-size:20px;color:var(--gold);line-height:1.2;min-width:28px;}
+  .tk-list .tk-t{font-size:15px;color:#dfe4ea;line-height:1.55;}
+  .tk-list .tk-t strong{color:#fff;font-weight:600;}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:34px 48px 40px;background:#11161f;color:#aeb8c4;}
+  footer .brand{font-family:'DM Serif Display',serif;font-size:18px;color:#fff;}
+  footer .agent{font-size:13.5px;color:var(--gold);margin-top:4px;}
+  footer .phone{font-size:13.5px;color:#c9d1da;}
+  footer .disclaimer{font-size:11px;color:#6c7785;line-height:1.55;margin-top:20px;border-top:1px solid rgba(255,255,255,0.08);padding-top:16px;}
+
+  @media (max-width:680px){
+    body{padding:0;}
+    header.masthead,section,footer{padding-left:24px;padding-right:24px;}
+    header.masthead h1{font-size:30px;}
+    .statsbar{grid-template-columns:repeat(2,1fr);}
+    .statsbar .stat:nth-child(2){border-right:none;}
+    .subject-grid,.val-ppsf{grid-template-columns:1fr;}
+    .subject-grid .cell{border-right:none;}
+    .val-ppsf .vp{border-right:none;}
+    .active-grid{grid-template-columns:1fr;}
+    .active-stats{grid-template-columns:repeat(2,1fr);}
+    .active-stats .as:nth-child(2){border-right:none;}
+    .barrow{grid-template-columns:120px 1fr;}
+    .barrow .blabel{font-size:11px;}
+    .chart-scale{margin-left:120px;}
+    .comp-top .addr{font-size:16px;}
+  }
+</style>
+</head>
+<body>
+<div class="report">
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="masthead">
+    <div class="eyebrow">Comparative Market Analysis &middot; Burlington 35 — Tansley</div>
+    <h1>407 – 4006 Kilmer Drive</h1>
+    <div class="sub">Burlington, Ontario &middot; L7M 4W4 &middot; Top-floor 2-bed condo, Kensington Gates</div>
+    <div class="header-meta">
+      <div class="item">
+        <div class="label">Current List Price</div>
+        <div class="val"><span class="accent">$470,000</span></div>
+      </div>
+      <div class="item">
+        <div class="label">Original List</div>
+        <div class="val">$498,900</div>
+      </div>
+      <div class="item">
+        <div class="label">Days on Market</div>
+        <div class="val">45</div>
+      </div>
+      <div class="item">
+        <div class="label">Seller Timeline</div>
+        <div class="val"><span class="accent">30 days</span></div>
+      </div>
+      <div class="item">
+        <div class="label">Prepared</div>
+        <div class="val">June 21, 2026</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== KEY STATS BAR ===================== -->
+  <div class="statsbar">
+    <div class="stat"><div class="num">$461,375</div><div class="cap">Avg Sold Price · 8 comps</div></div>
+    <div class="stat"><div class="num">98.5%</div><div class="cap">Avg Sold-to-List Ratio</div></div>
+    <div class="stat"><div class="num">66</div><div class="cap">Avg CDOM</div></div>
+    <div class="stat"><div class="num">8</div><div class="cap">Recent Sold / Pending</div></div>
+  </div>
+
+  <!-- ===================== SUBJECT SNAPSHOT ===================== -->
+  <section>
+    <div class="sec-eyebrow">The Subject Property</div>
+    <h2 class="sec-title">What we're selling</h2>
+    <p class="sec-lede">A top-floor (407) unit in the well-run Kensington Gates community: just under 900 sq ft, 9-foot ceilings, southern exposure, and one of the lowest monthly condo fees in the entire Burlington condo market. It has been listed 45 days and already trimmed $28,900 — so the analysis below is about pricing it to actually transact inside the seller's 30-day window.</p>
+
+    <div class="subject-grid">
+      <div class="cell"><div class="k">Beds / Baths</div><div class="v">2 (1 + den) / 1</div></div>
+      <div class="cell"><div class="k">Interior Size</div><div class="v">890 sq ft</div></div>
+      <div class="cell"><div class="k">Condo Fee</div><div class="v">$451.74 / mo</div></div>
+      <div class="cell"><div class="k">Property Taxes</div><div class="v">$2,623 / 2025</div></div>
+      <div class="cell"><div class="k">Parking / Locker</div><div class="v">1 underground + locker</div></div>
+      <div class="cell"><div class="k">Age</div><div class="v">16–30 yrs</div></div>
+      <div class="cell"><div class="k">Exposure / Floor</div><div class="v">South · Top floor</div></div>
+      <div class="cell"><div class="k">List $/sq ft</div><div class="v">$528 / sq ft</div></div>
+    </div>
+
+    <div class="edge-row">
+      <span class="pill adv">✓ Lowest fees in comp set</span>
+      <span class="pill adv">✓ Top floor · 9′ ceilings</span>
+      <span class="pill adv">✓ New furnace &amp; A/C (2024)</span>
+      <span class="pill lim">— Only 1 bathroom</span>
+      <span class="pill lim">— Single parking spot</span>
+    </div>
+  </section>
+
+  <!-- ===================== PRICE COMPARISON CHART ===================== -->
+  <section>
+    <div class="sec-eyebrow">Visual Comparison</div>
+    <h2 class="sec-title">Where $470,000 sits</h2>
+    <p class="sec-lede">The eight closest sold (slate) and pending (gold) condos, sorted by price. The red line is the subject's $470,000 ask. With the larger, premium product set aside, the picture sharpens: the subject now sits near the <em>top</em> of its true comparable field — and every unit priced above it carries a second bathroom.</p>
+
+    <div class="chart">
+      <div class="chart-scale">
+        <span style="left:11.1%">$400K</span>
+        <span style="left:48.1%">$450K</span>
+        <span style="left:85.2%">$500K</span>
+      </div>
+
+      <!-- subject reference line across the plot area -->
+      <div style="position:relative;">
+        <div class="subjectline" style="left:calc(188px + (100% - 188px) * 0.6296);"></div>
+
+        <div class="barrow"><div class="blabel">2020 Cleaver #107<small>806sf · 1ba · Closed</small></div><div class="bartrack"><div class="bar sold" style="width:9.63%;">$398K</div></div></div>
+        <div class="barrow"><div class="blabel">2010 Cleaver #307<small>711sf · 1ba · Closed</small></div><div class="bartrack"><div class="bar sold" style="width:10.37%;">$399K</div></div></div>
+        <div class="barrow"><div class="blabel">2045 Appleby #203<small>767sf · 1ba · Pending</small></div><div class="bartrack"><div class="bar pending" style="width:44.44%;">$445K</div></div></div>
+        <div class="barrow"><div class="blabel">2085 Appleby #107<small>921sf · 1ba · Pending</small></div><div class="bartrack"><div class="bar pending" style="width:69.63%;">$479K</div></div></div>
+        <div class="barrow"><div class="blabel">1441 Walkers #311<small>1,026sf · 2ba · Closed</small></div><div class="bartrack"><div class="bar sold" style="width:70.37%;">$480K</div></div></div>
+        <div class="barrow"><div class="blabel">3497 Upper Mid #105<small>942sf · 2ba · Pending</small></div><div class="bartrack"><div class="bar pending" style="width:77.78%;">$490K</div></div></div>
+        <div class="barrow"><div class="blabel">4040 Upper Mid #114<small>750sf · 2ba · Closed</small></div><div class="bartrack"><div class="bar sold" style="width:81.48%;">$495K</div></div></div>
+        <div class="barrow"><div class="blabel">4040 Upper Mid #418<small>809sf · 2ba · Pending</small></div><div class="bartrack"><div class="bar pending" style="width:88.89%;">$505K</div></div></div>
+      </div>
+
+      <div class="chart-legend">
+        <div class="li"><span class="sw" style="background:var(--slate);"></span> Closed (sold)</div>
+        <div class="li"><span class="sw" style="background:var(--gold);"></span> Pending (firm/conditional)</div>
+        <div class="li"><span class="sw" style="background:var(--red);"></span> Subject — $470,000</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== COMPARABLE ANALYSIS ===================== -->
+  <section>
+    <div class="sec-eyebrow">Comparable Analysis</div>
+    <h2 class="sec-title">Reading each comparable</h2>
+    <p class="sec-lede">These are the eight transactions closest to the subject — the larger and premium-tower product has been set aside. They're grouped into two tiers by how directly they speak to value. Tier 1 — sub-1,000 sq ft, one-bathroom units — carries the most weight, because the subject is a one-bath unit.</p>
+
+    <!-- TIER 1 -->
+    <div class="tier-head"><span class="tnum">01</span><h3>Closest comparables — one bathroom, under 1,000 sq ft</h3></div>
+    <p class="tier-sub">Same product as the subject. These four set the floor and ceiling for where 407-4006 Kilmer should land.</p>
+
+    <div class="comp pending">
+      <div class="comp-top">
+        <div><span class="status pending">Pending</span><div class="addr">2085 Appleby Line #107 <small>Orchard · 16–30 yrs</small></div></div>
+        <div class="comp-price"><div class="sp">$479,000</div><div class="lp">List $479,900</div></div>
+      </div>
+      <div class="comp-stats">
+        <div class="cs"><div class="csk">Size</div><div class="csv">921 sf</div></div>
+        <div class="cs"><div class="csk">$/sf</div><div class="csv">$520</div></div>
+        <div class="cs"><div class="csk">SP/LP</div><div class="csv good">100%</div></div>
+        <div class="cs"><div class="csk">CDOM</div><div class="csv good">15</div></div>
+        <div class="cs"><div class="csk">Fee</div><div class="csv">$429</div></div>
+      </div>
+      <div class="comp-why"><strong>The single best read on value.</strong> Nearly identical footprint (921 vs 890 sq ft), 2-bed-plus-den, one bath, low fees — and it sold at <strong>full ask in 15 days</strong>. The catch: it carried <em>two</em> parking spaces (underground + surface). That two-parking premium is why it cleared $520/sq ft. Strip one parking spot back to the subject's single spot and you're looking at the high-$450s to high-$460s for Kilmer — squarely where the subject is fighting.</div>
+    </div>
+
+    <div class="comp pending">
+      <div class="comp-top">
+        <div><span class="status pending">Pending</span><div class="addr">2045 Appleby Line #203 <small>Orchard · 16–30 yrs</small></div></div>
+        <div class="comp-price"><div class="sp">$445,000</div><div class="lp">List $449,900 · orig $465,000</div></div>
+      </div>
+      <div class="comp-stats">
+        <div class="cs"><div class="csk">Size</div><div class="csv">767 sf</div></div>
+        <div class="cs"><div class="csk">$/sf</div><div class="csv">$580</div></div>
+        <div class="cs"><div class="csk">SP/LP</div><div class="csv">99%</div></div>
+        <div class="cs"><div class="csk">CDOM</div><div class="csv flag">66</div></div>
+        <div class="cs"><div class="csk">Fee</div><div class="csv">$503</div></div>
+      </div>
+      <div class="comp-why">Smaller (767 sq ft) but otherwise a close cousin: 2-bed, one bath, vacant, freshly painted. It needed a $15K cut off the original $465,000 and <strong>66 days</strong> to find a buyer at $445,000. Lesson for Kilmer: even a tidy one-bath unit had to reprice to move. The subject is ~120 sq ft larger and top-floor, which supports a number above this — but not far above.</div>
+    </div>
+
+    <div class="comp">
+      <div class="comp-top">
+        <div><span class="status sold">Closed</span><div class="addr">2010 Cleaver Avenue #307 <small>Headon Forest · 31–50 yrs</small></div></div>
+        <div class="comp-price"><div class="sp">$399,000</div><div class="lp">List $399,900</div></div>
+      </div>
+      <div class="comp-stats">
+        <div class="cs"><div class="csk">Size</div><div class="csv">711 sf</div></div>
+        <div class="cs"><div class="csk">$/sf</div><div class="csv">$561</div></div>
+        <div class="cs"><div class="csk">SP/LP</div><div class="csv good">100%</div></div>
+        <div class="cs"><div class="csk">CDOM</div><div class="csv good">18</div></div>
+        <div class="cs"><div class="csk">Fee</div><div class="csv">$646</div></div>
+      </div>
+      <div class="comp-why">A textbook example of <strong>priced-right-sells-fast</strong>: listed at $399,900, sold at $399,000 in 18 days. It's smaller and older than the subject with higher fees, so it's a floor reference, not a target. The takeaway is behavioural — when these units are priced to the market, they go quickly and at ask.</div>
+    </div>
+
+    <div class="comp">
+      <div class="comp-top">
+        <div><span class="status sold">Closed</span><div class="addr">2020 Cleaver Avenue #107 <small>Headon Forest · 31–50 yrs</small></div></div>
+        <div class="comp-price"><div class="sp">$398,000</div><div class="lp">List $409,900 · orig $479,900</div></div>
+      </div>
+      <div class="comp-stats">
+        <div class="cs"><div class="csk">Size</div><div class="csv">806 sf</div></div>
+        <div class="cs"><div class="csk">$/sf</div><div class="csv">$494</div></div>
+        <div class="cs"><div class="csk">SP/LP</div><div class="csv">97%</div></div>
+        <div class="cs"><div class="csk">CDOM</div><div class="csv flag">230</div></div>
+        <div class="cs"><div class="csk">Fee</div><div class="csv">$654</div></div>
+      </div>
+      <div class="comp-why">The cautionary tale. Newly renovated and move-in ready, but launched at <strong>$479,900</strong> and chased the market down through six price cuts over <strong>230 days</strong>, finally closing at $398,000 — an $81,900 round trip. This is precisely the outcome the subject's 30-day deadline is meant to avoid: overpricing a one-bath unit and bleeding equity to time-on-market.</div>
+    </div>
+
+    <!-- TIER 2 -->
+    <div class="tier-head"><span class="tnum">02</span><h3>Two-bathroom condos in the same price band</h3></div>
+    <p class="tier-sub">These show what buyers get for roughly the same money — and why the subject's single bathroom is a real ceiling. Two of them sit in the subject's own Tansley neighbourhood.</p>
+
+    <div class="comp">
+      <div class="comp-top">
+        <div><span class="status sold">Closed</span><div class="addr">4040 Upper Middle Rd #114 <small>Tansley · 6–15 yrs (2019)</small></div></div>
+        <div class="comp-price"><div class="sp">$495,000</div><div class="lp">List $499,900</div></div>
+      </div>
+      <div class="comp-stats">
+        <div class="cs"><div class="csk">Size</div><div class="csv">750 sf</div></div>
+        <div class="cs"><div class="csk">$/sf</div><div class="csv flag">$660</div></div>
+        <div class="cs"><div class="csk">SP/LP</div><div class="csv">99%</div></div>
+        <div class="cs"><div class="csk">CDOM</div><div class="csv good">20</div></div>
+        <div class="cs"><div class="csk">Fee</div><div class="csv flag">$744</div></div>
+      </div>
+      <div class="comp-why">Same neighbourhood (Kilmer &amp; Tobyn), but a different generation of building: <strong>2019-built, 10-ft ceilings, two baths, Murphy bed, oversized terrace.</strong> It's <em>smaller</em> than the subject yet sold for $25,000 more, at $660/sq ft. The premium is the newer building, second bathroom and finishes — but note the $744 fee, $292/mo higher than the subject. For a fee-sensitive buyer, that gap is real money.</div>
+    </div>
+
+    <div class="comp pending">
+      <div class="comp-top">
+        <div><span class="status pending">Pending</span><div class="addr">4040 Upper Middle Rd #418 <small>Tansley · 6–15 yrs (2019)</small></div></div>
+        <div class="comp-price"><div class="sp">$505,000</div><div class="lp">List $509,900</div></div>
+      </div>
+      <div class="comp-stats">
+        <div class="cs"><div class="csk">Size</div><div class="csv">809 sf</div></div>
+        <div class="cs"><div class="csk">$/sf</div><div class="csv flag">$624</div></div>
+        <div class="cs"><div class="csk">SP/LP</div><div class="csv">99%</div></div>
+        <div class="cs"><div class="csk">CDOM</div><div class="csv">28</div></div>
+        <div class="cs"><div class="csk">Fee</div><div class="csv flag">$775</div></div>
+      </div>
+      <div class="comp-why">Same Park City building as #114. Two baths, 2019 build, premium finishes — pending at $505,000. Again, a comparable-size unit clearing well above the subject because of the extra bathroom and newer vintage, but carrying a fee ($775) that's $323/mo richer. <strong>The subject can't match the finishes, but it decisively wins on carrying cost.</strong></div>
+    </div>
+
+    <div class="comp pending">
+      <div class="comp-top">
+        <div><span class="status pending">Pending</span><div class="addr">3497 Upper Middle Rd #105 <small>Headon Forest · 16–30 yrs</small></div></div>
+        <div class="comp-price"><div class="sp">$490,000</div><div class="lp">List $499,900</div></div>
+      </div>
+      <div class="comp-stats">
+        <div class="cs"><div class="csk">Size</div><div class="csv">942 sf</div></div>
+        <div class="cs"><div class="csk">$/sf</div><div class="csv">$520</div></div>
+        <div class="cs"><div class="csk">SP/LP</div><div class="csv">98%</div></div>
+        <div class="cs"><div class="csk">CDOM</div><div class="csv">30</div></div>
+        <div class="cs"><div class="csk">Fee</div><div class="csv">$614</div></div>
+      </div>
+      <div class="comp-why">Almost the same size as the subject (942 sq ft) and the same $520/sq ft as the best Tier-1 comp — but it carries a <strong>second bathroom (3-pc ensuite + 4-pc main)</strong> and still only reached $490,000. That extra bath is worth roughly $20–30K of the gap above the subject. It's a clean illustration of the bathroom premium the subject simply doesn't have.</div>
+    </div>
+
+    <div class="comp">
+      <div class="comp-top">
+        <div><span class="status sold">Closed</span><div class="addr">1441 Walkers Line #311 <small>Tansley · 16–30 yrs</small></div></div>
+        <div class="comp-price"><div class="sp">$480,000</div><div class="lp">List $499,900</div></div>
+      </div>
+      <div class="comp-stats">
+        <div class="cs"><div class="csk">Size</div><div class="csv">1,026 sf</div></div>
+        <div class="cs"><div class="csk">$/sf</div><div class="csv">$468</div></div>
+        <div class="cs"><div class="csk">SP/LP</div><div class="csv flag">96%</div></div>
+        <div class="cs"><div class="csk">CDOM</div><div class="csv flag">103</div></div>
+        <div class="cs"><div class="csk">Fee</div><div class="csv">$569</div></div>
+      </div>
+      <div class="comp-why">Subject's own Tansley neighbourhood, and the most useful "near ceiling" for Kilmer. A larger <strong>1,026 sq ft, two-full-bath, two-bedroom with a gas fireplace</strong>, it still needed a $19,900 cut and a 103-day total marketing cycle to close at $480,000. If a bigger two-bath unit lands at $480K, a smaller one-bath unit can't reasonably expect to beat it — which frames the subject's realistic top end.</div>
+    </div>
+
+  </section>
+
+  <!-- ===================== ACTIVE INVENTORY ===================== -->
+  <section>
+    <div class="sec-eyebrow">Competing Active Inventory</div>
+    <h2 class="sec-title">What buyers can choose instead — today</h2>
+    <p class="sec-lede">This is the real headline. A buyer weighing 407-4006 Kilmer isn't choosing between it and a handful of options — they're walking through <strong>fourteen</strong> directly competing 2-bedroom condos listed between $439,000 and $500,000 in the immediate area (Tansley, Headon Forest, Orchard), five of them in the subject's own Tansley pocket and two in the literal twin building next door. When supply is this deep, buyers set the price, not sellers.</p>
+
+    <div class="active-stats">
+      <div class="as"><div class="num">14</div><div class="cap">Competing actives · $439K–$500K</div></div>
+      <div class="as"><div class="num">8</div><div class="cap">Priced below the subject's $470K</div></div>
+      <div class="as"><div class="num">~59</div><div class="cap">Avg active days on market</div></div>
+      <div class="as"><div class="num">$465,736</div><div class="cap">Avg active list — under the subject</div></div>
+    </div>
+
+    <p class="small" style="margin-top:16px;">The math that matters: the <em>average</em> asking price of the live competition ($465,736) already sits <strong>below</strong> the subject's $470,000 — and eight of the fourteen undercut it outright, several of them offering a second bathroom, a second parking spot, or both. The subject is currently priced above the middle of a crowded field while giving up features to most of the units beneath it.</p>
+
+    <!-- 206-2040 Cleaver history callout -->
+    <div class="history-callout">
+      <div class="hc-k">⚑ Watch this one — price history</div>
+      <div class="hc-addr">2040 Cleaver Avenue #206 — now $439,000, the cheapest in the field</div>
+      <p>This unit is a live cautionary tale. The exact same suite has been <strong>listed and cancelled repeatedly through 2025</strong> — never once selling — before being relisted at $439,000 this month. The seller chased the market all the way down and is now also <strong>marketing it for lease at $2,750/month</strong> as a hedge. It now anchors the bottom of the active range with fresh days-on-market, which is precisely the price point every other 2-bed in the area is being measured against.</p>
+      <div class="hist-chips">
+        <span class="hchip">$524,999 · cancelled</span>
+        <span class="hchip">$499,999 · cancelled</span>
+        <span class="hchip">$489,999 · cancelled</span>
+        <span class="hchip">$474,999 · cancelled ×2</span>
+        <span class="hchip">$399,999 · cancelled</span>
+        <span class="hchip">→ $439,000 active + for lease</span>
+      </div>
+    </div>
+
+    <div class="active-grid">
+
+      <!-- 1 -->
+      <div class="acomp below">
+        <div class="acomp-h"><span class="status active">Active</span><div class="acomp-price">$439,000<small>was $439K</small></div></div>
+        <div class="acomp-addr">2040 Cleaver Ave #206 <small>Headon Forest · 31–50 yrs · 11 DOM</small></div>
+        <div class="acomp-spec"><b>2 bd / 1 ba</b> · 825 sf · $532/sf · fee $610 · <b>2 parking</b></div>
+        <div class="acomp-note">The cheapest 2-bed in the field — see the history note above. Fresh on market and also offered for lease. At $439K it effectively sets the floor the subject is competing against.</div>
+        <span class="undercut">▼ $31K under the subject</span>
+      </div>
+
+      <!-- 2 -->
+      <div class="acomp below">
+        <div class="acomp-h"><span class="status active">Active</span><div class="acomp-price">$439,000<small>cut from $459K</small></div></div>
+        <div class="acomp-addr">4005 Kilmer Drive #212 <small>Tansley · 16–30 yrs · 51 DOM</small></div>
+        <div class="acomp-spec"><b>2 bd / 2 ba</b> · 940 sf · $467/sf · fee $991 · 1 parking</div>
+        <div class="acomp-note">The subject's <strong>twin building</strong>. <strong>Two full baths and 940 sq ft</strong> — more bathroom and more space than the subject — for <span class="down">$31K less</span>. A direct, better-equipped undercut right next door.</div>
+        <span class="undercut">▼ $31K under the subject</span>
+      </div>
+
+      <!-- 3 -->
+      <div class="acomp below">
+        <div class="acomp-h"><span class="status active">Active</span><div class="acomp-price">$439,900<small>cut from $445K</small></div></div>
+        <div class="acomp-addr">1940 Ironstone Drive #808 <small>Corporate · 6–15 yrs · 44 DOM</small></div>
+        <div class="acomp-spec"><b>1 bd+den / 2 ba</b> · 661 sf · $666/sf · fee $642 · 1 parking</div>
+        <div class="acomp-note">Newer 2013 high-rise with concierge, gym and escarpment views — 2 baths, but the smallest footprint here. A different buyer profile, but another sub-$440K, two-bath option.</div>
+        <span class="undercut">▼ $30K under the subject</span>
+      </div>
+
+      <!-- 4 -->
+      <div class="acomp below">
+        <div class="acomp-h"><span class="status active">Active</span><div class="acomp-price">$445,900<small>cut from $509K</small></div></div>
+        <div class="acomp-addr">3499 Upper Middle Rd #214 <small>Headon Forest · 16–30 yrs · 136 DOM</small></div>
+        <div class="acomp-spec"><b>2 bd / 2 ba</b> · 940 sf · $474/sf · fee $913 · <b>2 parking</b></div>
+        <div class="acomp-note"><strong>2 baths and TWO owned parking spots</strong>, $24K under the subject. <span class="down">136 days on market and $63,100 in cuts</span> from $509K — the clearest example in the area of what holding too high actually costs.</div>
+        <span class="undercut">▼ $24K under the subject</span>
+      </div>
+
+      <!-- 5 -->
+      <div class="acomp below">
+        <div class="acomp-h"><span class="status active">Active</span><div class="acomp-price">$449,000<small>raised from $399K</small></div></div>
+        <div class="acomp-addr">2040 Cleaver Ave #218 <small>Headon Forest · 31–50 yrs · 54 DOM</small></div>
+        <div class="acomp-spec"><b>2 bd / 1 ba</b> · 719 sf · $624/sf · fee $610 · 1 parking + locker</div>
+        <div class="acomp-note">Nicely renovated (quartz, new kitchen). Unusual history: launched at $399,000, then <strong>raised to $449,000</strong> — an optimistic move that's now sat 54 days without result.</div>
+        <span class="undercut">▼ $21K under the subject</span>
+      </div>
+
+      <!-- 6 -->
+      <div class="acomp cond">
+        <div class="acomp-h"><span class="status cond">Conditional</span><div class="acomp-price">$449,900<small>list unchanged</small></div></div>
+        <div class="acomp-addr">2010 Cleaver Ave #224 <small>Headon Forest · 31–50 yrs · 65 CDOM</small></div>
+        <div class="acomp-spec"><b>2 bd / 2 ba</b> · 1,018 sf · $442/sf · fee $986 · <b>2 parking</b></div>
+        <div class="acomp-note">Corner suite — the <strong>most space in the field at 1,018 sq ft, 2 baths, two parking</strong>. Went <strong>conditional</strong> priced $20K under the subject. Proof the action is happening <em>below</em> $470K, not at it.</div>
+        <span class="undercut">▼ $20K under the subject · under offer</span>
+      </div>
+
+      <!-- 7 -->
+      <div class="acomp below">
+        <div class="acomp-h"><span class="status active">Active</span><div class="acomp-price">$449,999<small>list unchanged</small></div></div>
+        <div class="acomp-addr">4003 Kilmer Drive #207 <small>Tansley · 16–30 yrs · 58 DOM</small></div>
+        <div class="acomp-spec"><b>2 bd / 1 ba</b> · 860 sf · $523/sf · fee $839 · 1 parking + locker</div>
+        <div class="acomp-note">The subject's <strong>literal next-door complex</strong>. Near-identical product — 860 sq ft, 1 bath, gas fireplace, updated — priced <span class="down">$50K under the subject</span>. The single most damaging comparison in this section.</div>
+        <span class="undercut">▼ $50K under the subject</span>
+      </div>
+
+      <!-- 8 -->
+      <div class="acomp below">
+        <div class="acomp-h"><span class="status active">Active</span><div class="acomp-price">$459,900<small>cut from $519K</small></div></div>
+        <div class="acomp-addr">1411 Walkers Line #202 <small>Tansley · 16–30 yrs · 118 DOM</small></div>
+        <div class="acomp-spec"><b>2 bd / 2 ba</b> · 900 sf · $511/sf · fee $604 · 1 parking + locker</div>
+        <div class="acomp-note">Tansley, <strong>2 baths</strong>, new 2024 furnace, low fee. <span class="down">118 days and $60,000 in cuts</span> from $519,900. Marketed "priced to sell" — and still hasn't.</div>
+        <span class="undercut">▼ $10K under the subject</span>
+      </div>
+
+      <!-- SUBJECT -->
+      <div class="acomp subj">
+        <div class="acomp-h"><span class="status subj">Subject</span><div class="acomp-price">$470,000<small>cut from $499K</small></div></div>
+        <div class="acomp-addr">4006 Kilmer Drive #407 <small>Tansley · 16–30 yrs · 45 DOM</small></div>
+        <div class="acomp-spec"><b>2 bd / 1 ba</b> · 890 sf · $528/sf · <b>fee $452 (lowest)</b> · 1 parking + locker</div>
+        <div class="acomp-note">Our listing, for reference. Top-floor, 9′ ceilings, new 2024 furnace/AC, and the lowest fee in the entire set — but a single bath and one parking spot, sitting above eight cheaper competitors.</div>
+      </div>
+
+      <!-- 9 -->
+      <div class="acomp alt">
+        <div class="acomp-h"><span class="status alt">Active · Woolcott</span><div class="acomp-price">$479,900<small>list unchanged</small></div></div>
+        <div class="acomp-addr">1451 Walkers Line #216 <small>Tansley · 16–30 yrs · 31 DOM</small></div>
+        <div class="acomp-spec"><b>2 bd / 2 ba</b> · 1,020 sf · $470/sf · fee $614 · 1 parking + locker</div>
+        <div class="acomp-note">Our own listing. <strong>Meaningfully larger (1,020 sf) with a second bath</strong> for just $10K over the subject — useful as a "trade-up" anchor when positioning Kilmer's price.</div>
+      </div>
+
+      <!-- 10 -->
+      <div class="acomp">
+        <div class="acomp-h"><span class="status active">Active</span><div class="acomp-price">$489,000<small>cut from $515K</small></div></div>
+        <div class="acomp-addr">5220 Dundas St #508 <small>Orchard · 6–15 yrs · 115 DOM</small></div>
+        <div class="acomp-spec"><b>2 bd / 2 ba</b> · 637 sf · $768/sf · fee $517 · 1 parking</div>
+        <div class="acomp-note">Newer 2017 build, 2 baths but very small at 637 sq ft. CMHC seller, sold strictly as-is. 115 days and $26K in cuts — priced on newness, not size.</div>
+      </div>
+
+      <!-- 11 -->
+      <div class="acomp">
+        <div class="acomp-h"><span class="status active">Active</span><div class="acomp-price">$489,900<small>list unchanged</small></div></div>
+        <div class="acomp-addr">1411 Walker's Line #105 <small>Tansley · 16–30 yrs · 32 DOM</small></div>
+        <div class="acomp-spec"><b>2 bd / 1 ba</b> · 895 sf · $547/sf · fee $530 · 1 parking + locker</div>
+        <div class="acomp-note">Ground-floor walkout with private patio; same size, same single bath as the subject — but asking $20K <em>more</em>. A useful ceiling: it shows what an ambitious 1-bath ask looks like, and it's fresh enough not to have been tested yet.</div>
+      </div>
+
+      <!-- 12 -->
+      <div class="acomp">
+        <div class="acomp-h"><span class="status active">Active</span><div class="acomp-price">$490,000<small>192 CDOM</small></div></div>
+        <div class="acomp-addr">5220 Dundas St #D422 <small>Orchard · 6–15 yrs · 62 DOM</small></div>
+        <div class="acomp-spec"><b>2 bd / 2 ba</b> · 664 sf · $738/sf · fee $518 · 1 parking</div>
+        <div class="acomp-note">Repeatedly relisted: <span class="down">192 cumulative days</span> across three listings after $535K and $525K attempts were cancelled. Another newer-but-tiny Orchard unit grinding for traction.</div>
+      </div>
+
+      <!-- 13 -->
+      <div class="acomp">
+        <div class="acomp-h"><span class="status active">Active</span><div class="acomp-price">$499,000<small>list unchanged</small></div></div>
+        <div class="acomp-addr">2020 Cleaver Ave #301 <small>Headon Forest · 31–50 yrs · 32 DOM</small></div>
+        <div class="acomp-spec"><b>2 bd / 1 ba</b> · 1,000 sf · $499/sf · fee $872 · 1 parking + locker</div>
+        <div class="acomp-note">A full <strong>1,000 sq ft with a 5-piece ensuite</strong> — over 100 sq ft more than the subject — for $29K more. Fresh at 32 days; the higher fee is its main drag.</div>
+      </div>
+
+      <!-- 14 -->
+      <div class="acomp">
+        <div class="acomp-h"><span class="status active">Active</span><div class="acomp-price">$499,900<small>list unchanged</small></div></div>
+        <div class="acomp-addr">3008 Palmer Drive #8 <small>Palmer · townhouse · 12 DOM</small></div>
+        <div class="acomp-spec"><b>3 bd / 2 ba</b> · 1,201 sf · $416/sf · fee $683 · <b>garage + drive</b></div>
+        <div class="acomp-note">A different product entirely: a <strong>3-bed, 2-bath, 1,201 sq ft townhouse</strong> with a garage in a pool community. For ~$30K over the subject, a $500K buyer can step into a whole townhouse — which quietly caps what an 890 sq ft, one-bath apartment can ask.</div>
+      </div>
+
+    </div>
+
+    <!-- Days-on-market reading -->
+    <div class="dom-read">
+      <div class="dr-k">Reading the days-on-market</div>
+      <p>Across the fourteen competitors the average time on market is <strong>~59 days</strong>, but it splits cleanly in two. The units that launched at realistic prices are moving — 2040 Cleaver #206 at 11 days, Palmer at 12, and three more fresh listings at 31–32 days. The units that started high are bleeding: <strong>3499 Upper Middle (136 days, &minus;$63K), 1411 Walkers #202 (118 days, &minus;$60K), 5220 Dundas #508 (115 days, &minus;$26K) and #D422 (192 cumulative days)</strong>. The subject — 45 days in, one $28,900 cut already behind it, still unsold — is sitting on the on-ramp to that second group. Holding at $470,000 against eight cheaper, often better-equipped rivals is how a listing drifts from 45 days to 120.</p>
+    </div>
+  </section>
+
+  <!-- ===================== VALUATION ===================== -->
+  <section>
+    <div class="sec-eyebrow">Valuation Analysis</div>
+    <h2 class="sec-title">What it's worth — and how to price for 30 days</h2>
+    <p class="sec-lede">Anchoring to the closest comparables: the one-bathroom cohort traded between $494 and $580 per square foot, with the best size-match (2085 Appleby, 921 sq ft) at $520/sq ft. Smaller units carry higher per-foot figures, so the right anchor for an 890 sq ft unit is the low-$500s.</p>
+
+    <div class="val-panel">
+      <div class="val-ppsf">
+        <div class="vp"><div class="num">$520 / sf</div><div class="cap">Size-matched comp · 2085 Appleby</div></div>
+        <div class="vp"><div class="num">$528 / sf</div><div class="cap">Subject at current $470K list</div></div>
+        <div class="vp"><div class="num">$455–$472K</div><div class="cap">Supported value range · 890 sf</div></div>
+      </div>
+
+      <div class="val-body">
+        <p>At <strong>890 sq ft</strong>, applying the size-matched $520/sq ft yields about <strong>$463,000</strong>. The subject earns a modest premium for being <strong>top-floor with 9-ft ceilings, a brand-new 2024 furnace and A/C, and the lowest condo fee in the entire comparable set ($451.74)</strong> — that fee advantage alone saves a buyer $1,800–$8,000 per year versus most comps and is a genuine, marketable differentiator. Against that, it carries the two clearest discounts in this market: <strong>only one bathroom and a single parking spot</strong>, where nearly every unit that closed above $480K had two baths.</p>
+        <p>Netting those out, fair market value lands in the <strong>$455,000–$472,000</strong> range, with the most probable sale price around <strong>$460,000–$465,000</strong>. At $470,000 the subject is asking slightly above the size-matched benchmark — defensible, but not a bargain, which is exactly why 45 days have passed without an offer.</p>
+
+        <div class="rangebar-wrap">
+          <div class="rangebar">
+            <!-- fill $452K-$472K on a $440K-$490K axis: (452-440)/50=24% to (472-440)/50=64% => left 24%, width 40% -->
+            <div class="range-fill" style="left:24%;width:40%;"></div>
+            <!-- target $462K => (462-440)/50 = 44% -->
+            <div class="range-marker target" style="left:44%;"><span class="mlabel">Target ~$462K</span></div>
+            <!-- list $470K => (470-440)/50 = 60% -->
+            <div class="range-marker list" style="left:60%;"><span class="mlabel">Now $470K</span></div>
+          </div>
+          <div class="range-axis"><span>$440K</span><span>$452K</span><span>$465K</span><span>$472K</span><span>$490K</span></div>
+        </div>
+
+        <div class="reco">
+          <div class="rk">Recommendation · 30-Day Strategy</div>
+          <div class="rv">Reposition at <span>$459,900</span> to sell inside the window.</div>
+          <p>Dropping under the $460K threshold captures the large buyer pool searching below $460,000, signals sharp value against the higher-fee 2-bath comps, and creates urgency — the conditions every fast sale in this set shared (15–30 days). It also moves the subject out from <em>above</em> the average competitor and into the active, moving part of the market: at $459,900 it would sit ahead of only the few stale, deeply-cut holdouts rather than behind eight cheaper rivals. Expect a sale in the <strong>$458,000–$465,000</strong> range. Holding at $470,000 is defensible on value but, with fourteen live competitors and eight of them cheaper, risks the slow grind the 115- to 192-day actives are living through right now.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TAKEAWAYS ===================== -->
+  <section class="takeaways">
+    <div class="sec-eyebrow">The Bottom Line</div>
+    <h2 class="sec-title">Key takeaways</h2>
+    <ul class="tk-list">
+      <li><span class="tk-n">1</span><span class="tk-t"><strong>45 days and one cut in, the market has been talking.</strong> The subject launched at $498,900, trimmed to $470,000, and still hasn't sold — a signal that the original price was ahead of value and $470K is at the top of the range, not the middle.</span></li>
+      <li><span class="tk-n">2</span><span class="tk-t"><strong>Fourteen competing actives — eight of them cheaper than the subject.</strong> Buyers in this pocket are spoiled for choice between $439K and $500K, with the average competitor listing at $465,736 — <em>below</em> our $470,000. Several of the cheaper units beat the subject on bathrooms, parking or square footage. That depth of supply is the single biggest pressure on price.</span></li>
+      <li><span class="tk-n">3</span><span class="tk-t"><strong>The closest comparisons sit right next door — and underprice us.</strong> 4003 Kilmer #207 (the twin complex) asks $449,999 and 4005 Kilmer #212 asks $439,000 with two baths. A buyer touring Kilmer Drive sees near-identical product $20K–$50K cheaper before they ever reach the subject.</span></li>
+      <li><span class="tk-n">4</span><span class="tk-t"><strong>The best size-match sold at $479,000 — but with two parking spots.</strong> 2085 Appleby #107 (921 sq ft, one bath, low fees) cleared full ask in 15 days carrying double parking. With the subject's single spot, that translates to the high-$450s to mid-$460s.</span></li>
+      <li><span class="tk-n">5</span><span class="tk-t"><strong>Well-priced units fly; ambitious ones bleed.</strong> Sharp listings — sold and active alike — move in 11–32 days. The overpriced ones sit 115–192 days and get cut $26K–$63K. The subject, at 45 days, is on the edge between the two groups.</span></li>
+      <li><span class="tk-n">6</span><span class="tk-t"><strong>The subject's real edge is carrying cost.</strong> At $451.74/month it has the lowest condo fee in the entire comparable set — $200–$540 less per month than its rivals — plus top-floor 9-ft ceilings and a new 2024 furnace and A/C. That's a genuine, leadable value story.</span></li>
+      <li><span class="tk-n">7</span><span class="tk-t"><strong>The one bathroom is the ceiling.</strong> Almost every unit priced above $480,000 — sold or active — offers two baths. That single missing bathroom, not size or condition, is what separates the subject from the upper field.</span></li>
+      <li><span class="tk-n">8</span><span class="tk-t"><strong>To sell in 30 days, reposition at $459,900.</strong> Cross under the $460K search barrier, slot in against the cheaper 2-bath field, and create urgency — targeting a sale near $458K–$465K rather than risking the slow grind that $470K invites against fourteen rivals.</span></li>
+    </ul>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <div class="brand">Woolcott Real Estate &middot; RE/MAX Escarpment Realty Inc.</div>
+    <div class="agent">Prepared by Justine Woolcott, Salesperson</div>
+    <div class="phone">905.689.9223</div>
+    <div class="disclaimer">The information contained herein has been obtained from sources believed to be reliable but is not guaranteed. This analysis is intended to provide general market context and should not be relied upon as a formal appraisal. All data sourced from the Cornerstone Association of REALTORS® MLS® System. Information deemed reliable but not guaranteed.</div>
+  </footer>
+
+</div>
+</body>
+</html>
