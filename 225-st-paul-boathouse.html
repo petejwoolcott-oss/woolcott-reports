@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Woolcott · 225 St. Paul Street — The Burlington Boathouse</title>
+<link rel="stylesheet" href="../../woolcott-document.css" />
+<style>
+  /* feature-sheet helpers layered on the Woolcott document system */
+  .hero-frame { border: 6px solid rgba(255,255,255,0.12); border-radius: 8px; overflow: hidden; box-shadow: 0 18px 40px rgba(0,0,0,0.4); }
+  .hero-frame img { width: 100%; display: block; }
+
+  .pricebadge { display: inline-flex; flex-direction: column; gap: 3px; }
+  .pricebadge .l { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue); }
+  .pricebadge .n { font-size: 42px; font-weight: 900; color: #fff; line-height: 1; }
+
+  .subjphoto { width: 100%; border-radius: 7px; display: block; object-fit: cover; box-shadow: 0 10px 26px rgba(29,46,92,0.16); }
+  .pcap { font-size: 10.5px; font-weight: 600; letter-spacing: 0.04em; color: var(--muted); margin-top: 7px; }
+
+  /* hero stat band on the cover */
+  .herostats { display: flex; gap: 30px; flex-wrap: wrap; }
+  .herostats .hs .v { font-size: 26px; font-weight: 900; color: #fff; line-height: 1; }
+  .herostats .hs .k { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 7px; }
+
+  /* signature feature cards */
+  .featgrid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-top: 14px; }
+  .featcard { background: var(--bg); border: 1px solid var(--border); border-top: 3px solid var(--blue); border-radius: 7px; padding: 16px 15px 15px; break-inside: avoid; }
+  .featcard .ic { width: 38px; height: 38px; border-radius: 999px; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; margin-bottom: 11px; }
+  .featcard .ic i { width: 19px; height: 19px; }
+  .featcard h5 { font-size: 13px; font-weight: 800; color: var(--navy); margin: 0 0 5px; letter-spacing: -0.01em; }
+  .featcard p { font-size: 11px; line-height: 1.5; color: var(--muted); }
+
+  /* page banner */
+  .banner { width: 100%; height: 196px; object-fit: cover; border-radius: 8px; display: block; box-shadow: 0 10px 26px rgba(29,46,92,0.16); }
+  .banner-cap { font-size: 10.5px; font-weight: 600; letter-spacing: 0.04em; color: var(--muted); margin-top: 7px; }
+
+  /* suite cards */
+  .suite { display: grid; grid-template-columns: 72px 1fr; gap: 20px; align-items: start; padding: 20px 0; border-top: 1px solid var(--border); break-inside: avoid; }
+  .suite:first-of-type { border-top: 0; }
+  .suite .no { width: 56px; height: 56px; border-radius: 999px; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900; }
+  .suite .meta .nm { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .suite .meta h4 { font-size: 19px; font-weight: 900; color: var(--navy); letter-spacing: -0.01em; }
+  .suite .meta .sq { font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; background: var(--blue); padding: 3px 9px; border-radius: 3px; }
+  .suite .meta p { font-size: 12.5px; color: var(--muted); line-height: 1.6; margin-top: 9px; max-width: 600px; }
+  .suite .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .suite .tags span { font-size: 10.5px; font-weight: 700; color: var(--navy); background: var(--navy-tint); padding: 5px 11px; border-radius: 999px; }
+
+  /* room table two-up */
+  .roomcols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 34px; }
+
+  @media screen and (max-width: 880px) {
+    .pricebadge .n { font-size: 34px; }
+    .hero-frame { border-width: 4px; }
+    .featgrid { grid-template-columns: 1fr 1fr; }
+    .suite { grid-template-columns: 1fr; gap: 12px; }
+    .banner { height: 150px; }
+    .roomcols { grid-template-columns: 1fr; gap: 0; }
+    .herostats { gap: 20px; }
+    .herostats .hs .v { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#1D2E5C">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#1D2E5C"/>
+    <polygon points="0,0 430,0 330,800 0,800" fill="#203566"/>
+    <polygon points="900,0 1200,0 1200,800 760,800" fill="#24447A"/>
+    <g transform="translate(600 300)" fill="none" stroke="#27A8E0" stroke-width="18" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M -160 60 L -160 -40 Q -160 -90 -110 -90 L 110 -90 Q 160 -90 160 -40 L 160 60"/>
+      <path d="M -200 60 L 200 60"/>
+      <path d="M -120 -90 L -120 60 M 0 -90 L 0 60 M 120 -90 L 120 60"/>
+    </g>
+    <text x="600" y="600" font-family="Montserrat, Arial, sans-serif" font-size="44" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="2">225 ST. PAUL STREET</text>
+    <text x="600" y="654" font-family="Montserrat, Arial, sans-serif" font-size="22" font-weight="600" fill="#9fb2d6" text-anchor="middle" letter-spacing="5">THE BURLINGTON BOATHOUSE</text>
+  </svg>
+</template>
+<div class="doc">
+
+<!-- ============================ COVER ============================ -->
+<section class="page facet-page" data-screen-label="Cover">
+  <div class="facet-bg"><span class="fct1"></span><span class="fct2"></span><span class="fct3"></span></div>
+  <div class="pad" style="justify-content:space-between">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <img src="../../assets/logos/woolcott-primary-white.png" alt="Woolcott Real Estate" style="height:40px" />
+      <p style="font-size:11px;color:rgba(255,255,255,0.55);letter-spacing:0.14em;text-transform:uppercase;font-weight:600">Burlington Waterfront · For Sale</p>
+    </div>
+
+    <div>
+      <p class="eyebrow" style="margin-bottom:16px">The Burlington Boathouse · A 1938 Art Moderne Landmark</p>
+      <h1 style="font-size:52px;font-weight:900;line-height:0.98;color:#fff">225 St. Paul<br />Street</h1>
+      <p style="margin-top:14px;font-size:16px;color:rgba(255,255,255,0.82);font-weight:500">Burlington, Ontario · Direct views over Lake Ontario</p>
+
+      <div class="hero-frame" style="margin-top:22px">
+        <img src="photos/aerial.jpeg" alt="225 St. Paul Street — Art Moderne exterior at dusk" />
+      </div>
+    </div>
+
+    <div>
+      <div class="herostats" style="margin-bottom:22px">
+        <div class="hs"><div class="v">4,167</div><div class="k">Finished sq ft</div></div>
+        <div class="hs"><div class="v">3</div><div class="k">Executive suites</div></div>
+        <div class="hs"><div class="v">4 / 4</div><div class="k">Beds · Baths</div></div>
+        <div class="hs"><div class="v">1938</div><div class="k">Year built</div></div>
+      </div>
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px">
+        <div class="pricebadge">
+          <span class="l">Offered at</span>
+          <span class="n">$3,900,000</span>
+        </div>
+        <p style="font-size:13px;color:#fff;font-weight:700;text-align:right">Drew Woolcott, Broker · Woolcott Real Estate<br /><span style="font-weight:500;color:rgba(255,255,255,0.6)">905 332 9223 · woolcott.ca</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ THE PROPERTY ============================ -->
+<section class="page" data-screen-label="The Property">
+  <div class="pad">
+    <div class="sec-head">
+      <div class="sec-ico"><i data-lucide="anchor"></i></div>
+      <div>
+        <p class="eyebrow">The property</p>
+        <div class="sec-title">An address you experience</div>
+      </div>
+    </div>
+    <hr class="accent" style="margin:16px 0 10px" />
+    <p class="lead" style="max-width:680px">Some homes are simply lived in. This one is experienced. Tucked into one of Burlington's most coveted waterfront pockets, the Burlington Boathouse is as iconic as they get — a 1938 Art Moderne residence transformed into a turnkey, income-producing trophy property, a fifteen-minute stroll from downtown.</p>
+
+    <div class="two" style="margin-top:20px;grid-template-columns:1.15fr 1fr;gap:28px">
+      <div>
+        <img class="subjphoto" src="photos/exterior-front.jpeg" alt="225 St. Paul Street aerial — lakefront setting" style="height:236px" />
+        <div class="pcap">A rare lakefront setting on St. Paul Street, steps from the shore of Lake Ontario and downtown Burlington</div>
+
+        <p class="flags-title" style="margin:18px 0 0">What sets it apart</p>
+        <ul class="flags good" style="margin-top:9px">
+          <li><i data-lucide="waves"></i><span>Direct water views over Lake Ontario in a quiet, sought-after pocket</span></li>
+          <li><i data-lucide="landmark"></i><span>Authentic 1938 Art Moderne architecture — eight decades of character</span></li>
+          <li><i data-lucide="trending-up"></i><span>Fully operational, multi-suite revenue property — turnkey and furnished</span></li>
+          <li><i data-lucide="repeat"></i><span>Flexible: investor cash flow, multi-generational living, or back to single-family</span></li>
+          <li><i data-lucide="footprints"></i><span>A 15-minute walk to downtown shops, dining and the waterfront trail</span></li>
+        </ul>
+      </div>
+      <div>
+        <p class="flags-title" style="margin-bottom:0">The facts</p>
+        <div class="facts">
+          <div class="row"><span class="k">Offered at</span><span class="v">$3,900,000</span></div>
+          <div class="row"><span class="k">Total finished</span><span class="v">4,167 sq ft</span></div>
+          <div class="row"><span class="k">Configuration</span><span class="v">Legal triplex</span></div>
+          <div class="row"><span class="k">Bedrooms</span><span class="v">4 (3 + 1)</span></div>
+          <div class="row"><span class="k">Bathrooms</span><span class="v">4 full</span></div>
+          <div class="row"><span class="k">Year built</span><span class="v">1938</span></div>
+          <div class="row"><span class="k">Storeys</span><span class="v">2.5</span></div>
+          <div class="row"><span class="k">Lot size</span><span class="v">7,976 sq ft</span></div>
+          <div class="row"><span class="k">Frontage</span><span class="v">74.9 ft</span></div>
+          <div class="row"><span class="k">Depth</span><span class="v">132.2 ft</span></div>
+          <div class="row"><span class="k">Parking</span><span class="v">4 surface</span></div>
+          <div class="row"><span class="k">Annual taxes</span><span class="v">$11,241 (2026)</span></div>
+        </div>
+
+        <div class="note">
+          <i data-lucide="badge-check"></i>
+          <div>
+            <div class="ttl">A modern engine underneath</div>
+            <p>Completely renovated in 2015–2016 with furnace, A/C and roof updated (2015; roof also 2021). Eight decades of character paired with a fully modern, turnkey interior.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="flags-title" style="margin-top:22px">Signature features</p>
+    <div class="featgrid">
+      <div class="featcard"><div class="ic"><i data-lucide="eye"></i></div><h5>Lake Ontario views</h5><p>Direct water views from the home, with a private rooftop terrace offering panoramic lake vistas.</p></div>
+      <div class="featcard"><div class="ic"><i data-lucide="building-2"></i></div><h5>Art Moderne form</h5><p>Sweeping curved stucco walls, ribbon windows and rounded balconies — a true 1938 streamline landmark.</p></div>
+      <div class="featcard"><div class="ic"><i data-lucide="key-round"></i></div><h5>Three turnkey suites</h5><p>Three fully furnished, designer-appointed executive suites, each with its own kitchen and entrance.</p></div>
+      <div class="featcard"><div class="ic"><i data-lucide="flame"></i></div><h5>Gas fireplaces</h5><p>Show-stopping living spaces anchored by natural-gas fireplaces across the principal suites.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>225 St. Paul Street · The Burlington Boathouse</span><span class="num"></span></div>
+</section>
+
+<!-- ============================ THE THREE SUITES ============================ -->
+<section class="page" data-screen-label="The Three Suites">
+  <div class="pad">
+    <div class="sec-head">
+      <div class="sec-ico"><i data-lucide="layout-grid"></i></div>
+      <div>
+        <p class="eyebrow">Three suites · one address</p>
+        <div class="sec-title">Designer-appointed living</div>
+      </div>
+    </div>
+    <hr class="accent" style="margin:16px 0 10px" />
+    <p class="body" style="max-width:680px">Three fully furnished, designer-appointed executive suites — each self-contained, each with its own character. Lease all three as a revenue property, blend them for multi-generational living, or reunite them as one extraordinary single-family home.</p>
+
+    <img class="banner" src="photos/aerial.jpeg" alt="225 St. Paul Street — exterior at dusk" style="margin-top:16px" />
+    <div class="banner-cap">Curved stucco walls, ribbon windows and rounded balconies — the streamline Art Moderne form that gives each suite its character</div>
+
+    <div class="suite">
+      <div class="no">1</div>
+      <div class="meta">
+        <div class="nm"><h4>The Captain's Quarters</h4><span class="sq">1,775 sq ft</span></div>
+        <p>Two bedrooms anchored by a show-stopping living room with a gas fireplace, made for evenings that feel like a postcard. French doors swing open onto a private, lake-view patio.</p>
+        <div class="tags"><span>2 bedrooms</span><span>Gas fireplace</span><span>Lake-view patio</span><span>French doors</span></div>
+      </div>
+    </div>
+
+    <div class="suite">
+      <div class="no">2</div>
+      <div class="meta">
+        <div class="nm"><h4>The Upper Deck</h4><span class="sq">2,008 sq ft</span></div>
+        <p>A single-bedroom suite with a gourmet kitchen and two full baths, crowned by a private rooftop terrace with panoramic lake views you'll want to show off.</p>
+        <div class="tags"><span>1 bedroom</span><span>Gourmet kitchen</span><span>2 full baths</span><span>Rooftop terrace</span></div>
+      </div>
+    </div>
+
+    <div class="suite">
+      <div class="no">3</div>
+      <div class="meta">
+        <div class="nm"><h4>The Galley</h4><span class="sq">1,172 sq ft</span></div>
+        <p>A single-bedroom suite with living and dining beside a gas fireplace, and a spa-like bath that feels like a daily escape.</p>
+        <div class="tags"><span>1 bedroom</span><span>Gas fireplace</span><span>Living &amp; dining</span><span>Spa-like bath</span></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <i data-lucide="lightbulb"></i>
+      <div>
+        <div class="ttl">Endless possibility</div>
+        <p>Whether you're an investor chasing cash flow, a multi-generational family wanting separate-but-connected living, or a buyer who wants the kind of property people dream about owning on the water — this is the one. A legacy property with a fully modern engine underneath.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>225 St. Paul Street · The Burlington Boathouse</span><span class="num"></span></div>
+</section>
+
+<!-- ============================ FEATURES & SPECS ============================ -->
+<section class="page" data-screen-label="Features & Specs">
+  <div class="pad">
+    <div class="sec-head">
+      <div class="sec-ico"><i data-lucide="clipboard-list"></i></div>
+      <div>
+        <p class="eyebrow">The details</p>
+        <div class="sec-title">Features &amp; specifications</div>
+      </div>
+    </div>
+    <hr class="accent" style="margin:16px 0 12px" />
+
+    <div class="two" style="grid-template-columns:1fr 1fr;gap:30px;align-items:start">
+      <div>
+        <p class="flags-title">Construction &amp; systems</p>
+        <div class="facts" style="margin-top:10px">
+          <div class="row"><span class="k">Architecture</span><span class="v">Art Moderne</span></div>
+          <div class="row"><span class="k">Exterior</span><span class="v">Stucco / plaster</span></div>
+          <div class="row"><span class="k">Foundation</span><span class="v">Poured concrete</span></div>
+          <div class="row"><span class="k">Roof</span><span class="v">2015 &amp; 2021</span></div>
+          <div class="row"><span class="k">Heating</span><span class="v">Forced air, gas</span></div>
+          <div class="row"><span class="k">Cooling</span><span class="v">Central + wall units</span></div>
+          <div class="row"><span class="k">Furnace / A/C</span><span class="v">2015</span></div>
+          <div class="row"><span class="k">Basement</span><span class="v">Full · finished</span></div>
+          <div class="row"><span class="k">Water / sewer</span><span class="v">Municipal</span></div>
+          <div class="row"><span class="k">Zoning</span><span class="v">R3.2</span></div>
+        </div>
+
+        <p class="flags-title" style="margin-top:20px">Lot &amp; location</p>
+        <div class="facts" style="margin-top:10px">
+          <div class="row"><span class="k">Water body</span><span class="v">Lake Ontario</span></div>
+          <div class="row"><span class="k">Water view</span><span class="v">Direct</span></div>
+          <div class="row"><span class="k">Lot area</span><span class="v">7,976 sq ft</span></div>
+          <div class="row"><span class="k">Ownership</span><span class="v">Freehold</span></div>
+          <div class="row"><span class="k">Parking</span><span class="v">4 surface</span></div>
+          <div class="row"><span class="k">Possession</span><span class="v">Flexible</span></div>
+        </div>
+      </div>
+
+      <div>
+        <p class="flags-title">Interior highlights</p>
+        <ul class="flags good" style="margin-top:10px">
+          <li><i data-lucide="utensils-crossed"></i><span>Three full kitchens — one per suite, fully furnished</span></li>
+          <li><i data-lucide="flame"></i><span>Two natural-gas fireplaces</span></li>
+          <li><i data-lucide="sun"></i><span>Private rooftop terrace with panoramic lake views</span></li>
+          <li><i data-lucide="door-open"></i><span>French doors to a private lake-view patio</span></li>
+          <li><i data-lucide="home"></i><span>Accessory apartment, in-law suite &amp; B&amp;B potential</span></li>
+          <li><i data-lucide="hammer"></i><span>Workshop space</span></li>
+          <li><i data-lucide="washing-machine"></i><span>Shared laundry, main level</span></li>
+        </ul>
+
+        <p class="flags-title" style="margin-top:20px">Included</p>
+        <div class="note" style="margin-top:10px">
+          <i data-lucide="package-check"></i>
+          <div>
+            <div class="ttl">Turnkey inclusions</div>
+            <p>3× stove, 3× fridge, 3× dishwasher, 2× built-in microwave, washer &amp; dryer, all light fixtures and all window coverings — a complete, furnished, ready-to-operate property.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="flags-title" style="margin-top:24px">Principal rooms</p>
+    <div class="tscroll">
+    <table class="data">
+      <thead><tr><th>Room</th><th>Level</th><th class="num">Dimensions</th><th>Room</th><th>Level</th><th class="num">Dimensions</th></tr></thead>
+      <tbody>
+        <tr><td>Living Room</td><td>Main</td><td class="num">29'7" × 14'3"</td><td>Kitchen</td><td>Second</td><td class="num">15'4" × 12'7"</td></tr>
+        <tr><td>Dining Room</td><td>Main</td><td class="num">16'2" × 13'2"</td><td>Bedroom</td><td>Second</td><td class="num">22'7" × 14'3"</td></tr>
+        <tr><td>Kitchen</td><td>Main</td><td class="num">13'1" × 10'7"</td><td>Bathroom</td><td>Second</td><td class="num">3-pc &amp; 4-pc</td></tr>
+        <tr><td>Primary Bedroom</td><td>Main</td><td class="num">18'1" × 12'2"</td><td>Kitchen</td><td>Basement</td><td class="num">12'1" × 10'0"</td></tr>
+        <tr><td>Bedroom</td><td>Main</td><td class="num">12'9" × 8'0"</td><td>Bedroom</td><td>Basement</td><td class="num">12'0" × 11'0"</td></tr>
+        <tr><td>Bathroom</td><td>Main</td><td class="num">4-piece</td><td>Bathroom</td><td>Basement</td><td class="num">3-piece</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="foot"><span>225 St. Paul Street · The Burlington Boathouse</span><span class="num"></span></div>
+</section>
+
+<!-- ============================ CLOSING ============================ -->
+<section class="page facet-page" data-screen-label="Inquiries">
+  <div class="facet-bg"><span class="fct1"></span><span class="fct2"></span><span class="fct3"></span></div>
+  <div class="pad">
+    <p class="eyebrow">An address like no other</p>
+    <h2 style="font-size:38px;font-weight:900;color:#fff;margin-top:12px;line-height:1.06;max-width:600px">Properties like this don't come up often.</h2>
+    <p style="margin-top:16px;font-size:15px;line-height:1.6;color:rgba(255,255,255,0.86);max-width:600px">This isn't just a beautiful home — it's a fully operational, multi-suite revenue property with the rare option to return to a single-family residence. A legacy address with eight decades of character and a fully modern engine underneath. A private viewing is the only way to feel it.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px;max-width:660px">
+      <div>
+        <div style="display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:999px;background:rgba(39,168,224,0.16);color:var(--blue);margin-bottom:12px"><i data-lucide="landmark"></i></div>
+        <p style="font-size:14px;font-weight:800;color:#fff">The architecture</p>
+        <p style="font-size:12px;line-height:1.55;color:rgba(255,255,255,0.7);margin-top:5px">A 1938 streamline Art Moderne residence — a genuinely irreplaceable piece of Burlington's waterfront heritage.</p>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:999px;background:rgba(39,168,224,0.16);color:var(--blue);margin-bottom:12px"><i data-lucide="map-pin"></i></div>
+        <p style="font-size:14px;font-weight:800;color:#fff">The location</p>
+        <p style="font-size:12px;line-height:1.55;color:rgba(255,255,255,0.7);margin-top:5px">Direct views over Lake Ontario in a quiet, coveted pocket — a fifteen-minute stroll to downtown.</p>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:999px;background:rgba(39,168,224,0.16);color:var(--blue);margin-bottom:12px"><i data-lucide="trending-up"></i></div>
+        <p style="font-size:14px;font-weight:800;color:#fff">The opportunity</p>
+        <p style="font-size:12px;line-height:1.55;color:rgba(255,255,255,0.7);margin-top:5px">Three furnished, income-producing suites today — with the flexibility to invest, share, or reunite tomorrow.</p>
+      </div>
+    </div>
+
+    <div class="chips">
+      <span>Lake Ontario views</span>
+      <span>Legal triplex · 3 suites</span>
+      <span>4,167 finished sq ft</span>
+      <span>15 min to downtown</span>
+      <span>Fully furnished &amp; turnkey</span>
+      <span>Renovated 2015–16</span>
+    </div>
+
+    <div style="margin-top:auto;padding-top:30px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+        <div>
+          <div style="width:46px;height:4px;background:var(--blue);margin-bottom:16px"></div>
+          <p style="font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue)">For private viewings &amp; inquiries</p>
+          <p style="font-size:24px;font-weight:900;color:#fff;margin-top:8px">Drew Woolcott, Broker</p>
+          <p style="font-size:14px;color:rgba(255,255,255,0.82);margin-top:6px;line-height:1.6">905 332 9223 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8beff9eefceae5efe1eaf2e5eecbfce4e4e7e8e4ffffa5e8ea">[email&#160;protected]</a><br />woolcott.ca</p>
+        </div>
+        <img src="../../assets/logos/woolcott-horizontal-pbyc-white.png" alt="Woolcott Real Estate" style="height:40px" />
+      </div>
+      <p style="font-size:9.5px;color:rgba(255,255,255,0.4);letter-spacing:0.04em;margin-top:24px;max-width:620px;line-height:1.6">225 St. Paul Street, Burlington, Ontario L7R 4G9. Information deemed reliable but not guaranteed. Square footages per listing brokerage. Furnishings and inclusions as listed. Not intended to solicit properties already under contract.</p>
+    </div>
+  </div>
+  <div class="foot"><span>225 St. Paul Street · The Burlington Boathouse</span><span class="num"></span></div>
+</section>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>
+  function draw(){ if (window.lucide) window.lucide.createIcons(); }
+  if (document.readyState !== "loading") draw(); else document.addEventListener("DOMContentLoaded", draw);
+  window.addEventListener("load", draw);
+</script>
+</body>
+</html>
