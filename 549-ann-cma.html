@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>549 Ann Avenue — Comparable Market Analysis | Woolcott Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #F4F7FC; color: #1A1A2E; font-family: 'Montserrat', Arial, sans-serif; }
+
+  /* ── LAYOUT ─────────────────────────────────── */
+  .pad    { padding: 56px 64px; }
+  .pad-lg { padding: 80px 64px; }
+  .alt    { background: #FFFFFF; }
+  .navy-bg { background: #1D2E5C; }
+  .max-w  { max-width: 1280px; margin: 0 auto; }
+
+  /* ── DIVIDER ─────────────────────────────────── */
+  .sky-rule { width: 60px; height: 4px; background: #27A8E0; margin: 16px 0 28px; }
+
+  /* ── TYPE ────────────────────────────────────── */
+  .kicker { font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: #27A8E0; margin-bottom: 8px; }
+  .kicker-muted { color: #6B7A99; }
+  h1 { font-family: 'Montserrat', Arial, sans-serif; font-size: 56px; font-weight: 900; line-height: 1.05; margin: 0 0 16px; text-transform: uppercase; }
+  h2 { font-size: 40px; font-weight: 900; text-transform: uppercase; color: #1D2E5C; margin: 0 0 6px; }
+  h3 { font-size: 22px; font-weight: 700; color: #1D2E5C; margin: 0 0 6px; }
+  p  { font-size: 14px; line-height: 1.7; color: #6B7A99; margin: 0 0 14px; }
+  .body-lg { font-size: 16px; line-height: 1.75; color: #1A1A2E; }
+
+  /* ── GRID ────────────────────────────────────── */
+  .grid { display: grid; gap: 24px; }
+  .g2   { grid-template-columns: 1fr 1fr; }
+  .g3   { grid-template-columns: 1fr 1fr 1fr; }
+  .g4   { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .g5   { grid-template-columns: 1fr 1fr 1fr 1fr 1fr; }
+  .g2-1 { grid-template-columns: 2fr 1fr; }
+  .g1-2 { grid-template-columns: 1fr 2fr; }
+
+  /* ── TILES ───────────────────────────────────── */
+  .tile { background: #FFFFFF; padding: 28px 24px; border-top: 5px solid #1D2E5C; border: 1px solid #E8EEF6; border-top: 5px solid #1D2E5C; }
+  .tile .stat { font-size: 48px; font-weight: 900; color: #1D2E5C; line-height: 1; margin-bottom: 6px; }
+  .tile .label { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #6B7A99; }
+  .tile .sub { font-size: 12px; color: #6B7A99; margin-top: 4px; }
+  .tile-sky { border-top-color: #27A8E0; }
+  .tile-sky .stat { color: #27A8E0; }
+  .tile-red { border-top-color: #ED1C28; }
+  .tile-red .stat { color: #ED1C28; }
+  .tile-green { border-top-color: #2a7a3b; }
+  .tile-green .stat { color: #2a7a3b; }
+
+  /* ── PILLS ───────────────────────────────────── */
+  .pill { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
+  .pill-navy  { background: #1D2E5C; color: #fff; }
+  .pill-sky   { background: #27A8E0; color: #fff; }
+  .pill-red   { background: #ED1C28; color: #fff; }
+  .pill-green { background: #2a7a3b; color: #fff; }
+  .pill-grey  { background: #E8EEF6; color: #6B7A99; }
+
+  /* ── HERO ────────────────────────────────────── */
+  .hero { background: #1D2E5C; color: #fff; }
+  .hero-inner { max-width: 1280px; margin: 0 auto; padding: 72px 64px 64px; }
+  .wordmark { margin-bottom: 48px; }
+  .wordmark .ww { font-family: 'Playfair Display', Georgia, serif; font-size: 52px; font-weight: 400; color: #FFFFFF; letter-spacing: 0.04em; line-height: 1; text-transform: uppercase; }
+  .wordmark .re { font-size: 10px; font-weight: 700; letter-spacing: 0.45em; text-transform: uppercase; color: #FFFFFF; margin-top: 5px; font-family: 'Montserrat', Arial, sans-serif; }
+  .wordmark .pbyc { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #27A8E0; margin-top: 6px; display: block; }
+  .hero-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: #27A8E0; margin-bottom: 20px; }
+  .hero h1 { color: #FFFFFF; font-size: 60px; }
+  .hero-sub { font-size: 17px; color: rgba(255,255,255,0.7); margin-top: 6px; }
+  .hero-meta { display: flex; gap: 40px; margin-top: 48px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.15); }
+  .hero-meta-item .hm-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+  .hero-meta-item .hm-val { font-size: 22px; font-weight: 900; color: #fff; margin-top: 4px; }
+  .hero-meta-item .hm-sub { font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+  /* ── SUBJECT CARD ─────────────────────────────── */
+  .subject-card { background: #1D2E5C; color: #fff; border-radius: 0; padding: 32px 36px; }
+  .subject-card h3 { color: #27A8E0; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 18px; font-weight: 700; }
+  .subject-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 32px; }
+  .spec-row { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; }
+  .spec-label { font-size: 11px; color: rgba(255,255,255,0.55); font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; }
+  .spec-val   { font-size: 13px; font-weight: 700; color: #fff; }
+
+  /* ── COMP TABLE ───────────────────────────────── */
+  table.comps { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.comps thead th { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #6B7A99; padding: 0 12px 12px; border-bottom: 2px solid #1D2E5C; text-align: left; }
+  table.comps thead th.num { text-align: right; }
+  table.comps tbody tr { border-bottom: 1px solid #E8EEF6; }
+  table.comps tbody tr:hover { background: #F4F7FC; }
+  table.comps td { padding: 16px 12px; vertical-align: middle; }
+  table.comps td.num { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+  table.comps .addr { font-weight: 700; color: #1D2E5C; }
+  table.comps .addr-sub { font-size: 11px; color: #6B7A99; font-weight: 400; display: block; margin-top: 2px; }
+  table.comps .badge { display: inline-block; padding: 2px 8px; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 999px; }
+  table.comps .badge-sold { background: #E8EEF6; color: #1D2E5C; }
+  table.comps .badge-active { background: #27A8E0; color: #fff; }
+  .highlight-row td { background: #1D2E5C !important; color: #fff !important; }
+  .highlight-row .addr { color: #27A8E0 !important; }
+  .highlight-row .addr-sub { color: rgba(255,255,255,0.6) !important; }
+  .highlight-row .badge-active { background: #27A8E0; }
+  .highlight-row td.num { color: #fff !important; }
+
+  /* ── PULL QUOTE ───────────────────────────────── */
+  .pull-quote { background: #1D2E5C; color: #fff; padding: 40px 48px; }
+  .pull-quote .pq-text { font-size: 28px; font-weight: 900; text-transform: uppercase; line-height: 1.25; }
+  .pull-quote .pq-sub  { font-size: 13px; color: rgba(255,255,255,0.65); margin-top: 16px; line-height: 1.6; }
+
+  /* ── CHART FRAME ──────────────────────────────── */
+  .chart-frame { background: #FFFFFF; padding: 28px; border: 1px solid #E8EEF6; }
+
+  /* ── RECOMMENDATION BOX ───────────────────────── */
+  .rec-box { background: #1D2E5C; color: #fff; padding: 48px 52px; text-align: center; }
+  .rec-box .rec-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: #27A8E0; margin-bottom: 16px; }
+  .rec-box .rec-price { font-size: 80px; font-weight: 900; line-height: 1; color: #fff; }
+  .rec-box .rec-range { font-size: 16px; color: rgba(255,255,255,0.65); margin-top: 12px; }
+  .rec-box .rec-rationale { font-size: 14px; color: rgba(255,255,255,0.75); max-width: 680px; margin: 28px auto 0; line-height: 1.7; }
+
+  /* ── ADJUSTMENTS TABLE ────────────────────────── */
+  .adj-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .adj-table th { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #6B7A99; padding: 0 14px 12px; border-bottom: 2px solid #1D2E5C; text-align: left; }
+  .adj-table th.num { text-align: right; }
+  .adj-table td { padding: 14px; border-bottom: 1px solid #E8EEF6; font-size: 13px; }
+  .adj-table td.num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; }
+  .adj-table tr.totals td { font-weight: 900; font-size: 14px; border-top: 2px solid #1D2E5C; border-bottom: none; }
+  .adj-pos { color: #2a7a3b; }
+  .adj-neg { color: #ED1C28; }
+
+  /* ── FOOTER ───────────────────────────────────── */
+  .footer { background: #1D2E5C; color: rgba(255,255,255,0.55); padding: 40px 64px; }
+  .footer .f-pbyc { font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #27A8E0; margin-bottom: 12px; }
+  .footer .f-disc { font-size: 11px; line-height: 1.6; }
+  .footer .f-credit { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 16px; }
+
+  /* ── FACTOR ICON LIST ─────────────────────────── */
+  .factor-list { list-style: none; padding: 0; margin: 0; }
+  .factor-list li { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid #E8EEF6; font-size: 14px; color: #1A1A2E; }
+  .factor-list li:last-child { border-bottom: none; }
+  .factor-list .fi { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; margin-top: 2px; }
+  .fi-plus  { background: #d6eedd; }
+  .fi-minus { background: #fde8e8; }
+  .fi-neut  { background: #E8EEF6; }
+
+  @media (max-width: 900px) {
+    .g3, .g4, .g5 { grid-template-columns: 1fr 1fr; }
+    .g2 { grid-template-columns: 1fr; }
+    h1 { font-size: 38px; }
+    h2 { font-size: 28px; }
+    .rec-box .rec-price { font-size: 56px; }
+    .pad, .pad-lg { padding: 40px 24px; }
+    .hero-inner { padding: 48px 24px; }
+    .hero-meta { flex-wrap: wrap; gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="wordmark">
+      <div class="ww">Woolcott</div>
+      <div class="re">Real Estate</div>
+      <span class="pbyc">Pack Before You Call!<sup style="font-size:8px;">®</sup></span>
+    </div>
+
+    <div class="hero-tag">Comparable Market Analysis — Buyer Advisory</div>
+    <h1>549 Ann Avenue<br><span style="color:#27A8E0;">Burlington</span></h1>
+    <div class="hero-sub">Aldershot South &nbsp;·&nbsp; Bungaloft &nbsp;·&nbsp; Listed at $1,750,000</div>
+
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="hm-label">Report Date</div>
+        <div class="hm-val">June 30, 2026</div>
+        <div class="hm-sub">Prepared for Gillian Kirkpatrick</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hm-label">Comparables Analyzed</div>
+        <div class="hm-val">5 Sales</div>
+        <div class="hm-sub">All Aldershot South, 2026</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hm-label">Days on Market</div>
+        <div class="hm-val">14 DOM</div>
+        <div class="hm-sub">Listed June 15, 2026</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hm-label">List Price</div>
+        <div class="hm-val">$1,750,000</div>
+        <div class="hm-sub">RE/MAX Escarpment — Drew Woolcott</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SUBJECT PROPERTY
+══════════════════════════════════════════════════════════════════ -->
+<div class="pad-lg alt">
+  <div class="max-w">
+    <div class="kicker">Subject Property</div>
+    <div class="sky-rule"></div>
+    <div class="grid g2-1" style="gap:32px; align-items:start;">
+      <div>
+        <h2>The Property</h2>
+        <p class="body-lg" style="margin-top:16px;">A genuinely rare bungaloft on one of Aldershot South's most sought-after streets — directly across from Burlington Golf & Country Club. The home blends 1952 character (solid brick, hardwood, double-sided gas fireplace) with thoughtful modern upgrades including a chef's kitchen with 6-burner gas range, panoramic sunroom addition, and a spectacular top-floor primary retreat occupying the entire upper level with vaulted ceilings, dual walk-ins, and a 5-piece ensuite. The lot — 85 × 125 ft — and the oversized heated 2-car garage with 10-car parking are genuinely hard to replicate in this neighbourhood.</p>
+        <p>Listed by Drew Woolcott &nbsp;·&nbsp; RE/MAX Escarpment Realty &nbsp;·&nbsp; MLS #40839960</p>
+      </div>
+      <div class="subject-card">
+        <h3>Property Specs</h3>
+        <div class="subject-specs">
+          <div class="spec-row">
+            <span class="spec-label">Style</span>
+            <span class="spec-val">Bungaloft (1.5 Storey)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Bedrooms</span>
+            <span class="spec-val">4 + Den</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Bathrooms</span>
+            <span class="spec-val">3 (2 full + 1 half)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">AG Sq Ft</span>
+            <span class="spec-val">2,964 sq ft</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Lot Size</span>
+            <span class="spec-val">85 × 125 ft</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Year Built</span>
+            <span class="spec-val">1952</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Garage</span>
+            <span class="spec-val">2-car attached, heated</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Parking</span>
+            <span class="spec-val">10 spaces total</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Basement</span>
+            <span class="spec-val">Partial / Crawl Space</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Pool</span>
+            <span class="spec-val">No</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">List Price</span>
+            <span class="spec-val" style="color:#27A8E0;">$1,750,000</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">$ / Sq Ft</span>
+            <span class="spec-val">$590 / sq ft</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MARKET SNAPSHOT
+══════════════════════════════════════════════════════════════════ -->
+<div class="pad-lg">
+  <div class="max-w">
+    <div class="kicker">Aldershot South — 2026 Market Snapshot</div>
+    <div class="sky-rule"></div>
+    <h2>What the Market is Telling Us</h2>
+    <p style="max-width:640px; margin-top:12px;">Five comparable sales in Aldershot South in 2026 tell a clear story. Premium lots, updated homes, and sought-after streets continue to command strong prices — with the right home attracting full-price or better offers quickly.</p>
+
+    <div class="grid g4" style="margin-top:40px;">
+      <div class="tile">
+        <div class="stat">$1.81M</div>
+        <div class="label">Avg Sold Price</div>
+        <div class="sub">5 comparable sales</div>
+      </div>
+      <div class="tile tile-sky">
+        <div class="stat">$696</div>
+        <div class="label">Avg $/Sq Ft (AG)</div>
+        <div class="sub">Weighted by sqft</div>
+      </div>
+      <div class="tile tile-green">
+        <div class="stat">11 days</div>
+        <div class="label">Avg Days on Market</div>
+        <div class="sub">Tight, motivated market</div>
+      </div>
+      <div class="tile">
+        <div class="stat">100%</div>
+        <div class="label">Avg Sale-to-List Ratio</div>
+        <div class="sub">Market is pricing well</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     COMPARABLES TABLE
+══════════════════════════════════════════════════════════════════ -->
+<div class="pad-lg alt">
+  <div class="max-w">
+    <div class="kicker">Side-by-Side Comparison</div>
+    <div class="sky-rule"></div>
+    <h2>Comparable Sales</h2>
+    <p style="margin-top:12px; margin-bottom:36px;">All properties in Aldershot South (District 303), Burlington. Sold 2026.</p>
+
+    <div style="overflow-x:auto;">
+      <table class="comps">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Style</th>
+            <th class="num">Beds/Bath</th>
+            <th class="num">AG Sq Ft</th>
+            <th class="num">Lot (ft)</th>
+            <th>Pool</th>
+            <th class="num">List Price</th>
+            <th class="num">Sold Price</th>
+            <th class="num">$/Sq Ft</th>
+            <th class="num">DOM</th>
+            <th>S/L</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Subject -->
+          <tr class="highlight-row">
+            <td>
+              <span class="addr">549 Ann Ave</span>
+              <span class="addr-sub">Subject Property</span>
+            </td>
+            <td><span class="badge badge-active">Active</span></td>
+            <td class="num">4+Den / 3</td>
+            <td class="num">2,964</td>
+            <td class="num">85 × 125</td>
+            <td>No</td>
+            <td class="num">$1,750,000</td>
+            <td class="num">—</td>
+            <td class="num">$590</td>
+            <td class="num">14</td>
+            <td>—</td>
+          </tr>
+          <!-- Comp 1 -->
+          <tr>
+            <td>
+              <span class="addr">582 Cedar Ave</span>
+              <span class="addr-sub">Aldershot South · Closed Mar 2026</span>
+            </td>
+            <td><span class="badge badge-sold">Bungalow</span></td>
+            <td class="num">4 / 2</td>
+            <td class="num">2,281</td>
+            <td class="num">107 × 215</td>
+            <td>Yes (inground)</td>
+            <td class="num">$1,699,900</td>
+            <td class="num">$1,700,000</td>
+            <td class="num">$745</td>
+            <td class="num">11</td>
+            <td>100%</td>
+          </tr>
+          <!-- Comp 2 -->
+          <tr>
+            <td>
+              <span class="addr">877 Kingsway Dr</span>
+              <span class="addr-sub">Aldershot South · Pending Apr 2026</span>
+            </td>
+            <td><span class="badge badge-sold">2-Storey</span></td>
+            <td class="num">7 (5+2) / 5</td>
+            <td class="num">3,400</td>
+            <td class="num">90 × 130</td>
+            <td>Yes (inground)</td>
+            <td class="num">$1,399,000</td>
+            <td class="num">$1,700,000</td>
+            <td class="num">$378*</td>
+            <td class="num">8</td>
+            <td>122%</td>
+          </tr>
+          <!-- Comp 3 -->
+          <tr>
+            <td>
+              <span class="addr">587 Sharalin Crt</span>
+              <span class="addr-sub">Aldershot South · Closed Jun 2026</span>
+            </td>
+            <td><span class="badge badge-sold">2-Storey</span></td>
+            <td class="num">4+Den / 3</td>
+            <td class="num">2,456</td>
+            <td class="num">60 × 109</td>
+            <td>Yes (inground)</td>
+            <td class="num">$1,699,000</td>
+            <td class="num">$1,600,000</td>
+            <td class="num">$569</td>
+            <td class="num">12</td>
+            <td>94%</td>
+          </tr>
+          <!-- Comp 4 -->
+          <tr>
+            <td>
+              <span class="addr">677 King Rd</span>
+              <span class="addr-sub">Aldershot South · Closed Jun 2026</span>
+            </td>
+            <td><span class="badge badge-sold">Bungalow</span></td>
+            <td class="num">3 (2+1) / 4</td>
+            <td class="num">2,126</td>
+            <td class="num">80 × 135</td>
+            <td>Yes (heated saltwater)</td>
+            <td class="num">$2,195,000</td>
+            <td class="num">$2,195,000</td>
+            <td class="num">$1,032</td>
+            <td class="num">3</td>
+            <td>100%</td>
+          </tr>
+          <!-- Comp 5 -->
+          <tr>
+            <td>
+              <span class="addr">1050 Mohawk Rd</span>
+              <span class="addr-sub">Aldershot South · Closed May 2026</span>
+            </td>
+            <td><span class="badge badge-sold">2-Storey</span></td>
+            <td class="num">4 (3+1) / 3</td>
+            <td class="num">2,703</td>
+            <td class="num">124 × 102</td>
+            <td>No</td>
+            <td class="num">$1,995,000</td>
+            <td class="num">$1,975,000</td>
+            <td class="num">$731</td>
+            <td class="num">4</td>
+            <td>99%</td>
+          </tr>
+          <!-- Comp 6 -->
+          <tr>
+            <td>
+              <span class="addr">428 Hendrie Ave</span>
+              <span class="addr-sub">Aldershot South · Closed Jun 2026</span>
+            </td>
+            <td><span class="badge badge-sold">2-Storey</span></td>
+            <td class="num">4 (3+1) / 3</td>
+            <td class="num">2,123</td>
+            <td class="num">100 × 105</td>
+            <td>Yes (saltwater)</td>
+            <td class="num">$1,639,000</td>
+            <td class="num">$1,600,000</td>
+            <td class="num">$500</td>
+            <td class="num">25</td>
+            <td>98%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:16px; font-size:11px; color:#6B7A99;">*877 Kingsway $/sqft is weighted lower due to 4,500 total sqft incl. fully finished basement — the headline AG figure (3,400 sqft) at $378/sqft is less comparable; excluded from $/sqft averaging.</p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CHART — Sold Prices
+══════════════════════════════════════════════════════════════════ -->
+<div class="pad-lg">
+  <div class="max-w">
+    <div class="kicker">Price Range Visual</div>
+    <div class="sky-rule"></div>
+    <h2>Comparable Sold Prices</h2>
+    <p style="margin-bottom:36px;">2026 Aldershot South sales vs. 549 Ann Ave list price.</p>
+    <div class="grid g2" style="gap:32px; align-items:start;">
+      <div class="chart-frame">
+        <canvas id="priceChart" height="320"></canvas>
+      </div>
+      <div class="chart-frame">
+        <canvas id="psftChart" height="320"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ADJUSTMENTS ANALYSIS
+══════════════════════════════════════════════════════════════════ -->
+<div class="pad-lg alt">
+  <div class="max-w">
+    <div class="kicker">Adjusted Value Analysis</div>
+    <div class="sky-rule"></div>
+    <h2>Best Comparable Adjustments</h2>
+    <p style="max-width:640px; margin-top:12px; margin-bottom:40px;">Using the three most comparable sales — 582 Cedar Ave, 587 Sharalin Crt, and 1050 Mohawk Rd — adjusted for key differences from 549 Ann Ave.</p>
+
+    <div class="grid g3" style="gap:28px;">
+      <!-- Comp A: 582 Cedar -->
+      <div>
+        <div style="font-weight:900; font-size:15px; color:#1D2E5C; margin-bottom:4px;">582 Cedar Ave</div>
+        <div style="font-size:11px; color:#6B7A99; margin-bottom:20px;">Sold $1,700,000 · Bungalow · 2,281 sqft</div>
+        <table class="adj-table">
+          <thead><tr><th>Factor</th><th class="num">Adjustment</th></tr></thead>
+          <tbody>
+            <tr><td>Sold Price</td><td class="num">$1,700,000</td></tr>
+            <tr><td>Size (+683 sqft vs subject) <span class="adj-pos">▲</span></td><td class="num adj-pos">+$68,300</td></tr>
+            <tr><td>Pool (Cedar has pool) <span class="adj-neg">▼</span></td><td class="num adj-neg">−$50,000</td></tr>
+            <tr><td>Lot depth (Cedar 215 ft vs 125 ft) <span class="adj-neg">▼</span></td><td class="num adj-neg">−$30,000</td></tr>
+            <tr><td>Style (bungalow vs bungaloft) <span class="adj-pos">▲</span></td><td class="num adj-pos">+$10,000</td></tr>
+            <tr><td>Garage (subject heated/insulated) <span class="adj-pos">▲</span></td><td class="num adj-pos">+$15,000</td></tr>
+            <tr><td>Reno (Cedar 2025 west wing reno) <span class="adj-neg">▼</span></td><td class="num adj-neg">−$40,000</td></tr>
+          </tbody>
+          <tfoot><tr class="totals"><td>Adjusted Value</td><td class="num">$1,673,300</td></tr></tfoot>
+        </table>
+      </div>
+
+      <!-- Comp B: 587 Sharalin -->
+      <div>
+        <div style="font-weight:900; font-size:15px; color:#1D2E5C; margin-bottom:4px;">587 Sharalin Crt</div>
+        <div style="font-size:11px; color:#6B7A99; margin-bottom:20px;">Sold $1,600,000 · 2-Storey · 2,456 sqft</div>
+        <table class="adj-table">
+          <thead><tr><th>Factor</th><th class="num">Adjustment</th></tr></thead>
+          <tbody>
+            <tr><td>Sold Price</td><td class="num">$1,600,000</td></tr>
+            <tr><td>Size (+508 sqft vs subject) <span class="adj-pos">▲</span></td><td class="num adj-pos">+$50,800</td></tr>
+            <tr><td>Pool (Sharalin has pool) <span class="adj-neg">▼</span></td><td class="num adj-neg">−$50,000</td></tr>
+            <tr><td>Lot (subject 85×125 vs 60×109) <span class="adj-pos">▲</span></td><td class="num adj-pos">+$40,000</td></tr>
+            <tr><td>Location (court vs Ann Ave) <span class="adj-pos">▲</span></td><td class="num adj-pos">+$15,000</td></tr>
+            <tr><td>Age/condition (well maintained)</td><td class="num">—</td></tr>
+            <tr><td>DOM penalty (sold 94% of list) <span class="adj-pos">▲</span></td><td class="num adj-pos">+$25,000</td></tr>
+          </tbody>
+          <tfoot><tr class="totals"><td>Adjusted Value</td><td class="num">$1,680,800</td></tr></tfoot>
+        </table>
+      </div>
+
+      <!-- Comp C: 1050 Mohawk -->
+      <div>
+        <div style="font-weight:900; font-size:15px; color:#1D2E5C; margin-bottom:4px;">1050 Mohawk Rd</div>
+        <div style="font-size:11px; color:#6B7A99; margin-bottom:20px;">Sold $1,975,000 · 2-Storey · 2,703 sqft</div>
+        <table class="adj-table">
+          <thead><tr><th>Factor</th><th class="num">Adjustment</th></tr></thead>
+          <tbody>
+            <tr><td>Sold Price</td><td class="num">$1,975,000</td></tr>
+            <tr><td>Size (−261 sqft vs subject) <span class="adj-neg">▼</span></td><td class="num adj-neg">−$26,100</td></tr>
+            <tr><td>Location premium (Indian Point/Bay views) <span class="adj-neg">▼</span></td><td class="num adj-neg">−$75,000</td></tr>
+            <tr><td>No pool (same as subject)</td><td class="num">—</td></tr>
+            <tr><td>Year built (1924 vs 1952) <span class="adj-pos">▲</span></td><td class="num adj-pos">+$10,000</td></tr>
+            <tr><td>Lot (Mohawk 124×102 wider front) <span class="adj-neg">▼</span></td><td class="num adj-neg">−$15,000</td></tr>
+            <tr><td>Renovation level (custom kitchen) <span class="adj-neg">▼</span></td><td class="num adj-neg">−$30,000</td></tr>
+          </tbody>
+          <tfoot><tr class="totals"><td>Adjusted Value</td><td class="num">$1,838,900</td></tr></tfoot>
+        </table>
+      </div>
+    </div>
+
+    <!-- Average band -->
+    <div style="margin-top:40px; background:#F4F7FC; border:1px solid #E8EEF6; padding:28px 36px; display:flex; align-items:center; gap:48px; flex-wrap:wrap;">
+      <div>
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:#6B7A99;">Adjusted Value — Average of 3 Best Comps</div>
+        <div style="font-size:48px; font-weight:900; color:#1D2E5C; line-height:1; margin-top:8px;">$1,731,000</div>
+        <div style="font-size:13px; color:#6B7A99; margin-top:4px;">Range: $1,673,300 – $1,838,900</div>
+      </div>
+      <div style="flex:1; min-width:240px;">
+        <p style="font-size:14px; color:#1A1A2E; line-height:1.7; margin:0;">The adjusted value range places 549 Ann Avenue's <strong>fair market value at approximately $1,680,000 – $1,750,000</strong>. The list price of $1,750,000 sits at the top of that range — meaning the seller has priced to market. There is limited room for further appreciation without a competing offer scenario.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     STRENGTHS & CONSIDERATIONS
+══════════════════════════════════════════════════════════════════ -->
+<div class="pad-lg">
+  <div class="max-w">
+    <div class="grid g2" style="gap:48px;">
+      <div>
+        <div class="kicker kicker-muted">Buyer Strengths</div>
+        <div class="sky-rule"></div>
+        <h3>What Works in Your Favour</h3>
+        <ul class="factor-list" style="margin-top:20px;">
+          <li>
+            <div class="fi fi-plus">✅</div>
+            <div><strong>14 DOM — not a hot listing.</strong> The property has been sitting 2 weeks. That gives your clients negotiating room that a Day 1 offer wouldn't have.</div>
+          </li>
+          <li>
+            <div class="fi fi-plus">✅</div>
+            <div><strong>No competing offer clause active.</strong> Listing notes "offers accepted anytime" with no hold date — clean negotiation.</div>
+          </li>
+          <li>
+            <div class="fi fi-plus">✅</div>
+            <div><strong>No pool to negotiate around.</strong> Comparables with pools (Cedar, Kingsway, Sharalin, Hendrie) carry $40–60K value — 549 Ann Ave doesn't have that premium baked in, which is a cleaner comparison.</div>
+          </li>
+          <li>
+            <div class="fi fi-plus">✅</div>
+            <div><strong>Comparable sold range supports $1.65–1.75M.</strong> With adjusted values sitting near the list price, there's a rational basis for an offer in the $1.65–1.70M range.</div>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="kicker kicker-muted">Buyer Considerations</div>
+        <div class="sky-rule"></div>
+        <h3>What to Keep in Mind</h3>
+        <ul class="factor-list" style="margin-top:20px;">
+          <li>
+            <div class="fi fi-minus">⚠️</div>
+            <div><strong>Crawl space / partial basement.</strong> Unlike most comps (full basements), 549 Ann has only a crawl space — limits usable square footage and storage. This is reflected in our adjusted values.</div>
+          </li>
+          <li>
+            <div class="fi fi-minus">⚠️</div>
+            <div><strong>1952 build — mechanical and structural unknowns.</strong> Budget for a thorough home inspection. Key items: foundation, HVAC, electrical (knob-and-tube risk), plumbing, and the sunroom addition integrity.</div>
+          </li>
+          <li>
+            <div class="fi fi-neut">ℹ️</div>
+            <div><strong>677 King Rd sold at $2.195M</strong> — an outlier driven by a premium lot, full reno (2025), and heated saltwater pool. Not a comparable floor for 549 Ann Ave.</div>
+          </li>
+          <li>
+            <div class="fi fi-neut">ℹ️</div>
+            <div><strong>877 Kingsway Drive sold 22% over list</strong> at $1.7M — suggests the seller was underpriced. Multi-generational/in-law suite property with 4,500 total sqft. Different buyer profile.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PULL QUOTE
+══════════════════════════════════════════════════════════════════ -->
+<div class="pull-quote">
+  <div class="max-w" style="display:flex; gap:60px; align-items:center; flex-wrap:wrap;">
+    <div style="flex:1; min-width:260px;">
+      <div class="pq-text">"The list price is at market. You're not overpaying at $1,750,000 — but you do have room to open lower."</div>
+      <div class="pq-sub">14 days on market, no hold date, no competing offers. The data supports a strategic opening offer below list with room to move to value.</div>
+    </div>
+    <div style="text-align:center; min-width:220px;">
+      <div style="font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:12px;">Adjusted Market Value</div>
+      <div style="font-size:64px; font-weight:900; color:#27A8E0; line-height:1;">$1.71M</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.55); margin-top:8px;">Midpoint of adjusted comp range</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     RECOMMENDATION
+══════════════════════════════════════════════════════════════════ -->
+<div class="rec-box">
+  <div class="rec-kicker">Recommended Offer Price</div>
+  <div class="rec-price">$1,680,000</div>
+  <div class="rec-range">Strategic range: $1,660,000 – $1,710,000</div>
+  <div class="rec-rationale">
+    Based on the adjusted comparable analysis, 549 Ann Avenue's fair market value sits between $1,673,000 and $1,839,000, with the most weight on the Cedar Avenue and Sharalin Court comparables (similar size, style, and condition). An opening offer of <strong>$1,680,000</strong> is well-supported by the data, positions your buyers below list without being insulting, and leaves room to negotiate to $1,700,000 – $1,720,000 if needed. Given 14 DOM and no active competing interest noted, there is no urgency to open at list. If a home inspection reveals any material concerns (foundation, mechanicals, sunroom addition), there is further justification for the lower end of the range.
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════════════ -->
+<div class="footer">
+  <div class="max-w">
+    <div class="f-pbyc">Pack Before You Call!<sup style="font-size:8px;">®</sup></div>
+    <div class="f-disc">This report was prepared by Woolcott Real Estate for internal agent use only. All information is sourced from Cornerstone Association of REALTORS® / ITSO MLS data and is deemed reliable but not guaranteed. Market conditions can change rapidly — this analysis reflects data current as of June 30, 2026. This is not a formal appraisal. Recommended offer price reflects a buyer advisory based on comparable sales analysis and should be discussed with your clients in the context of their specific situation, financing, and risk tolerance.</div>
+    <div class="f-credit">Prepared by Woolcott Real Estate &nbsp;·&nbsp; woolcott.ca &nbsp;·&nbsp; RE/MAX Escarpment Realty Inc.</div>
+  </div>
+</div>
+
+
+<script>
+// ── PRICE COMPARISON CHART ──────────────────────────────
+const priceCtx = document.getElementById('priceChart').getContext('2d');
+new Chart(priceCtx, {
+  type: 'bar',
+  data: {
+    labels: ['582 Cedar', '877 Kingsway', '587 Sharalin', '677 King Rd', '1050 Mohawk', '428 Hendrie', '549 Ann\n(List)'],
+    datasets: [{
+      label: 'Sold / List Price',
+      data: [1700000, 1700000, 1600000, 2195000, 1975000, 1600000, 1750000],
+      backgroundColor: [
+        '#1D2E5C','#1D2E5C','#1D2E5C','#1D2E5C','#1D2E5C','#1D2E5C',
+        '#27A8E0'
+      ],
+      borderRadius: 2,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      title: { display: true, text: 'Sold Prices vs. 549 Ann Ave (List)', font: { family: 'Montserrat', size: 13, weight: '700' }, color: '#1D2E5C', padding: { bottom: 16 } },
+      tooltip: {
+        backgroundColor: '#1A1A2E', titleColor: '#fff', bodyColor: '#27A8E0',
+        bodyFont: { family: 'Montserrat', size: 12 }, cornerRadius: 0,
+        callbacks: {
+          label: ctx => ' $' + ctx.raw.toLocaleString()
+        }
+      }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { family: 'Montserrat', size: 10 }, color: '#6B7A99' } },
+      y: {
+        grid: { color: 'rgba(26,26,30,0.07)' },
+        ticks: {
+          font: { family: 'Montserrat', size: 10 }, color: '#6B7A99',
+          callback: v => '$' + (v/1000000).toFixed(1) + 'M'
+        },
+        min: 1400000
+      }
+    }
+  }
+});
+
+// ── $/SQFT CHART ──────────────────────────────
+const psftCtx = document.getElementById('psftChart').getContext('2d');
+new Chart(psftCtx, {
+  type: 'bar',
+  data: {
+    labels: ['582 Cedar', '587 Sharalin', '677 King Rd', '1050 Mohawk', '428 Hendrie', '549 Ann\n(List)'],
+    datasets: [{
+      label: '$ per Sq Ft (AG)',
+      data: [745, 569, 1032, 731, 500, 590],
+      backgroundColor: [
+        '#1D2E5C','#1D2E5C','#1D2E5C','#1D2E5C','#1D2E5C',
+        '#27A8E0'
+      ],
+      borderRadius: 2,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      title: { display: true, text: '$ Per Sq Ft (AG) Comparison', font: { family: 'Montserrat', size: 13, weight: '700' }, color: '#1D2E5C', padding: { bottom: 16 } },
+      tooltip: {
+        backgroundColor: '#1A1A2E', titleColor: '#fff', bodyColor: '#27A8E0',
+        bodyFont: { family: 'Montserrat', size: 12 }, cornerRadius: 0,
+        callbacks: { label: ctx => ' $' + ctx.raw + '/sqft' }
+      }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { family: 'Montserrat', size: 10 }, color: '#6B7A99' } },
+      y: {
+        grid: { color: 'rgba(26,26,30,0.07)' },
+        ticks: { font: { family: 'Montserrat', size: 10 }, color: '#6B7A99', callback: v => '$' + v },
+        min: 400
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
