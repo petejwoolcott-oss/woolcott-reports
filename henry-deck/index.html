@@ -189,6 +189,42 @@
     letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:14px}
   .kicker .pulse{width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber)}
 
+  /* ---- extra chips ---- */
+  .chip.noted{background:var(--ink-3);color:var(--t1)} .chip.noted .dot{background:var(--t2)}
+
+  /* ---- architecture map ---- */
+  .maplegend{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:14px;font-size:12px;color:var(--t1)}
+  .maplegend .lg{display:flex;align-items:center;gap:7px}
+  .maplegend .lg i{width:16px;height:0;border-top:3px solid var(--green);border-radius:2px;display:inline-block}
+  .maplegend .w i{border-top-color:var(--amber)} .maplegend .p i{border-top-color:var(--blue);border-top-style:dashed}
+  .map-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,var(--ink-1),var(--ink-0));padding:26px 22px}
+  .map{display:grid;grid-template-columns:repeat(4,minmax(168px,1fr));gap:0;min-width:760px;align-items:start}
+  .mcol{padding:0 18px}
+  .mcol + .mcol{border-left:1px dashed var(--line-2)}
+  .mcol h4{font-family:var(--f-mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--amber);margin-bottom:15px;display:flex;align-items:center;gap:7px}
+  .mcol h4 b{color:var(--t2);font-weight:400;font-size:9px}
+  .node{background:var(--ink-2);border:1px solid var(--line);border-left:3px solid var(--line-2);border-radius:9px;padding:9px 12px;margin-bottom:9px}
+  .node.good{border-left-color:var(--green)} .node.watch{border-left-color:var(--amber)}
+  .node.plan{border-left-color:var(--blue);border-style:dashed;border-left-style:solid;opacity:.9}
+  .node b{font-size:12.5px;font-weight:600;display:block;line-height:1.3}
+  .node span{display:block;font-family:var(--f-mono);font-size:9.5px;color:var(--t2);margin-top:3px;letter-spacing:.02em}
+  .flowcap{text-align:center;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-top:16px}
+
+  /* ---- deep dive ---- */
+  .dd-domain{margin-bottom:12px;border:1px solid var(--line);border-radius:14px;background:var(--ink-1);overflow:hidden}
+  .dd-head{display:flex;align-items:center;gap:14px;padding:16px 20px;border-bottom:1px solid var(--line);background:var(--ink-2)}
+  .dd-head h3{font-size:15px}
+  .dd-head .dd-verd{margin-left:auto;font-family:var(--f-mono);font-size:11px;color:var(--amber)}
+  .dd-head .dd-n{font-family:var(--f-mono);font-size:11px;color:var(--t2)}
+  .dd-rows{padding:6px 8px}
+  .dd-row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:11px 12px;border-radius:9px;transition:background .13s}
+  .dd-row:hover{background:var(--ink-2)}
+  .dd-row:focus-visible{outline:2px solid var(--amber);outline-offset:-2px}
+  .dd-row .dd-t{font-size:13.5px;color:var(--t0);flex:1;min-width:0}
+  .dd-row .chip{flex:none}
+  .dd-row .arrow{color:var(--t2);font-family:var(--f-mono);font-size:12px;flex:none;transition:color .13s,transform .13s}
+  .dd-row:hover .arrow{color:var(--amber);transform:translateX(2px)}
+
   @media (max-width:900px){
     .rail{position:fixed;z-index:30;transform:translateX(-100%);transition:transform .25s}
     .rail.open{transform:none}
@@ -218,6 +254,9 @@
     <button class="nav" data-p="flight"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 12l19-9-9 19-2-8-8-2z"/></svg>Flight Plan<span class="ct">9</span></button>
     <button class="nav" data-p="crons"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Crons<span class="ct">32</span></button>
     <button class="nav" data-p="health"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Health</button>
+    <div class="navlab">Analysis</div>
+    <button class="nav" data-p="map"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="5" cy="6" r="2.4"/><circle cx="5" cy="18" r="2.4"/><circle cx="19" cy="12" r="2.4"/><path d="M7.4 6.6L16.6 11M7.4 17.4L16.6 13"/></svg>System Map</button>
+    <button class="nav" data-p="deepdive"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>Deep Dive<span class="ct">26</span></button>
     <div class="railfoot">OpenClaw v2026.6.11<br>Deck built Jul 2, 2026<br>32 live · 3 need eyes</div>
   </aside>
 
@@ -355,6 +394,64 @@
         <div class="panel"><div class="eyebrow" style="margin-bottom:12px">Exec policy</div><p style="margin:0;color:var(--t1);font-size:13.5px">Mode <b style="color:var(--t0)">ask</b> · allowlist for known scripts · inline-eval always prompts · approvals routed to your Discord DM · fallback <b style="color:var(--t0)">deny</b>. Henry can't edit its own guardrails — hard rule.</p></div>
         <div class="panel"><div class="eyebrow" style="margin-bottom:12px">Channels</div><p style="margin:0;color:var(--t1);font-size:13.5px">Teams requires @mention · display-name trust off · Discord approvers = you only. Loosening the allowlist happens organically as you approve real commands.</p></div>
       </div>
+    </section>
+
+    <!-- ============ SYSTEM MAP ============ -->
+    <section class="page" id="map">
+      <div class="phead">
+        <div><h1>How Henry is wired</h1><p>The whole system, left to right: where messages come in, the core that routes and guards them, the brain that decides, and everything Henry can reach. Left border shows status.</p></div>
+      </div>
+      <div class="maplegend">
+        <div class="lg"><i></i>Solid / live</div>
+        <div class="lg w"><i></i>Watch — has a caveat</div>
+        <div class="lg p"><i></i>Planned — not built yet</div>
+      </div>
+      <div class="map-scroll">
+        <div class="map">
+          <div class="mcol">
+            <h4>Inbound <b>signals</b></h4>
+            <div class="node good"><b>Discord</b><span>primary · DMs + channels</span></div>
+            <div class="node good"><b>MS Teams</b><span>@mention only now</span></div>
+            <div class="node good"><b>Crons ×32</b><span>scheduled jobs</span></div>
+            <div class="node good"><b>Heartbeat</b><span>every 3h (was hourly)</span></div>
+          </div>
+          <div class="mcol">
+            <h4>Core <b>gateway</b></h4>
+            <div class="node good"><b>Gateway :18789</b><span>loopback + token auth</span></div>
+            <div class="node good"><b>Exec gate</b><span>allowlist → your Discord</span></div>
+            <div class="node good"><b>Secrets store</b><span>36 keys, off-workspace</span></div>
+            <div class="node good"><b>Memory</b><span>3-layer + Mistral search</span></div>
+            <div class="node good"><b>Backups</b><span>nightly → D: drive</span></div>
+          </div>
+          <div class="mcol">
+            <h4>The <b>brain</b></h4>
+            <div class="node good"><b>Henry</b><span>client-reports agent</span></div>
+            <div class="node good"><b>Model routing</b><span>Haiku → Sonnet → Opus</span></div>
+            <div class="node good"><b>Skills + scripts</b><span>the workspace toolkit</span></div>
+          </div>
+          <div class="mcol">
+            <h4>Tools &amp; <b>data</b></h4>
+            <div class="node good"><b>Outlook</b><span>email + cal · COM, no token</span></div>
+            <div class="node good"><b>MS Graph app</b><span>Teams reads · never expires</span></div>
+            <div class="node good"><b>Capsule CRM</b><span>agent roster</span></div>
+            <div class="node watch"><b>DocuSign</b><span>offers · validator coming</span></div>
+            <div class="node good"><b>Garmin</b><span>training data</span></div>
+            <div class="node good"><b>Cloudflare Pages</b><span>client reports + this deck</span></div>
+            <div class="node good"><b>Meta Ads</b><span>PPC insights</span></div>
+            <div class="node plan"><b>Follow Up Boss</b><span>pipeline — planned</span></div>
+            <div class="node plan"><b>MLS / Sierra</b><span>listings — planned</span></div>
+          </div>
+        </div>
+        <div class="flowcap">signal → guard → decide → act</div>
+      </div>
+    </section>
+
+    <!-- ============ DEEP DIVE ============ -->
+    <section class="page" id="deepdive">
+      <div class="phead">
+        <div><h1>The full deep dive</h1><p>The complete audit across security, cost, memory, reliability, and strategy — every finding, its status now, and my recommendation. Tap any line for the detail.</p></div>
+      </div>
+      <div id="dd-body"></div>
     </section>
 
   </div></main>
@@ -519,6 +616,55 @@ function fill(el,arr,set){let n=1;document.getElementById(el).innerHTML=arr.map(
 fill('grid-sec',shipped.sec,'ship');fill('grid-rel',shipped.rel,'ship');fill('grid-intel',shipped.intel,'ship');
 fill('grid-big',flight.big,'fl');fill('grid-build',flight.build,'fl');fill('grid-clean',flight.clean,'fl');
 
+// ---------- DEEP DIVE ----------
+const CMAP={fx:['shipped','Fixed'],gd:['shipped','Solid'],pt:['needs','Partial'],nt:['noted','Noted'],dc:['noted','Skipped'],pl:['planned','Planned'],gr:['needs','Greenlit']};
+function chip2(st){const c=CMAP[st]||CMAP.nt;return `<span class="chip ${c[0]}"><span class="dot"></span>${c[1]}</span>`;}
+const deepdive=[
+ {dom:"Security",verdict:"Foundation now solid",items:[
+   {id:"dd-exec",t:"Unrestricted command execution + open channels",st:"fx",detail:"Henry ran any shell command with no approval (<b>exec: full</b>), while 40 agents could DM it and documents can carry hidden instructions — a clean path from a chat message to running code on your PC.",rec:"Fixed: exec is now an allowlist that prompts your Discord on anything new, and you chose to loosen it to your safe toolkit. Don't revert to full."},
+   {id:"dd-vault",t:"Plaintext master-key file (TOOLS.md)",st:"fx",detail:"One file held the GitHub PAT, Meta token, DocuSign production keys, Graph refresh tokens, and passwords — and it synced to Google Drive and got pasted into model context.",rec:"Fixed: 36 secrets moved to an external store; instruction files hold pointers only. Still to do: rotate the 4 tokens that were exposed."},
+   {id:"dd-exfil",t:"Credentials leaving the machine",st:"pt",detail:"Beyond the file itself, the workspace synced to Drive, memory embedded through Mistral, and cron prompts pasted tokens into LLM calls — credentials left the box several ways.",rec:"Secrets no longer travel. The Drive backup still carries other workspace data — trimming it is the remaining piece."},
+   {id:"dd-pii",t:"Client PII sitting unencrypted",st:"pt",detail:"A driver's licence image, signed offers, and client PDFs sat in the workspace and swept into the offsite Drive backup.",rec:"Tighten the Drive sync so client documents stay local, and turn on BitLocker for the D: drive. Waiting on your go."},
+   {id:"dd-reuse",t:"Reused passwords",st:"dc",detail:"The same password covered Garmin and OneHome; qBittorrent used a weak default.",rec:"You opted to skip this — noted. Worth revisiting if either service is ever exposed."},
+   {id:"dd-good",t:"The base was already strong",st:"gd",detail:"Loopback-only gateway, token auth, Tailscale off, sensible denyCommands, media host allowlists, the impersonation hard rule, and local backups were all in place.",rec:"Kept intact — the hardening built on top of a genuinely sound foundation."}
+ ]},
+ {dom:"Token efficiency",verdict:"~94% leaner",items:[
+   {id:"dd-monitor",t:"5-minute monitor burning ~91% of cron spend",st:"fx",detail:"The Offers & Deals monitor spun up a model session every 5 minutes — 2,016 runs a week, all failing on a dead token.",rec:"Killed it and replaced with the weekly deal tally on a never-expiring app token. This one change did most of the savings."},
+   {id:"dd-scriptturn",t:"Model turns doing plain script work",st:"pt",detail:"About half the crons were 'run a script, stay silent' — paying model tokens to boot a session just to shell out.",rec:"Moved the Ghent check to Task Scheduler. The Fit/duty consolidation will convert more of these."},
+   {id:"dd-hb",t:"Hourly heartbeat against an empty file",st:"fx",detail:"The heartbeat woke 16×/day to check a HEARTBEAT.md that had no reminders in it — 112 no-op sessions a week.",rec:"Now every 3 hours with a real checklist (imminent calendar + urgent unread), both on the free COM path."},
+   {id:"dd-dash",t:"Nightly LLM dashboard rewrite",st:"nt",detail:"A model rewrites an HTML status page every night — work a template could do for free.",rec:"Low priority; convert to a templated fill when we do the lean pass."},
+   {id:"dd-routing",t:"Model routing was already smart",st:"gd",detail:"Haiku-by-default with clear escalation, cache-TTL context pruning, and a 40K memory flush were all in place.",rec:"Kept — your cost instincts here were ahead of most setups."}
+ ]},
+ {dom:"Memory architecture",verdict:"Good design, some drift",items:[
+   {id:"dd-mem3",t:"Three-layer memory design",st:"gd",detail:"A lean index (MEMORY.md) over domain files over daily logs, with semantic search and weekly distillation — genuinely well thought out.",rec:"Kept as-is. This is better than most professional deployments."},
+   {id:"dd-memidx",t:"MEMORY.md drifting from 'lean index'",st:"nt",detail:"The milestones section grew into a 30-entry log, so the index that loads every session got heavy.",rec:"Trim it back to an index during a distillation pass; push detail to domain files."},
+   {id:"dd-retention",t:"Daily-log retention not enforced",st:"nt",detail:"The rule says keep 14 days, but February logs are still there — distillation promotes but never archives.",rec:"Have the distillation loop archive anything older than 14 days."},
+   {id:"dd-agentsdup",t:"Duplicated block in AGENTS.md",st:"nt",detail:"The memory-rules lines appear twice — a sign of the append-without-checking habit the file itself warns against.",rec:"Dedupe it; quick cleanup."},
+   {id:"dd-state",t:"State JSON living inside memory/",st:"nt",detail:"Half a megabyte of non-prose state (outlook-state, appointment tallies) sits in the folder the search index reads.",rec:"Move state to its own folder so memory/ stays prose the search can use."}
+ ]},
+ {dom:"Crons & reliability",verdict:"Outage class eliminated",items:[
+   {id:"dd-tokenexp",t:"Token expiry — the #1 recurring outage",st:"fx",detail:"Three separate outages were all the same failure: OAuth tokens dying of inactivity, discovered only after they broke.",rec:"Fixed at the root: email/calendar moved to token-free COM, and remaining tokens now auto-rotate on use."},
+   {id:"dd-sprawl",t:"Cron sprawl and dead jobs",st:"fx",detail:"About 25 dead entries cluttered the list, and a TEST EMAIL job was still live and set to fire again next March.",rec:"Removed 14 (the 5-min monitor, TEST EMAIL, and 11 dead one-offs). The list is now readable."},
+   {id:"dd-stampede",t:"Monday 9am stampede",st:"nt",detail:"Coach scan, memory distillation, and the PPC report all fire at exactly 9:00.",rec:"Stagger them during the consolidation pass — cheap, prevents contention."},
+   {id:"dd-silent",t:"Failures don't reliably reach you",st:"pt",detail:"Erroring crons failed quietly — you only noticed because you happened to look.",rec:"OpenClaw has per-job failure alerts; wire them to your Discord so any consecutive failure pings you."},
+   {id:"dd-sigkill",t:"SIGKILL on big batches",st:"pt",detail:"The Work Drive indexer and full appointment tally get killed at the ~150s exec timeout on large data.",rec:"The appointment tally is fixed via the weekly window; the Work Drive indexer still needs incremental indexing."},
+   {id:"dd-validator2",t:"Your costliest mistakes are deterministic",st:"gr",detail:"A Saturday closing date, a wrong commission, a Form 326 left in — every one is a checkable rule, currently left to Henry's memory.",rec:"The offer validator encodes them as a hard pre-send gate. Greenlit — next to build."}
+ ]},
+ {dom:"The strategic build-out",verdict:"Where the leverage is",items:[
+   {id:"dd-fub",t:"Follow Up Boss integration",st:"pl",detail:"Your #1 roadmap item since February, and the data source that unlocks pipeline summaries, ISA tracking, and lead routing.",rec:"Build first tomorrow — most other business intelligence is blocked on it."},
+   {id:"dd-mls",t:"MLS data via Sierra",st:"pl",detail:"Live MLS access lets Henry generate real CMAs, market stats, and auto-configured buyer searches.",rec:"Access first, code second — confirm the Sierra route, then it builds fast on the report system you already have."},
+   {id:"dd-hvt",t:"Home-value lead magnet",st:"pl",detail:"Rebuild the instant home-value tool into a landing page that actually converts — ideally MLS-backed.",rec:"Worth a real design pass; this is the 'make Apple jealous' piece. Feeds leads straight into FUB."},
+   {id:"dd-recruit",t:"Recruiting engine",st:"pl",detail:"You already have the pieces — Cheplak voice training, the coach scanner, Opus drafting. Close the loop with agent-movement scanning and queued outreach.",rec:"Recruiting is your actual role; this is where Henry compounds hardest."},
+   {id:"dd-scorecard",t:"Weekly business scorecard",st:"pl",detail:"Appointments, PPC spend, pipeline, and recruiting in one Monday snapshot so you start the week from data.",rec:"Builds naturally on FUB plus the deal + appointment tally already live."},
+   {id:"dd-bq",t:"Boston-qualifier training system",st:"pl",detail:"Turn 'Henry builds a training plan' into a feedback loop that reads your actual Garmin load and adjusts weekly through November.",rec:"You went 3:36 to 3:13 in one block — a real feedback loop helps close the last gap to 2:55."}
+ ]}
+];
+document.getElementById('dd-body').innerHTML=deepdive.map(d=>{
+  const n=d.items.length;
+  return `<div class="dd-domain"><div class="dd-head"><h3>${d.dom}</h3><span class="dd-n">${n} findings</span><span class="dd-verd">${d.verdict}</span></div>
+  <div class="dd-rows">${d.items.map(it=>`<button class="dd-row" data-id="${it.id}"><span class="dd-t">${it.t}</span>${chip2(it.st)}<span class="arrow">→</span></button>`).join('')}</div></div>`;
+}).join('');
+
 document.getElementById('cron-bad').innerHTML=cronsBad.map(r=>`<tr><td class="name">${r[0]}</td><td class="sched">${r[1]}</td><td>${S.br}</td><td class="note">${r[3]}</td></tr>`).join('');
 document.getElementById('cron-ok').innerHTML=cronsOk.map(r=>`<tr><td class="name">${r[0]}</td><td class="sched">${r[1]}</td><td><span class="chip shipped"><span class="dot"></span>OK</span></td><td class="note">${r[2]}</td></tr>`).join('');
 
@@ -532,9 +678,10 @@ document.getElementById('menubtn').addEventListener('click',()=>document.getElem
 // ---------- drawer ----------
 const idx={};[...shipped.sec,...shipped.rel,...shipped.intel].forEach(o=>idx[o.id]={...o,ship:1});
 [...flight.big,...flight.build,...flight.clean].forEach(o=>idx[o.id]=o);
+deepdive.forEach(d=>d.items.forEach(o=>idx[o.id]=o));
 const drawer=document.getElementById('drawer'),scrim=document.getElementById('scrim');
 function open(id){const o=idx[id];if(!o)return;
-  document.getElementById('dChip').innerHTML=S[o.st||'sh'];
+  document.getElementById('dChip').innerHTML=CMAP[o.st]?chip2(o.st):S[o.st||'sh'];
   document.getElementById('dTitle').textContent=o.t;
   document.getElementById('dMeta').innerHTML=(o.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('');
   document.getElementById('dBody').innerHTML=`
