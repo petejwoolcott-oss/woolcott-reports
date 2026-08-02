@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Opinion of Value — 983 Garden Lane, Millgrove</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2332;
+    --slate: #2d3a4a;
+    --gold: #c8a45c;
+    --light: #f5f2ec;
+    --white: #ffffff;
+    --muted: #7a8794;
+    --green: #2d7a4f;
+    --red: #a03030;
+    --border: #ddd8cf;
+    --blue: #2a5f8f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10pt;
+    background: var(--light);
+    color: var(--navy);
+    line-height: 1.45;
+  }
+
+  .page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 18px 30px 28px;
+  }
+
+  /* BANNER */
+  .banner {
+    background: var(--navy);
+    padding: 16px 30px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+  }
+
+  .banner-left h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 19pt;
+    color: var(--white);
+    line-height: 1.1;
+  }
+
+  .banner-left .sub {
+    font-size: 8.5pt;
+    color: var(--gold);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 5px;
+  }
+
+  .banner-right {
+    text-align: right;
+    font-size: 8.5pt;
+    color: var(--muted);
+    line-height: 1.8;
+    white-space: nowrap;
+  }
+
+  .banner-right strong { color: var(--gold); font-weight: 600; }
+
+  .gold-strip { background: var(--gold); height: 3px; }
+
+  /* NOTICE BOX */
+  .notice {
+    background: rgba(42, 95, 143, 0.08);
+    border-left: 3px solid var(--blue);
+    padding: 8px 12px;
+    font-size: 8.5pt;
+    color: var(--slate);
+    margin: 14px 0 6px;
+    line-height: 1.5;
+  }
+
+  /* SECTION HEADINGS */
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 12.5pt;
+    color: var(--navy);
+    border-bottom: 1.5px solid var(--gold);
+    padding-bottom: 4px;
+    margin: 16px 0 9px;
+  }
+
+  h3 {
+    font-size: 8.5pt;
+    font-weight: 600;
+    color: var(--slate);
+    margin: 12px 0 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+
+  p.note {
+    font-size: 8.5pt;
+    color: var(--slate);
+    margin-bottom: 7px;
+    line-height: 1.5;
+  }
+
+  .caption { font-size: 7.5pt; color: var(--muted); margin: -6px 0 8px; }
+
+  /* TABLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+    margin-bottom: 10px;
+    table-layout: fixed;
+  }
+
+  th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 5px 7px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 8pt;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    vertical-align: top;
+  }
+
+  td {
+    padding: 4px 7px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+  }
+
+  tr:nth-child(even) td { background: rgba(255,255,255,0.6); }
+  tr:nth-child(odd) td { background: rgba(245,242,236,0.4); }
+
+  .label-col { font-weight: 500; color: var(--slate); }
+  .highlight-row td { background: rgba(200,164,92,0.15) !important; font-weight: 600; }
+  .total-row td { background: var(--navy) !important; color: var(--white) !important; font-weight: 600; }
+  .active-row td { background: rgba(42,95,143,0.07) !important; }
+  .dated-row td { background: rgba(122,135,148,0.08) !important; color: var(--muted); }
+
+  .adj-pos { color: var(--green); font-weight: 600; }
+  .adj-neg { color: var(--red); font-weight: 600; }
+  .adj-neutral { color: var(--muted); }
+
+  /* PROPERTY OVERVIEW */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .ov-item {
+    display: flex;
+    gap: 6px;
+    padding: 4px 9px;
+    font-size: 9pt;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ov-item:nth-child(odd) { background: var(--white); }
+  .ov-item:nth-child(even) { background: rgba(245,242,236,0.6); }
+  .ov-item.full { grid-column: 1 / -1; }
+
+  .ov-label {
+    color: var(--muted);
+    font-weight: 500;
+    min-width: 110px;
+    flex-shrink: 0;
+    font-size: 8.5pt;
+  }
+
+  /* VALUE BOXES */
+  .value-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin: 12px 0 10px;
+  }
+
+  .vbox {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 12px;
+    text-align: center;
+  }
+
+  .vbox.primary { background: var(--navy); border-color: var(--navy); }
+
+  .vbox-label {
+    font-size: 7.5pt;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 3px;
+  }
+
+  .vbox.primary .vbox-label { color: var(--gold); }
+
+  .vbox-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 15pt;
+    color: var(--navy);
+  }
+
+  .vbox.primary .vbox-num { color: var(--white); }
+
+  /* OUTBUILDING BOXES */
+  .ob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 8px 0;
+  }
+
+  .ob-box {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 10px;
+    background: var(--white);
+    font-size: 9pt;
+  }
+
+  .ob-box h4 { font-size: 9pt; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
+  .ob-box .ob-val { color: var(--green); font-weight: 600; font-size: 9.5pt; }
+  .ob-box p { color: var(--slate); font-size: 8.5pt; line-height: 1.4; margin-top: 3px; }
+
+  /* FOOTNOTE */
+  .footnote {
+    font-size: 7.5pt;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    margin-top: 14px;
+    padding-top: 8px;
+    line-height: 1.6;
+  }
+
+  @media print {
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+    body { background: var(--light); }
+    .page { padding: 12px 22px 18px; }
+    .banner { padding: 12px 22px 10px; }
+    h2 { margin-top: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- BANNER -->
+<div class="banner">
+  <div class="banner-left">
+    <h1>983 Garden Lane, Millgrove</h1>
+    <div class="sub">Opinion of Value &nbsp;·&nbsp; Confidential</div>
+  </div>
+  <div class="banner-right">
+    <strong>Woolcott Real Estate</strong><br>
+    Todd Osborne, Sales Representative<br>
+    July 20, 2026
+  </div>
+</div>
+<div class="gold-strip"></div>
+
+<div class="page">
+
+  <div class="notice">
+    This document constitutes an opinion of value prepared by a licensed real estate broker based on current MLS comparable sales. It is not a formal appraisal by a designated AACI/CRA appraiser and should be supplemented by a certified appraisal if required for legal purposes.
+  </div>
+
+
+  <!-- SUBJECT PROPERTY -->
+  <h2>Subject Property</h2>
+  <div class="overview-grid">
+    <div class="ov-item"><span class="ov-label">Address</span><span>983 Garden Lane, Millgrove</span></div>
+    <div class="ov-item"><span class="ov-label">Municipality</span><span>Flamborough, City of Hamilton</span></div>
+    <div class="ov-item"><span class="ov-label">Style</span><span>Bungalow with primary suite above garage</span></div>
+    <div class="ov-item"><span class="ov-label">Above Grade SqFt</span><span>1,700 sqft</span></div>
+    <div class="ov-item"><span class="ov-label">Bedrooms</span><span>4</span></div>
+    <div class="ov-item"><span class="ov-label">Bathrooms</span><span>3 full</span></div>
+    <div class="ov-item"><span class="ov-label">Lot</span><span>2 acres, A1 / S1 zoning</span></div>
+    <div class="ov-item"><span class="ov-label">Garage</span><span>Single car attached</span></div>
+    <div class="ov-item"><span class="ov-label">Kitchen</span><span>New — updated</span></div>
+    <div class="ov-item"><span class="ov-label">Bathrooms</span><span>Updated throughout</span></div>
+    <div class="ov-item full"><span class="ov-label">Outbuildings</span><span>Two workshops (25×30 ft each): both with power, one heated; one workshop includes party room with 2-pc bath, wet bar, and deck. Above-ground pool adjacent to party room. Quonset building (additional covered storage).</span></div>
+    <div class="ov-item full"><span class="ov-label">Services</span><span>Drilled well, septic — consistent with all properties on Garden Lane</span></div>
+  </div>
+
+
+  <!-- COMPARABLES -->
+  <h2>Comparable Sales — Garden Lane</h2>
+  <table>
+    <colgroup>
+      <col style="width:20%">
+      <col style="width:11%">
+      <col style="width:9%">
+      <col style="width:9%">
+      <col style="width:9%">
+      <col style="width:7%">
+      <col style="width:35%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>Sale / List Price</th>
+        <th>Date / DOM</th>
+        <th>SqFt AG</th>
+        <th>Beds / Baths</th>
+        <th>Acres</th>
+        <th>Key Features</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>983 Garden Lane</strong><br><em>Subject</em></td>
+        <td>—</td>
+        <td>—</td>
+        <td>1,700</td>
+        <td>4 / 3F</td>
+        <td>2.0</td>
+        <td>Bungalow, new kitchen, 1-car garage, A1/S1 zoning, well, septic, two workshops + Quonset + party room + pool</td>
+      </tr>
+      <tr>
+        <td>961 Garden Lane<br><em>Millgrove</em></td>
+        <td style="color:var(--green)"><strong>$1,023,000</strong><br><small>LP $1,049,900</small></td>
+        <td>Sep 2025<br>DOM 11</td>
+        <td>1,210</td>
+        <td>3 / 1F</td>
+        <td>0.5</td>
+        <td>3-level sidesplit (1969), 2-car attached garage, well, septic. Small lot. Used for lower bracket only.</td>
+      </tr>
+      <tr>
+        <td>973 Garden Lane<br><em>Flamborough</em></td>
+        <td style="color:var(--green)"><strong>$1,240,000</strong><br><small>LP $1,370,000</small></td>
+        <td>Jul 2025<br>DOM 40</td>
+        <td>1,914</td>
+        <td>4 / 2F</td>
+        <td>3.5</td>
+        <td>Bungalow (1930), updated kitchen, A1/S1 zoning, 4-car detached garage, 1,000 sqft barn/studio with gas fireplace + loft, well, septic. <strong>Primary anchor.</strong></td>
+      </tr>
+      <tr>
+        <td>979 Garden Lane<br><em>Flamborough</em></td>
+        <td style="color:var(--green)"><strong>$2,085,000</strong><br><small>LP $2,189,900</small></td>
+        <td>Apr 2026<br>DOM 78 / CDOM 156</td>
+        <td>2,196<br><small>(+2,196 BG)</small></td>
+        <td>6 (3+3) / 5</td>
+        <td>2.12</td>
+        <td>Bungalow, fully renovated, A1/S1 zoning, 1,500 sqft heated workshop, full in-law suite in basement, above-ground pool, hot tub, 2-car garage. <strong>Secondary anchor.</strong></td>
+      </tr>
+      <tr class="active-row">
+        <td>976 Garden Lane ★<br><em>Hamilton</em></td>
+        <td style="color:var(--blue)"><strong>$1,775,000</strong><br><small>Reduced from $1,925,000</small></td>
+        <td>Active<br>CDOM 187</td>
+        <td>3,100<br><small>(+800 BG)</small></td>
+        <td>3 / 2F+2H</td>
+        <td>1.0</td>
+        <td>Custom rebuilt 2010, 3,900 total sqft, S1 zoning only, cedar shake roof, 2-car garage. Unsold after 187 days — sets ceiling for current buyer appetite.</td>
+      </tr>
+      <tr class="dated-row">
+        <td>997 Garden Lane<br><em>Millgrove</em></td>
+        <td><strong>$1,800,000</strong><br><small>LP $1,999,000</small></td>
+        <td>Mar 2021<br>DOM 25</td>
+        <td>2,221</td>
+        <td>4 / 2F</td>
+        <td>12.5</td>
+        <td>A1 zoning, 2 legal residences, 3 large outbuildings (26×42, 24×52, 50×24 all w/hydro). 2021 peak market — excluded from analysis.</td>
+      </tr>
+      <tr class="dated-row">
+        <td>1005 Garden Lane<br><em>Millgrove</em></td>
+        <td><strong>$1,325,000</strong><br><small>LP $1,149,000</small></td>
+        <td>Jul 2021<br>DOM 2</td>
+        <td>2,481</td>
+        <td>4 / 2F+1H</td>
+        <td>0.5</td>
+        <td>4-level sidesplit, 2-car garage, 0.5 acres. 2021 peak market — excluded from analysis.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="caption">★ Active listing shown for ceiling reference only. Grey rows excluded from value analysis — 2021 peak market is not reflective of 2026 conditions.</p>
+
+
+  <!-- CMA ADJUSTMENTS -->
+  <h2>CMA Anchor Adjustments</h2>
+
+  <h3>Primary Anchor — 973 Garden Lane &nbsp;·&nbsp; Sold $1,240,000 — July 2025</h3>
+  <p class="note">Best comparable for style and zoning (bungalow, A1/S1, rural, well/septic). Slightly larger sqft, more land, and a 4-car garage give 973 an advantage over the subject; the subject's outbuilding package and updated condition work in its favour.</p>
+  <table>
+    <colgroup>
+      <col style="width:28%">
+      <col style="width:26%">
+      <col style="width:27%">
+      <col style="width:19%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>973 Garden Lane</th>
+        <th>983 Garden Lane (Subject)</th>
+        <th>Adjustment</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="label-col">Market Time</td><td>July 2025</td><td>July 2026</td><td class="adj-pos">+$30,000</td></tr>
+      <tr><td class="label-col">Above Grade SqFt</td><td>1,914 sqft</td><td>1,700 sqft</td><td class="adj-neg">−$20,000</td></tr>
+      <tr><td class="label-col">Bathrooms</td><td>2 full</td><td>3 full</td><td class="adj-pos">+$15,000</td></tr>
+      <tr><td class="label-col">Garage</td><td>4-car detached</td><td>1-car attached</td><td class="adj-neg">−$45,000</td></tr>
+      <tr><td class="label-col">Acreage</td><td>3.5 acres</td><td>2.0 acres</td><td class="adj-neg">−$30,000</td></tr>
+      <tr><td class="label-col">Outbuildings</td><td>1,000 sqft barn/studio (gas FP + loft)</td><td>Two 25×30 workshops + Quonset + party room/2-pc bath/wet bar/deck/pool</td><td class="adj-pos">+$80,000</td></tr>
+      <tr><td class="label-col">Age / Condition</td><td>1930 build (updated)</td><td>New kitchen, updated baths</td><td class="adj-pos">+$20,000</td></tr>
+      <tr class="highlight-row"><td class="label-col">Net Adjustment</td><td colspan="2"></td><td class="adj-pos">+$50,000</td></tr>
+      <tr class="total-row"><td>Indicated Value</td><td>$1,240,000</td><td></td><td>$1,290,000</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Secondary Anchor — 979 Garden Lane &nbsp;·&nbsp; Sold $2,085,000 — April 2026</h3>
+  <p class="note">Most recent sale on the street and near-identical acreage. However, 979 is dramatically more finished (4,392 total sqft; fully finished basement with complete in-law suite) and was renovated to a luxury standard. Applied at lower weight as a ceiling reference.</p>
+  <table>
+    <colgroup>
+      <col style="width:28%">
+      <col style="width:26%">
+      <col style="width:27%">
+      <col style="width:19%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>979 Garden Lane</th>
+        <th>983 Garden Lane (Subject)</th>
+        <th>Adjustment</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="label-col">AG SqFt</td><td>2,196 sqft</td><td>1,700 sqft</td><td class="adj-neg">−$100,000</td></tr>
+      <tr><td class="label-col">Finished Basement</td><td>2,196 sqft fully finished + complete in-law suite</td><td>Likely minimal / unfinished</td><td class="adj-neg">−$200,000</td></tr>
+      <tr><td class="label-col">Garage</td><td>2-car attached</td><td>1-car attached</td><td class="adj-neg">−$15,000</td></tr>
+      <tr><td class="label-col">Outbuildings</td><td>1,500 sqft heated workshop</td><td>Two workshops + Quonset + party room/wet bar/pool</td><td class="adj-pos">+$30,000</td></tr>
+      <tr><td class="label-col">Finish Level</td><td>High-end full renovation (coffered ceilings, etc.)</td><td>New kitchen, updated baths</td><td class="adj-neg">−$20,000</td></tr>
+      <tr class="highlight-row"><td class="label-col">Net Adjustment</td><td colspan="2"></td><td class="adj-neg">−$305,000</td></tr>
+      <tr class="total-row"><td>Indicated Value</td><td>$2,085,000</td><td></td><td>$1,780,000</td></tr>
+    </tbody>
+  </table>
+
+
+  <!-- BLENDED VALUE -->
+  <h2>Market Value Conclusion</h2>
+
+  <table style="margin-bottom:10px">
+    <colgroup>
+      <col style="width:38%">
+      <col style="width:17%">
+      <col style="width:12%">
+      <col style="width:33%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Anchor</th>
+        <th>Indicated Value</th>
+        <th>Weight</th>
+        <th>Rationale</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>973 Garden Lane — bungalow, A1/S1, similar style</td>
+        <td>$1,290,000</td>
+        <td>70%</td>
+        <td>Most comparable in style, zoning, and general configuration</td>
+      </tr>
+      <tr>
+        <td>979 Garden Lane — same street, same acreage (2026)</td>
+        <td>$1,780,000</td>
+        <td>30%</td>
+        <td>Most recent sale on the street; ceiling reference due to larger scale</td>
+      </tr>
+      <tr class="total-row">
+        <td>Blended Indicated Value (70/30)</td>
+        <td>$1,437,000</td>
+        <td>—</td>
+        <td>Rounded to $1,350,000 reflecting soft luxury demand (976 Garden Lane, 187 CDOM) and limited buyer pool above $1.4M on this street</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="note"><strong>Bracketing check:</strong> 961 Garden Lane (1,210 sqft sidesplit, 0.5 acres) sold at $1,023,000 in Sep 2025 — sets the absolute floor. 976 Garden Lane (3,100 AG sqft, unsold at $1,775,000 after 187 days) sets the current market ceiling for buyer appetite on this street. The subject at 1,700 sqft with a strong outbuilding package sits comfortably between these markers.</p>
+
+  <div class="value-grid">
+    <div class="vbox">
+      <div class="vbox-label">Market Value Low</div>
+      <div class="vbox-num">$1,275,000</div>
+    </div>
+    <div class="vbox">
+      <div class="vbox-label">Market Value High</div>
+      <div class="vbox-num">$1,400,000</div>
+    </div>
+    <div class="vbox primary">
+      <div class="vbox-label">Opinion of Value</div>
+      <div class="vbox-num">$1,350,000</div>
+    </div>
+  </div>
+
+
+  <!-- OUTBUILDING CONTRIBUTION -->
+  <h2>Outbuilding Contribution to Value</h2>
+  <p class="note">Rural buyers generally discount outbuilding values relative to their construction cost — maintenance, insurance, and utility obligations transfer with the property. The following estimates reflect market contribution, not replacement cost.</p>
+
+  <div class="ob-grid">
+    <div class="ob-box">
+      <h4>Workshop 1 — 25×30 ft (750 sqft) — Heated + Power</h4>
+      <div class="ob-val">$60,000 – $80,000</div>
+      <p>Heated and powered — the most functional and versatile structure. Includes party room, 2-pc bathroom, wet bar, and deck with above-ground pool. Effectively a secondary recreation and entertainment space.</p>
+    </div>
+    <div class="ob-box">
+      <h4>Workshop 2 — 25×30 ft (750 sqft) — Power Only</h4>
+      <div class="ob-val">$20,000 – $30,000</div>
+      <p>Powered but unheated — suited for storage, seasonal use, or hobbyist workspace. Solid functional value for rural buyers with equipment, vehicles, or materials storage needs.</p>
+    </div>
+    <div class="ob-box">
+      <h4>Quonset Building</h4>
+      <div class="ob-val">$10,000 – $20,000</div>
+      <p>Provides additional covered storage capacity. Exact contribution dependent on size, condition, and whether it has power. Valued conservatively pending inspection of structure.</p>
+    </div>
+    <div class="ob-box">
+      <h4>Above-Ground Pool</h4>
+      <div class="ob-val">$5,000 – $8,000</div>
+      <p>Considered personal property in most jurisdictions. As a fixture attached to the deck it has minimal real property value. Seasonal asset — limited year-round utility in Ontario climate.</p>
+    </div>
+  </div>
+
+  <table style="margin-top:10px">
+    <colgroup>
+      <col style="width:50%">
+      <col style="width:25%">
+      <col style="width:25%">
+    </colgroup>
+    <thead>
+      <tr><th>Component</th><th>Low Estimate</th><th>High Estimate</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Workshop 1 (heated + power + party room/bath/wet bar/deck)</td><td>$60,000</td><td>$80,000</td></tr>
+      <tr><td>Workshop 2 (power only)</td><td>$20,000</td><td>$30,000</td></tr>
+      <tr><td>Quonset building</td><td>$10,000</td><td>$20,000</td></tr>
+      <tr><td>Above-ground pool (as fixture)</td><td>$5,000</td><td>$8,000</td></tr>
+      <tr class="total-row"><td><strong>Total Outbuilding Contribution</strong></td><td><strong>$95,000</strong></td><td><strong>$138,000</strong></td></tr>
+    </tbody>
+  </table>
+
+  <p class="note" style="margin-top:8px">Without the outbuilding complex, the estimated market value of the house, single-car garage, and 2-acre lot would be approximately <strong>$1,100,000 – $1,175,000</strong> based on the 973 Garden Lane comparable adjusted for sqft, lot size, and garage differences.</p>
+
+
+  <div class="footnote">
+    Comparables sourced from Cornerstone Association of REALTORS® / CoreLogic Matrix MLS as of July 20, 2026. Information deemed reliable but not guaranteed. This opinion of value is prepared for the exclusive use of the named client and is not to be relied upon by any other party or for any other purpose. &nbsp;·&nbsp; Prepared by <strong>Todd Osborne, Sales Representative</strong> — Woolcott Real Estate, RE/MAX Escarpment Realty Inc., Brokerage
+  </div>
+
+</div>
+</body>
+</html>
