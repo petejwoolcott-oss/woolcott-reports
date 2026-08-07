@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Valuation & Sale Strategy — 1354 No 1 Side Road, Burlington</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #1a2332; --slate: #2d3a4a; --gold: #c8a45c; --light: #f5f2ec;
+    --white: #ffffff; --muted: #7a8794; --green: #2d7a4f; --red: #a03030;
+    --amber: #b07830; --border: #ddd8cf;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--light); color: var(--navy); font-size: 13.5px; line-height: 1.6; }
+  h1, h2, h3, h4, .serif { font-family: 'DM Serif Display', serif; }
+
+  /* HEADER */
+  .page-header { background: var(--navy); }
+  .header-top { background: var(--gold); padding: 8px 40px; display: flex; justify-content: space-between; align-items: center; }
+  .header-top .brokerage { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); }
+  .header-top .report-type { font-size: 11px; color: var(--navy); font-weight: 500; }
+  .header-main { padding: 26px 40px 22px; }
+  .header-main h1 { font-size: 26px; color: var(--white); margin-bottom: 4px; }
+  .header-main .subaddress { font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 14px; }
+  .header-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.15); margin-top: 6px; border-radius: 4px; overflow: hidden; }
+  .hstat { background: rgba(255,255,255,0.06); padding: 12px 16px; }
+  .hstat .label { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
+  .hstat .value { font-size: 17px; font-weight: 600; color: var(--white); }
+  .hstat .value.alert { color: #e88080; }
+  .hstat .note { font-size: 10px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+  /* MAIN CONTENT */
+  .content { max-width: 1000px; margin: 0 auto; padding: 28px 24px 48px; }
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 12px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted); border-bottom: 2px solid var(--border); padding-bottom: 7px; margin-bottom: 14px; }
+
+  /* ALERT BOX */
+  .cdom-alert { background: #fff0f0; border: 1px solid #f0c0c0; border-left: 5px solid var(--red); padding: 16px 20px; border-radius: 4px; margin-bottom: 18px; }
+  .cdom-alert .alert-head { font-size: 14px; font-weight: 700; color: var(--red); margin-bottom: 6px; }
+  .cdom-alert p { font-size: 13px; color: var(--slate); line-height: 1.6; }
+
+  /* INTRO BOX */
+  .intro-box { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 16px 20px; border-radius: 4px; margin-bottom: 18px; }
+  .intro-box p { font-size: 13px; line-height: 1.65; color: var(--slate); margin-bottom: 10px; }
+  .intro-box p:last-child { margin-bottom: 0; }
+
+  /* SUBJECT GRID */
+  .overview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
+  .overview-card { background: var(--white); border: 1px solid var(--border); border-radius: 5px; padding: 13px 15px; }
+  .overview-card .oc-label { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+  .overview-card .oc-value { font-size: 14px; font-weight: 600; color: var(--navy); }
+  .overview-card .oc-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* PRICE HISTORY */
+  .price-history { background: var(--white); border: 1px solid var(--border); border-radius: 5px; overflow: hidden; margin-bottom: 18px; }
+  .ph-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .ph-table th { background: var(--slate); color: var(--white); padding: 8px 12px; text-align: left; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
+  .ph-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  .ph-table tr:last-child td { border-bottom: none; font-weight: 600; background: rgba(200,164,92,0.08); }
+  .ph-table tr:last-child td:first-child { border-left: 3px solid var(--gold); }
+  .ph-table .cut { color: var(--red); font-weight: 600; font-size: 11px; }
+  .ph-table .start { color: var(--muted); font-size: 11px; }
+
+  /* COMP TABLES */
+  .comp-table { width: 100%; border-collapse: collapse; font-size: 11.5px; background: var(--white); }
+  .comp-table th { background: var(--navy); color: var(--white); text-align: left; padding: 8px 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.3px; white-space: nowrap; }
+  .comp-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .comp-table tr:hover td { background: #f9f7f4; }
+  .comp-table tr.subject td { background: #f0f4fa; font-weight: 600; }
+  .comp-table tr.subject td:first-child { border-left: 4px solid var(--navy); }
+  .comp-table tr.cond td { background: #f8f5e8; }
+  .sp { color: var(--green); font-weight: 600; }
+  .lp { color: var(--slate); }
+  .dom-high { color: var(--red); font-weight: 600; }
+  .dom-ok { color: var(--green); }
+  .dom-med { color: var(--amber); }
+  .tag { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 9.5px; font-weight: 700; letter-spacing: 0.3px; white-space: nowrap; }
+  .tag-sold { background: #e8f5ee; color: var(--green); }
+  .tag-active { background: #eef2fa; color: #3a5fa0; }
+  .tag-cond { background: #fff3e0; color: #b06000; }
+  .tag-subject { background: #e8edf5; color: var(--navy); }
+  .tag-anchor { background: #fdeacb; color: #8a5a10; }
+  .table-wrapper { border: 1px solid var(--border); border-radius: 5px; overflow: hidden; margin-bottom: 8px; overflow-x: auto; }
+  .table-note { font-size: 11px; color: var(--muted); margin-bottom: 18px; line-height: 1.55; }
+
+  /* ADJ TABLES */
+  .adj-table { width: 100%; border-collapse: collapse; font-size: 12px; background: var(--white); }
+  .adj-table th { background: var(--slate); color: var(--white); padding: 8px 10px; text-align: left; font-size: 10.5px; font-weight: 600; }
+  .adj-table td { padding: 7px 10px; border-bottom: 1px solid var(--border); }
+  .adj-table tr:last-child td { border-bottom: none; font-weight: 700; background: #f0f4fa; }
+  .adj-table td.adj-pos { color: var(--green); font-weight: 600; }
+  .adj-table td.adj-neg { color: var(--red); font-weight: 600; }
+  .adj-block { margin-bottom: 18px; }
+  .adj-block h4 { font-size: 12px; font-weight: 700; color: var(--navy); padding: 8px 10px; background: #f5f2ec; border: 1px solid var(--border); border-bottom: none; border-radius: 5px 5px 0 0; }
+
+  /* STRATEGY SECTION */
+  .strategy-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 18px; }
+  .strat-card { background: var(--white); border: 1px solid var(--border); border-radius: 5px; padding: 16px 18px; }
+  .strat-card .sc-num { display: inline-flex; align-items: center; justify-content: center; background: var(--navy); color: var(--gold); font-size: 11px; font-weight: 700; width: 22px; height: 22px; border-radius: 50%; margin-bottom: 8px; }
+  .strat-card .sc-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 6px; display: block; }
+  .strat-card .sc-body { font-size: 12px; color: var(--slate); line-height: 1.6; }
+  .strat-card.priority { border-left: 3px solid var(--gold); }
+
+  /* SCENARIO TABLE */
+  .scenario-table { width: 100%; border-collapse: collapse; font-size: 12.5px; background: var(--white); border-radius: 5px; overflow: hidden; }
+  .scenario-table th { background: var(--slate); color: var(--white); padding: 9px 12px; text-align: left; font-size: 10.5px; font-weight: 600; letter-spacing: 0.3px; }
+  .scenario-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .scenario-table tr.recommended td { background: rgba(200,164,92,0.1); }
+  .scenario-table tr.recommended td:first-child { border-left: 3px solid var(--gold); }
+  .scenario-table tr:last-child td { border-bottom: none; }
+
+  /* VERDICT */
+  .verdict-box { background: var(--navy); color: var(--white); border-radius: 6px; padding: 24px 28px; margin-top: 10px; }
+  .verdict-box h3 { font-size: 18px; color: var(--gold); margin-bottom: 12px; }
+  .verdict-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px; }
+  .vcard { background: rgba(255,255,255,0.07); border: 1px solid rgba(200,164,92,0.35); border-radius: 4px; padding: 13px 15px; text-align: center; }
+  .vcard .vl { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 5px; }
+  .vcard .vv { font-size: 18px; font-weight: 700; color: var(--gold); }
+  .vcard .vn { font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+  .verdict-box p { font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.65; margin-bottom: 8px; }
+  .verdict-box p:last-child { margin-bottom: 0; }
+
+  /* FOOTER */
+  .page-footer { background: var(--navy); color: rgba(255,255,255,0.6); font-size: 10.5px; padding: 18px 40px; text-align: center; margin-top: 40px; }
+  .page-footer strong { color: var(--gold); }
+
+  @media print {
+    body { background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .content { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="header-top">
+    <span class="brokerage">RE/MAX Escarpment Woolcott Realty Inc.</span>
+    <span class="report-type">Market Valuation &amp; Offer Assessment · July 7, 2026 · Confidential</span>
+  </div>
+  <div class="header-main">
+    <h1>1354 No 1 Side Road</h1>
+    <div class="subaddress">Burlington, Ontario L7P 0R9 &nbsp;·&nbsp; Halton / North Burlington Rural / NEC Dev Control Area</div>
+    <div class="header-stats">
+      <div class="hstat">
+        <div class="label">Total Finished Area</div>
+        <div class="value">7,563 sqft</div>
+        <div class="note">4,726 AG + 2,837 BG · 6 bed · 6 bath</div>
+      </div>
+      <div class="hstat">
+        <div class="label">Lot / Year Built</div>
+        <div class="value">0.69 acres</div>
+        <div class="note">Built 1960 · Renovated 2021 · Drilled well</div>
+      </div>
+      <div class="hstat">
+        <div class="label">Offer Activity</div>
+        <div class="value" style="color:var(--gold);">3 Prior Offers</div>
+        <div class="note">Received across listing period · Buyers no longer available</div>
+      </div>
+      <div class="hstat">
+        <div class="label">Current List Price</div>
+        <div class="value">$2,450,000</div>
+        <div class="note">Reduced from $2,650,000 on May 28/26</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="section">
+    <div class="cdom-alert" style="border-color:var(--gold); background:#fefaf3;">
+      <div class="alert-head" style="color:var(--gold);">Three Offers Received Across the Listing Period — July 2026 Market Valuation Update</div>
+      <p>1354 No 1 Side Road has been actively marketed since October 2024 across six listing instances, with the price adjusted from $3,750,000 to the current $2,450,000 as market conditions have evolved and comparable data has clarified the value range. Three offers have been received during this period — meaningful confirmation that this property generates genuine buyer interest. However, those buyers are no longer available, and none of the offers resulted in a closing. This report uses the most recent comparable sales in the Rural Burlington NEC corridor to establish the supported market value, identifies the right buyer profile for this home, and lays out a clear, practical strategy to convert the next showing into a sale.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Subject Property Summary</div>
+    <div class="overview-grid">
+      <div class="overview-card">
+        <div class="oc-label">Bedrooms / Bathrooms</div>
+        <div class="oc-value">6 bed · 6 bath</div>
+        <div class="oc-sub">Main floor primary + main floor in-law suite (east wing)</div>
+      </div>
+      <div class="overview-card">
+        <div class="oc-label">Finished Living Area</div>
+        <div class="oc-value">7,563 sqft total</div>
+        <div class="oc-sub">4,726 AG + 2,837 BG — largest in the comp set</div>
+      </div>
+      <div class="overview-card">
+        <div class="oc-label">Garage / Parking</div>
+        <div class="oc-value">4.5 car attached</div>
+        <div class="oc-sub">Circular drive, 10+ asphalt surface parking spaces</div>
+      </div>
+      <div class="overview-card">
+        <div class="oc-label">Lot</div>
+        <div class="oc-value">0.69 acres</div>
+        <div class="oc-sub">NEC Dev Control Area · 120 × 250 ft rectangular</div>
+      </div>
+      <div class="overview-card">
+        <div class="oc-label">Year Built / Systems</div>
+        <div class="oc-value">1960 / all 2021</div>
+        <div class="oc-sub">Electric, plumbing, furnace all replaced 2021 · Roof 2021</div>
+      </div>
+      <div class="overview-card">
+        <div class="oc-label">Outdoor Living</div>
+        <div class="oc-value">Covered deck + FP</div>
+        <div class="oc-sub">Gas fireplace on deck · Views of Hidden Lake Golf Course</div>
+      </div>
+      <div class="overview-card">
+        <div class="oc-label">Water / Sewer</div>
+        <div class="oc-value">Drilled well + septic</div>
+        <div class="oc-sub">UV system, water softener, on-demand hot water owned</div>
+      </div>
+      <div class="overview-card">
+        <div class="oc-label">In-Law Suite</div>
+        <div class="oc-value">Full east wing suite</div>
+        <div class="oc-sub">Separate kitchen, bath, living, bedroom — main floor</div>
+      </div>
+      <div class="overview-card">
+        <div class="oc-label">Basement</div>
+        <div class="oc-value">2,837 sqft finished</div>
+        <div class="oc-sub">Rec room, wet bar, wine room, gym · 4-pc bath</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Complete Listing History — Price Journey Since October 2024</div>
+    <div class="price-history">
+      <table class="ph-table">
+        <thead>
+          <tr><th>MLS#</th><th>List Date</th><th>List Price</th><th>Status / End Date</th><th>DOM</th><th>Change vs Prior</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>XH4192941 / 40663471</td>
+            <td>Oct 17, 2024</td>
+            <td class="lp">$3,750,000</td>
+            <td>Cancelled Jan 13, 2025</td>
+            <td class="dom-high">88</td>
+            <td class="start">— Original listing</td>
+          </tr>
+          <tr>
+            <td>40689785</td>
+            <td>Jan 13, 2025</td>
+            <td class="lp">$3,499,900</td>
+            <td>Cancelled Jun 23, 2025</td>
+            <td class="dom-high">161</td>
+            <td class="cut">▼ $250,100 (−6.7%)</td>
+          </tr>
+          <tr>
+            <td>40746754</td>
+            <td>Jul 2, 2025</td>
+            <td class="lp">$3,299,900</td>
+            <td>Cancelled Jan 14, 2026</td>
+            <td class="dom-high">197</td>
+            <td class="cut">▼ $200,000 (−5.7%)</td>
+          </tr>
+          <tr>
+            <td>40798817</td>
+            <td>Jan 14, 2026</td>
+            <td class="lp">$3,299,900</td>
+            <td>Cancelled Mar 11, 2026</td>
+            <td class="dom-high">56</td>
+            <td class="start">— Re-listed same price</td>
+          </tr>
+          <tr>
+            <td>40811738</td>
+            <td>Mar 12, 2026</td>
+            <td class="lp">$2,699,000</td>
+            <td>Cancelled Apr 28, 2026</td>
+            <td class="dom-high">47</td>
+            <td class="cut">▼ $600,900 (−18.2%)</td>
+          </tr>
+          <tr>
+            <td>40825017 ← <strong>CURRENT</strong></td>
+            <td>Apr 28, 2026 (reduced May 28)</td>
+            <td><strong>$2,450,000</strong></td>
+            <td>Active · DOM 70 · CDOM 618</td>
+            <td class="dom-high">70+</td>
+            <td class="cut">▼ $249,000 (−9.2%) + in-cycle reduction</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">Total price journey from original list: $3,750,000 → $2,450,000 — a rebalancing of $1,300,000 (−34.7%) that reflects how the broader luxury rural market has adjusted since late 2024. Three offers were received across this period — important validation that buyer interest in this property is real. Those buyers have since moved on, but the interest they showed confirms that the right buyer for 1354 No 1 Side Road exists in this market. The July 2026 comparable data now provides the clearest picture yet of where that buyer will engage, and the strategy ahead is built around reaching them directly.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Market Context — North Burlington Rural, 60-Day Window</div>
+    <div class="intro-box">
+      <p>The last 60 days produced eight comparable transactions across the North Burlington Rural / Flamborough corridor, establishing a clear market ceiling and buyer profile. Properties in the NEC Dev Control area (well/septic, rural acreage) are transacting in the $1.95M–$2.6M range, with the higher end reserved for either exceptional luxury builds (37 Appaloosa Trail in Carlisle: custom 2002, saltwater pool + cabana, sold $2,555,000 in 16 days) or large land-play purchases (6101 Walkers Line: 26 acres of escarpment land, sold $2,597,000 despite a modest 1,895 sqft home). For comparable-era homes — renovated or updated, well/septic, rural but modest lot sizes — buyers are settling in the $2.04M–$2.35M range.</p>
+      <p>The active competition provides useful context for pricing decisions. 6115 Guelph Line (listed June 22 at $2,349,000 — a converted 1860 barn with 5,673 sqft AG on 4 acres) and 1065 Milburough Line (conditional at $2,499,999 — sold in 34 days) both offer more acreage than the subject. The subject's distinction is different but equally compelling: at 7,563 total finished sqft — 4,726 above grade — it offers significantly more usable living space than any comparable in the market. For the right buyer, space, functionality, and a self-contained in-law suite are the defining features, and this property delivers all three.</p>
+      <p>At the current price, the blended cost is $324/total sqft — a genuine value story for a buyer who understands what that square footage means in daily living. The three prior offers across the listing period confirm that buyers have recognized this value. The task ahead is reaching the next one at the right moment, at the right price, with fresh eyes on the property.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Comparable Sales — Last 60 Days</div>
+    <div class="table-wrapper">
+      <table class="comp-table">
+        <thead>
+          <tr><th>Address</th><th>Area</th><th>Beds/Baths</th><th>AG SqFt (Total)</th><th>Lot</th><th>List Price</th><th>Sold Price</th><th>SP/LP</th><th>DOM</th><th>Sold</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>6685 McNiven Road <span class="tag tag-anchor">Anchor A</span></td>
+            <td>Rural Burlington NEC</td>
+            <td>5 / 4</td>
+            <td>2,186 (3,142)</td>
+            <td>1.32 ac</td>
+            <td class="lp">$2,099,000</td>
+            <td class="sp">$2,040,000</td>
+            <td>97%</td>
+            <td class="dom-ok">20</td>
+            <td>May '26</td>
+          </tr>
+          <tr>
+            <td>5724 Blind Line</td>
+            <td>Rural Burlington NEC</td>
+            <td>3 / 3</td>
+            <td>2,479</td>
+            <td>11.09 ac</td>
+            <td class="lp">$1,999,000</td>
+            <td class="sp">$1,950,000</td>
+            <td>97%</td>
+            <td class="dom-ok">25</td>
+            <td>Jun '26</td>
+          </tr>
+          <tr>
+            <td>6306 McNiven Road <span class="tag tag-anchor">Anchor B</span></td>
+            <td>Rural Burlington NEC</td>
+            <td>4 / 3</td>
+            <td>2,726 (4,031)</td>
+            <td>&lt;1 ac</td>
+            <td class="lp">$2,385,000</td>
+            <td class="sp">$2,235,000</td>
+            <td>97%</td>
+            <td class="dom-med">78</td>
+            <td>May '26</td>
+          </tr>
+          <tr>
+            <td>3400 Cedar Springs Road</td>
+            <td>Rural Burlington NEC</td>
+            <td>3 / 2</td>
+            <td>1,800</td>
+            <td>4.9 ac</td>
+            <td class="lp">$1,999,900</td>
+            <td class="sp">$1,999,900</td>
+            <td>100%</td>
+            <td class="dom-high">215</td>
+            <td>May '26</td>
+          </tr>
+          <tr>
+            <td>402 Progreston Road</td>
+            <td>Carlisle (Flamborough)</td>
+            <td>3 / 4</td>
+            <td>3,556 (4,465)</td>
+            <td>3.98 ac</td>
+            <td class="lp">$2,349,000</td>
+            <td class="sp">$2,100,000</td>
+            <td>89%</td>
+            <td class="dom-med">98</td>
+            <td>Jun '26</td>
+          </tr>
+          <tr>
+            <td>2 Blueheron Lane</td>
+            <td>Carlisle (Flamborough)</td>
+            <td>5 / 3</td>
+            <td>2,293 (4,364)</td>
+            <td>0.54 ac</td>
+            <td class="lp">$2,249,900</td>
+            <td class="sp">$2,135,000</td>
+            <td>95%</td>
+            <td class="dom-ok">16</td>
+            <td>Jun '26</td>
+          </tr>
+          <tr>
+            <td>37 Appaloosa Trail</td>
+            <td>Carlisle — custom 2002</td>
+            <td>5 / 5</td>
+            <td>3,905</td>
+            <td>&lt;1 ac</td>
+            <td class="lp">$2,699,000</td>
+            <td class="sp">$2,555,000</td>
+            <td>95%</td>
+            <td class="dom-ok">16</td>
+            <td>May '26</td>
+          </tr>
+          <tr>
+            <td>6101 Walkers Line</td>
+            <td>Rural Burlington NEC</td>
+            <td>4 / 2</td>
+            <td>1,895 (2,534)</td>
+            <td>26 acres</td>
+            <td class="lp">$2,999,000</td>
+            <td class="sp">$2,597,000</td>
+            <td>87%</td>
+            <td class="dom-med">77</td>
+            <td>Jun '26</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">Anchors A and B are the two most directly comparable sales: both in North Burlington Rural / NEC Dev Control Area (matching the subject's zoning and services), and both with smaller AG footprints that allow the subject's size advantage to be quantified and applied. 402 Progreston and 2 Blueheron are included as size-bracketing context (Carlisle/Flamborough setting with similar lifestyle appeal but municipal water and no NEC overlay). 37 Appaloosa is the highest quality-matched comparable but reflects a Carlisle luxury/custom-build premium not directly applicable. 6101 Walkers Line is primarily a land play (26 acres) — its $2,597,000 sale price reflects escarpment acreage, not residential quality.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Active Competition</div>
+    <div class="table-wrapper">
+      <table class="comp-table">
+        <thead>
+          <tr><th>Address</th><th>Area</th><th>Beds/Baths</th><th>AG SqFt</th><th>Lot</th><th>List Price</th><th>DOM / CDOM</th><th>Key Feature</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>6 Iris Court, Carlisle</td>
+            <td>Carlisle (Flamborough)</td>
+            <td>5+2 / 4</td>
+            <td>3,200</td>
+            <td>~2 ac</td>
+            <td class="lp">$2,299,000</td>
+            <td class="dom-high">126 / 547</td>
+            <td>Pool, 3 garages — also long-listed</td>
+          </tr>
+          <tr>
+            <td>2092 Highway 6, Puslinch</td>
+            <td>Puslinch (rural)</td>
+            <td>4 / 4</td>
+            <td>3,258</td>
+            <td>10.1 ac</td>
+            <td class="lp">$2,299,900</td>
+            <td class="dom-ok">49</td>
+            <td>40×54 heated shop, 10+ acres</td>
+          </tr>
+          <tr>
+            <td>6115 Guelph Line, Burlington</td>
+            <td>Rural Burlington (Lowville)</td>
+            <td>4 / 4</td>
+            <td>5,673</td>
+            <td>4.04 ac</td>
+            <td class="lp">$2,349,000</td>
+            <td class="dom-ok">15</td>
+            <td>NEW LISTING — 1860 barn conversion, 4 acres, solar $1K/month</td>
+          </tr>
+          <tr class="subject">
+            <td>1354 No 1 Side Road <span class="tag tag-subject">Subject</span></td>
+            <td>Rural Burlington NEC</td>
+            <td>6 / 6</td>
+            <td>4,726</td>
+            <td>0.69 ac</td>
+            <td><strong>$2,450,000</strong></td>
+            <td class="dom-high">70 / 618</td>
+            <td>Largest total sqft, in-law suite, 2021 reno</td>
+          </tr>
+          <tr class="cond">
+            <td>1065 Milburough Line <span class="tag tag-cond">Conditional</span></td>
+            <td>Hamilton / Flamborough</td>
+            <td>4 / 3</td>
+            <td>3,781</td>
+            <td>2.19 ac</td>
+            <td class="lp">$2,499,999</td>
+            <td class="dom-ok">34</td>
+            <td>JUST SOLD CONDITIONAL — 4-season great room, pool, 2.19 acres</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">The conditional sale of 1065 Milburough Lane at $2,499,999 in only 34 days confirms buyers are active above $2.4M — an encouraging signal for this price corridor. 6115 Guelph Line (entered June 22 at $2,349,000) offers 4 acres and solar income, appealing to land-focused buyers. The subject addresses a different and equally compelling buyer profile: those who need maximum interior living space, a fully self-contained in-law suite, and the confidence of 2021-rebuilt systems throughout. The three prior offers across the listing period confirm that this buyer profile exists in this market — the goal now is reaching the next one with renewed clarity and energy.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Value Adjustment Analysis</div>
+
+    <div class="adj-block">
+      <h4>Anchor A · 6685 McNiven Road — Sold $2,040,000 (May 2026, DOM 20, 97% SP/LP · Rural Burlington NEC)</h4>
+      <div class="table-wrapper" style="margin-bottom:0;">
+      <table class="adj-table">
+        <thead><tr><th>Feature</th><th>Comparable (McNiven, 1973/2021)</th><th>Subject (1960/2021)</th><th>Adjustment</th></tr></thead>
+        <tbody>
+          <tr><td>Above-Grade Living Area</td><td>2,186 sqft sidesplit</td><td>4,726 sqft (+2,540 sqft AG)</td><td class="adj-pos">+$130,000</td></tr>
+          <tr><td>Finished Basement</td><td>956 sqft BG + 5-bed total</td><td>2,837 sqft BG (+1,881 sqft)</td><td class="adj-pos">+$75,000</td></tr>
+          <tr><td>Pool / Outdoor Living</td><td>Saltwater pool + hot tub</td><td>Covered deck + FP, no pool</td><td class="adj-neg">−$75,000</td></tr>
+          <tr><td>In-Law Suite</td><td>None</td><td>Full east wing in-law suite (kitchen, bath, separate)</td><td class="adj-pos">+$40,000</td></tr>
+          <tr><td>Beds / Baths</td><td>5 bed / 4 bath (3+2)</td><td>6 bed / 6 bath (all AG)</td><td class="adj-pos">+$20,000</td></tr>
+          <tr><td>Garage</td><td>2.5-car attached</td><td>4.5-car attached</td><td class="adj-pos">+$10,000</td></tr>
+          <tr><td>Lot</td><td>1.32 acres (NEC)</td><td>0.69 acres (NEC)</td><td class="adj-neg">−$30,000</td></tr>
+          <tr><td><strong>Indicated Value — Anchor A</strong></td><td colspan="2"></td><td><strong>$2,210,000</strong></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="adj-block">
+      <h4>Anchor B · 6306 McNiven Road — Sold $2,235,000 (May 2026, DOM 78, 97% SP/LP · Rural Burlington NEC)</h4>
+      <div class="table-wrapper" style="margin-bottom:0;">
+      <table class="adj-table">
+        <thead><tr><th>Feature</th><th>Comparable (6306 McNiven, 1875 heritage/reno)</th><th>Subject (1960/2021)</th><th>Adjustment</th></tr></thead>
+        <tbody>
+          <tr><td>Above-Grade Living Area</td><td>2,726 sqft (+1,305 BG fin)</td><td>4,726 sqft AG (+2,000 sqft AG)</td><td class="adj-pos">+$100,000</td></tr>
+          <tr><td>Finished Basement</td><td>1,305 sqft BG fin</td><td>2,837 sqft BG (+1,532 sqft)</td><td class="adj-pos">+$75,000</td></tr>
+          <tr><td>Pool / Outdoor Living</td><td>Inground pool + hot tub + stone patio</td><td>Covered deck + fireplace, no pool</td><td class="adj-neg">−$75,000</td></tr>
+          <tr><td>In-Law Suite</td><td>None (single-family)</td><td>Full east wing in-law suite</td><td class="adj-pos">+$40,000</td></tr>
+          <tr><td>Beds / Baths</td><td>4 bed / 3 bath (all AG)</td><td>6 bed / 6 bath (all AG)</td><td class="adj-pos">+$30,000</td></tr>
+          <tr><td>Lot</td><td>&lt;1 acre (similar to subject)</td><td>0.69 acres (similar)</td><td class="adj-neg">−$10,000</td></tr>
+          <tr><td>Heritage / Renovation Quality</td><td>1875 heritage frame, fully renovated with premium finishes</td><td>1960 build, 2021 systems/cosmetics</td><td class="adj-neg">−$15,000</td></tr>
+          <tr><td><strong>Indicated Value — Anchor B</strong></td><td colspan="2"></td><td><strong>$2,380,000</strong></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="comp-table">
+        <thead><tr><th>Anchor</th><th>Sale</th><th>Sold Price</th><th>Net Adjustment</th><th>Indicated Value</th><th>Weight</th></tr></thead>
+        <tbody>
+          <tr><td>Anchor A</td><td>6685 McNiven Road (1.32 ac, pool)</td><td>$2,040,000</td><td>+$170,000</td><td>$2,210,000</td><td>50%</td></tr>
+          <tr><td>Anchor B</td><td>6306 McNiven Road (&lt;1 ac, pool)</td><td>$2,235,000</td><td>+$145,000</td><td>$2,380,000</td><td>50%</td></tr>
+          <tr style="background:#f0f4fa; font-weight:700;"><td colspan="4"><strong>Blended Market Value</strong></td><td><strong>$2,295,000 → rounded $2,250,000</strong></td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">Equal weighting reflects that both anchors are in the same rural Burlington NEC market with comparable lot profiles. Anchor A (smaller home with pool) anchors the lower bound; Anchor B (larger home, similar lot) anchors the upper. The blended result rounds to $2,250,000 — reflecting the subject's fair market value based on the two most directly comparable recent sales. At $2,250,000, the subject's $298/total sqft represents compelling value, and the three prior offers across the listing period confirm that buyers have been drawn to this property. The supported value gives a clear anchor for the pricing conversation ahead.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Pricing Scenarios — Path to Sale</div>
+    <div class="table-wrapper">
+      <table class="scenario-table">
+        <thead><tr><th>Scenario</th><th>List Price</th><th>Rationale</th><th>Expected Outcome</th><th>Timeline to Sale</th></tr></thead>
+        <tbody>
+          <tr class="recommended">
+            <td><strong>A · Strategic fresh launch ✓ Recommended</strong></td>
+            <td><strong>$2,199,000</strong></td>
+            <td>Expire current listing and re-launch with a new MLS number, fresh photography, targeted multigenerational marketing, and an offer presentation date 14 days out. Priced $150,000 below fresh competitor 6115 Guelph Line. The three prior offers confirm buyer interest exists — a fresh launch is the mechanism to convert the next one.</td>
+            <td>New listing energy resets buyer perception. $2,199,000 positions the subject as the standout value in the market. Likely sale $2,050,000–$2,150,000, with potential for multiple-offer tension at the presentation date.</td>
+            <td style="color:var(--green);">30–60 days</td>
+          </tr>
+          <tr>
+            <td><strong>B · At-market re-launch</strong></td>
+            <td>$2,299,000</td>
+            <td>Re-launch fresh at the supported market value. Positions the subject competitively alongside active listings at $2,299,000–$2,349,000 while still offering the space and in-law suite advantage.</td>
+            <td>Fresh listing generates renewed showing activity. Likely sale $2,100,000–$2,230,000 with a motivated buyer — especially effective if an offer presentation date is used.</td>
+            <td style="color:var(--amber);">60–90 days</td>
+          </tr>
+          <tr>
+            <td><strong>C · Continue current listing</strong></td>
+            <td>$2,450,000</td>
+            <td>Maintain the current campaign and price, allowing additional market exposure. Best suited to waiting for a specific buyer profile to enter the market.</td>
+            <td>Continued market exposure. Price gap versus 6115 Guelph Line ($2,349,000) may limit showing urgency without a re-launch to refresh buyer attention.</td>
+            <td style="color:var(--amber);">90–180+ days</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Path Forward — Six Actions to Maximize Your Position</div>
+    <div class="strategy-grid">
+      <div class="strat-card priority">
+        <div class="sc-num">1</div>
+        <span class="sc-title">Launch Fresh at $2,199,000 with a New MLS Number</span>
+        <div class="sc-body">A deliberate re-launch — new MLS number, new photography, fresh remarks — gives the property a genuine restart with the buyer pool. Three prior offers confirm that buyers respond to this home; the goal is to reach the next serious buyer before they commit elsewhere. At $2,199,000, the subject undercuts every active competitor by at least $100,000 while remaining close to the supported market value of $2,250,000. Position the re-launch proactively to the brokerage community: "newly priced, must be seen." This is a confident, informed move — not a reaction, but a strategy.</div>
+      </div>
+      <div class="strat-card priority">
+        <div class="sc-num">2</div>
+        <span class="sc-title">Lead With the Multigenerational Story</span>
+        <div class="sc-body">The subject's most differentiated and time-relevant feature is the fully self-contained east wing in-law suite — its own kitchen, bathroom, living and bedroom with no shared interior access required. This is the feature that no other active comparable can match, and it speaks directly to the fastest-growing buyer profile in the Burlington area: families looking to house aging parents or adult children. The MLS remarks, all photography, and digital advertising should open with this message, not with square footage or the golf course.</div>
+      </div>
+      <div class="strat-card priority">
+        <div class="sc-num">3</div>
+        <span class="sc-title">Set an Offer Presentation Date (Day 14)</span>
+        <div class="sc-body">Fresh-launch the property with an offer presentation date 14 days out, clearly communicated in MLS. This creates urgency for buyers who have been watching, eliminates the "I'll think about it" pattern, and signals genuine seller intent. The 7,563 sqft value story at $291/sqft is compelling enough to draw multiple parties if they are all in the room at the same time. If no offers materialize on presentation day, the listing remains active but the urgency window will have produced 10+ showings and meaningful feedback.</div>
+      </div>
+      <div class="strat-card priority">
+        <div class="sc-num">4</div>
+        <span class="sc-title">New Photography — Lifestyle Focus on Covered Deck</span>
+        <div class="sc-body">The covered outdoor deck with gas fireplace is this property's best answer to the "no pool" objection. Current listing photography likely reflects the property from years of different campaigns. Commission a fresh shoot (ideally at dusk/golden hour) that makes the covered deck look like a 12-month outdoor living room — fire lit, furniture staged, lights on. Buyers comparing this home to 37 Appaloosa Trail ($2.555M, saltwater pool + cabana) need to see an outdoor lifestyle vision, not an empty concrete pad.</div>
+      </div>
+      <div class="strat-card">
+        <div class="sc-num">5</div>
+        <span class="sc-title">Tell the 2021 Renovation Story Prominently</span>
+        <div class="sc-body">Electric, plumbing, furnace, and roof all replaced in 2021 — this means the subject's ownership cost profile is closer to a new build than a 1960 structure. Most buyers overestimate the maintenance risk on a 60-year-old home and discount accordingly. The MLS remarks and feature sheet should lead with this clearly: "Rebuilt from the inside out — 100% of major systems replaced 2021." The goal is to neutralize the age objection before the showing, not after.</div>
+      </div>
+      <div class="strat-card">
+        <div class="sc-num">6</div>
+        <span class="sc-title">Target Agent Outreach — 5km Radius</span>
+        <div class="sc-body">A direct agent-to-agent communication reaching the 20–30 most active agents in the Waterdown/Burlington North/Carlisle market is a high-value step at any stage of the campaign. Framing it around the fresh launch — "newly priced, must be seen, offer date in 14 days" — gives co-operating agents a clear reason to revisit this property with their buyer clients. Including the value per sqft comparison ($291/total sqft vs $415–$805 for comparable active listings) gives those agents a compelling data point. Woolcott's strong market share in this corridor makes this a warm, relationship-first outreach — not a cold call.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="verdict-box">
+    <h3>Market Value &amp; Recommendation</h3>
+    <div class="verdict-grid">
+      <div class="vcard">
+        <div class="vl">Indicated Market Value</div>
+        <div class="vv">$2,250,000</div>
+        <div class="vn">Blended two-anchor CMA · Rural Burlington NEC</div>
+      </div>
+      <div class="vcard">
+        <div class="vl">Recommended List Price</div>
+        <div class="vv">$2,199,000</div>
+        <div class="vn">Strategic fresh launch · offer date in 14 days</div>
+      </div>
+      <div class="vcard">
+        <div class="vl">Likely Sale Price</div>
+        <div class="vv">$2.05M–$2.15M</div>
+        <div class="vn">SP/LP ~93–98% at $2,199,000</div>
+      </div>
+    </div>
+    <p>The adjusted comparable analysis, anchored to the two most recent NEC Dev Control Area sales in Rural Burlington, supports a market value of <strong style="color:var(--gold);">$2,250,000</strong>. Three offers received across the listing period are meaningful evidence that this property generates genuine buyer interest — the challenge has been converting that interest into a closing. The recommended strategy is a deliberate fresh launch at <strong style="color:var(--gold);">$2,199,000</strong> — slightly below market value — with a new MLS number, an offer presentation date, updated photography, and focused multigenerational marketing. This positions the subject as the standout value in a market where comparable active properties are asking $2,299,000–$2,499,999.</p>
+    <p>Likely sale range: <strong style="color:var(--gold);">$2,050,000–$2,150,000</strong>. The path to the upper end is creating competitive tension with an offer presentation date and multiple parties; the path to the lower end is a single offer without that structure. The subject's true competitive advantage — 7,563 sqft of finished living space, a self-contained in-law suite, fully rebuilt 2021 systems, and golf course views — is a rare combination that speaks directly to a growing buyer profile. That buyer is in the market. A fresh, targeted approach gives this home the best opportunity to reach them before they commit elsewhere.</p>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  Prepared by <strong>Anita McGowan, Broker</strong> &nbsp;·&nbsp; RE/MAX Escarpment Woolcott Realty Inc. &nbsp;·&nbsp; July 7, 2026
+  &nbsp;&nbsp;|&nbsp;&nbsp; Confidential — for seller discussion purposes only &nbsp;·&nbsp; Information deemed reliable but not guaranteed · CoreLogic Matrix
+</div>
+
+</body>
+</html>

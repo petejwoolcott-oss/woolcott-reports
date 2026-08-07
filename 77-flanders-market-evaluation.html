@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Evaluation — 77 Flanders Drive, Waterdown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1a2332; --slate:#2d3a4a; --gold:#c8a45c; --gold-light:#e8d5a0;
+    --bg:#f5f2ec; --white:#ffffff; --red:#c44040; --green:#3a8a5c;
+    --muted:#7a8694; --border:#ddd5c8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--slate);line-height:1.6;}
+  .report{max-width:900px;margin:0 auto;background:var(--white);}
+  h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400;}
+
+  /* Header */
+  .header{background:var(--navy);color:var(--white);padding:48px 56px 40px;}
+  .header .brand{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px;}
+  .header h1{font-size:40px;line-height:1.15;margin-bottom:8px;}
+  .header .sub{font-size:16px;color:#b8c0cc;}
+  .header .meta{margin-top:22px;font-size:13px;color:#8a94a4;display:flex;gap:28px;flex-wrap:wrap;}
+  .header .meta span strong{color:var(--gold-light);font-weight:500;}
+
+  /* Stats bar */
+  .statsbar{display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid var(--border);}
+  .stat{padding:24px 12px;text-align:center;border-right:1px solid var(--border);}
+  .stat:last-child{border-right:none;}
+  .stat .num{font-family:'DM Serif Display',serif;font-size:26px;color:var(--navy);}
+  .stat .lbl{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-top:4px;}
+
+  .section{padding:44px 56px;}
+  .section + .section{border-top:1px solid var(--border);}
+  .section h2{font-size:28px;color:var(--navy);margin-bottom:6px;}
+  .section .kicker{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:700;}
+  .section .lede{color:var(--muted);font-size:15px;margin-bottom:26px;max-width:640px;}
+
+  /* Subject panel */
+  .subject-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 32px;margin-top:8px;}
+  .fact{display:flex;justify-content:space-between;border-bottom:1px dashed var(--border);padding:8px 0;font-size:14px;}
+  .fact .k{color:var(--muted);}
+  .fact .v{font-weight:500;color:var(--navy);text-align:right;}
+  .adu-callout{margin-top:26px;background:#faf7f0;border-left:4px solid var(--gold);padding:20px 24px;font-size:14px;}
+  .adu-callout strong{color:var(--navy);}
+
+  /* Bar chart */
+  .chart{margin-top:10px;}
+  .bar-row{display:grid;grid-template-columns:190px 1fr 110px;align-items:center;gap:14px;margin-bottom:13px;font-size:13px;}
+  .bar-row .name{text-align:right;color:var(--slate);line-height:1.3;}
+  .bar-row .name small{display:block;color:var(--muted);font-size:11px;}
+  .bar-track{background:#f0ece3;border-radius:3px;height:26px;position:relative;}
+  .bar-fill{height:100%;border-radius:3px;}
+  .bar-fill.sold{background:var(--green);}
+  .bar-fill.pending{background:repeating-linear-gradient(45deg,var(--green),var(--green) 6px,#5aa87a 6px,#5aa87a 12px);}
+  .bar-fill.active{background:var(--muted);}
+  .bar-fill.cancelled{background:repeating-linear-gradient(45deg,#a8b0ba,#a8b0ba 6px,#c4cad2 6px,#c4cad2 12px);}
+  .bar-fill.subject{background:var(--gold);}
+  .bar-row .price{font-weight:700;color:var(--navy);}
+  .bar-row.subj .name{color:var(--navy);font-weight:700;}
+  .chart-note{font-size:12px;color:var(--muted);margin-top:14px;}
+  .legend{display:flex;gap:22px;margin-top:16px;font-size:12px;color:var(--muted);flex-wrap:wrap;}
+  .legend span{display:flex;align-items:center;gap:7px;}
+  .dot{width:12px;height:12px;border-radius:3px;display:inline-block;}
+
+  /* Comp cards (sold) */
+  .comp{border:1px solid var(--border);border-radius:6px;margin-bottom:22px;overflow:hidden;}
+  .comp-head{background:#faf8f3;padding:16px 24px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--border);}
+  .comp-head h3{font-size:19px;color:var(--navy);}
+  .comp-head .tag{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;}
+  .tag.sold{color:var(--green);} .tag.pending{color:#8a7430;} .tag.active{color:var(--muted);} .tag.cancelled{color:var(--red);}
+  .comp-body{padding:20px 24px;}
+  .comp-stats{display:flex;gap:0;flex-wrap:wrap;margin-bottom:14px;}
+  .comp-stats div{font-size:13px;padding:0 18px;border-right:1px solid var(--border);}
+  .comp-stats div:first-child{padding-left:0;}
+  .comp-stats div:last-child{border-right:none;}
+  .comp-stats strong{display:block;font-size:15px;color:var(--navy);}
+  .comp-body p{font-size:14px;color:var(--slate);}
+  .comp-body p strong{color:var(--navy);}
+
+  /* Active grid */
+  .active-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .acard{border:1px solid var(--border);border-radius:6px;padding:20px 22px;background:#fdfcf9;}
+  .acard.flanders{border-color:var(--gold);background:#faf7f0;}
+  .acard h3{font-size:17px;color:var(--navy);margin-bottom:2px;}
+  .acard .price{font-family:'DM Serif Display',serif;font-size:22px;color:var(--navy);margin:6px 0 2px;}
+  .acard .status{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-bottom:10px;}
+  .acard .specs{font-size:13px;color:var(--muted);margin-bottom:10px;}
+  .acard p{font-size:13px;color:var(--slate);}
+  .acard .pricenote{font-size:12px;color:var(--red);font-weight:500;margin-top:8px;}
+
+  /* Valuation */
+  .val-panel{background:#faf8f3;border:1px solid var(--border);border-radius:6px;padding:28px 32px;margin-top:8px;}
+  .ppsf-table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:26px;}
+  .ppsf-table th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);padding:8px 10px;border-bottom:2px solid var(--border);}
+  .ppsf-table td{padding:10px;border-bottom:1px solid var(--border);}
+  .ppsf-table tr.subj td{background:#f3ecdd;font-weight:700;color:var(--navy);}
+  .ppsf-table td.r{text-align:right;}
+  .range-wrap{margin-top:10px;}
+  .range-bar{position:relative;height:14px;background:linear-gradient(90deg,#e8e2d6,var(--gold-light),var(--gold),var(--gold-light),#e8e2d6);border-radius:7px;margin:34px 0 10px;}
+  .range-marker{position:absolute;top:-30px;transform:translateX(-50%);text-align:center;font-size:12px;font-weight:700;color:var(--navy);white-space:nowrap;}
+  .range-marker::after{content:'';display:block;width:2px;height:22px;background:var(--navy);margin:2px auto 0;}
+  .range-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);}
+  .reco{margin-top:26px;text-align:center;background:var(--navy);border-radius:6px;padding:24px;}
+  .reco .lbl{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);}
+  .reco .num{font-family:'DM Serif Display',serif;font-size:40px;color:var(--white);margin-top:4px;}
+  .reco .why{font-size:13px;color:#b8c0cc;margin-top:8px;max-width:520px;margin-left:auto;margin-right:auto;}
+
+  /* Takeaways */
+  .takeaways{background:var(--navy);color:var(--white);padding:48px 56px;}
+  .takeaways h2{font-size:28px;color:var(--white);margin-bottom:6px;}
+  .takeaways .kicker{color:var(--gold);}
+  .takeaways ul{list-style:none;margin-top:22px;}
+  .takeaways li{padding:14px 0 14px 34px;position:relative;border-bottom:1px solid #2d3a4a;font-size:14.5px;color:#d5dae2;}
+  .takeaways li:last-child{border-bottom:none;}
+  .takeaways li::before{content:'—';position:absolute;left:0;color:var(--gold);font-weight:700;}
+  .takeaways li strong{color:var(--white);}
+
+  .footer{background:var(--navy);color:#8a94a4;padding:0 56px 44px;font-size:12px;}
+  .footer .brandline{border-top:1px solid #2d3a4a;padding-top:24px;color:var(--gold-light);font-size:14px;font-family:'DM Serif Display',serif;}
+  .footer .agent{margin-top:4px;color:#b8c0cc;}
+  .footer .disclaimer{margin-top:18px;font-size:11px;line-height:1.6;color:#6a7484;}
+
+  @media(max-width:700px){
+    .header,.section,.takeaways,.footer{padding-left:24px;padding-right:24px;}
+    .statsbar{grid-template-columns:repeat(2,1fr);}
+    .stat{border-bottom:1px solid var(--border);}
+    .subject-grid,.active-grid{grid-template-columns:1fr;}
+    .bar-row{grid-template-columns:110px 1fr 90px;font-size:11px;}
+  }
+</style>
+</head>
+<body>
+<div class="report">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="brand">Woolcott Real Estate • Market Evaluation</div>
+    <h1>77 Flanders Drive</h1>
+    <div class="sub">Waterdown East • Detached Two-Storey on a Cul-de-Sac Backing onto the Bruce Trail Conservancy</div>
+    <div class="meta">
+      <span>Prepared for: <strong>Julie &amp; James Angold</strong></span>
+      <span>Prepared: <strong>August 2026</strong></span>
+      <span>Launch: <strong>September 14, 2026</strong></span>
+      <span>Prepared by: <strong>Justine Woolcott</strong></span>
+    </div>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="statsbar">
+    <div class="stat"><div class="num">$1.92M</div><div class="lbl">Avg Sold Price</div></div>
+    <div class="stat"><div class="num">94.5%</div><div class="lbl">Avg SP/LP Ratio</div></div>
+    <div class="stat"><div class="num">62</div><div class="lbl">Avg Days on Market</div></div>
+    <div class="stat"><div class="num">5</div><div class="lbl">Active Competitors</div></div>
+    <div class="stat"><div class="num">$1,999,900</div><div class="lbl">Recommended List</div></div>
+  </div>
+
+  <!-- SUBJECT -->
+  <div class="section">
+    <div class="kicker">The Subject Property</div>
+    <h2>What We're Working With</h2>
+    <p class="lede">A well-maintained Branthaven two-storey on one of Waterdown's most established streets — now with a rare and valuable addition.</p>
+    <div class="subject-grid">
+      <div class="fact"><span class="k">Style</span><span class="v">2-Storey Detached</span></div>
+      <div class="fact"><span class="k">Above-Grade Floor Area (MPAC)</span><span class="v">4,303 sq ft (incl. ADU)</span></div>
+      <div class="fact"><span class="k">Bedrooms</span><span class="v">5 + 1 (incl. ADU)</span></div>
+      <div class="fact"><span class="k">Basement</span><span class="v">Fully Finished, Sound-Proofed</span></div>
+      <div class="fact"><span class="k">Lot</span><span class="v">70 ft × 106 ft</span></div>
+      <div class="fact"><span class="k">Backing Onto</span><span class="v">Woodland / Bruce Trail Conservancy</span></div>
+      <div class="fact"><span class="k">Street Setting</span><span class="v">Quiet Cul-de-Sac</span></div>
+      <div class="fact"><span class="k">Purchased</span><span class="v">2014 — $876,000</span></div>
+    </div>
+    <div class="adu-callout">
+      <strong>The 1,000 sq ft Accessory Dwelling Unit is the story of this listing.</strong> A legal, fully permitted two-storey addition — all 1,000 sq ft of it above grade — with one bedroom, a full bathroom, and a complete kitchen, connected to the main home on both floors. It works as a fully private in-law suite, a multigenerational wing, or potential income space, while remaining integrated enough to live as one large home. Almost nothing else in Waterdown's current or recent inventory offers this, and because it is permitted and above grade (not a basement conversion), it materially widens the buyer pool and supports the price premium with documentation in hand.
+    </div>
+  </div>
+
+  <!-- PRICE CHART -->
+  <div class="section">
+    <div class="kicker">Market Position</div>
+    <h2>Where $1,999,900 Sits</h2>
+    <p class="lede">Every relevant sale, pending deal, and active listing in the competitive set — and where the recommended price positions 77 Flanders among them.</p>
+    <div class="chart">
+      <div class="bar-row"><div class="name">5 Mays Crescent<small>Active • 5 DOM (50 CDOM)</small></div><div class="bar-track"><div class="bar-fill active" style="width:15%"></div></div><div class="price">$1,650,000</div></div>
+      <div class="bar-row"><div class="name">54 Waterwheel Crescent<small>Active • New (Jul 23)</small></div><div class="bar-track"><div class="bar-fill active" style="width:20%"></div></div><div class="price">$1,699,000</div></div>
+      <div class="bar-row"><div class="name">196 Dundas Street E<small>Sold Jan 2026 • 123 DOM</small></div><div class="bar-track"><div class="bar-fill sold" style="width:25%"></div></div><div class="price">$1,750,000</div></div>
+      <div class="bar-row"><div class="name">136 Grindstone Way<small>Sold Apr 2026 • 24 DOM</small></div><div class="bar-track"><div class="bar-fill sold" style="width:28%"></div></div><div class="price">$1,780,000</div></div>
+      <div class="bar-row"><div class="name">116 Grindstone Way<small>Sold Jan 2026 • 58 DOM</small></div><div class="bar-track"><div class="bar-fill sold" style="width:34%"></div></div><div class="price">$1,840,000</div></div>
+      <div class="bar-row subj"><div class="name">77 Flanders Drive<small>Recommended List</small></div><div class="bar-track"><div class="bar-fill subject" style="width:50%"></div></div><div class="price">$1,999,900</div></div>
+      <div class="bar-row"><div class="name">344 Mountain Brow Road<small>Active • 39 DOM</small></div><div class="bar-track"><div class="bar-fill active" style="width:80%"></div></div><div class="price">$2,299,000</div></div>
+      <div class="bar-row"><div class="name">9 Flanders Drive<small>Cancelled Aug 1 • 64 DOM</small></div><div class="bar-track"><div class="bar-fill cancelled" style="width:80%"></div></div><div class="price">$2,299,900</div></div>
+      <div class="bar-row"><div class="name">342 Mountain Brow Road<small>Sold Jul 2026 • 44 DOM • 1.7-ac estate</small></div><div class="bar-track"><div class="bar-fill sold" style="width:80%"></div></div><div class="price">$2,300,000</div></div>
+      <div class="bar-row"><div class="name">81 Flanders Drive<small>Active • 26 DOM (150 CDOM)</small></div><div class="bar-track"><div class="bar-fill active" style="width:90%"></div></div><div class="price">$2,399,000</div></div>
+    </div>
+    <div class="legend">
+      <span><span class="dot" style="background:var(--green)"></span>Sold</span>
+      <span><span class="dot" style="background:repeating-linear-gradient(45deg,var(--green),var(--green) 4px,#5aa87a 4px,#5aa87a 8px)"></span>Pending</span>
+      <span><span class="dot" style="background:var(--muted)"></span>Active</span>
+      <span><span class="dot" style="background:#b8bfc8"></span>Cancelled</span>
+      <span><span class="dot" style="background:var(--gold)"></span>Subject</span>
+    </div>
+    <p class="chart-note">Bar lengths scaled from a $1.5M baseline to emphasize relative differences. Note the pattern: comparable homes on standard lots have sold between $1,750,000 and $1,840,000; the only sale above that — $2,300,000 for 342 Mountain Brow — was a 1.7-acre estate with a pool, and even it settled $195,000 below ask. Meanwhile, everything <em>asking</em> $2.3M+ on a standard lot is sitting, relisting, or cancelled. $1,999,900 occupies the open ground between those zones.</p>
+  </div>
+
+  <!-- SOLD COMPS -->
+  <div class="section">
+    <div class="kicker">Closed Sales — Past 400 Days</div>
+    <h2>What Buyers Have Actually Paid</h2>
+    <p class="lede">Four closed sales define the market. Each tells us something specific about where 77 Flanders fits.</p>
+
+    <div class="comp">
+      <div class="comp-head"><h3>116 Grindstone Way</h3><span class="tag sold">Sold — Best Comparable</span></div>
+      <div class="comp-body">
+        <div class="comp-stats">
+          <div><strong>$1,840,000</strong>Sold Price</div>
+          <div><strong>$1,895,000</strong>Final List</div>
+          <div><strong>$2,097,000</strong>Original List</div>
+          <div><strong>58</strong>DOM</div>
+          <div><strong>4,342</strong>Total Fin Sq Ft</div>
+          <div><strong>4 / 4</strong>Beds / Baths</div>
+        </div>
+        <p><strong>This is the anchor sale for the evaluation.</strong> An executive Vanhoeve-built home on a 70-ft lot backing onto a ravine, steps from the Bruce Trail — nearly a mirror of the subject's lot and setting, with a comparable total finished footprint. It sold in January 2026 for $1,840,000, but only after cutting $202,000 from an ambitious $2,097,000 original ask. Two lessons: (1) this size and setting supports a price in the mid-$1.8Ms, and (2) buyers made the seller pay for overreaching. 77 Flanders adds what this home didn't have — a full 1,000 sq ft self-contained ADU and larger above-grade area — which is what justifies pricing above this benchmark.</p>
+      </div>
+    </div>
+
+    <div class="comp">
+      <div class="comp-head"><h3>136 Grindstone Way</h3><span class="tag sold">Sold</span></div>
+      <div class="comp-body">
+        <div class="comp-stats">
+          <div><strong>$1,780,000</strong>Sold Price</div>
+          <div><strong>$1,799,900</strong>List Price</div>
+          <div><strong>98.9%</strong>SP/LP</div>
+          <div><strong>24</strong>DOM</div>
+          <div><strong>2,596</strong>AG Sq Ft + Fin Bsmt</div>
+          <div><strong>5 / 3</strong>Beds / Baths</div>
+        </div>
+        <p><strong>Proof that sharp pricing gets rewarded.</strong> A pie-shaped lot backing onto forest and the Bruce Trail — the same nature-backing appeal as the subject — but a substantially smaller house (2,596 sq ft above grade vs. the subject's 4,303). Listed at $1,799,900 in March 2026, it sold in 24 days at 98.9% of ask. It demonstrates strong, fast demand for well-priced Bruce Trail-backing homes, and its smaller footprint at $1.78M supports meaningful additional value for the subject's extra ~1,700 sq ft above grade.</p>
+      </div>
+    </div>
+
+    <div class="comp">
+      <div class="comp-head"><h3>196 Dundas Street E</h3><span class="tag sold">Sold</span></div>
+      <div class="comp-body">
+        <div class="comp-stats">
+          <div><strong>$1,750,000</strong>Sold Price</div>
+          <div><strong>$1,949,000</strong>List Price</div>
+          <div><strong>89.8%</strong>SP/LP</div>
+          <div><strong>123</strong>DOM</div>
+          <div><strong>5,101</strong>Total Fin Sq Ft</div>
+          <div><strong>6 / 3</strong>Beds / Baths</div>
+        </div>
+        <p><strong>The most relevant test of the ADU story — and a cautionary tale.</strong> An extensively renovated 3-family home on 0.61 acres with three fully self-contained suites: the closest thing in the dataset to the subject's multigenerational appeal. It sold for $1,750,000, but took 123 days and a $199,000 reduction to get there. The takeaway isn't that suite potential lacks value — it's that a busy Dundas Street location and pure-income positioning limited the audience. 77 Flanders offers the multigenerational flexibility <em>without</em> the compromises: a family home on a cul-de-sac backing onto conservation land, where the ADU is a bonus rather than the whole identity.</p>
+      </div>
+    </div>
+
+    <div class="comp">
+      <div class="comp-head"><h3>342 Mountain Brow Road</h3><span class="tag sold">Sold — July 2026</span></div>
+      <div class="comp-body">
+        <div class="comp-stats">
+          <div><strong>$2,300,000</strong>Sold Price</div>
+          <div><strong>$2,495,000</strong>List Price</div>
+          <div><strong>92.2%</strong>SP/LP</div>
+          <div><strong>44</strong>DOM</div>
+          <div><strong>4,392</strong>Total Fin Sq Ft</div>
+          <div><strong>1.7 ac</strong>Lot</div>
+        </div>
+        <p><strong>Proves buyers will transact above $2M — but only for estate-calibre property, and never at full ask.</strong> A stately all-brick home on nearly 1.7 acres with panoramic escarpment views, heated pool, triple garage, and 240+ feet of frontage sold in July for $2,300,000 — $195,000 (7.8%) below its $2,495,000 ask despite a reasonable 44 days on market. It's not a direct comparable for the subject — the lot alone puts it in a different category — but it brackets the top of the local market and reinforces the theme: even the strongest offering in the dataset couldn't hold a $2.4M+ number.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIVE COMPETITION -->
+  <div class="section">
+    <div class="kicker">Active Inventory</div>
+    <h2>The Competition Today</h2>
+    <p class="lede">Five competing listings — including two on Flanders Drive itself. The street is currently teaching an expensive lesson about pricing above $2.3M.</p>
+    <div class="active-grid">
+      <div class="acard flanders">
+        <h3>9 Flanders Drive</h3>
+        <div class="price">$2,299,900</div>
+        <div class="status" style="color:var(--red)">Cancelled Aug 1 — Returning After Labour Day</div>
+        <div class="specs">5 bed • 5 bath • 5,318 total fin sq ft • 64 DOM • 75×164 ft lot</div>
+        <p>Executive home with concrete pool. Originally listed at $2,399,900 in May, reduced to $2,299,900, then cancelled August 1 after 64 days without a buyer. Per the listing agent, it will relist at a modestly lower price after Labour Day — meaning it will likely be live when 77 Flanders launches September 14. Even at a reduced ask, it will sit well above the recommended price for 77 Flanders, making sharp pricing the key to winning the head-to-head (see takeaways).</p>
+        <div class="pricenote">Already reduced $100,000; market rejected $2.3M</div>
+      </div>
+      <div class="acard flanders">
+        <h3>81 Flanders Drive</h3>
+        <div class="price">$2,399,000</div>
+        <div class="status" style="color:var(--muted)">Active — 26 DOM (150 CDOM)</div>
+        <div class="specs">4 bed • 4 bath • 4,887 total fin sq ft • Saltwater pool • 65.5×120 ft lot</div>
+        <p>European-inspired renovation with beautifully reimagined interiors and a saltwater pool. Relisted July 9 after a prior unsuccessful attempt — 150 cumulative days on market tells the real story. A more polished product than the subject, yet still unsold, which defines exactly where the buyer resistance begins on this street.</p>
+        <div class="pricenote">150 cumulative days — buyers are not engaging at $2.4M</div>
+      </div>
+      <div class="acard">
+        <h3>344 Mountain Brow Road</h3>
+        <div class="price">$2,299,000</div>
+        <div class="status" style="color:var(--muted)">Active — 39 DOM</div>
+        <div class="specs">3 bed • 4 bath • Custom bungaloft • 0.75-acre ravine lot</div>
+        <p>Architect-designed Arts &amp; Crafts custom build with 27-ft vaulted ceilings and timber trusses on a spectacular ravine lot. A striking property, but 39 days without a deal at $2,299,000 reinforces the same message as the Flanders listings: the $2.3M tier is slow.</p>
+      </div>
+      <div class="acard">
+        <h3>54 Waterwheel Crescent</h3>
+        <div class="price">$1,699,000</div>
+        <div class="status" style="color:var(--green)">New Listing — July 23</div>
+        <div class="specs">4 bed (2+2) • 3 bath • 3,763 total fin sq ft • Bungalow</div>
+        <p>Updated bungalow with pond, greenhouse, and mature grounds. A different buyer profile (main-floor living), smaller footprint, and no ADU — it competes below the subject rather than against it, and helps make $1,999,900 for a much larger home look reasonable.</p>
+      </div>
+      <div class="acard">
+        <h3>5 Mays Crescent</h3>
+        <div class="price">$1,650,000</div>
+        <div class="status" style="color:var(--muted)">Active — 5 DOM (50 CDOM)</div>
+        <div class="specs">3 bed • 3 bath • 3,344 total fin sq ft • Walk-out • Backs onto green space</div>
+        <p>Well-kept home backing onto green space with a walk-out lower level — similar setting appeal, but three bedrooms and roughly 1,000 fewer above-grade square feet than the subject. Sets the floor of the competitive set.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- VALUATION -->
+  <div class="section">
+    <div class="kicker">Valuation</div>
+    <h2>Pricing the Property</h2>
+    <p class="lede">Price-per-square-foot triangulation against the closed sales, adjusted for the subject's size, setting, finish level, and the ADU.</p>
+    <div class="val-panel">
+      <table class="ppsf-table">
+        <tbody><tr><th>Property</th><th class="r">Sold / List Price</th><th class="r">Total Fin Sq Ft</th><th class="r">$ / Sq Ft</th></tr>
+        <tr><td>116 Grindstone Way (sold)</td><td class="r">$1,840,000</td><td class="r">4,342</td><td class="r">$424</td></tr>
+        <tr><td>196 Dundas Street E (sold)</td><td class="r">$1,750,000</td><td class="r">5,101</td><td class="r">$343</td></tr>
+        <tr><td>342 Mountain Brow Road (sold, 1.7-ac estate)</td><td class="r">$2,300,000</td><td class="r">4,392</td><td class="r">$524</td></tr>
+        <tr><td>81 Flanders Drive (active, unsold)</td><td class="r">$2,399,000</td><td class="r">4,887</td><td class="r">$491</td></tr>
+        <tr><td>9 Flanders Drive (cancelled)</td><td class="r">$2,299,900</td><td class="r">5,318</td><td class="r">$432</td></tr>
+        <tr class="subj"><td>77 Flanders Drive @ $1,999,900</td><td class="r">$1,999,900</td><td class="r">~5,300–5,600*</td><td class="r">~$360–$377</td></tr>
+      </tbody></table>
+      <p style="font-size:12px;color:var(--muted);margin-top:-16px;margin-bottom:22px;">*4,303 sq ft above grade (MPAC, including ADU) plus finished basement, to be confirmed on measurement. On above-grade area alone, $1,999,900 equals $465/sq ft.</p>
+      <p style="font-size:14px;">On a per-square-foot basis, $1,999,900 lands <strong>between the standard-lot closed benchmarks</strong> — above the compromised Dundas Street sale, below the smaller but more polished 116 Grindstone — well under the $524/sq ft the estate sale achieved, and comfortably below the $430–490/sq ft asks the market is currently rejecting on this street. That is exactly where a large, well-located home with mostly original finishes and a premium ADU should sit. The largely 2014-era interior is the reason not to reach higher; the ADU, conservation backing, and cul-de-sac are the reasons not to price lower.</p>
+      <div class="range-wrap">
+        <div class="range-bar">
+          <div class="range-marker" style="left:12%">$1,940,000</div>
+          <div class="range-marker" style="left:52%">$1,999,900</div>
+          <div class="range-marker" style="left:88%">$2,050,000</div>
+        </div>
+        <div class="range-labels"><span>Conservative</span><span>Estimated Fair Value Range</span><span>Optimistic</span></div>
+      </div>
+      <div class="reco">
+        <div class="lbl">Recommended List Price</div>
+        <div class="num">$1,999,900</div>
+        <div class="why">Positioned above every closed sale on the strength of the ADU and lot, below the stalled $2.3M+ tier, and inside the under-$2,000,000 search band that captures both buyer pools.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAKEAWAYS -->
+  <div class="takeaways">
+    <div class="kicker">Summary</div>
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li><strong>$1,999,900 is the recommended list price.</strong> It is supported by the $1,840,000 sale of the near-identical 116 Grindstone Way plus a defensible premium for the 1,000 sq ft ADU, larger above-grade area, and Bruce Trail conservancy backing.</li>
+      <li><strong>No comparable home on a standard lot has closed above $1,840,000 in the past 400 days.</strong> The lone sale above that — 342 Mountain Brow at $2,300,000 — was a 1.7-acre estate with a pool, and even it settled $195,000 below ask. Pricing at the top of the range ($2,049,900) would rely on features carrying the day against no direct closed-sale support — a risk this market is actively punishing.</li>
+      <li><strong>Flanders Drive itself is proving where the ceiling is.</strong> 81 Flanders has accumulated 150 days at $2,399,000 and 9 Flanders was cancelled at $2,299,900 after 64 days. At $1,999,900, 77 Flanders is $300,000+ below both — a compelling value story against larger, more updated homes.</li>
+      <li><strong>Overpricing costs real money here.</strong> The average sale closed at 94.5% of final list; three of the four sellers gave up $195,000–$257,000 from their original asking prices, while sharply priced 136 Grindstone sold in 24 days at 98.9% of ask.</li>
+      <li><strong>Timing: the September 14 launch means competing head-to-head with 9 Flanders.</strong> The listing agent confirms it relists at a reduced price after Labour Day, so expect it live — likely around $2.2M — when 77 Flanders hits the market. That makes the $1,999,900 position even more important: buyers comparing the two on the same street will see 77 Flanders at $200,000+ less, under the $2M search threshold, with a legal ADU that 9 Flanders can't match. A mid-September launch also catches the fall market at full strength, with buyers re-engaged after summer.</li>
+      <li><strong>The ADU is the differentiator — and it's legal, permitted, and fully above grade.</strong> A self-contained 1,000 sq ft two-storey suite with full kitchen is nearly unique in current Waterdown inventory. Marketing should lead with the permits in hand — a documented legal ADU commands a premium a basement conversion never could.</li>
+      <li><strong>Under $2,000,000 matters mechanically.</strong> $1,999,900 keeps the listing visible in both the $1.5–2M and around-$2M search bands, maximizing exposure at launch — when it counts most.</li>
+    </ul>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="brandline">Woolcott Real Estate • RE/MAX Escarpment Realty Inc.</div>
+    <div class="agent">Prepared by Justine Woolcott, Salesperson • 905.689.9223</div>
+    <div class="disclaimer">The information contained herein has been obtained from sources believed to be reliable but is not guaranteed. This analysis is intended to provide general market context and should not be relied upon as a formal appraisal. All data sourced from the Cornerstone Association of REALTORS® MLS® System. Information deemed reliable but not guaranteed.</div>
+  </div>
+
+</div>
+
+
+</body></html>

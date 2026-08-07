@@ -1,0 +1,573 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Analysis — 303 Webster Road, Hamilton</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1a2332;
+    --slate:#2d3a4a;
+    --gold:#c8a45c;
+    --light:#e8d5a0;
+    --bg:#f5f2ec;
+    --white:#ffffff;
+    --red:#c44040;
+    --green:#3a8a5c;
+    --muted:#7a8694;
+    --border:#ddd5c8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--bg);
+    color:var(--slate);
+    line-height:1.6;
+    font-size:16px;
+  }
+  .report{max-width:900px;margin:0 auto;background:var(--white);box-shadow:0 2px 30px rgba(26,35,50,0.08);}
+  h1,h2,h3,.serif{font-family:'DM Serif Display',Georgia,serif;font-weight:400;}
+
+  /* ---------- HEADER ---------- */
+  .masthead{background:var(--navy);color:var(--white);padding:48px 56px 44px;position:relative;}
+  .masthead:after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,var(--gold) 0%,var(--light) 100%);}
+  .eyebrow{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px;}
+  .masthead h1{font-size:42px;line-height:1.08;letter-spacing:-0.5px;margin-bottom:6px;}
+  .masthead .sub{font-size:18px;color:var(--light);font-style:italic;margin-bottom:24px;}
+  .masthead .meta{display:flex;flex-wrap:wrap;gap:6px 28px;font-size:13px;color:#c3ccd6;border-top:1px solid rgba(255,255,255,0.12);padding-top:18px;}
+  .masthead .meta strong{color:var(--white);font-weight:600;}
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  .section{padding:42px 56px;}
+  .section + .section{border-top:1px solid var(--border);}
+  .label{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;}
+  .section h2{font-size:30px;color:var(--navy);line-height:1.15;margin-bottom:8px;}
+  .lead{font-size:16.5px;color:var(--slate);max-width:64ch;}
+  p{margin-bottom:14px;}
+  p:last-child{margin-bottom:0;}
+  .note{font-size:12.5px;color:var(--muted);font-style:italic;}
+
+  /* ---------- SUBJECT SNAPSHOT ---------- */
+  .subject{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-top:22px;}
+  .subject .cell{padding:16px 20px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .subject .cell:nth-child(2n){border-right:none;}
+  .subject .cell .k{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:3px;}
+  .subject .cell .v{font-size:16px;color:var(--navy);font-weight:600;}
+  .subject .cell .v small{font-weight:400;color:var(--slate);font-size:13px;}
+  .tagrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
+  .tag{font-size:12.5px;padding:5px 12px;border-radius:20px;font-weight:600;}
+  .tag.pos{background:rgba(58,138,92,0.12);color:var(--green);}
+  .tag.neg{background:rgba(196,64,64,0.10);color:var(--red);}
+
+  /* ---------- THEN vs NOW ---------- */
+  .thennow{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0 8px;}
+  .tn-card{border:1px solid var(--border);border-radius:8px;padding:20px 22px;background:var(--white);}
+  .tn-card.now{border-color:var(--gold);background:rgba(200,164,92,0.06);}
+  .tn-card .tn-k{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:6px;}
+  .tn-card.now .tn-k{color:#8a6d24;}
+  .tn-card .tn-v{font-family:'DM Serif Display',serif;font-size:27px;color:var(--navy);line-height:1.1;}
+  .tn-card .tn-s{font-size:12.5px;color:var(--slate);margin-top:6px;}
+  .evrow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:18px;}
+  .ev{border-left:3px solid var(--gold);padding:4px 0 4px 14px;}
+  .ev .ev-n{font-family:'DM Serif Display',serif;font-size:21px;color:var(--navy);line-height:1.15;}
+  .ev .ev-c{font-size:12.5px;color:var(--slate);line-height:1.45;margin-top:3px;}
+
+  /* ---------- STATS BAR ---------- */
+  .stats{background:var(--slate);color:var(--white);display:grid;grid-template-columns:repeat(5,1fr);}
+  .stats .stat{padding:26px 12px;text-align:center;border-right:1px solid rgba(255,255,255,0.10);}
+  .stats .stat:last-child{border-right:none;}
+  .stats .num{font-family:'DM Serif Display',serif;font-size:28px;color:var(--gold);line-height:1;}
+  .stats .cap{font-size:10.5px;letter-spacing:1.1px;text-transform:uppercase;color:#c3ccd6;margin-top:8px;line-height:1.4;}
+
+  /* ---------- BAR CHART ---------- */
+  .chart{margin-top:26px;position:relative;}
+  .barrow{display:grid;grid-template-columns:172px 1fr;align-items:center;gap:10px;margin-bottom:9px;}
+  .blabel{font-size:12.5px;color:var(--slate);text-align:right;line-height:1.25;}
+  .blabel b{color:var(--navy);font-weight:700;display:block;}
+  .blabel small{color:var(--muted);font-size:11px;}
+  .btrack{position:relative;height:30px;background:rgba(221,213,200,0.35);border-radius:4px;overflow:visible;}
+  .bfill{position:absolute;left:0;top:0;bottom:0;border-radius:4px 3px 3px 4px;display:flex;align-items:center;justify-content:flex-end;padding-right:9px;min-width:64px;}
+  .bfill span{font-size:12px;font-weight:700;color:var(--white);white-space:nowrap;}
+  .bfill.sold{background:var(--slate);}
+  .bfill.pending{background:var(--gold);}
+  .bfill.pending span{color:var(--navy);}
+  .bfill.activebar{background:rgba(200,164,92,0.18);border:1.5px solid var(--gold);}
+  .bfill.activebar span{color:var(--navy);}
+  .bfill.pos-bar{background:rgba(45,58,74,0.45);border:1.5px dashed var(--red);}
+  .bfill.pos-bar span{color:var(--white);}
+  .chart-band{position:absolute;top:-6px;bottom:22px;background:rgba(58,138,92,0.10);border-left:2px dashed var(--green);border-right:2px dashed var(--green);z-index:0;pointer-events:none;}
+  .bandlbl{position:absolute;top:-24px;font-size:11px;font-weight:700;color:var(--green);white-space:nowrap;transform:translateX(-50%);}
+  .chart-axis{display:flex;justify-content:space-between;margin-left:182px;margin-top:6px;font-size:11px;color:var(--muted);}
+  .legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;font-size:12.5px;color:var(--slate);}
+  .legend i{display:inline-block;width:13px;height:13px;border-radius:3px;margin-right:6px;vertical-align:-2px;}
+  .l-sold{background:var(--slate);}
+  .l-pending{background:var(--gold);}
+  .l-active{background:rgba(200,164,92,0.18);border:1.5px solid var(--gold);}
+  .l-pos{background:rgba(45,58,74,0.45);border:1.5px dashed var(--red);}
+  .l-band{background:rgba(58,138,92,0.18);border:1px dashed var(--green);}
+
+  /* ---------- COMP TIERS ---------- */
+  .tier{margin-top:30px;}
+  .tier-head{display:flex;align-items:baseline;gap:14px;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:6px;flex-wrap:wrap;}
+  .tier-head .ttl{font-family:'DM Serif Display',serif;font-size:21px;color:var(--navy);}
+  .tier-head .rng{margin-left:auto;font-size:13.5px;font-weight:700;color:var(--gold);letter-spacing:0.5px;}
+  .tier-note{font-size:13.5px;color:var(--muted);margin-bottom:14px;font-style:italic;}
+  .comp{padding:16px 0 18px;border-bottom:1px solid var(--border);}
+  .comp:last-child{border-bottom:none;}
+  .comp-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  .comp-top .addr{font-size:17px;font-weight:700;color:var(--navy);}
+  .stat-pill{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;padding:2px 9px;border-radius:4px;}
+  .pill-closed{background:rgba(45,58,74,0.10);color:var(--slate);}
+  .pill-pending{background:rgba(200,164,92,0.22);color:#8a6d24;}
+  .comp-top .price{margin-left:auto;font-family:'DM Serif Display',serif;font-size:21px;color:var(--navy);white-space:nowrap;}
+  .comp-facts{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:12.5px;color:var(--muted);margin:5px 0 8px;}
+  .comp-facts b{color:var(--slate);font-weight:600;}
+  .comp-why{font-size:14px;color:var(--slate);line-height:1.55;max-width:74ch;}
+  .comp-why b{color:var(--navy);}
+  .comp-why .dn{color:var(--red);font-weight:600;}
+  .comp-why .up{color:var(--green);font-weight:600;}
+
+  /* ---------- ACTIVE CARDS ---------- */
+  .actives{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px;}
+  .acard{border:1px solid var(--border);border-radius:8px;padding:16px 18px;background:var(--white);display:flex;flex-direction:column;}
+  .acard.pos{border-color:rgba(196,64,64,0.45);background:rgba(196,64,64,0.03);}
+  .acard .ah{display:flex;align-items:baseline;gap:8px;}
+  .acard .aaddr{font-size:14.5px;font-weight:700;color:var(--navy);line-height:1.25;}
+  .acard .aprice{margin-left:auto;font-family:'DM Serif Display',serif;font-size:19px;color:var(--navy);white-space:nowrap;}
+  .abadges{margin:7px 0 9px;display:flex;flex-wrap:wrap;gap:6px;}
+  .abadge{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;padding:2px 8px;border-radius:4px;}
+  .abadge.cut{background:rgba(196,64,64,0.10);color:var(--red);}
+  .abadge.pos{background:var(--red);color:var(--white);}
+  .abadge.stale{background:rgba(122,134,148,0.15);color:var(--muted);}
+  .abadge.fresh{background:rgba(200,164,92,0.20);color:#8a6d24;}
+  .abadge.value{background:rgba(58,138,92,0.12);color:var(--green);}
+  .acard .afacts{font-size:11.5px;color:var(--muted);margin-bottom:8px;}
+  .acard .afacts b{color:var(--slate);font-weight:600;}
+  .acard .anote{font-size:12.5px;color:var(--slate);line-height:1.5;}
+  .acard .anote b{color:var(--navy);}
+
+  /* ---------- VALUATION ---------- */
+  .ppsf{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:24px;}
+  .vp{border:1px solid var(--border);border-radius:8px;padding:18px 20px;}
+  .vp .vk{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:5px;}
+  .vp .vn{font-family:'DM Serif Display',serif;font-size:26px;color:var(--navy);line-height:1.1;}
+  .vp .vc{font-size:12.5px;color:var(--slate);margin-top:6px;line-height:1.45;}
+  .vmath{margin-top:20px;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:6px;padding:16px 20px;font-size:14px;color:var(--slate);}
+  .vmath b{color:var(--navy);}
+  .rangebar{margin-top:34px;}
+  .rb-scale{position:relative;height:56px;}
+  .rb-track{position:absolute;left:0;right:0;top:24px;height:12px;background:rgba(221,213,200,0.55);border-radius:6px;}
+  .rb-band{position:absolute;top:16px;height:28px;background:linear-gradient(90deg,var(--gold),var(--light));border-radius:6px;box-shadow:0 2px 10px rgba(200,164,92,0.45);}
+  .rb-marker{position:absolute;top:0;width:2px;height:56px;background:var(--muted);opacity:0.55;}
+  .rb-mlabel{position:absolute;top:58px;font-size:11px;color:var(--muted);transform:translateX(-50%);white-space:nowrap;}
+  .rb-bandlbl{position:absolute;top:-14px;font-size:13px;font-weight:700;color:var(--navy);transform:translateX(-50%);white-space:nowrap;}
+  .rb-caption{margin-top:44px;font-size:13.5px;color:var(--slate);max-width:70ch;}
+  .strategy{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px;}
+  .strat{border:1px solid var(--border);border-radius:8px;padding:18px 20px;}
+  .strat.rec{border-color:var(--green);background:rgba(58,138,92,0.05);}
+  .strat .sk{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700;color:var(--muted);margin-bottom:5px;}
+  .strat.rec .sk{color:var(--green);}
+  .strat .sn{font-family:'DM Serif Display',serif;font-size:24px;color:var(--navy);}
+  .strat .sc{font-size:13px;color:var(--slate);margin-top:6px;line-height:1.5;}
+
+  /* ---------- TAKEAWAYS ---------- */
+  .takeaway{background:var(--navy);color:var(--white);padding:46px 56px 50px;position:relative;}
+  .takeaway:before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--gold) 0%,var(--light) 100%);}
+  .takeaway .label{color:var(--gold);}
+  .takeaway h2{color:var(--white);font-size:30px;margin-bottom:20px;}
+  .tk-list{list-style:none;}
+  .tk-list li{position:relative;padding:0 0 16px 30px;font-size:15px;color:#d5dbe3;line-height:1.6;}
+  .tk-list li:before{content:"";position:absolute;left:0;top:6px;width:14px;height:14px;border:2px solid var(--gold);border-radius:50%;}
+  .tk-list li b{color:var(--white);font-weight:700;}
+  .tk-list li .hl{color:var(--gold);font-weight:700;}
+
+  /* ---------- FOOTER ---------- */
+  .footer{background:var(--white);padding:32px 56px 40px;}
+  .footer .brand{font-family:'DM Serif Display',serif;font-size:20px;color:var(--navy);}
+  .footer .prep{font-size:14px;color:var(--slate);margin-top:4px;}
+  .footer .prep b{color:var(--navy);}
+  .disclaimer{margin-top:20px;padding-top:18px;border-top:1px solid var(--border);font-size:11px;line-height:1.55;color:var(--muted);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:680px){
+    .masthead,.section,.takeaway,.footer{padding-left:24px;padding-right:24px;}
+    .masthead h1{font-size:31px;}
+    .section h2,.takeaway h2{font-size:24px;}
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .subject,.thennow,.evrow,.ppsf,.strategy,.actives{grid-template-columns:1fr;}
+    .subject .cell{border-right:none;}
+    .barrow{grid-template-columns:110px 1fr;}
+    .blabel{font-size:11px;}
+    .chart-axis{margin-left:120px;}
+    .comp-top .price{margin-left:0;}
+    .tier-head .rng{margin-left:0;width:100%;}
+  }
+  @media print{
+    body{background:#fff;}
+    .report{box-shadow:none;max-width:100%;}
+  }
+</style>
+</head>
+<body>
+<div class="report">
+
+  <!-- ============ HEADER ============ -->
+  <header class="masthead">
+    <div class="eyebrow">Comparative Market Analysis &middot; Updated Valuation</div>
+    <h1>303 Webster Road</h1>
+    <div class="sub">Hamilton (Stoney Creek), Ontario &mdash; Gershome, Hamilton East</div>
+    <div class="meta">
+      <span><strong>Prepared exclusively for</strong> the owners of 303 Webster Road</span>
+      <span><strong>Date</strong> August 2, 2026</span>
+      <span><strong>Analyst</strong> Justine Woolcott</span>
+      <span><strong>Prior CMA</strong> March 2025</span>
+    </div>
+  </header>
+
+  <!-- ============ SUBJECT SNAPSHOT ============ -->
+  <section class="section">
+    <div class="label">The Property</div>
+    <h2>An upgraded Escarpment-backing home on a quiet dead-end street</h2>
+    <p class="lead">303 Webster Road offers the combination buyers in Gershome pay a premium for: a professionally landscaped lot that backs directly onto the Escarpment with no rear neighbours, an inground pool wrapped in stamped concrete, recent upgrades throughout, and a quiet dead-end street setting. The question this report answers is what that combination is worth in <i>today&rsquo;s</i> market &mdash; which has moved meaningfully since we last spoke in March 2025.</p>
+
+    <div class="subject">
+      <div class="cell"><div class="k">Style</div><div class="v">Detached 2-storey <small>&middot; Gershome (Hamilton 28 &ndash; 283)</small></div></div>
+      <div class="cell"><div class="k">Beds / Baths</div><div class="v">3 + 1 bed &middot; 3 bath <small>incl. primary ensuite</small></div></div>
+      <div class="cell"><div class="k">Approx. Size</div><div class="v">&asymp;2,000 sq ft AG <small>+ finished lower (&asymp;2,700 total; to be confirmed by measurement)</small></div></div>
+      <div class="cell"><div class="k">Lot</div><div class="v">Backs onto Escarpment <small>&middot; no rear neighbours &middot; Lot 23, Plan 62M965</small></div></div>
+      <div class="cell"><div class="k">Outdoor</div><div class="v">Inground pool <small>&middot; stamped concrete &middot; professionally landscaped</small></div></div>
+      <div class="cell"><div class="k">Parking</div><div class="v">Attached garage <small>+ double-wide private drive (4 spaces)</small></div></div>
+      <div class="cell"><div class="k">Condition</div><div class="v">Recent upgrades throughout <small>&middot; move-in ready</small></div></div>
+      <div class="cell"><div class="k">Street</div><div class="v">Quiet dead-end street <small>&middot; steps to Escarpment trails</small></div></div>
+    </div>
+
+    <div class="tagrow">
+      <span class="tag pos">Backs onto Escarpment &middot; no rear neighbours</span>
+      <span class="tag pos">Inground pool</span>
+      <span class="tag pos">Recent upgrades throughout</span>
+      <span class="tag pos">Quiet dead-end street</span>
+      <span class="tag pos">Full 3+1 layout with finished lower level</span>
+      <span class="tag neg">Thin buyer pool at this price point</span>
+      <span class="tag neg">Heavy active competition ($880K&ndash;$1.19M)</span>
+    </div>
+  </section>
+
+  <!-- ============ THEN VS NOW ============ -->
+  <section class="section">
+    <div class="label">Since We Last Spoke</div>
+    <h2>The March 2025 estimate, revisited honestly</h2>
+    <p class="lead">In March 2025 we valued 303 Webster at <b>$1,100,000&ndash;$1,175,000</b>, and that was the right number for that market. Roughly sixteen months later, the evidence says Hamilton East has softened &mdash; not collapsed, but repriced &mdash; and an honest update matters more than a comfortable one. Three independent lines of evidence all point the same direction.</p>
+
+    <div class="thennow">
+      <div class="tn-card">
+        <div class="tn-k">March 2025 CMA</div>
+        <div class="tn-v">$1,100,000 &ndash; $1,175,000</div>
+        <div class="tn-s">Supported by early-2025 comparables, before the spring-2025 repricing worked through the east end.</div>
+      </div>
+      <div class="tn-card now">
+        <div class="tn-k">August 2026 &mdash; This Report</div>
+        <div class="tn-v">$1,000,000 &ndash; $1,050,000</div>
+        <div class="tn-s">An adjustment of roughly 9&ndash;11% &mdash; consistent with the benchmark data and with what actually sold.</div>
+      </div>
+    </div>
+
+    <div class="evrow">
+      <div class="ev">
+        <div class="ev-n">$1,047K&ndash;$1,070K</div>
+        <div class="ev-c">Where the HPI benchmark for this segment now sits, depending on which 2025 baseline is used &mdash; squarely below the 2025 range.</div>
+      </div>
+      <div class="ev">
+        <div class="ev-n">16 sales / 365 days</div>
+        <div class="ev-c">Detached 2-storey sales in all of Hamilton 28 over the past year. A thin market: fewer buyers, longer decisions, less pricing power.</div>
+      </div>
+      <div class="ev">
+        <div class="ev-n">$1.36M &rarr; $1,065,000</div>
+        <div class="ev-c">136 Country Club Drive: listed April 2025 at 2025 expectations, then followed the market down for 230 days before closing in December.</div>
+      </div>
+    </div>
+
+    <p style="margin-top:20px;">The point of this section isn&rsquo;t the smaller number &mdash; it&rsquo;s what the sellers who ignored it went through. The two homes in this comp set that priced at 2025 levels (136 Country Club, 100 National) each spent <b>200+ days on market</b> and gave up <b>over $290,000</b> from their original asks before selling. The one that priced at 2026 levels (72 National) sold <b>over asking in 11 days</b>. That contrast is the entire pricing strategy for 303 Webster.</p>
+  </section>
+
+  <!-- ============ STATS BAR ============ -->
+  <div class="stats">
+    <div class="stat"><div class="num">$940,432</div><div class="cap">Avg Sold Price &middot; 9 comps</div></div>
+    <div class="stat"><div class="num">94.8%</div><div class="cap">Avg SP / Final List</div></div>
+    <div class="stat"><div class="num">89.5%</div><div class="cap">Avg SP / Original List</div></div>
+    <div class="stat"><div class="num">83</div><div class="cap">Avg CDOM (days)</div></div>
+    <div class="stat"><div class="num">7</div><div class="cap">Active Competitors</div></div>
+  </div>
+
+  <!-- ============ SOLD PRICE CHART ============ -->
+  <section class="section">
+    <div class="label">Visual Comparison</div>
+    <h2>Where the market actually transacted</h2>
+    <p class="lead">Every recent sold (slate) and pending (gold) detached two-storey in the comparable set, sorted by price. The green band is the fair-value range for 303 Webster. Note where the band sits: above the mainstream family-home cluster, below only the premium-lot sales &mdash; exactly where an upgraded Escarpment-backing pool home belongs.</p>
+
+    <div class="chart">
+      <!-- scale $750K -> 0% ... $1,150K -> 100%; span $400K. Band $1.00M-$1.05M = 62.5% to 75% of track -->
+      <div class="chart-band" style="left:calc(182px + (100% - 182px)*0.625);width:calc((100% - 182px)*0.125);"></div>
+      <div class="bandlbl" style="left:calc(182px + (100% - 182px)*0.6875);">Fair value $1.00M&ndash;$1.05M</div>
+
+      <div class="barrow"><div class="blabel"><b>176 Montmorency Dr</b><small>Red Hill &middot; Dec 2025</small></div><div class="btrack"><div class="bfill sold" style="width:12.5%;"><span>$800,000</span></div></div></div>
+      <div class="barrow"><div class="blabel"><b>357 Saint Andrews Dr</b><small>Vincent &middot; Sep 2025</small></div><div class="btrack"><div class="bfill sold" style="width:12.5%;"><span>$800,000</span></div></div></div>
+      <div class="barrow"><div class="blabel"><b>1012 Greenhill Ave</b><small>Gershome &middot; Mar 2026</small></div><div class="btrack"><div class="bfill sold" style="width:37%;"><span>$898,000</span></div></div></div>
+      <div class="barrow"><div class="blabel"><b>19 National Dr</b><small>Gershome &middot; Feb 2026</small></div><div class="btrack"><div class="bfill sold" style="width:37.5%;"><span>$900,000</span></div></div></div>
+      <div class="barrow"><div class="blabel"><b>452 Quigley Rd</b><small>Gershome &middot; Nov 2025</small></div><div class="btrack"><div class="bfill sold" style="width:38.75%;"><span>$905,000</span></div></div></div>
+      <div class="barrow"><div class="blabel"><b>126 Forest Hill Cres</b><small>Red Hill &middot; closes Aug 2026</small></div><div class="btrack"><div class="bfill pending" style="width:43.75%;"><span>$925,000</span></div></div></div>
+      <div class="barrow"><div class="blabel"><b>136 Country Club Dr</b><small>Gershome &middot; Dec 2025</small></div><div class="btrack"><div class="bfill sold" style="width:78.75%;"><span>$1,065,000</span></div></div></div>
+      <div class="barrow"><div class="blabel"><b>100 National Dr</b><small>Gershome &middot; May 2026</small></div><div class="btrack"><div class="bfill sold" style="width:80%;"><span>$1,070,000</span></div></div></div>
+      <div class="barrow"><div class="blabel"><b>72 National Dr</b><small>Gershome &middot; Jul 2026</small></div><div class="btrack"><div class="bfill sold" style="width:87.75%;"><span>$1,100,888</span></div></div></div>
+
+      <div class="chart-axis"><span>$750K</span><span>$850K</span><span>$950K</span><span>$1.05M</span><span>$1.15M</span></div>
+    </div>
+
+    <div class="legend">
+      <span><i class="l-sold"></i>Sold (closed)</span>
+      <span><i class="l-pending"></i>Pending</span>
+      <span><i class="l-band"></i>303 Webster fair-value range</span>
+    </div>
+  </section>
+
+  <!-- ============ COMP ANALYSIS ============ -->
+  <section class="section">
+    <div class="label">Comparable Analysis</div>
+    <h2>Three tiers &mdash; and 303 Webster belongs in the top one</h2>
+    <p class="lead">Nine recent sold and pending detached two-storeys across Hamilton East tell a consistent story: ordinary homes trade in the $800Ks and low $900Ks; premium lots &mdash; ravine, Escarpment, golf frontage, pools &mdash; earn $1.06M&ndash;$1.10M, but only when priced to today&rsquo;s market.</p>
+
+    <!-- TIER 1 -->
+    <div class="tier">
+      <div class="tier-head"><span class="ttl">The premium-lot tier</span><span class="rng">$1,065,000 &ndash; $1,100,888</span></div>
+      <div class="tier-note">Homes with the same "irreplaceable lot" story as 303 Webster. This is the subject&rsquo;s true peer group &mdash; and it contains both the cautionary tales and the blueprint.</div>
+
+      <div class="comp">
+        <div class="comp-top"><span class="addr">72 National Drive</span><span class="stat-pill pill-closed">Closed Jul 14, 2026</span><span class="price">$1,100,888</span></div>
+        <div class="comp-facts"><span>Gershome</span><span><b>4</b> bed / <b>3</b> bath</span><span><b>2,775</b> sq ft finished</span><span><b>100%</b> of ask</span><span><b>11</b> days</span><span>$397/sq ft</span></div>
+        <div class="comp-why"><b>The single most important comp in this report &mdash; and the most recent.</b> A 1988 Losani on a 215-foot ravine lot with an inground pool, no rear neighbours, and gated ravine access: the closest lifestyle match to 303 Webster in the entire data set. Listed at $1,099,900 in April 2026 &mdash; a price that respected the current market &mdash; it went conditional in 4 days and closed <span class="up">$988 over asking</span>. It proves two things at once: buyers will still pay $1.1M for the Escarpment/ravine-and-pool package, and they&rsquo;ll only do it when the ask doesn&rsquo;t make them negotiate down from a 2025 number. Where 72 National edges out our subject is its 215-ft lot depth and 2-car garage; 303 Webster answers with more recent interior upgrades and the dead-end street.</div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-top"><span class="addr">100 National Drive</span><span class="stat-pill pill-closed">Closed May 1, 2026</span><span class="price">$1,070,000</span></div>
+        <div class="comp-facts"><span>Gershome</span><span><b>5+3</b> bed / <b>3</b> bath</span><span><b>3,373</b> sq ft AG (+2,093 unfinished)</span><span><b>93%</b> of final ask</span><span><b>209</b> CDOM</span><span>$317/sq ft</span></div>
+        <div class="comp-why">A much bigger house than the subject &mdash; nearly 3,400 sq ft above grade with a 2025-renovated kitchen, backing onto mature greenery. Its price history is a case study in chasing the market: <span class="dn">launched at $1,379,000 in August 2025, cancelled, relisted at $1,295,000, expired, relisted again at $1,149,000</span> &mdash; and only then sold, in 15 days, at $1,070,000. Nine months and $309,000 of ask separated the 2025 expectation from the 2026 result. It also tells us that sheer size doesn&rsquo;t rescue an aspirational price: this 3,373 sq ft home couldn&rsquo;t out-earn 72 National&rsquo;s 2,275 sq ft ravine package by more than a rounding error.</div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-top"><span class="addr">136 Country Club Drive</span><span class="stat-pill pill-closed">Closed Dec 22, 2025</span><span class="price">$1,065,000</span></div>
+        <div class="comp-facts"><span>Gershome &middot; Glendale Golf frontage</span><span><b>4</b> bed / <b>4</b> bath</span><span><b>3,512</b> sq ft finished</span><span><b>78%</b> of original ask</span><span><b>230</b> CDOM</span><span>$303/sq ft</span></div>
+        <div class="comp-why">The comp that best documents the 2025&rarr;2026 repricing. A well-kept Cape Cod on an 88-foot lot overlooking the golf course &mdash; a genuinely special property &mdash; listed in <b>April 2025 at $1,360,000</b>, right in line with where the market had been. Five price cuts, two collapsed conditional deals and 230 days later, it closed at <span class="dn">$1,065,000 &mdash; $295,000 below the original ask</span>. Worth noting for our purposes: its inground pool had not been operational for years and sold as-is, and the furnace/AC were rentals. 303 Webster&rsquo;s functioning pool and recent upgrades are exactly the deficiencies this sale was discounted for &mdash; which is why the subject can defend the same price bracket in a smaller footprint.</div>
+      </div>
+    </div>
+
+    <!-- TIER 2 -->
+    <div class="tier">
+      <div class="tier-head"><span class="ttl">The mainstream family-home tier</span><span class="rng">$898,000 &ndash; $925,000</span></div>
+      <div class="tier-note">Solid Gershome and Red Hill family homes without the full premium-lot package &mdash; or with it, but in original condition. This tier defines the floor beneath 303 Webster.</div>
+
+      <div class="comp">
+        <div class="comp-top"><span class="addr">126 Forest Hill Crescent</span><span class="stat-pill pill-pending">Pending &middot; closes Aug 12, 2026</span><span class="price">$925,000</span></div>
+        <div class="comp-facts"><span>Red Hill</span><span><b>4</b> bed / <b>2</b> bath</span><span><b>3,266</b> sq ft finished</span><span><b>93%</b> of ask</span><span><b>12</b> days</span><span>Pie lot 13,778 sq ft</span></div>
+        <div class="comp-why">The freshest data point on where buyers are <i>right now</i> &mdash; sold firm in May 2026 after just 12 days. A one-owner custom home on a premium pie-shaped lot with walk-out basement and in-law potential, but sold as-is in largely original condition with only 2 bathrooms. Buyers paid $925,000 for the lot and the potential, discounting for the work ahead. 303 Webster offers a comparable lot story <i>plus</i> the pool <i>plus</i> the updating already done &mdash; the gap between $925,000 and our range is, in effect, the market&rsquo;s price for those three finished items.</div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-top"><span class="addr">452 Quigley Road</span><span class="stat-pill pill-closed">Closed Nov 20, 2025</span><span class="price">$905,000</span></div>
+        <div class="comp-facts"><span>Gershome</span><span><b>3+1</b> bed / <b>4</b> bath</span><span><b>2,577</b> sq ft finished</span><span><b>91%</b> of ask</span><span><b>107</b> days</span><span>$351/sq ft</span></div>
+        <div class="comp-why"><b>The most instructive "same lot, different condition" comparison available.</b> A one-owner 1971 custom backing onto ravine and hugging the forested Escarpment &mdash; no rear neighbours, steps to Felker and Little Davis Falls &mdash; virtually the identical setting story to 303 Webster. But inside it was a time capsule: original kitchen, broadloom, wood-panelled basement. It listed at $999,000 and needed 107 days and a <span class="dn">9% discount</span> to find its buyer at $905,000. This sale isolates the value of the Escarpment lot itself (&asymp;$905K in dated condition) and hands us a clean framework: the subject&rsquo;s recent upgrades and functioning pool are what carry it from Quigley&rsquo;s result up into the $1.0M+ bracket.</div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-top"><span class="addr">19 National Drive</span><span class="stat-pill pill-closed">Closed Feb 26, 2026</span><span class="price">$900,000</span></div>
+        <div class="comp-facts"><span>Gershome</span><span><b>4+1</b> bed / <b>4</b> bath</span><span><b>3,050</b> sq ft finished</span><span><b>97%</b> of final ask</span><span><b>71</b> days</span><span>$295/sq ft</span></div>
+        <div class="comp-why">A 1989 family home with a basement in-law suite and separate entrance &mdash; but positioned in a less desirable pocket of National Drive, without the deep ravine backing that carried 72 and 100 National, and with an above-ground (not inground) pool and leased furnace/AC. It needed a price cut and 71 days to close at $900,000. The $200,888 spread between 19 National and 72 National &mdash; the same street, five months apart &mdash; is the cleanest measurement in this report of what the premium-lot package is worth in Gershome. 303 Webster sits on the right side of that spread.</div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-top"><span class="addr">1012 Greenhill Avenue</span><span class="stat-pill pill-closed">Closed Mar 31, 2026</span><span class="price">$898,000</span></div>
+        <div class="comp-facts"><span>Gershome</span><span><b>4</b> bed / <b>5</b> bath</span><span><b>4,029</b> sq ft finished</span><span><b>90%</b> of ask</span><span><b>23</b> days</span><span>$223/sq ft</span></div>
+        <div class="comp-why">The largest home in the set &mdash; a 4,029 sq ft custom with a 5-piece primary ensuite, second-bedroom ensuite and finished lower level with wet bar and separate entrance &mdash; yet it closed at $898,000, <span class="dn">10% under its $995,000 ask</span>, on a conventional interior lot on busier Greenhill Avenue. Read alongside the premium-lot tier, the message is unambiguous: in this market, <b>lot and setting are out-earning square footage</b>. That dynamic runs directly in 303 Webster&rsquo;s favour.</div>
+      </div>
+    </div>
+
+    <!-- TIER 3 -->
+    <div class="tier">
+      <div class="tier-head"><span class="ttl">The established-neighbourhood floor</span><span class="rng">$800,000</span></div>
+      <div class="tier-note">Older-stock Hamilton East two-storeys. Not direct competitors, but they anchor the bottom of the buyer&rsquo;s search results and frame the overall market.</div>
+
+      <div class="comp">
+        <div class="comp-top"><span class="addr">176 Montmorency Drive</span><span class="stat-pill pill-closed">Closed Dec 5, 2025</span><span class="price">$800,000</span></div>
+        <div class="comp-facts"><span>Red Hill</span><span><b>4</b> bed / <b>3</b> bath</span><span><b>1,995</b> sq ft AG</span><span><b>84%</b> of original ask</span><span><b>64</b> days</span><span>Ravine lot &middot; no garage</span></div>
+        <div class="comp-why">A lovingly maintained 1975 one-owner home on a picturesque ravine lot with a walk-out basement &mdash; but no garage and a largely original interior. Its history repeats the pattern: <span class="dn">listed at $949,000, cut to $849,000, closed at $800,000</span> &mdash; 84 cents on the original dollar. Even a ravine setting can&rsquo;t carry a 2025-style ask when condition doesn&rsquo;t back it up.</div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-top"><span class="addr">357 Saint Andrews Drive</span><span class="stat-pill pill-closed">Closed Sep 26, 2025</span><span class="price">$800,000</span></div>
+        <div class="comp-facts"><span>Vincent</span><span><b>3</b> bed / <b>3</b> bath</span><span><b>2,627</b> sq ft finished</span><span><b>98%</b> of ask</span><span><b>24</b> days</span><span>$305/sq ft</span></div>
+        <div class="comp-why">The counter-example that proves pricing discipline works at every price point: a tastefully updated 1970 two-storey (modern kitchen, renovated baths, updated windows) priced realistically at $824,900 and sold in 24 days at 98% of ask. Updated-and-well-priced moves quickly; it simply tops out around $800K without the lot premium. It confirms that 303 Webster&rsquo;s upgrades alone aren&rsquo;t what justify seven figures &mdash; it&rsquo;s the upgrades <b>on that lot</b>.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ACTIVE COMPETITION ============ -->
+  <section class="section">
+    <div class="label">Active Competition</div>
+    <h2>Seven competitors &mdash; and three of them aren&rsquo;t really setting the market</h2>
+    <p class="lead">This is the shelf a buyer sees today in Gershome. The gold outlines below are asking prices, not values &mdash; and the record matters: the group has been sitting an average of <b>109 days</b>, and not one has sold. Critically, the three highest-priced listings are all <b>Power of Sale</b> properties where showing activity is confirmed to be very slow &mdash; motivated, lender-driven inventory, not evidence of what buyers will pay.</p>
+
+    <div class="chart" style="margin-top:34px;">
+      <!-- scale $850K -> 0% ... $1,200K -> 100%; span $350K. Band $1.00M-$1.05M = 42.86% to 57.14% -->
+      <div class="chart-band" style="left:calc(182px + (100% - 182px)*0.4286);width:calc((100% - 182px)*0.1428);"></div>
+      <div class="bandlbl" style="left:calc(182px + (100% - 182px)*0.50);">Fair value $1.00M&ndash;$1.05M</div>
+
+      <div class="barrow"><div class="blabel"><b>11 Gabriele Crt</b><small>42 DOM</small></div><div class="btrack"><div class="bfill activebar" style="width:8.5%;"><span>$879,900</span></div></div></div>
+      <div class="barrow"><div class="blabel"><b>15 Gabriele Crt</b><small>156 CDOM</small></div><div class="btrack"><div class="bfill activebar" style="width:11.4%;"><span>$889,900</span></div></div></div>
+      <div class="barrow"><div class="blabel"><b>48 Nashville Cir</b><small>106 CDOM</small></div><div class="btrack"><div class="bfill activebar" style="width:41.4%;"><span>$994,999</span></div></div></div>
+      <div class="barrow"><div class="blabel"><b>36 Tommar Pl</b><small>81 DOM</small></div><div class="btrack"><div class="bfill activebar" style="width:57.1%;"><span>$1,049,900</span></div></div></div>
+      <div class="barrow"><div class="blabel"><b>43 Riesling Crt</b><small>246 CDOM &middot; POS</small></div><div class="btrack"><div class="bfill pos-bar" style="width:70%;"><span>$1,095,000</span></div></div></div>
+      <div class="barrow"><div class="blabel"><b>7 Chardonnay St</b><small>66 DOM &middot; POS</small></div><div class="btrack"><div class="bfill pos-bar" style="width:85.7%;"><span>$1,149,900</span></div></div></div>
+      <div class="barrow"><div class="blabel"><b>27 Riesling Crt</b><small>64 CDOM &middot; POS</small></div><div class="btrack"><div class="bfill pos-bar" style="width:96.9%;"><span>$1,189,000</span></div></div></div>
+
+      <div class="chart-axis"><span>$850K</span><span>$937K</span><span>$1.025M</span><span>$1.11M</span><span>$1.2M</span></div>
+    </div>
+    <div class="legend">
+      <span><i class="l-active"></i>Active &mdash; asking price</span>
+      <span><i class="l-pos"></i>Active &mdash; Power of Sale</span>
+      <span><i class="l-band"></i>303 Webster fair-value range</span>
+    </div>
+
+    <div class="actives">
+      <div class="acard">
+        <div class="ah"><span class="aaddr">11 Gabriele Court</span><span class="aprice">$879,900</span></div>
+        <div class="abadges"><span class="abadge value">Value tier</span><span class="abadge fresh">Estate sale &middot; vacant</span></div>
+        <div class="afacts"><b>3</b> bed / <b>3</b> bath &middot; <b>2,481</b> sq ft finished (1,903 AG) &middot; 1990 &middot; <b>42</b> DOM</div>
+        <div class="anote">Well-kept estate sale on a quiet court with a second kitchen and in-law potential. It sets the entry point for the neighbourhood, but with 3 beds, dated finishes and a standard lot, it isn&rsquo;t competing for 303 Webster&rsquo;s buyer &mdash; it defines what <b>$880K buys without the premium lot</b>.</div>
+      </div>
+      <div class="acard">
+        <div class="ah"><span class="aaddr">15 Gabriele Court</span><span class="aprice">$889,900</span></div>
+        <div class="abadges"><span class="abadge cut">Cut from $899,900</span><span class="abadge stale">156 days combined</span></div>
+        <div class="afacts"><b>3+1</b> bed / <b>4</b> bath &middot; <b>2,876</b> sq ft finished &middot; 1989 &middot; garage converted to office &middot; <b>73</b> DOM this listing</div>
+        <div class="anote">In-law suite, sauna, and California shutters &mdash; but this is its <b>second listing attempt since February</b> (an earlier try at $899,900 was cancelled), and it previously chased $1,150,000 in 2023. A home the market has repeatedly repriced; its 156 combined days show buyers aren&rsquo;t rushing even at $890K.</div>
+      </div>
+      <div class="acard">
+        <div class="ah"><span class="aaddr">48 Nashville Circle</span><span class="aprice">$994,999</span></div>
+        <div class="abadges"><span class="abadge stale">106 days combined</span><span class="abadge cut">Relist of $999,000</span></div>
+        <div class="afacts"><b>3+3</b> bed / <b>5</b> bath &middot; <b>2,176</b> sq ft AG &middot; legal 2-bed apartment + in-law suite &middot; <b>106</b> CDOM</div>
+        <div class="anote">Renovated with cathedral ceilings and a legal basement apartment &mdash; a genuine income story, and the closest active to our range. Yet even with that rental math, it has sat <b>106 combined days</b> across two attempts just under $1M. The income-property buyer and the Escarpment-lifestyle buyer are different people; this listing pressures neither our range nor our story.</div>
+      </div>
+      <div class="acard">
+        <div class="ah"><span class="aaddr">36 Tommar Place</span><span class="aprice">$1,049,900</span></div>
+        <div class="abadges"><span class="abadge stale">81 days &middot; 4th attempt since 2025</span></div>
+        <div class="afacts"><b>4</b> bed / <b>4</b> bath &middot; <b>2,708</b> sq ft AG &middot; 1989 one-owner &middot; 84-ft lot &middot; <b>81</b> DOM</div>
+        <div class="anote"><b>The subject&rsquo;s most direct active competitor.</b> An impeccably maintained one-owner executive with a finished basement, on a big irregular lot &mdash; but on its fourth listing attempt, down from $1,149,900 in 2025, and still unsold after 81 days at the top of our band. It shows the ceiling clearly: at $1,049,900 <i>without</i> an Escarpment backing or pool, buyers hesitate. With them, the same number becomes defensible.</div>
+      </div>
+      <div class="acard pos">
+        <div class="ah"><span class="aaddr">43 Riesling Court</span><span class="aprice">$1,095,000</span></div>
+        <div class="abadges"><span class="abadge pos">Power of Sale</span><span class="abadge stale">246 days combined</span></div>
+        <div class="afacts"><b>4+1</b> bed / <b>4</b> bath &middot; <b>2,629</b> sq ft AG &middot; 2018 build &middot; vacant &middot; <b>95</b> DOM this listing</div>
+        <div class="anote">A newer executive sold "as is, where is" under Power of Sale, on its second consecutive listing (246 combined days) after failed attempts as high as $1,399,990 in 2024. Agents confirm showings are very slow. A lender clearing a book, not a homeowner setting a price &mdash; <b>its ask is not market evidence.</b></div>
+      </div>
+      <div class="acard pos">
+        <div class="ah"><span class="aaddr">7 Chardonnay Street</span><span class="aprice">$1,149,900</span></div>
+        <div class="abadges"><span class="abadge pos">Power of Sale</span></div>
+        <div class="afacts"><b>4+2</b> bed / <b>4</b> bath &middot; <b>2,693</b> sq ft AG &middot; basement suite w/ separate entrance &middot; vacant &middot; <b>66</b> DOM</div>
+        <div class="anote">Another as-is Power of Sale, empty and slow to show, asking near its distressed lender math rather than buyer demand (it traded at $1,750,000 in the 2022 peak &mdash; a number no one should anchor to). Sixty-six days without traction at $1.15M tells you what buyers think of the ask.</div>
+      </div>
+      <div class="acard pos">
+        <div class="ah"><span class="aaddr">27 Riesling Court</span><span class="aprice">$1,189,000</span></div>
+        <div class="abadges"><span class="abadge pos">Power of Sale</span><span class="abadge cut">Deal collapsed Jun 29</span></div>
+        <div class="afacts"><b>4</b> bed / <b>4</b> bath &middot; <b>2,624</b> sq ft AG &middot; 2018 build &middot; tenanted &middot; <b>64</b> DOM</div>
+        <div class="anote">The highest ask in Gershome &mdash; and the shakiest file: tenanted, sold as-is under Power of Sale, and a conditional deal that <b>fell through in late June</b>. When the priciest listing on the shelf can&rsquo;t hold a deal together, it reinforces rather than raises the ceiling. Not a value-setter.</div>
+      </div>
+      <div class="acard">
+        <div class="ah"><span class="aaddr">What this shelf means for us</span><span class="aprice serif" style="font-size:16px;color:var(--green);">Opportunity</span></div>
+        <div class="anote" style="margin-top:6px;">Between $995,000 and $1,189,000 there are four active listings &mdash; and <b>every one is compromised</b>: three are distressed Power of Sale files with slow showings, and the fourth (36 Tommar) lacks the lot story. A well-presented, honestly-priced Escarpment-backing pool home would enter this field as <b>the only emotionally compelling option above $1M</b>. That&rsquo;s a rare positioning advantage, and it argues for listing sooner rather than later &mdash; before any of the POS files capitulate on price.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VALUATION ============ -->
+  <section class="section">
+    <div class="label">Valuation</div>
+    <h2>Building the number: $1,000,000 &ndash; $1,050,000</h2>
+    <p class="lead">Two independent methods land in the same place: a price-per-square-foot analysis anchored to the three most relevant sales, and a direct-comparison bracket between the dated Escarpment backer (452 Quigley) and the turnkey ravine-and-pool sale (72 National).</p>
+
+    <div class="ppsf">
+      <div class="vp">
+        <div class="vk">The Floor &middot; 452 Quigley</div>
+        <div class="vn">$351 / sq ft</div>
+        <div class="vc">Escarpment-backing, no rear neighbours &mdash; but a fully original interior. This is the lot with none of the updating.</div>
+      </div>
+      <div class="vp">
+        <div class="vk">The Ceiling &middot; 72 National</div>
+        <div class="vn">$397 / sq ft</div>
+        <div class="vc">Turnkey ravine lot with inground pool &mdash; sold at 100% of ask in 11 days. The full package, priced right.</div>
+      </div>
+      <div class="vp">
+        <div class="vk">303 Webster &middot; Applied</div>
+        <div class="vn">$370&ndash;$390 / sq ft</div>
+        <div class="vc">Recent upgrades and a working pool place the subject well above Quigley; 72 National&rsquo;s 215-ft lot and 2-car garage keep it a touch below the ceiling.</div>
+      </div>
+    </div>
+
+    <div class="vmath">
+      Applying <b>$370&ndash;$390 per finished sq ft</b> to the subject&rsquo;s approximately <b>2,700 sq ft of finished space</b> (&asymp;2,000 above grade + finished lower level; to be confirmed by iGuide/RMS measurement before listing) produces <b>$999,000 &ndash; $1,053,000</b>. Cross-checked against the direct bracket &mdash; above Quigley&rsquo;s $905,000 (same lot, dated), below 72 National&rsquo;s $1,100,888 (deeper lot, double garage) &mdash; and against the HPI benchmark of $1,047K&ndash;$1,070K for the segment, the supportable range is <b>$1,000,000 &ndash; $1,050,000</b>. If measurement comes back materially above or below 2,700 sq ft, we&rsquo;ll revisit &mdash; but the direct-comparison bracket holds regardless.
+    </div>
+
+    <div class="rangebar">
+      <div class="rb-scale">
+        <!-- scale $900K -> 0% ... $1.2M -> 100% -->
+        <div class="rb-track"></div>
+        <div class="rb-marker" style="left:1.7%;"></div><div class="rb-mlabel" style="left:1.7%;">$905K &middot; Quigley (dated)</div>
+        <div class="rb-band" style="left:33.3%;width:16.7%;"></div>
+        <div class="rb-bandlbl" style="left:41.7%;">$1,000,000 &ndash; $1,050,000</div>
+        <div class="rb-marker" style="left:66.9%;"></div><div class="rb-mlabel" style="left:66.9%;">$1.10M &middot; 72 National (turnkey)</div>
+      </div>
+      <p class="rb-caption">The fair-value band sits deliberately between its two bookends: comfortably above what the lot earns in dated condition, respectfully below the deepest-lot, double-garage sale on the street that proved the ceiling.</p>
+    </div>
+
+    <div class="strategy">
+      <div class="strat rec">
+        <div class="sk">Recommended &middot; Replicate 72 National</div>
+        <div class="sn">List at $999,900</div>
+        <div class="sc">Enter as the sharpest-priced non-distressed home above the family tier, generate early competing interest, and let the Escarpment/pool story carry the result into the $1.00M&ndash;$1.05M band &mdash; the strategy that just produced an 11-day, over-ask sale at 72 National.</div>
+      </div>
+      <div class="strat">
+        <div class="sk">Alternative &middot; Price within the band</div>
+        <div class="sn">List at $1,049,900</div>
+        <div class="sc">Defensible on the data, but it puts us at the exact number where 36 Tommar has sat unsold for 81 days, and leaves room to negotiate down rather than up. Expect a longer runway and a landing near the bottom of the band.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAKEAWAYS ============ -->
+  <section class="takeaway">
+    <div class="label">The Bottom Line</div>
+    <h2>Key takeaways for 303 Webster Road</h2>
+    <ul class="tk-list">
+      <li><b>The March 2025 range of $1,100,000&ndash;$1,175,000 no longer holds, and the honest revision is <span class="hl">$1,000,000&ndash;$1,050,000</span>.</b> That ~9&ndash;11% adjustment matches the HPI benchmark ($1,047K&ndash;$1,070K depending on baseline) and, more importantly, matches what actually closed.</li>
+      <li><b>The market is thin: only 16 detached 2-storey sales in Hamilton 28 in the past 365 days.</b> With few buyers active at this price point, the cost of missing the first weeks of exposure is higher than in a normal market.</li>
+      <li><b>Pricing at 2025 levels has a documented price tag.</b> 136 Country Club ($1.36M ask, April 2025 &rarr; $1,065,000, 230 days) and 100 National ($1.379M &rarr; $1,070,000, 209 days) each surrendered roughly <span class="hl">$300,000 and seven-plus months</span> chasing the market down. The comp set averaged 94.8% of final list but only 89.5% of original ask &mdash; the gap is the overpricing tax.</li>
+      <li><b>72 National Drive is the blueprint:</b> ravine lot, inground pool, no rear neighbours, listed at $1,099,900 in April 2026 &mdash; conditional in 4 days, closed at <span class="hl">$1,100,888, 100% of ask, in 11 days</span>. Premium-lot homes still command premium prices when the ask respects today&rsquo;s market.</li>
+      <li><b>The lot is doing the earning in this market.</b> The 4,029 sq ft home at 1012 Greenhill brought $898,000 on a conventional lot, while 72 National&rsquo;s 2,775 sq ft brought $1,100,888 on ravine. 303 Webster&rsquo;s Escarpment backing, dead-end street, pool and recent upgrades put it firmly on the premium side of that divide.</li>
+      <li><b>Three of the seven actives &mdash; the three priciest &mdash; are Power of Sale files with confirmed slow showings.</b> 43 Riesling ($1,095,000, 246 combined days), 7 Chardonnay ($1,149,900) and 27 Riesling ($1,189,000, deal collapsed in June) are motivated, as-is, lender-driven listings. They are not evidence of value, and buyers know it.</li>
+      <li><b>Recommended approach: list at <span class="hl">$999,900</span> with strong presentation and let the property&rsquo;s scarcity work.</b> A turnkey, honestly-priced Escarpment-backing pool home would be the only compelling non-distressed option above $1M in Gershome today &mdash; the conditions that produce results at the top of the $1.00M&ndash;$1.05M range, and the same playbook that just worked on National Drive.</li>
+    </ul>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="brand">Woolcott Real Estate &bull; RE/MAX Escarpment Realty Inc.</div>
+    <div class="prep">Prepared by <b>Justine Woolcott</b>, Salesperson &bull; 905.689.9223</div>
+    <div class="disclaimer">
+      The information contained herein has been obtained from sources believed to be reliable but is not guaranteed. This analysis is intended to provide general market context and should not be relied upon as a formal appraisal. All data sourced from the Cornerstone Association of REALTORS&reg; MLS&reg; System. Information deemed reliable but not guaranteed.
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
+

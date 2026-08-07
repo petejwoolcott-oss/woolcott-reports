@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Report — 202 Victoria Avenue N, Hamilton</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1a2332; --slate:#2d3a4a; --gold:#c8a45c; --gold-light:#e8d5a0;
+    --bg:#f5f2ec; --white:#ffffff; --red:#c44040; --green:#3a8a5c;
+    --muted:#7a8694; --border:#ddd5c8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--slate);line-height:1.6;font-size:15px;}
+  .report{max-width:900px;margin:0 auto;background:var(--white);box-shadow:0 0 40px rgba(26,35,50,.08);}
+
+  /* ============ HEADER ============ */
+  .header{background:var(--navy);color:var(--white);padding:48px 56px 40px;}
+  .header .brand{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(200,164,92,.35);padding-bottom:18px;margin-bottom:28px;}
+  .header .brand .name{font-family:'DM Serif Display',serif;font-size:21px;letter-spacing:.06em;}
+  .header .brand .name span{color:var(--gold);}
+  .header .brand .tag{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);}
+  .header h1{font-family:'DM Serif Display',serif;font-size:38px;font-weight:400;line-height:1.15;margin-bottom:6px;}
+  .header .subtitle{color:var(--gold-light);font-size:16px;margin-bottom:20px;}
+  .header .meta{display:flex;gap:28px;flex-wrap:wrap;font-size:12.5px;color:rgba(255,255,255,.65);}
+  .header .meta strong{color:var(--white);font-weight:600;display:block;font-size:13.5px;}
+
+  /* ============ STATS BAR ============ */
+  .stats-bar{display:grid;grid-template-columns:repeat(5,1fr);background:var(--slate);}
+  .stat{padding:22px 12px;text-align:center;border-right:1px solid rgba(255,255,255,.08);}
+  .stat:last-child{border-right:none;}
+  .stat .num{font-family:'DM Serif Display',serif;font-size:24px;color:var(--gold);line-height:1.1;}
+  .stat .lbl{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:4px;}
+
+  /* ============ SECTIONS ============ */
+  .section{padding:44px 56px;}
+  .section + .section{border-top:1px solid var(--border);}
+  .eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px;}
+  h2{font-family:'DM Serif Display',serif;font-size:27px;font-weight:400;color:var(--navy);margin-bottom:16px;}
+  h3{font-family:'DM Serif Display',serif;font-size:19px;font-weight:400;color:var(--navy);margin:26px 0 10px;}
+  p{margin-bottom:14px;}
+  p:last-child{margin-bottom:0;}
+
+  /* ============ SUBJECT SNAPSHOT ============ */
+  .snapshot{display:grid;grid-template-columns:1fr 1fr;gap:0 40px;margin-top:20px;border:1px solid var(--border);}
+  .snap-row{display:flex;justify-content:space-between;padding:10px 18px;font-size:14px;border-bottom:1px solid var(--border);}
+  .snapshot .snap-row:nth-last-child(-n+1){border-bottom:none;}
+  .snap-row .k{color:var(--muted);}
+  .snap-row .v{font-weight:600;color:var(--navy);text-align:right;}
+  .history-strip{display:flex;gap:14px;margin-top:22px;}
+  .hist{flex:1;background:var(--bg);border:1px solid var(--border);padding:16px 18px;}
+  .hist .yr{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+  .hist .amt{font-family:'DM Serif Display',serif;font-size:21px;color:var(--navy);margin:2px 0;}
+  .hist .note{font-size:12px;color:var(--muted);line-height:1.4;}
+  .hist.peak .amt{color:var(--navy);}
+
+  /* ============ RENTAL PANEL ============ */
+  .income-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0;}
+  .income-cell{background:var(--bg);border:1px solid var(--border);padding:18px;text-align:center;}
+  .income-cell .big{font-family:'DM Serif Display',serif;font-size:24px;color:var(--navy);}
+  .income-cell .sm{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+
+  /* ============ BAR CHART ============ */
+  .chart{margin:26px 0 8px;}
+  .bar-row{display:grid;grid-template-columns:190px 1fr 90px;align-items:center;gap:14px;margin-bottom:13px;}
+  .bar-row .addr{font-size:13px;font-weight:600;color:var(--navy);line-height:1.3;text-align:right;}
+  .bar-row .addr small{display:block;font-weight:400;color:var(--muted);font-size:11px;}
+  .bar-track{background:var(--bg);border:1px solid var(--border);height:26px;position:relative;}
+  .bar-fill{height:100%;display:flex;align-items:center;}
+  .bar-fill.sold{background:var(--green);}
+  .bar-fill.active{background:var(--gold);}
+  .bar-fill.subject{background:var(--navy);}
+  .bar-row .price{font-size:13.5px;font-weight:700;color:var(--navy);}
+  .chart-legend{display:flex;gap:22px;font-size:12px;color:var(--muted);margin-top:16px;}
+  .chart-legend .chip{display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px;}
+  .chart-note{font-size:12.5px;color:var(--muted);font-style:italic;margin-top:10px;}
+
+  /* ============ COMP CARDS (SOLDS) ============ */
+  .comp{border:1px solid var(--border);margin-top:22px;}
+  .comp-head{background:var(--bg);padding:16px 22px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--border);}
+  .comp-head .addr{font-family:'DM Serif Display',serif;font-size:18px;color:var(--navy);}
+  .comp-head .addr small{font-family:'DM Sans',sans-serif;font-size:12px;color:var(--muted);margin-left:8px;}
+  .comp-head .sold-price{font-family:'DM Serif Display',serif;font-size:19px;color:var(--green);}
+  .comp-specs{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid var(--border);}
+  .comp-specs .spec{padding:10px 18px;font-size:12.5px;border-right:1px solid var(--border);}
+  .comp-specs .spec b{color:var(--navy);}
+  .comp-body{padding:18px 22px;font-size:14px;}
+  .comp-body p{margin-bottom:10px;}
+
+  /* ============ ACTIVES GRID ============ */
+  .actives-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px;}
+  .active-card{border:1px solid var(--border);display:flex;flex-direction:column;}
+  .active-card .ac-head{background:var(--navy);color:var(--white);padding:14px 18px;}
+  .active-card .ac-head .addr{font-family:'DM Serif Display',serif;font-size:16.5px;line-height:1.25;}
+  .active-card .ac-head .hood{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);margin-top:3px;}
+  .active-card .ac-price{background:var(--gold);color:var(--navy);font-weight:700;font-size:16px;padding:8px 18px;display:flex;justify-content:space-between;}
+  .active-card .ac-price .dom{font-weight:500;font-size:12.5px;align-self:center;}
+  .active-card .ac-specs{padding:10px 18px;font-size:12.5px;color:var(--slate);border-bottom:1px solid var(--border);background:var(--bg);}
+  .active-card .ac-notes{padding:14px 18px;font-size:13px;flex:1;}
+  .active-card .ac-notes p{margin-bottom:8px;}
+  .badge{display:inline-block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:2px 8px;margin-bottom:8px;}
+  .badge.red{background:rgba(196,64,64,.1);color:var(--red);}
+  .badge.green{background:rgba(58,138,92,.12);color:var(--green);}
+  .badge.gold{background:rgba(200,164,92,.16);color:#9a7a38;}
+
+  /* ============ VALUATION ============ */
+  .valuation{background:var(--bg);border:1px solid var(--border);padding:30px 34px;margin-top:24px;}
+  .val-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:18px 0 26px;}
+  .val-cell{background:var(--white);border:1px solid var(--border);padding:16px 18px;text-align:center;}
+  .val-cell .big{font-family:'DM Serif Display',serif;font-size:22px;color:var(--navy);}
+  .val-cell .sm{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:4px;line-height:1.4;}
+  .range-bar-wrap{margin:30px 0 8px;}
+  .range-scale{position:relative;height:10px;background:linear-gradient(to right,#ddd5c8 0%,#ddd5c8 100%);}
+  .range-fair{position:absolute;top:0;height:10px;background:linear-gradient(to right,var(--gold-light),var(--gold));}
+  .range-list{position:absolute;top:-5px;height:20px;background:var(--navy);opacity:.92;}
+  .range-labels{position:relative;height:52px;margin-top:10px;font-size:12px;}
+  .range-labels .rl{position:absolute;transform:translateX(-50%);text-align:center;color:var(--muted);line-height:1.3;}
+  .range-labels .rl b{display:block;color:var(--navy);font-size:13.5px;}
+  .range-caption{display:flex;gap:24px;font-size:12px;color:var(--muted);margin-top:14px;}
+  .range-caption .chip{display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px;}
+  .verdict{background:var(--white);border-left:4px solid var(--gold);padding:18px 22px;margin-top:22px;font-size:14.5px;}
+  .verdict b{color:var(--navy);}
+
+  /* ============ TAKEAWAYS ============ */
+  .takeaways{background:var(--navy);color:rgba(255,255,255,.85);padding:48px 56px;}
+  .takeaways h2{color:var(--white);}
+  .takeaways .eyebrow{color:var(--gold);}
+  .tk-list{list-style:none;margin-top:22px;}
+  .tk-list li{padding:16px 0 16px 34px;position:relative;border-bottom:1px solid rgba(255,255,255,.1);font-size:14.5px;line-height:1.65;}
+  .tk-list li:last-child{border-bottom:none;}
+  .tk-list li::before{content:"";position:absolute;left:0;top:24px;width:16px;height:2px;background:var(--gold);}
+  .tk-list b{color:var(--white);}
+
+  /* ============ FOOTER ============ */
+  .footer{background:var(--navy);border-top:1px solid rgba(200,164,92,.3);padding:30px 56px 40px;color:rgba(255,255,255,.65);font-size:12.5px;text-align:center;}
+  .footer .fbrand{font-family:'DM Serif Display',serif;font-size:16px;color:var(--white);letter-spacing:.04em;margin-bottom:4px;}
+  .footer .prep{color:var(--gold-light);margin-bottom:16px;}
+  .footer .disclaimer{font-size:11px;line-height:1.6;color:rgba(255,255,255,.45);max-width:720px;margin:0 auto;border-top:1px solid rgba(255,255,255,.1);padding-top:16px;}
+
+  @media(max-width:720px){
+    .header,.section,.takeaways,.footer{padding-left:24px;padding-right:24px;}
+    .stats-bar{grid-template-columns:repeat(2,1fr);}
+    .stat{border-bottom:1px solid rgba(255,255,255,.08);}
+    .snapshot,.actives-grid,.val-grid,.income-grid{grid-template-columns:1fr;}
+    .bar-row{grid-template-columns:110px 1fr 78px;}
+    .bar-row .addr{font-size:11px;}
+    .history-strip{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+<div class="report">
+
+  <!-- ================= HEADER ================= -->
+  <div class="header">
+    <div class="brand">
+      <div class="name">WOOLCOTT <span>REAL ESTATE</span></div>
+      <div class="tag">Market Evaluation Update</div>
+    </div>
+    <h1>202 Victoria Avenue N, Hamilton</h1>
+    <div class="subtitle">Lansdale · Duplexed 2.5-Storey Victorian · Pricing &amp; Positioning Analysis</div>
+    <div class="meta">
+      <div><strong>August 5, 2026</strong>Report date</div>
+      <div><strong>Hamilton Centre / 141 – Lansdale</strong>MLS district</div>
+      <div><strong>$725,000–$775,000</strong>Prior Letter of Opinion (Aug 2025)</div>
+      <div><strong>~$682,000</strong>HPI-adjusted value (current)</div>
+    </div>
+  </div>
+
+  <!-- ================= STATS BAR ================= -->
+  <div class="stats-bar">
+    <div class="stat"><div class="num">$702,500</div><div class="lbl">Avg Sold Price</div></div>
+    <div class="stat"><div class="num">96.3%</div><div class="lbl">Avg SP/LP Ratio</div></div>
+    <div class="stat"><div class="num">60</div><div class="lbl">Avg CDOM (Solds)</div></div>
+    <div class="stat"><div class="num">7</div><div class="lbl">Active Competitors</div></div>
+    <div class="stat"><div class="num">$3,800</div><div class="lbl">Monthly Rent Income</div></div>
+  </div>
+
+  <!-- ================= SUBJECT ================= -->
+  <div class="section">
+    <div class="eyebrow">The Subject Property</div>
+    <h2>What We're Pricing</h2>
+    <p>202 Victoria Avenue N is a circa-1900, 2.5-storey solid brick Victorian in Lansdale, legally assessed as a duplex and currently operating as two tenanted units. The home was substantially renovated in 2020–21 — new roof, A/C, 200-amp panel, flooring, both kitchens and baths — and features the expansive third-floor loft with exposed brick and skylight that defines this house type. One factor to weigh throughout this analysis is location: the property fronts onto Victoria Avenue N, a busier arterial road, which is noted in the MPAC assessment record and reflected in nearby sale prices.</p>
+    <div class="snapshot">
+      <div class="snap-row"><span class="k">Style</span><span class="v">2.5-Storey Detached Victorian</span></div>
+      <div class="snap-row"><span class="k">Configuration</span><span class="v">Duplex — 2 self-contained units</span></div>
+      <div class="snap-row"><span class="k">Above-grade area (MPAC)</span><span class="v">2,120 sq ft</span></div>
+      <div class="snap-row"><span class="k">Beds / Baths</span><span class="v">4 (2 + 2) / 2 Full</span></div>
+      <div class="snap-row"><span class="k">Lot</span><span class="v">28.06 × 102 ft (0.07 ac)</span></div>
+      <div class="snap-row"><span class="k">Parking</span><span class="v">Detached garage, rear laneway</span></div>
+      <div class="snap-row"><span class="k">Basement</span><span class="v">Full, unfinished, sep. entrance</span></div>
+      <div class="snap-row"><span class="k">Key renovations</span><span class="v">2020–21 (roof, A/C, kitchens, baths)</span></div>
+      <div class="snap-row"><span class="k">Location factor</span><span class="v">Arterial road frontage (per MPAC)</span></div>
+      <div class="snap-row"><span class="k">MPAC assessment (2016 base)</span><span class="v">$257,000</span></div>
+    </div>
+
+    <h3>Ownership &amp; Price History</h3>
+    <div class="history-strip">
+      <div class="hist"><div class="yr">May 2016</div><div class="amt">$295,000</div><div class="note">Sold as-is, "needs TLC" — 39 DOM</div></div>
+      <div class="hist"><div class="yr">May 2021</div><div class="amt">$670,000</div><div class="note">Sold post-partial-update at 112% of list — 6 DOM</div></div>
+      <div class="hist peak"><div class="yr">May 2022</div><div class="amt">$945,000</div><div class="note">Current owners' purchase at the market peak — 135% of a $699,000 list, 5 DOM</div></div>
+      <div class="hist"><div class="yr">Aug 2026</div><div class="amt">~$682,000</div><div class="note">HPI-adjusted estimate from 2025 opinion of value</div></div>
+    </div>
+    <p style="margin-top:16px;font-size:13.5px;color:var(--muted);">The May 2022 purchase took place during an exceptionally competitive period — the sale closed in five days at 135% of list, a market dynamic specific to that moment. Conditions have since normalized across this segment, and today's value is best guided by current comparable evidence and the HPI-adjusted figure.</p>
+  </div>
+
+  <!-- ================= RENTAL INCOME ================= -->
+  <div class="section">
+    <div class="eyebrow">Income Profile</div>
+    <h2>The Duplex Economics</h2>
+    <p>Both units are tenanted at rents that are at or near market. This is a real strength for marketing — the property arrives as a turnkey income producer or an ideal house-hack — and the income figures also help define where pricing works best.</p>
+    <div class="income-grid">
+      <div class="income-cell"><div class="big">$2,050</div><div class="sm">Upper Unit / mo + utilities</div></div>
+      <div class="income-cell"><div class="big">$1,750</div><div class="sm">Lower Unit / mo + utilities</div></div>
+      <div class="income-cell"><div class="big">$45,600</div><div class="sm">Gross Annual Income</div></div>
+    </div>
+    <p>At a $699,000 list, the gross rent multiplier is approximately <b>15.3×</b> ($679,000 → 14.9×). Investors in this market typically start sharpening pencils in the 14–15× range; above 16× the cash-flow math stops working at current financing costs. In practical terms, the income comfortably supports a price in the high-$600s and keeps the widest pool of investor buyers engaged; above $750,000 the multiplier climbs past 16.4× and investor interest naturally narrows. The owner-occupier buyer paying a premium for size and Victorian character has also tended to favour the single-family format (see 483 King William below).</p>
+  </div>
+
+  <!-- ================= SOLD COMPARABLES ================= -->
+  <div class="section">
+    <div class="eyebrow">Closed &amp; Pending Sales</div>
+    <h2>What Buyers Actually Paid</h2>
+    <p>Six comparable 2–2.5 storey century homes have transacted in Hamilton Centre over the past year. Not one sold at or above list — the average came in at 96.3% of asking after roughly 60 days on market. Two sold quickly (8–9 days), and both were priced at $749,900 in quieter neighbourhoods. The pattern is consistent: in this segment, well-calibrated pricing generates the fastest and strongest results.</p>
+
+    <div class="chart">
+      <div class="bar-row"><div class="addr">483 King William St<small>Landsdale · Sold Dec 2025</small></div><div class="bar-track"><div class="bar-fill sold" style="width:90.6%"></div></div><div class="price">$770,000</div></div>
+      <div class="bar-row"><div class="addr">55 Erie Ave<small>Stinson · Pending Aug 2026</small></div><div class="bar-track"><div class="bar-fill sold" style="width:87.6%"></div></div><div class="price">$745,000</div></div>
+      <div class="bar-row"><div class="addr">176 Emerald St S<small>Stinson · Sold Jan 2026</small></div><div class="bar-track"><div class="bar-fill sold" style="width:85.9%"></div></div><div class="price">$730,000</div></div>
+      <div class="bar-row"><div class="addr">189 West Ave N<small>Landsdale · Sold Mar 2026</small></div><div class="bar-track"><div class="bar-fill sold" style="width:84.1%"></div></div><div class="price">$715,000</div></div>
+      <div class="bar-row"><div class="addr">202 Victoria Ave N<small>SUBJECT · Proposed list band</small></div><div class="bar-track"><div class="bar-fill subject" style="width:79.9%;background:linear-gradient(to right,var(--navy) 97%,var(--gold) 97%)"></div></div><div class="price">$679–699K</div></div>
+      <div class="bar-row"><div class="addr">87 East Ave N<small>Landsdale · Sold May 2026</small></div><div class="bar-track"><div class="bar-fill sold" style="width:74.1%"></div></div><div class="price">$630,000</div></div>
+      <div class="bar-row"><div class="addr">187 Victoria Ave N<small>Beasley · Sold Sep 2025</small></div><div class="bar-track"><div class="bar-fill sold" style="width:73.5%"></div></div><div class="price">$625,000</div></div>
+      <div class="chart-legend">
+        <span><span class="chip" style="background:var(--green)"></span>Sold / pending price</span>
+        <span><span class="chip" style="background:var(--navy)"></span>Subject — proposed list band</span>
+      </div>
+      <div class="chart-note">Bar length scaled to $850,000. The subject band sits deliberately between the same-street evidence below it and the superior single-family product above it.</div>
+    </div>
+
+    <!-- COMP 1 -->
+    <div class="comp">
+      <div class="comp-head"><div class="addr">483 King William Street <small>Landsdale · MLS 40770579</small></div><div class="sold-price">Sold $770,000</div></div>
+      <div class="comp-specs">
+        <div class="spec">List <b>$799,900</b></div><div class="spec">SP/LP <b>96%</b></div><div class="spec">DOM <b>51</b></div>
+        <div class="spec"><b>2,393</b> sq ft AG</div><div class="spec"><b>4</b> bed / <b>4</b> bath</div><div class="spec"><b>$321.77</b>/sq ft</div><div class="spec">Closed <b>Dec 12, 2025</b></div>
+      </div>
+      <div class="comp-body">
+        <p><b>Why it matters:</b> This is the only comparable of matching size to trade in the past year, and it's the same neighbourhood — which makes it the ceiling for this house type. But it's a materially superior product: a meticulous 2020 single-family renovation with refinished hardwood and walnut inlay, original pocket doors, a third-floor primary sanctuary with heated floors and ensuite, an EV-ready garage, and a landscaped garden — on a quieter street.</p>
+        <p><b>What it tells us:</b> Even the best-in-class version of this Victorian needed 51 days and a $29,900 reduction to close at $770,000. The subject — duplexed, with a more utilitarian finish level and an arterial-road address — must be positioned meaningfully below this number. A $70,000–$90,000 gap for street, finish quality, and the superior primary suite is conservative, not aggressive.</p>
+      </div>
+    </div>
+
+    <!-- COMP 2 -->
+    <div class="comp">
+      <div class="comp-head"><div class="addr">55 Erie Avenue <small>Stinson · MLS 40845471</small></div><div class="sold-price">Pending $745,000</div></div>
+      <div class="comp-specs">
+        <div class="spec">List <b>$749,900</b></div><div class="spec">SP/LP <b>99%</b></div><div class="spec">DOM <b>9</b></div>
+        <div class="spec"><b>1,576</b> sq ft AG</div><div class="spec"><b>4</b> bed / <b>2</b> bath</div><div class="spec"><b>$472.72</b>/sq ft</div><div class="spec">Firm <b>Jul 2026</b></div>
+      </div>
+      <div class="comp-body">
+        <p><b>Why it matters:</b> The freshest data point in the set — firm just three weeks ago. A charming c.1890 single-family Victorian in Stinson, smaller than the subject but with recent big-ticket updates (roof 2021, windows 2019, patio 2022) and rear alley parking for two.</p>
+        <p><b>What it tells us:</b> Sharp pricing works. At $749,900 in a desirable, quiet pocket, it attracted a near-full-price offer in nine days. Its very high $/sq ft reflects its small footprint and neighbourhood premium — not a benchmark the larger, busier-street subject can borrow. What we should borrow is the strategy: price where buyers recognize value immediately.</p>
+      </div>
+    </div>
+
+    <!-- COMP 3 -->
+    <div class="comp">
+      <div class="comp-head"><div class="addr">176 Emerald Street S <small>Stinson · MLS 40781374</small></div><div class="sold-price">Sold $730,000</div></div>
+      <div class="comp-specs">
+        <div class="spec">List <b>$749,900</b></div><div class="spec">SP/LP <b>97%</b></div><div class="spec">DOM <b>8</b></div>
+        <div class="spec"><b>2,152</b> sq ft total fin.</div><div class="spec"><b>3</b> bed / <b>3</b> bath</div><div class="spec"><b>$339.22</b>/sq ft</div><div class="spec">Closed <b>Jan 9, 2026</b></div>
+      </div>
+      <div class="comp-body">
+        <p><b>Why it matters:</b> The closest match to the subject's total finished area (2,152 vs. ~2,120 sq ft) — a turn-key century home with finished basement (separate entrance, in-law capability) and finished attic, steps from Corktown Pub in one of the city's most sought-after pockets.</p>
+        <p><b>What it tells us:</b> Similar space, better location, single-family flexibility, finished basement — $730,000. This is arguably the single best proxy for what a "quiet-street version" of the subject would fetch. Deduct for the arterial road and the unfinished basement, and the subject lands naturally in the high-$600s.</p>
+      </div>
+    </div>
+
+    <!-- COMP 4 -->
+    <div class="comp">
+      <div class="comp-head"><div class="addr">189 West Avenue N <small>Landsdale · MLS 40785552</small></div><div class="sold-price">Sold $715,000</div></div>
+      <div class="comp-specs">
+        <div class="spec">List <b>$749,000</b> (orig. $774,990)</div><div class="spec">SP/LP <b>95%</b></div><div class="spec">CDOM <b>211</b></div>
+        <div class="spec"><b>2,589</b> sq ft total fin.</div><div class="spec"><b>5</b> bed / <b>3</b> bath</div><div class="spec"><b>$276.17</b>/sq ft</div><div class="spec">Closed <b>Mar 25, 2026</b></div>
+      </div>
+      <div class="comp-body">
+        <p><b>Why it matters:</b> The most instructive pricing case in the set — and the closest micro-location comp among the larger homes, sitting on the Landsdale/Beasley border a few blocks from the subject. Beautifully updated all-brick home with nearly 2,600 sq ft of finished space, finished basement, and rear parking pad.</p>
+        <p><b>What it tells us:</b> It began at $774,990 — within last year's opinion-of-value range for the subject — and buyers didn't respond at that level. The path to a sale ran through a cancellation, a re-list, 211 cumulative days, and a final price of $715,000. It illustrates why we'd recommend against opening in the mid-$700s today, and it anchors the low end of the $/sq ft band (~$276) for bigger homes in this pocket.</p>
+      </div>
+    </div>
+
+    <!-- COMP 5 -->
+    <div class="comp">
+      <div class="comp-head"><div class="addr">87 East Avenue N <small>Landsdale · MLS 40811845</small></div><div class="sold-price">Sold $630,000</div></div>
+      <div class="comp-specs">
+        <div class="spec">List <b>$665,000</b></div><div class="spec">SP/LP <b>95%</b></div><div class="spec">DOM <b>28</b></div>
+        <div class="spec"><b>1,566</b> sq ft AG + 669 attic</div><div class="spec"><b>3</b> bed / <b>2</b> bath</div><div class="spec"><b>$402.30</b>/sq ft</div><div class="spec">Closed <b>May 8, 2026</b></div>
+      </div>
+      <div class="comp-body">
+        <p><b>Why it matters:</b> A well-updated all-brick Victorian in the subject's own neighbourhood on a quiet, walkable street, with two rear parking spaces and a renovated attic (2018). Smaller than the subject, single-family layout.</p>
+        <p><b>What it tells us:</b> Even attractive, move-in-ready Landsdale product listed in the mid-$600s took a 5% haircut. It sets the floor logic: the subject's extra ~550 sq ft, duplex income, and garage should carry it above $630,000 — but this sale caps how much premium the neighbourhood alone will fund.</p>
+      </div>
+    </div>
+
+    <!-- COMP 6 -->
+    <div class="comp">
+      <div class="comp-head"><div class="addr">187 Victoria Avenue N <small>Beasley · MLS 40752936</small></div><div class="sold-price">Sold $625,000</div></div>
+      <div class="comp-specs">
+        <div class="spec">List <b>$650,000</b></div><div class="spec">SP/LP <b>96%</b></div><div class="spec">CDOM <b>55</b></div>
+        <div class="spec"><b>1,617</b> sq ft AG</div><div class="spec"><b>3</b> bed / <b>2</b> bath</div><div class="spec"><b>$386.52</b>/sq ft</div><div class="spec">Closed <b>Sep 29, 2025</b></div>
+      </div>
+      <div class="comp-body">
+        <p><b>Why it matters:</b> The same street, a few blocks south — the market's most direct verdict on a Victoria Avenue N address. A charming 1906 brick 2.5-storey with a finished attic, in-law-capable basement, and the area's rarest amenity: three parking spaces including a double garage.</p>
+        <p><b>What it tells us:</b> Despite superior parking and considerable charm, it settled at $625,000. The subject is larger and carries rental income, which justifies a premium over this sale — but this comp is the clearest evidence that Victoria Ave N addresses trade at a modest, consistent discount to their quiet-street equivalents.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= ACTIVE COMPETITION ================= -->
+  <div class="section">
+    <div class="eyebrow">Active Inventory · $600K–$900K · Hamilton Centre · 2+ Storeys</div>
+    <h2>The Competition on Launch Day</h2>
+    <p>This is what a buyer sees in the same search results as the subject. Seven active listings, averaging roughly <b>$776,500</b> — and the landscape is favourable: every income-producing property on the market is asking <b>$749,000 or more</b>, and the multi-unit offerings all sit at $797,777+. Only one listing is priced below the proposed band, a single-family home currently on a re-list. A launch in the $679,000–$699,000 window positions the subject as <em>the most affordable income property in Hamilton Centre by roughly $100,000</em>.</p>
+
+    <div class="actives-grid">
+
+      <div class="active-card">
+        <div class="ac-head"><div class="addr">108 Victoria Avenue N</div><div class="hood">Beasley · MLS 40841133</div></div>
+        <div class="ac-price">$849,000 <span class="dom">47 DOM</span></div>
+        <div class="ac-specs">8 bed · 4 bath · 3,900 sq ft · 3 units · Parking for 3</div>
+        <div class="ac-notes">
+          <span class="badge gold">Same Street · Income Comp</span>
+          <p>Fully tenanted three-unit producing $73,200/yr gross. Extensively updated, at 47 days on market so far. At 11.6× GRM it's the sharper investor buy on paper — its time on market suggests the $800K+ investor pool is currently limited. Its price point makes the subject look like exceptional value per door.</p>
+        </div>
+      </div>
+
+      <div class="active-card">
+        <div class="ac-head"><div class="addr">143 Catharine Street N</div><div class="hood">Beasley · MLS 40841242</div></div>
+        <div class="ac-price">$829,900 <span class="dom">47 DOM</span></div>
+        <div class="ac-specs">3 bed · 3 bath · 1,572 sq ft AG · Parking for 3</div>
+        <div class="ac-notes">
+          <span class="badge red">47 Days at Current Price</span>
+          <p>A gorgeous designer restoration — 12-ft ceilings, primary ensuite with sunroom — asking $528/sq ft. Forty-seven days without an accepted offer suggests buyers see the price as ahead of the market. A useful reference point: finish quality alone doesn't set price in this district.</p>
+        </div>
+      </div>
+
+      <div class="active-card">
+        <div class="ac-head"><div class="addr">103 Mary Street</div><div class="hood">Beasley · MLS 40850961</div></div>
+        <div class="ac-price">$799,950 <span class="dom">12 DOM</span></div>
+        <div class="ac-specs">3 units · 2,440 sq ft total · Separate hydro meters · No parking</div>
+        <div class="ac-notes">
+          <span class="badge gold">Direct Investor Competitor</span>
+          <p>Vacant three-unit conversion with separate meters, new kitchens and baths — but street parking only and no income in place. A buyer comparing this to the subject gets two tenanted units, a garage, and a yard for $100,000+ less. This listing does the subject's marketing for it.</p>
+        </div>
+      </div>
+
+      <div class="active-card">
+        <div class="ac-head"><div class="addr">30 Ontario Avenue</div><div class="hood">Stinson · MLS 40847354</div></div>
+        <div class="ac-price">$797,777 <span class="dom">25 DOM</span></div>
+        <div class="ac-specs">Triplex · 2,526 sq ft total · 4 bed · 3 bath · Parking for 4</div>
+        <div class="ac-notes">
+          <span class="badge gold">Direct Investor Competitor</span>
+          <p>Tenanted triplex on a quiet Stinson street with slate roof and parking for four — a strong offering, though with dated interiors and electric baseboard heat in two zones. It confirms the pattern: the entry point for a multi-unit century home in this district is currently ~$798K, and the subject sits well below the entire category.</p>
+        </div>
+      </div>
+
+      <div class="active-card">
+        <div class="ac-head"><div class="addr">273 Stinson Crescent</div><div class="hood">Stinson · MLS 40846371</div></div>
+        <div class="ac-price">$759,900 <span class="dom">22 / 112 CDOM</span></div>
+        <div class="ac-specs">3 bed · 2 bath · 1,700 sq ft AG · Parking for 3</div>
+        <div class="ac-notes">
+          <span class="badge red">Currently on Re-List</span>
+          <p>Beautifully renovated (new mechanicals throughout, quartz kitchen) on a quiet crescent — the 112 cumulative days reflect an earlier listing attempt at this level. Single-family buyers at $760K have several options; this one overlaps with the subject mainly for the owner-occupier who'd rent out one floor.</p>
+        </div>
+      </div>
+
+      <div class="active-card">
+        <div class="ac-head"><div class="addr">86 Smith Avenue</div><div class="hood">Landsdale · MLS 40850347</div></div>
+        <div class="ac-price">$749,000 <span class="dom">12 DOM</span></div>
+        <div class="ac-specs">5 bed (4+1) · 3 bath · 1,989 sq ft total · Laneway parking for 2</div>
+        <div class="ac-notes">
+          <span class="badge gold">Nearest Neighbourhood Rival</span>
+          <p>A vacant investor renovation two blocks into the same neighbourhood — fresh, neutral, move-in ready, but smaller than the subject, no garage, and no tenants or income in place. Fresh to market, so its fate is unknown; at $749K it frames the subject's band as the value play in Landsdale.</p>
+        </div>
+      </div>
+
+      <div class="active-card">
+        <div class="ac-head"><div class="addr">24 Baillie Street</div><div class="hood">Corktown · MLS 40849262</div></div>
+        <div class="ac-price">$649,900 <span class="dom">19 / 157 CDOM</span></div>
+        <div class="ac-specs">3 bed · 3 bath · 1,623 sq ft AG · Parking for 4 · Duplex-zoned</div>
+        <div class="ac-notes">
+          <span class="badge red">Only Listing Below the Band</span>
+          <p>The only active under the proposed band — a stylishly renovated single-family on a quiet Corktown dead-end, with duplex zoning but no second unit built. Its 157 cumulative days (currently on a re-list) show buyers remain selective even below $650K. The subject compares favourably with 500 more sq ft, a built and tenanted second suite, and $45,600 of income in place.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= VALUATION ================= -->
+  <div class="section">
+    <div class="eyebrow">Valuation &amp; Pricing Strategy</div>
+    <h2>Where the Numbers Converge</h2>
+    <p>Three independent methods triangulate to the same answer. The price-per-square-foot band for larger century homes in this district runs <b>$276–$339</b> (189 West to 176 Emerald, with 483 King William at $322 as the renovated ceiling). Applying a mid-band <b>$310–$330</b> to the subject's 2,120 sq ft yields <b>$657,000–$700,000</b>. The HPI adjustment from last year's opinion lands at <b>~$682,000</b>. And the income approach supports investor participation up to roughly <b>$700,000</b> before the gross rent multiplier deteriorates past 15.5×.</p>
+
+    <div class="valuation">
+      <div class="val-grid">
+        <div class="val-cell"><div class="big">$310–$330</div><div class="sm">Applied $/sq ft<br>(district mid-band)</div></div>
+        <div class="val-cell"><div class="big">2,120</div><div class="sm">Above-grade sq ft<br>(MPAC)</div></div>
+        <div class="val-cell"><div class="big">$660K–$700K</div><div class="sm">Estimated fair<br>value range</div></div>
+      </div>
+
+      <div class="range-bar-wrap">
+        <div class="range-scale">
+          <!-- scale: $600k to $780k, 180k span -->
+          <div class="range-fair" style="left:33.3%;width:22.2%;"></div>
+          <div class="range-list" style="left:43.9%;width:11.1%;"></div>
+        </div>
+        <div class="range-labels">
+          <div class="rl" style="left:0%"><b>$600K</b></div>
+          <div class="rl" style="left:33.3%"><b>$660K</b>Fair value low</div>
+          <div class="rl" style="left:49.4%"><b>$679–699K</b>Recommended list band</div>
+          <div class="rl" style="left:71%"><b>$728K</b>&nbsp;</div>
+          <div class="rl" style="left:100%"><b>$780K</b></div>
+        </div>
+        <div class="range-caption">
+          <span><span class="chip" style="background:linear-gradient(to right,var(--gold-light),var(--gold))"></span>Estimated fair value range ($660,000–$700,000)</span>
+          <span><span class="chip" style="background:var(--navy)"></span>Recommended list band ($679,000–$699,000)</span>
+        </div>
+      </div>
+
+      <div class="verdict">
+        <b>Recommended list price: $679,000–$699,000.</b> A launch at <b>$679,000</b> positions the subject as the standout value in the district — the cheapest income property by a six-figure margin — and is engineered for competitive traffic and a sub-30-day timeline, following the playbook that worked at 55 Erie and 176 Emerald. A launch at <b>$699,000</b> is the defensible top-of-band ask that preserves negotiating room to the ~96% district average (implying a sale around $670,000–$672,000). The recent experience of 189 West Ave N and 273 Stinson suggests that opening above $699,000 carries a real risk of extended market time and a lower final result — the band above is designed to avoid that path.
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= TAKEAWAYS ================= -->
+  <div class="takeaways">
+    <div class="eyebrow">The Bottom Line</div>
+    <h2>Key Takeaways</h2>
+    <ul class="tk-list">
+      <li><b>Fair value is $660,000–$700,000; list at $679,000–$699,000.</b> Price-per-square-foot analysis ($657K–$700K), the HPI adjustment (~$682K), and the income approach all converge on this window independently.</li>
+      <li><b>No comparable sold at asking.</b> Six sales, average 96.3% of list, average 60 days on market. The two fastest sales (8–9 days) were the two priced most sharply — while 189 West Ave N needed 211 days and a re-list to reach $715,000 from a $774,990 start. Pricing accuracy at launch is the single biggest driver of outcome in this segment.</li>
+      <li><b>483 King William ($770,000) sets the ceiling for this house type.</b> The only matching-size sale in a year was a superior single-family renovation on a quieter street with a stronger primary suite — and even it took 51 days and a $30K adjustment. The subject is best positioned at a sensible margin below it.</li>
+      <li><b>The street factor is consistent and measurable.</b> 187 Victoria Ave N — same street, three parking spaces, double garage — sold at $625,000. Victoria Avenue N addresses trade at a modest discount to quiet-street equivalents, and pricing that accounts for it up front supports a faster, cleaner sale.</li>
+      <li><b>The actives make $679–699K a clear positioning advantage.</b> Every income property currently listed asks $749,000–$849,000. At the recommended band, the subject becomes the most affordable way to buy tenanted income in Hamilton Centre by roughly $100,000 — with $45,600/yr already in place at a workable ~15× multiplier.</li>
+      <li><b>Today's market is a different one from May 2022.</b> The $945,000 purchase reflected the peak of an exceptionally competitive period — a 5-day sale at 135% of list. Current evidence across all three valuation methods sits well below that figure, and no pricing strategy can recreate those conditions. Pricing to today's market, rather than to 2022, gives the property its best chance at a strong, timely result.</li>
+    </ul>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <div class="footer">
+    <div class="fbrand">Woolcott Real Estate • RE/MAX Escarpment Realty Inc.</div>
+    <div class="prep">Prepared by Justine Woolcott, Salesperson • 905.689.9223</div>
+    <div class="disclaimer">The information contained herein has been obtained from sources believed to be reliable but is not guaranteed. This analysis is intended to provide general market context and should not be relied upon as a formal appraisal. All data sourced from the Cornerstone Association of REALTORS® MLS® System. Information deemed reliable but not guaranteed.</div>
+  </div>
+
+</div>
+</body>
+</html>
