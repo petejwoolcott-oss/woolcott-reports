@@ -347,7 +347,8 @@
           "<strong>" + who + "</strong> — " + dayNames + ", 10–11 AM, week of " +
           fmt(mon, {month:"long", day:"numeric"}) +
           ". Change of plans later? Just sign up again — your newest picks win.");
-        loadBoard();
+        mySignup = { name: who, sessions: days.map(function (s) { return iso(s.date); }) };
+        renderBoard(lastBoard);
       }).catch(function () {
         submitBtn.disabled = false;
         submitBtn.textContent = "Sign Me Up";
@@ -371,32 +372,41 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
     });
   }
+  var mySignup = null;   // this visitor's own submission — shown immediately even
+                         // though the shared storage list can lag by up to a minute
+  function renderBoard(data) {
+    var signups = data.signups.slice();
+    if (mySignup) {
+      signups = signups.filter(function (a) { return a.name !== mySignup.name; });
+      signups.push(mySignup);
+    }
+    var rows = document.getElementById("boardRows");
+    rows.innerHTML = "";
+    sessions.forEach(function (s) {
+      var names = signups
+        .filter(function (a) { return a.sessions.indexOf(iso(s.date)) !== -1; })
+        .map(function (a) { return esc(a.name); })
+        .sort();
+      var row = document.createElement("div");
+      row.className = "board-row";
+      row.innerHTML =
+        '<span class="bday">' + s.day + '</span>' +
+        (names.length
+          ? '<span class="bwho">' + names.join(" · ") + '</span>'
+          : '<span class="bwho empty">Open — be the first name here.</span>');
+      rows.appendChild(row);
+    });
+    document.getElementById("boardCount").textContent =
+      signups.length === 0 ? "Wide open" : signups.length + " signed up";
+    document.getElementById("board").hidden = false;
+  }
+  var lastBoard = { signups: [] };
   function loadBoard() {
     if (SUBMIT_MODE !== "api") return;
     fetch(BOARD_URL + "?week=" + iso(mon), { cache: "no-store" })
       .then(function (res) { if (!res.ok) throw new Error(); return res.json(); })
-      .then(function (data) {
-        var rows = document.getElementById("boardRows");
-        rows.innerHTML = "";
-        sessions.forEach(function (s) {
-          var names = data.signups
-            .filter(function (a) { return a.sessions.indexOf(iso(s.date)) !== -1; })
-            .map(function (a) { return esc(a.name); });
-          var row = document.createElement("div");
-          row.className = "board-row";
-          row.innerHTML =
-            '<span class="bday">' + s.day + '</span>' +
-            (names.length
-              ? '<span class="bwho">' + names.join(" · ") + '</span>'
-              : '<span class="bwho empty">Open — be the first name here.</span>');
-          rows.appendChild(row);
-        });
-        var n = data.signups.length;
-        document.getElementById("boardCount").textContent =
-          n === 0 ? "Wide open" : n + " signed up";
-        document.getElementById("board").hidden = false;
-      })
-      .catch(function () { /* board stays hidden if it can't load */ });
+      .then(function (data) { lastBoard = data; renderBoard(data); })
+      .catch(function () { if (mySignup) renderBoard(lastBoard); /* else board stays hidden */ });
   }
   loadBoard();
 </script>
