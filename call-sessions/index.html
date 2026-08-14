@@ -148,6 +148,25 @@
   .done h2 { font-weight: 700; font-size: 1.25rem; margin-bottom: .4rem; }
   .done p { color: var(--gray-text); font-size: .95rem; }
 
+  /* Leaderboard */
+  .board { margin-top: 3rem; }
+  .board-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: .75rem; }
+  .board-title { font-weight: 900; font-size: 1.5rem; letter-spacing: -.02em; }
+  .board-count { font-weight: 700; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--light-blue); }
+  .board-row {
+    position: relative; background: var(--white); border: 1px solid var(--gray-border);
+    border-radius: 4px; box-shadow: var(--shadow-sm); padding: .8rem 1rem .8rem 1.25rem;
+    display: flex; gap: 1rem; align-items: baseline; margin-bottom: .5rem;
+  }
+  .board-row::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: var(--light-blue); border-radius: 4px 0 0 4px;
+  }
+  .board-row .bday { font-weight: 700; min-width: 6.5rem; }
+  .board-row .bwho { color: var(--gray-text); font-weight: 500; font-size: .95rem; }
+  .board-row .bwho.empty { color: var(--gray-text-faint); font-style: italic; font-weight: 400; }
+  .board-note { font-size: .875rem; color: var(--gray-text-faint); margin-top: .75rem; }
+
   footer {
     max-width: 760px; margin: 0 auto; padding: 0 1.5rem 2.5rem;
     display: flex; justify-content: space-between; align-items: center; gap: 1rem;
@@ -195,6 +214,15 @@
     <h2 id="doneTitle"></h2>
     <p id="doneBody"></p>
   </div>
+
+  <section class="board" id="board" hidden>
+    <div class="board-head">
+      <span class="board-title">Who's In</span>
+      <span class="board-count" id="boardCount"></span>
+    </div>
+    <div id="boardRows"></div>
+    <p class="board-note">The board updates the moment someone signs up.</p>
+  </section>
 </main>
 
 <footer>
@@ -206,6 +234,7 @@
   // ── Config ──────────────────────────────────────────────
   var SUBMIT_MODE = "api";                          // "api" = one-tap Cloudflare submit; "mailto" = email fallback
   var API_URL = "/call-sessions/api/signup";
+  var BOARD_URL = "/call-sessions/api/board";
   var SIGNUP_TO = "peterwoolcott@woolcott.ca";      // fallback + failure instructions
   var AGENTS = [
     "Alex K","Angus","Christian","Colleen","Deb","Deirdre","Eden",
@@ -318,6 +347,7 @@
           "<strong>" + who + "</strong> — " + dayNames + ", 10–11 AM, week of " +
           fmt(mon, {month:"long", day:"numeric"}) +
           ". Change of plans later? Just sign up again — your newest picks win.");
+        loadBoard();
       }).catch(function () {
         submitBtn.disabled = false;
         submitBtn.textContent = "Sign Me Up";
@@ -334,6 +364,41 @@
         "Your email app just opened with your session picks addressed to Peter — hit <strong>Send</strong> and you're on the board.");
     }
   });
+
+  // ── Leaderboard ─────────────────────────────────────────
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+  function loadBoard() {
+    if (SUBMIT_MODE !== "api") return;
+    fetch(BOARD_URL + "?week=" + iso(mon), { cache: "no-store" })
+      .then(function (res) { if (!res.ok) throw new Error(); return res.json(); })
+      .then(function (data) {
+        var rows = document.getElementById("boardRows");
+        rows.innerHTML = "";
+        sessions.forEach(function (s) {
+          var names = data.signups
+            .filter(function (a) { return a.sessions.indexOf(iso(s.date)) !== -1; })
+            .map(function (a) { return esc(a.name); });
+          var row = document.createElement("div");
+          row.className = "board-row";
+          row.innerHTML =
+            '<span class="bday">' + s.day + '</span>' +
+            (names.length
+              ? '<span class="bwho">' + names.join(" · ") + '</span>'
+              : '<span class="bwho empty">Open — be the first name here.</span>');
+          rows.appendChild(row);
+        });
+        var n = data.signups.length;
+        document.getElementById("boardCount").textContent =
+          n === 0 ? "Wide open" : n + " signed up";
+        document.getElementById("board").hidden = false;
+      })
+      .catch(function () { /* board stays hidden if it can't load */ });
+  }
+  loadBoard();
 </script>
 </body>
 </html>
