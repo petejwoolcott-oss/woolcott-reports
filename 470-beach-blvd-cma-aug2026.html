@@ -22,7 +22,7 @@
     padding: 32px 16px 64px;
   }
 
-  /* ── TITLE BAND ── */
+  /* TITLE BAND */
   .title-band {
     background: #1D2E5C;
     border-radius: 10px 10px 0 0;
@@ -50,803 +50,914 @@
   .report-kicker {
     font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: rgba(255,255,255,0.5);
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
-  .title-address {
-    font-size: 28px;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.15;
-    margin-bottom: 12px;
+  .address-headline {
+    font-size: 30px;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1.1;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
   }
-  .title-framing {
+  .framing-line {
     font-size: 14px;
     font-weight: 400;
-    color: rgba(255,255,255,0.7);
-    max-width: 500px;
-    line-height: 1.6;
-    margin-bottom: 24px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 22px;
+    line-height: 1.55;
+    max-width: 520px;
   }
-  .chips {
+  .chip-row {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
   }
   .chip {
-    background: rgba(39,168,224,0.18);
-    border: 1px solid rgba(39,168,224,0.35);
-    color: #fff;
-    font-size: 11px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 12px;
     font-weight: 600;
-    letter-spacing: 0.08em;
-    padding: 5px 12px;
-    border-radius: 999px;
-    text-transform: uppercase;
-  }
-  .title-meta {
-    margin-top: 20px;
-    padding-top: 18px;
-    border-top: 1px solid rgba(255,255,255,0.12);
-    font-size: 11px;
-    color: rgba(255,255,255,0.4);
-    letter-spacing: 0.05em;
+    color: #ffffff;
+    letter-spacing: 0.03em;
   }
 
-  /* ── SECTION SHELL ── */
-  .section {
-    background: #fff;
-    border-left: 1px solid #E2E5EA;
-    border-right: 1px solid #E2E5EA;
-    padding: 36px 40px;
-  }
-  .section + .section {
-    border-top: 1px solid #E2E5EA;
-  }
-  .section:last-of-type {
-    border-radius: 0 0 10px 10px;
-    border-bottom: 1px solid #E2E5EA;
-  }
-  .section-eyebrow {
+  /* SECTION HEADERS */
+  .section-label {
     font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
+    font-weight: 800;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #27A8E0;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
+    margin-top: 36px;
   }
   .section-title {
     font-size: 18px;
     font-weight: 700;
     color: #1D2E5C;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
-  .section-lede {
+  .section-sub {
     font-size: 13px;
     color: #5F6B80;
-    margin-bottom: 28px;
-    line-height: 1.6;
+    margin-bottom: 18px;
+    line-height: 1.5;
   }
 
-  /* ── COMP CARDS ── */
+  /* COMP CARDS */
   .comp-card {
-    background: #fff;
+    background: #ffffff;
+    border-radius: 8px;
     border: 1px solid #E2E5EA;
     border-left: 4px solid #27A8E0;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    overflow: hidden;
-    page-break-inside: avoid;
+    padding: 22px 24px 20px;
+    margin-bottom: 14px;
   }
   .comp-card.outlier {
-    border-left-color: #98A1B3;
-    opacity: 0.92;
+    border-left: 4px solid #C9A227;
+    background: #FDFBF3;
+  }
+  .comp-card.active {
+    border-left: 4px solid #2E8B57;
   }
   .comp-header {
-    padding: 16px 20px 14px;
-    border-bottom: 1px solid #E2E5EA;
     display: flex;
-    justify-content: space-between;
     align-items: flex-start;
+    justify-content: space-between;
     gap: 12px;
-    flex-wrap: wrap;
+    margin-bottom: 14px;
   }
   .comp-address {
     font-size: 15px;
     font-weight: 700;
     color: #1D2E5C;
+    line-height: 1.3;
   }
-  .comp-unit {
-    font-size: 13px;
-    font-weight: 400;
-    color: #5F6B80;
-  }
-  .status-badge {
+  .comp-badge {
+    flex-shrink: 0;
     font-size: 10px;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     padding: 4px 10px;
-    border-radius: 999px;
+    border-radius: 12px;
     white-space: nowrap;
-    flex-shrink: 0;
   }
-  .badge-sold { background: #E6F4EC; color: #1A7A40; }
-  .badge-firm { background: #EAF6FC; color: #0D6E9A; }
-  .badge-active { background: #F7F8FA; color: #5F6B80; border: 1px solid #E2E5EA; }
-  .badge-outlier { background: #F7F8FA; color: #98A1B3; border: 1px solid #E2E5EA; }
-
-  .comp-stats-row {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 14px 20px;
-    gap: 0;
-    border-bottom: 1px solid #F7F8FA;
+  .badge-sold {
+    background: #E8F5E9;
+    color: #2E7D32;
+  }
+  .badge-firm {
+    background: #E3F2FD;
+    color: #1565C0;
+  }
+  .badge-active {
+    background: #FFF8E1;
+    color: #F57F17;
+  }
+  .badge-outlier {
+    background: #FFF8E1;
+    color: #C9A227;
+    border: 1px solid #C9A22740;
+  }
+  .comp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
   }
   .comp-stat {
-    flex: 1 1 90px;
-    min-width: 90px;
-    padding: 2px 16px 2px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
-  .comp-stat:last-child { padding-right: 0; }
   .comp-stat-label {
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #98A1B3;
-    margin-bottom: 3px;
+    color: #5F6B80;
   }
   .comp-stat-value {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     color: #1D2E5C;
   }
-  .comp-stat-value.muted { color: #5F6B80; font-weight: 500; }
-
+  .comp-stat-value.green { color: #2E7D32; }
+  .comp-stat-note {
+    font-size: 11px;
+    color: #5F6B80;
+    margin-top: 1px;
+  }
   .comp-relates {
-    padding: 14px 20px;
+    background: #F7F8FA;
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-top: 4px;
+  }
+  .comp-relates-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1D2E5C;
+    margin-bottom: 5px;
+  }
+  .comp-relates-text {
     font-size: 13px;
     color: #3A4560;
-    line-height: 1.65;
+    line-height: 1.55;
   }
-  .comp-relates strong {
-    color: #1D2E5C;
-    font-weight: 700;
-  }
-
-  .outlier-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #98A1B3;
-    padding: 8px 20px 0;
-  }
-
-  /* ── ACTIVE COMP ── */
-  .active-card {
-    background: #F7F8FA;
-    border: 1px solid #E2E5EA;
-    border-left: 4px solid #98A1B3;
-    border-radius: 8px;
-    overflow: hidden;
-    page-break-inside: avoid;
-  }
-
-  /* ── STATS SECTION ── */
-  .stat-tiles {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 28px;
-  }
-  .stat-tile {
-    background: #1D2E5C;
-    border-radius: 8px;
-    padding: 18px 20px 16px;
-    flex: 1 1 130px;
-    min-width: 130px;
-    text-align: center;
-  }
-  .stat-tile-value {
-    font-size: 22px;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.1;
-    margin-bottom: 6px;
-  }
-  .stat-tile-label {
-    font-size: 10px;
+  .outlier-banner {
+    background: #FFF8E1;
+    border: 1px solid #C9A22740;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    font-size: 12px;
     font-weight: 600;
+    color: #7A5F10;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .outlier-icon {
+    font-size: 14px;
+  }
+
+  /* STATS */
+  .stats-section {
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #E2E5EA;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .stats-header {
+    background: #1D2E5C;
+    padding: 16px 24px;
+  }
+  .stats-header-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+  }
+  .stats-header-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 2px;
+  }
+  .tiles-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid #E2E5EA;
+  }
+  .tile {
+    padding: 20px 16px;
+    text-align: center;
+    border-right: 1px solid #E2E5EA;
+  }
+  .tile:last-child { border-right: none; }
+  .tile-label {
+    font-size: 10px;
+    font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
+    color: #5F6B80;
+    margin-bottom: 6px;
   }
-
+  .tile-value {
+    font-size: 20px;
+    font-weight: 800;
+    color: #1D2E5C;
+    line-height: 1;
+  }
+  .tile-sub {
+    font-size: 11px;
+    color: #5F6B80;
+    margin-top: 4px;
+  }
+  .stats-table-wrap {
+    padding: 0 24px 0;
+  }
   .stats-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 13px;
-    margin-bottom: 20px;
+    margin: 0;
   }
-  .stats-table th {
+  .stats-table thead th {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #5F6B80;
+    padding: 12px 8px 8px;
+    border-bottom: 1px solid #E2E5EA;
     text-align: left;
+  }
+  .stats-table thead th:not(:first-child) {
+    text-align: right;
+  }
+  .stats-table tbody td {
+    padding: 10px 8px;
+    border-bottom: 1px solid #F0F2F5;
+    color: #1D2E5C;
+    font-weight: 500;
+    vertical-align: middle;
+  }
+  .stats-table tbody td:not(:first-child) {
+    text-align: right;
+  }
+  .stats-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .stats-table tbody tr.match-row td {
+    font-weight: 700;
+  }
+  .stats-table tbody tr.match-row td:first-child::after {
+    content: ' \2605';
+    color: #27A8E0;
+    font-size: 11px;
+  }
+  .stats-table tfoot td {
+    padding: 10px 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1D2E5C;
+    border-top: 2px solid #1D2E5C;
+  }
+  .stats-table tfoot td:not(:first-child) {
+    text-align: right;
+  }
+  .stats-note {
+    padding: 12px 24px 16px;
+    font-size: 11px;
+    color: #5F6B80;
+    line-height: 1.5;
+    border-top: 1px solid #F0F2F5;
+  }
+  .dom-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid #E2E5EA;
+  }
+  .dom-cell {
+    padding: 18px 16px;
+    text-align: center;
+    border-right: 1px solid #E2E5EA;
+  }
+  .dom-cell:last-child { border-right: none; }
+  .dom-label {
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #98A1B3;
-    padding: 8px 10px 8px 0;
-    border-bottom: 2px solid #E2E5EA;
+    color: #5F6B80;
+    margin-bottom: 6px;
   }
-  .stats-table th:not(:first-child) { text-align: right; padding-right: 0; padding-left: 10px; }
-  .stats-table td {
-    padding: 10px 10px 10px 0;
-    border-bottom: 1px solid #F7F8FA;
+  .dom-value {
+    font-size: 22px;
+    font-weight: 800;
     color: #1D2E5C;
-    vertical-align: top;
   }
-  .stats-table td:not(:first-child) { text-align: right; padding-left: 10px; padding-right: 0; }
-  .stats-table tr.highlight-row td { background: #EAF6FC; }
-  .stats-table tr.total-row td { font-weight: 700; border-top: 2px solid #E2E5EA; border-bottom: none; }
-  .stats-table .addr-main { font-weight: 600; color: #1D2E5C; }
-  .stats-table .addr-sub { font-size: 11px; color: #98A1B3; font-weight: 400; }
-
-  .footnote {
+  .dom-sub {
     font-size: 11px;
-    color: #98A1B3;
-    line-height: 1.6;
-    margin-top: 8px;
+    color: #5F6B80;
+    margin-top: 4px;
   }
 
-  /* ── DOM BAR CHART ── */
-  .dom-chart { margin-top: 6px; }
-  .dom-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
-    font-size: 12px;
+  /* MARKET READ */
+  .market-read {
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #E2E5EA;
+    padding: 28px 28px 24px;
+    margin-bottom: 24px;
   }
-  .dom-label { width: 100px; flex-shrink: 0; color: #5F6B80; font-size: 11px; font-weight: 500; }
-  .dom-track { flex: 1; background: #F7F8FA; border-radius: 3px; height: 18px; }
-  .dom-fill { height: 100%; border-radius: 3px; background: #27A8E0; }
-  .dom-fill.long { background: #1D2E5C; }
-  .dom-fill.active-bar { background: #E2E5EA; }
-  .dom-val { width: 40px; flex-shrink: 0; text-align: right; font-weight: 700; color: #1D2E5C; font-size: 12px; }
-
-  /* ── MARKET READ ── */
-  .market-read-body {
+  .market-read-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1D2E5C;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #27A8E0;
+    display: inline-block;
+  }
+  .market-read p {
     font-size: 14px;
     color: #3A4560;
-    line-height: 1.75;
-  }
-  .market-read-body p { margin-bottom: 16px; }
-  .market-read-body p:last-child { margin-bottom: 0; }
-
-  /* ── FOOTER ── */
-  .report-footer {
-    background: #fff;
-    border: 1px solid #E2E5EA;
-    border-radius: 0 0 10px 10px;
-    border-top: 2px solid #E2E5EA;
-    padding: 24px 40px;
-    font-size: 10px;
-    color: #98A1B3;
     line-height: 1.7;
+    margin-bottom: 14px;
   }
-  .footer-brand {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+  .market-read p:last-child { margin-bottom: 0; }
+  .market-read strong {
     color: #1D2E5C;
-    margin-bottom: 12px;
-  }
-  .footer-tagline {
-    font-size: 11px;
     font-weight: 700;
-    color: #27A8E0;
-    letter-spacing: 0.06em;
-    margin-top: 12px;
+  }
+
+  /* FOOTER */
+  .footer {
+    padding: 24px 24px 20px;
+    background: #ffffff;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid #E2E5EA;
+    border-top: 3px solid #1D2E5C;
+  }
+  .footer-text {
+    font-size: 11px;
+    color: #5F6B80;
+    line-height: 1.65;
+  }
+  .footer-preparedby {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1D2E5C;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #E2E5EA;
+  }
+  .footer-trademark {
+    font-size: 11px;
+    color: #5F6B80;
+    margin-top: 4px;
+  }
+
+  /* DIVIDER */
+  .section-divider {
+    height: 1px;
+    background: #E2E5EA;
+    margin: 28px 0 0;
+  }
+
+  /* ACTIVE SECTION */
+  .active-section-note {
+    font-size: 13px;
+    color: #5F6B80;
+    margin-bottom: 16px;
+    line-height: 1.55;
+  }
+
+  /* Price reduced pill */
+  .price-reduced {
+    display: inline-block;
+    background: #FFF3E0;
+    color: #E65100;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 10px;
+    margin-left: 8px;
+    vertical-align: middle;
   }
 
   @media (max-width: 520px) {
-    .title-band { padding: 28px 24px 24px; }
-    .section { padding: 28px 24px; }
-    .report-footer { padding: 20px 24px; }
-    .title-address { font-size: 22px; }
-    .stat-tile { flex: 1 1 100px; }
-  }
-  @media print {
-    body { background: #fff; }
-    .report-wrap { padding: 0; max-width: 100%; }
-    .comp-card, .stat-tile, .active-card { page-break-inside: avoid; }
+    .comp-grid { grid-template-columns: 1fr 1fr; }
+    .tiles-row { grid-template-columns: 1fr 1fr; }
+    .dom-row { grid-template-columns: 1fr 1fr; }
+    .address-headline { font-size: 24px; }
+    .title-band { padding: 28px 24px; }
   }
 </style>
 </head>
 <body>
 <div class="report-wrap">
 
-  <!-- ══════════════════════════════════════
-       TITLE BAND
-  ══════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════ TITLE BAND -->
   <div class="title-band">
     <div class="wordmark">Woolcott Real Estate</div>
-    <div class="report-kicker">Market Report · Prepared for Ian Farwell</div>
-    <div class="title-address">470 Beach Blvd<br>Hamilton, ON L8H 6X2</div>
-    <div class="title-framing">
-      A review of what comparable units in this building have achieved at the market, and where the current competition stands. All data sourced from ITSO and TREB MLS® systems, captured August 19, 2026.
-    </div>
-    <div class="chips">
+    <div class="report-kicker">Comparative Market Analysis · Aug 19, 2026</div>
+    <div class="address-headline">470 Beach Blvd<br>Hamilton, ON</div>
+    <p class="framing-line">This report looks at what similar units in the WSCP 448 complex have sold for, and what one unit is currently asking, so you have a clear, current picture of where this market sits.</p>
+    <div class="chip-row">
       <span class="chip">3 Bed</span>
       <span class="chip">2 Full + 1 Half Bath</span>
       <span class="chip">1,531 sq.ft.</span>
       <span class="chip">Condo Townhome</span>
       <span class="chip">Hamilton Beach</span>
-      <span class="chip">WSCP 448</span>
-    </div>
-    <div class="title-meta">Prepared by Donald Parkhill, Salesperson · Re/Max Escarpment Realty Inc. · August 19, 2026</div>
-  </div>
-
-  <!-- ══════════════════════════════════════
-       SOLD COMPS
-  ══════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-eyebrow">Comparable Sales</div>
-    <div class="section-title">What Has Sold in This Building</div>
-    <div class="section-lede">Five transactions from the past two years, all within WSCP 448. Sorted most recent first. All confirmed or pending close.</div>
-
-    <!-- Comp 1: Unit 69 -->
-    <div class="comp-card">
-      <div class="comp-header">
-        <div>
-          <div class="comp-address">470 Beach Blvd <span class="comp-unit">Unit #69</span></div>
-          <div style="font-size:11px;color:#98A1B3;margin-top:3px;">1,676 sq.ft. · Went firm June 25, 2026 · Closing Oct 1, 2026</div>
-        </div>
-        <span class="status-badge badge-firm">Firm Sale</span>
-      </div>
-      <div class="comp-stats-row">
-        <div class="comp-stat">
-          <div class="comp-stat-label">Sold Price</div>
-          <div class="comp-stat-value">$652,500</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">List Price</div>
-          <div class="comp-stat-value muted">$679,900</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">SP / LP</div>
-          <div class="comp-stat-value">96%</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">$/sq.ft.</div>
-          <div class="comp-stat-value">$389</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">DOM</div>
-          <div class="comp-stat-value">90 days</div>
-        </div>
-      </div>
-      <div class="comp-relates">
-        <strong>Relates to your home:</strong> Same complex, same 3-bed 3-bath layout, and 145 sq.ft. larger than your unit. This is an end unit with a 2022 kitchen renovation (granite, subway tile, updated appliances) and laminate floors throughout. The showing requirement of four hours' notice — sellers had a small child — contributed to the longer runway. At $389/sq.ft. on 1,676 sq.ft., it represents the building's current top-of-market for a home with genuine condition improvements. The premium over the standard-finish comps reflects both the size advantage and the updated kitchen.
-      </div>
-    </div>
-
-    <!-- Comp 2: Unit 38 -->
-    <div class="comp-card">
-      <div class="comp-header">
-        <div>
-          <div class="comp-address">470 Beach Blvd <span class="comp-unit">Unit #38</span></div>
-          <div style="font-size:11px;color:#98A1B3;margin-top:3px;">1,676 sq.ft. · Closed Feb 9, 2026</div>
-        </div>
-        <span class="status-badge badge-sold">Sold</span>
-      </div>
-      <div class="comp-stats-row">
-        <div class="comp-stat">
-          <div class="comp-stat-label">Sold Price</div>
-          <div class="comp-stat-value">$595,000</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">List Price</div>
-          <div class="comp-stat-value muted">$599,900</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">SP / LP</div>
-          <div class="comp-stat-value">99%</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">$/sq.ft.</div>
-          <div class="comp-stat-value">$355</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">DOM</div>
-          <div class="comp-stat-value">44 days</div>
-        </div>
-      </div>
-      <div class="comp-relates">
-        <strong>Relates to your home:</strong> Same complex, same layout, 145 sq.ft. larger. This unit had a prior cancelled listing attempt at $659,900-$669,900, then relaunched at $599,900 and sold for 99% of that revised ask. The sharp repricing is what drove the near-full-price result. Buyers in this building are attentive to value, and this sale shows what happens when a home is positioned correctly after a false start. At $355/sq.ft. on the larger footprint, this sits below the updated-finish comps, reflecting the lower opening price strategy rather than a condition discount.
-      </div>
-    </div>
-
-    <!-- Comp 3: Unit 67, May 2025 -->
-    <div class="comp-card">
-      <div class="comp-header">
-        <div>
-          <div class="comp-address">470 Beach Blvd <span class="comp-unit">Unit #67</span></div>
-          <div style="font-size:11px;color:#27A8E0;font-weight:600;margin-top:3px;">Same footprint as your home · Closed May 30, 2025</div>
-        </div>
-        <span class="status-badge badge-sold">Sold</span>
-      </div>
-      <div class="comp-stats-row">
-        <div class="comp-stat">
-          <div class="comp-stat-label">Sold Price</div>
-          <div class="comp-stat-value">$620,500</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">List Price</div>
-          <div class="comp-stat-value muted">$649,999</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">SP / LP</div>
-          <div class="comp-stat-value">95%</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">$/sq.ft.</div>
-          <div class="comp-stat-value">$405</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">DOM</div>
-          <div class="comp-stat-value">7 days</div>
-        </div>
-      </div>
-      <div class="comp-relates">
-        <strong>Relates to your home:</strong> Identical 1,531 sq.ft. footprint and the most direct same-size comparable in the dataset. Seven days to a firm sale is a confident result, and it happened because this unit had been updated: new laminate floors on the second and third levels (2024), new carpet on the main level (2024), upgraded staircase (2022), and pot lights throughout. Buyers recognized the condition premium quickly. The $620,500 result, at $405/sq.ft., is the upper bound for a well-presented home of this exact size in this complex.
-      </div>
-    </div>
-
-    <!-- Comp 4: Unit 67, Oct 2024 -->
-    <div class="comp-card">
-      <div class="comp-header">
-        <div>
-          <div class="comp-address">470 Beach Blvd <span class="comp-unit">Unit #67</span></div>
-          <div style="font-size:11px;color:#27A8E0;font-weight:600;margin-top:3px;">Same footprint as your home · Closed Oct 24, 2024</div>
-        </div>
-        <span class="status-badge badge-sold">Sold</span>
-      </div>
-      <div class="comp-stats-row">
-        <div class="comp-stat">
-          <div class="comp-stat-label">Sold Price</div>
-          <div class="comp-stat-value">$620,000</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">List Price</div>
-          <div class="comp-stat-value muted">$654,900</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">SP / LP</div>
-          <div class="comp-stat-value">95%</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">$/sq.ft.</div>
-          <div class="comp-stat-value">$405</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">DOM</div>
-          <div class="comp-stat-value">77 days</div>
-        </div>
-      </div>
-      <div class="comp-relates">
-        <strong>Relates to your home:</strong> This is the prior sale of the same unit as Comp 3 above. Same 1,531 sq.ft., same upgrades, same end result at $620,000. The difference: it took 77 days and required a price reduction from $669,900 to $654,900 before finding a buyer. Seven months later, the same home sold in 7 days at a virtually identical price. The contrast is a useful read on the importance of opening price and timing in this buyer pool. The fall 2024 market was more cautious; spring 2025 moved faster. The sold price, however, was nearly the same either way.
-      </div>
-    </div>
-
-    <!-- Comp 5: Unit 45 -->
-    <div class="comp-card">
-      <div class="comp-header">
-        <div>
-          <div class="comp-address">470 Beach Blvd <span class="comp-unit">Unit #45</span></div>
-          <div style="font-size:11px;color:#27A8E0;font-weight:600;margin-top:3px;">Same footprint as your home · Closed Sep 20, 2024</div>
-        </div>
-        <span class="status-badge badge-sold">Sold</span>
-      </div>
-      <div class="comp-stats-row">
-        <div class="comp-stat">
-          <div class="comp-stat-label">Sold Price</div>
-          <div class="comp-stat-value">$585,000</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">List Price</div>
-          <div class="comp-stat-value muted">$599,900</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">SP / LP</div>
-          <div class="comp-stat-value">98%</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">$/sq.ft.</div>
-          <div class="comp-stat-value">$382</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">DOM</div>
-          <div class="comp-stat-value">43 days</div>
-        </div>
-      </div>
-      <div class="comp-relates">
-        <strong>Relates to your home:</strong> Identical 1,531 sq.ft. footprint and the closest apples-to-apples comparable for a standard-condition unit in this complex. Open-plan layout, gas fireplace, no premium upgrades noted. The $585,000 result at 98% of list price shows where an honestly priced, standard-finish home in this building landed in the fall 2024 market. This is the floor of the same-size dataset, and it reflects condition more than anything else.
-      </div>
-    </div>
-
-    <!-- Comp 6: Unit 64 — outlier -->
-    <div class="comp-card outlier">
-      <div class="outlier-label">Context Only: Premium Outlier</div>
-      <div class="comp-header">
-        <div>
-          <div class="comp-address">470 Beach Blvd <span class="comp-unit">Unit #64</span></div>
-          <div style="font-size:11px;color:#98A1B3;margin-top:3px;">Approx. 1,458 sq.ft. · End Unit · Closed Jun 3, 2025</div>
-        </div>
-        <span class="status-badge badge-outlier">Sold · Renovated</span>
-      </div>
-      <div class="comp-stats-row">
-        <div class="comp-stat">
-          <div class="comp-stat-label">Sold Price</div>
-          <div class="comp-stat-value">$710,000</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">List Price</div>
-          <div class="comp-stat-value muted">$724,999</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">SP / LP</div>
-          <div class="comp-stat-value">98%</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">$/sq.ft.</div>
-          <div class="comp-stat-value">$487</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">DOM</div>
-          <div class="comp-stat-value">21 days</div>
-        </div>
-      </div>
-      <div class="comp-relates">
-        <strong>Included for context, not for valuation:</strong> This end unit underwent an extensive renovation: engineered hardwood throughout, quartz waterfall kitchen countertop, built-in double ovens, 5-burner cooktop, glass-front cabinetry, fully updated bathrooms, and a refinished staircase. It is not a comparable for a standard-condition unit. What it provides is a useful ceiling: the best a renovated end unit in this complex has achieved recently is $710,000. That figure shows the building's upside, while the standard-finish comps bracket the middle of the range.
-      </div>
+      <span class="chip">Condo Fees: $203/mo</span>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════
-       ACTIVE COMPETITION
-  ══════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-eyebrow">Active Competition</div>
-    <div class="section-title">What Is on the Market Today</div>
-    <div class="section-lede">One unit in this complex is currently listed as of August 19, 2026.</div>
+  <!-- ═══════════════════════════════════════════ ACTIVE LISTING -->
+  <div class="section-label" style="margin-top:32px;">On the Market Right Now</div>
+  <div class="section-title">Active Listing</div>
+  <p class="section-sub">This is the one unit in the complex currently for sale. Anyone looking in this complex right now is already seeing it.</p>
 
-    <div class="active-card">
-      <div class="comp-header">
-        <div>
-          <div class="comp-address">470 Beach Blvd <span class="comp-unit">Unit #65</span></div>
-          <div style="font-size:11px;color:#98A1B3;margin-top:3px;">Approx. 1,455 sq.ft. · Listed June 23, 2026 · 57 days on market</div>
-        </div>
-        <span class="status-badge badge-active">Active</span>
+  <!-- Unit 65 Active -->
+  <div class="comp-card active">
+    <div class="comp-header">
+      <div class="comp-address">Unit #65 · 470 Beach Blvd<span class="price-reduced">Price Reduced</span></div>
+      <span class="comp-badge badge-active">Active · 57 Days</span>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-stat">
+        <span class="comp-stat-label">List Price</span>
+        <span class="comp-stat-value">$639,999</span>
+        <span class="comp-stat-note">Was $649,000 · Jun 23</span>
       </div>
-      <div class="comp-stats-row" style="background:#F7F8FA;">
-        <div class="comp-stat">
-          <div class="comp-stat-label">List Price</div>
-          <div class="comp-stat-value">$639,999</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">Original Price</div>
-          <div class="comp-stat-value muted">$649,000</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">Price Drop</div>
-          <div class="comp-stat-value" style="color:#C44040;">-$9,001</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">Size</div>
-          <div class="comp-stat-value">~1,455 sq.ft.</div>
-        </div>
-        <div class="comp-stat">
-          <div class="comp-stat-label">Baths</div>
-          <div class="comp-stat-value muted">1 full + 1 half</div>
-        </div>
+      <div class="comp-stat">
+        <span class="comp-stat-label">Size</span>
+        <span class="comp-stat-value">~1,455 sq.ft.</span>
+        <span class="comp-stat-note">3 bed · 1 full + 1 half bath</span>
       </div>
-      <div class="comp-relates" style="background:#F7F8FA;">
-        <strong>Relates to your home:</strong> The only active listing in this complex as of this report. It has been on the market for 57 days and has already had a price reduction, from $649,000 at launch to $639,999 as of August 12. The listing notes several updates including new flooring, new appliances, updated bath, and new wood stairs, though its bath count per the TREB listing (1 full + 1 half) is different from the typical 3-bath layout in this building. At 57 days without a firm sale, including a price adjustment, this listing is a relevant data point on where the market has drawn a line for this building in the current environment.
+      <div class="comp-stat">
+        <span class="comp-stat-label">Days on Market</span>
+        <span class="comp-stat-value">57</span>
+        <span class="comp-stat-note">As of Aug 19, 2026</span>
+      </div>
+    </div>
+    <div class="comp-relates">
+      <div class="comp-relates-label">How it relates to your home:</div>
+      <div class="comp-relates-text">This is your direct competition in the same complex. It has been on the market for nearly two months without finding a buyer, and the seller has already dropped the price once. It is also slightly smaller than your home and has fewer bathrooms (one full bath versus your two). Any buyer looking in this complex right now is already aware of this unit.</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ SOLD COMPS -->
+  <div class="section-divider"></div>
+  <div class="section-label">What Has Actually Sold</div>
+  <div class="section-title">Sold Comparables</div>
+  <p class="section-sub">Nine sales in the WSCP 448 complex over the past two years, most recent first. Days on market = how long it took each home to find a buyer after it was listed.</p>
+
+  <!-- Unit 69 Firm -->
+  <div class="comp-card">
+    <div class="comp-header">
+      <div class="comp-address">Unit #69 · 470 Beach Blvd</div>
+      <span class="comp-badge badge-firm">Firm · Closes Oct 1, 2026</span>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-stat">
+        <span class="comp-stat-label">Sold Price</span>
+        <span class="comp-stat-value green">$652,500</span>
+        <span class="comp-stat-note">Went firm Jun 25, 2026</span>
+      </div>
+      <div class="comp-stat">
+        <span class="comp-stat-label">List Price</span>
+        <span class="comp-stat-value">$679,900</span>
+        <span class="comp-stat-note">Sold for 96% of asking</span>
+      </div>
+      <div class="comp-stat">
+        <span class="comp-stat-label">Size · $/sq.ft.</span>
+        <span class="comp-stat-value">1,676 sq.ft.</span>
+        <span class="comp-stat-note">$389/sq.ft. · DOM: 90</span>
+      </div>
+    </div>
+    <div class="comp-relates">
+      <div class="comp-relates-label">How it relates to your home:</div>
+      <div class="comp-relates-text">Same complex, same general layout — but 145 sq.ft. larger and an end unit, meaning it sits on a corner with extra windows and only one shared wall with a neighbour. End units like this typically get a higher price than interior units. The 2022 kitchen updates also added value. Even with those advantages, it still took 90 days to find a buyer and sold for $27,400 less than asking.</div>
+    </div>
+  </div>
+
+  <!-- Unit 67 May 2025 -->
+  <div class="comp-card">
+    <div class="comp-header">
+      <div class="comp-address">Unit #67 · 470 Beach Blvd</div>
+      <span class="comp-badge badge-sold">Sold · May 2025</span>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-stat">
+        <span class="comp-stat-label">Sold Price</span>
+        <span class="comp-stat-value green">$620,500</span>
+        <span class="comp-stat-note">95.4% of asking</span>
+      </div>
+      <div class="comp-stat">
+        <span class="comp-stat-label">List Price</span>
+        <span class="comp-stat-value">$649,999</span>
+        <span class="comp-stat-note">Same size as your home</span>
+      </div>
+      <div class="comp-stat">
+        <span class="comp-stat-label">Size · $/sq.ft.</span>
+        <span class="comp-stat-value">1,531 sq.ft.</span>
+        <span class="comp-stat-note">$405/sq.ft. · DOM: 7</span>
+      </div>
+    </div>
+    <div class="comp-relates">
+      <div class="comp-relates-label">How it relates to your home:</div>
+      <div class="comp-relates-text">Identical size to your home, and it sold in just 7 days. The recent updates — new laminate floors on two levels (2024), new carpet, upgraded staircase (2022), pot lights throughout, granite kitchen, gas fireplace — made it a move-in ready home. Buyers responded to that and moved quickly. It still sold for about $29,500 less than asking, which is fairly normal. This is one of the strongest comps for your home on timing.</div>
+    </div>
+  </div>
+
+  <!-- Unit 64 OUTLIER -->
+  <div class="comp-card outlier">
+    <div class="comp-header">
+      <div class="comp-address">Unit #64 · 470 Beach Blvd</div>
+      <span class="comp-badge badge-outlier">Sold · Apr 2025 · Outlier</span>
+    </div>
+    <div class="outlier-banner">
+      <span class="outlier-icon">&#9888;</span>
+      Fully renovated end unit — included to show the top of what this complex can achieve, not as a typical benchmark.
+    </div>
+    <div class="comp-grid">
+      <div class="comp-stat">
+        <span class="comp-stat-label">Sold Price</span>
+        <span class="comp-stat-value green">$710,000</span>
+        <span class="comp-stat-note">98% of asking</span>
+      </div>
+      <div class="comp-stat">
+        <span class="comp-stat-label">List Price</span>
+        <span class="comp-stat-value">$724,999</span>
+        <span class="comp-stat-note">Sold in 21 days</span>
+      </div>
+      <div class="comp-stat">
+        <span class="comp-stat-label">Size · $/sq.ft.</span>
+        <span class="comp-stat-value">~1,458 sq.ft.</span>
+        <span class="comp-stat-note">$487/sq.ft. · DOM: 21</span>
+      </div>
+    </div>
+    <div class="comp-relates">
+      <div class="comp-relates-label">How it relates to your home:</div>
+      <div class="comp-relates-text">This is included to show the top end of what this complex can achieve — but the result reflects a level of investment that is not typical. This unit was essentially a show home: engineered hardwood throughout, quartz waterfall-edge countertop, built-in double ovens, five-burner cooktop, glass-front cabinetry, fully renovated bathrooms, refinished staircase, fresh paint, premium window coverings, and a pergola on the rear patio. The $710,000 result reflects that, not a standard-finish home. I am not using this as a benchmark for your home, but you deserve to see the full picture.</div>
+    </div>
+  </div>
+
+  <!-- Unit 49 March 2025 -->
+  <div class="comp-card">
+    <div class="comp-header">
+      <div class="comp-address">Unit #49 · 470 Beach Blvd</div>
+      <span class="comp-badge badge-sold">Sold · March 2025</span>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-stat">
+        <span class="comp-stat-label">Sold Price</span>
+        <span class="comp-stat-value green">$664,900</span>
+        <span class="comp-stat-note">97.8% of asking</span>
+      </div>
+      <div class="comp-stat">
+        <span class="comp-stat-label">List Price</span>
+        <span class="comp-stat-value">$679,900</span>
+        <span class="comp-stat-note">Larger unit</span>
+      </div>
+      <div class="comp-stat">
+        <span class="comp-stat-label">Size · $/sq.ft.</span>
+        <span class="comp-stat-value">1,712 sq.ft.</span>
+        <span class="comp-stat-note">$388/sq.ft. · DOM: N/A</span>
+      </div>
+    </div>
+    <div class="comp-relates">
+      <div class="comp-relates-label">How it relates to your home:</div>
+      <div class="comp-relates-text">One of the larger units in the complex at 1,712 sq.ft., about 180 sq.ft. more than your home. It gives a sense of where the bigger units top out here. Even with the extra square footage, the price did not push dramatically above the other sales. That tells you that additional size alone does not produce a big premium in this complex.</div>
+    </div>
+  </div>
+
+  <!-- Unit 51 January 2025 -->
+  <div class="comp-card">
+    <div class="comp-header">
+      <div class="comp-address">Unit #51 · 470 Beach Blvd</div>
+      <span class="comp-badge badge-sold">Sold · January 2025</span>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-stat">
+        <span class="comp-stat-label">Sold Price</span>
+        <span class="comp-stat-value green">$631,000</span>
+        <span class="comp-stat-note">97.1% of asking</span>
+      </div>
+      <div class="comp-stat">
+        <span class="comp-stat-label">List Price</span>
+        <span class="comp-stat-value">$649,888</span>
+        <span class="comp-stat-note">Same size as your home</span>
+      </div>
+      <div class="comp-stat">
+        <span class="comp-stat-label">Size · $/sq.ft.</span>
+        <span class="comp-stat-value">1,531 sq.ft.</span>
+        <span class="comp-stat-note">$412/sq.ft. · DOM: N/A</span>
+      </div>
+    </div>
+    <div class="comp-relates">
+      <div class="comp-relates-label">How it relates to your home:</div>
+      <div class="comp-relates-text">Same size as your home. This sale happened in January 2025, which is typically one of the quieter times of year for real estate. It still sold for $631,000, and buyers paid close to the asking price — 97 cents on the dollar. A 97% sale-to-list ratio suggests the home was priced fairly from the start and the seller did not have to negotiate much to get a deal done.</div>
+    </div>
+  </div>
+
+  <!-- Unit 36 October 2024 -->
+  <div class="comp-card">
+    <div class="comp-header">
+      <div class="comp-address">Unit #36 · 470 Beach Blvd</div>
+      <span class="comp-badge badge-sold">Sold · October 2024</span>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-stat">
+        <span class="comp-stat-label">Sold Price</span>
+        <span class="comp-stat-value green">$670,000</span>
+        <span class="comp-stat-note">98.7% of asking</span>
+      </div>
+      <div class="comp-stat">
+        <span class="comp-stat-label">List Price</span>
+        <span class="comp-stat-value">$679,000</span>
+        <span class="comp-stat-note">Same size as your home</span>
+      </div>
+      <div class="comp-stat">
+        <span class="comp-stat-label">Size · $/sq.ft.</span>
+        <span class="comp-stat-value">1,531 sq.ft.</span>
+        <span class="comp-stat-note">$437/sq.ft. · DOM: N/A</span>
+      </div>
+    </div>
+    <div class="comp-relates">
+      <div class="comp-relates-label">How it relates to your home:</div>
+      <div class="comp-relates-text">Exact same size as your home at 1,531 sq.ft. This is the highest sale among same-size units in the past two years at $670,000. It also sold very close to asking price (98.7%), which means buyers were ready to pay near full price without much back-and-forth. This sets the high end of what this footprint has achieved in the complex. Worth knowing as you think about the upper range of what is possible.</div>
+    </div>
+  </div>
+
+  <!-- Unit 38 February 2026 -->
+  <div class="comp-card">
+    <div class="comp-header">
+      <div class="comp-address">Unit #38 · 470 Beach Blvd</div>
+      <span class="comp-badge badge-sold">Sold · February 2026</span>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-stat">
+        <span class="comp-stat-label">Sold Price</span>
+        <span class="comp-stat-value green">$595,000</span>
+        <span class="comp-stat-note">99.2% of asking</span>
+      </div>
+      <div class="comp-stat">
+        <span class="comp-stat-label">List Price</span>
+        <span class="comp-stat-value">$599,900</span>
+        <span class="comp-stat-note">Larger unit</span>
+      </div>
+      <div class="comp-stat">
+        <span class="comp-stat-label">Size · $/sq.ft.</span>
+        <span class="comp-stat-value">1,676 sq.ft.</span>
+        <span class="comp-stat-note">$355/sq.ft. · DOM: 44</span>
+      </div>
+    </div>
+    <div class="comp-relates">
+      <div class="comp-relates-label">How it relates to your home:</div>
+      <div class="comp-relates-text">Larger than your home by 145 sq.ft. This unit sold almost exactly at asking price, which means the seller got the price right from day one. That is worth noting because an earlier attempt at $659,900 to $669,900 did not produce a deal. After cancelling and coming back at a lower price, it sold in 44 days. The market gave clear and direct feedback on where the price needed to be, and the seller listened.</div>
+    </div>
+  </div>
+
+  <!-- Unit 67 October 2024 -->
+  <div class="comp-card">
+    <div class="comp-header">
+      <div class="comp-address">Unit #67 · 470 Beach Blvd</div>
+      <span class="comp-badge badge-sold">Sold · October 2024</span>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-stat">
+        <span class="comp-stat-label">Sold Price</span>
+        <span class="comp-stat-value green">$620,000</span>
+        <span class="comp-stat-note">94.7% of reduced asking</span>
+      </div>
+      <div class="comp-stat">
+        <span class="comp-stat-label">List Price</span>
+        <span class="comp-stat-value">$654,900</span>
+        <span class="comp-stat-note">Reduced from $669,900</span>
+      </div>
+      <div class="comp-stat">
+        <span class="comp-stat-label">Size · $/sq.ft.</span>
+        <span class="comp-stat-value">1,531 sq.ft.</span>
+        <span class="comp-stat-note">$405/sq.ft. · DOM: 77</span>
+      </div>
+    </div>
+    <div class="comp-relates">
+      <div class="comp-relates-label">How it relates to your home:</div>
+      <div class="comp-relates-text">Exact same size as your home. This is the same physical unit as the May 2025 sale above — same home, different owner. In fall 2024 it took 77 days and needed a price reduction before a buyer stepped up. Then in spring 2025, the next owner sold the same unit in just 7 days at a very similar price. The difference was timing and the opening price. Fall 2024 buyers were cautious; spring 2025 buyers moved quickly. Both times the home landed around the same number.</div>
+    </div>
+  </div>
+
+  <!-- Unit 45 September 2024 -->
+  <div class="comp-card">
+    <div class="comp-header">
+      <div class="comp-address">Unit #45 · 470 Beach Blvd</div>
+      <span class="comp-badge badge-sold">Sold · September 2024</span>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-stat">
+        <span class="comp-stat-label">Sold Price</span>
+        <span class="comp-stat-value green">$585,000</span>
+        <span class="comp-stat-note">97.5% of asking</span>
+      </div>
+      <div class="comp-stat">
+        <span class="comp-stat-label">List Price</span>
+        <span class="comp-stat-value">$599,900</span>
+        <span class="comp-stat-note">Same size as your home</span>
+      </div>
+      <div class="comp-stat">
+        <span class="comp-stat-label">Size · $/sq.ft.</span>
+        <span class="comp-stat-value">1,531 sq.ft.</span>
+        <span class="comp-stat-note">$382/sq.ft. · DOM: 43</span>
+      </div>
+    </div>
+    <div class="comp-relates">
+      <div class="comp-relates-label">How it relates to your home:</div>
+      <div class="comp-relates-text">The closest match to your home — same size, standard finishes, no premium upgrades noted. Open-plan living with a gas fireplace, low condo fees. Sold for $585,000 in fall 2024. This is the most straightforward comparison for a home in standard condition in this complex, and it represents the lower end of the range for your footprint.</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ STATS SECTION -->
+  <div class="section-divider"></div>
+  <div class="section-label" style="margin-top:36px;">The Numbers</div>
+  <div class="section-title">Market Statistics</div>
+  <p class="section-sub">All math in one place. The premium outlier (Unit #64) is shown separately so it does not distort the picture for a standard-finish home.</p>
+
+  <div class="stats-section">
+    <div class="stats-header">
+      <div class="stats-header-title">Price Summary — All 8 Standard Sold Comps</div>
+      <div class="stats-header-sub">Excludes Unit #64 (premium outlier) and the current active listing</div>
+    </div>
+    <div class="tiles-row">
+      <div class="tile">
+        <div class="tile-label">Low Sale</div>
+        <div class="tile-value">$585K</div>
+        <div class="tile-sub">Unit #45 · Sep 2024</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Average Sale</div>
+        <div class="tile-value">$629,863</div>
+        <div class="tile-sub">8 standard comps</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">High Sale</div>
+        <div class="tile-value">$670K</div>
+        <div class="tile-sub">Unit #36 · Oct 2024</div>
+      </div>
+    </div>
+    <div class="stats-table-wrap">
+      <table class="stats-table">
+        <thead>
+          <tr>
+            <th>Unit</th>
+            <th>Date</th>
+            <th>Size (sq.ft.)</th>
+            <th>Sold Price</th>
+            <th>$/sq.ft.</th>
+            <th>SP/LP</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#69</td>
+            <td>Jun 2026</td>
+            <td>1,676</td>
+            <td>$652,500</td>
+            <td>$389</td>
+            <td>96%</td>
+          </tr>
+          <tr class="match-row">
+            <td>#67</td>
+            <td>May 2025</td>
+            <td>1,531</td>
+            <td>$620,500</td>
+            <td>$405</td>
+            <td>95%</td>
+          </tr>
+          <tr>
+            <td>#49</td>
+            <td>Mar 2025</td>
+            <td>1,712</td>
+            <td>$664,900</td>
+            <td>$388</td>
+            <td>98%</td>
+          </tr>
+          <tr class="match-row">
+            <td>#51</td>
+            <td>Jan 2025</td>
+            <td>1,531</td>
+            <td>$631,000</td>
+            <td>$412</td>
+            <td>97%</td>
+          </tr>
+          <tr class="match-row">
+            <td>#36</td>
+            <td>Oct 2024</td>
+            <td>1,531</td>
+            <td>$670,000</td>
+            <td>$437</td>
+            <td>99%</td>
+          </tr>
+          <tr>
+            <td>#38</td>
+            <td>Feb 2026</td>
+            <td>1,676</td>
+            <td>$595,000</td>
+            <td>$355</td>
+            <td>99%</td>
+          </tr>
+          <tr class="match-row">
+            <td>#67</td>
+            <td>Oct 2024</td>
+            <td>1,531</td>
+            <td>$620,000</td>
+            <td>$405</td>
+            <td>95%</td>
+          </tr>
+          <tr class="match-row">
+            <td>#45</td>
+            <td>Sep 2024</td>
+            <td>1,531</td>
+            <td>$585,000</td>
+            <td>$382</td>
+            <td>98%</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3">Average (8 standard comps)</td>
+            <td>$629,863</td>
+            <td>$397</td>
+            <td>97%</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <div class="stats-note">
+      &#9733; = Same size as your home (1,531 sq.ft.). These are the most directly relevant comparisons. Unit #64 sold for $710,000 in April 2025 but was a fully renovated end unit — that result is excluded from the averages above but shown in the comp cards for full transparency.
+    </div>
+    <div class="dom-row">
+      <div class="dom-cell">
+        <div class="dom-label">Same-Size Avg Sale</div>
+        <div class="dom-value">$625,300</div>
+        <div class="dom-sub">5 units at 1,531 sq.ft.</div>
+      </div>
+      <div class="dom-cell">
+        <div class="dom-label">Same-Size Range</div>
+        <div class="dom-value">$585K&ndash;$670K</div>
+        <div class="dom-sub">Excl. outlier #64</div>
+      </div>
+      <div class="dom-cell">
+        <div class="dom-label">Avg Days on Market</div>
+        <div class="dom-value">~47</div>
+        <div class="dom-sub">Where reported (excl. N/A)</div>
       </div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════
-       STATS SECTION
-  ══════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-eyebrow">By the Numbers</div>
-    <div class="section-title">The Price Story</div>
-    <div class="section-lede">All sold figures below are for the five core comparable transactions. The premium outlier (Unit #64) is excluded from aggregate calculations.</div>
+  <!-- ═══════════════════════════════════════════ MARKET READ -->
+  <div class="section-label">What This All Means</div>
+  <div class="section-title">Market Read</div>
 
-    <!-- Stat tiles -->
-    <div class="stat-tiles">
-      <div class="stat-tile">
-        <div class="stat-tile-value">$614,600</div>
-        <div class="stat-tile-label">Avg. Sold Price</div>
-      </div>
-      <div class="stat-tile">
-        <div class="stat-tile-value">$620,000</div>
-        <div class="stat-tile-label">Median Sold</div>
-      </div>
-      <div class="stat-tile">
-        <div class="stat-tile-value">52 days</div>
-        <div class="stat-tile-label">Avg. Days on Market</div>
-      </div>
-      <div class="stat-tile">
-        <div class="stat-tile-value">95–99%</div>
-        <div class="stat-tile-label">SP/LP Range</div>
-      </div>
-    </div>
+  <div class="market-read">
+    <div class="market-read-title">The WSCP 448 Market Right Now</div>
 
-    <!-- $/sq.ft. table -->
-    <div style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1D2E5C;margin-bottom:10px;">Price per Square Foot by Unit</div>
-    <table class="stats-table">
-      <thead>
-        <tr>
-          <th>Unit</th>
-          <th>Sold Price</th>
-          <th>Size</th>
-          <th>$/sq.ft.</th>
-          <th>DOM</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><span class="addr-main">#69</span><br><span class="addr-sub">Firm Sale · Jun 2026</span></td>
-          <td>$652,500</td>
-          <td>1,676 sq.ft.</td>
-          <td><strong>$389</strong></td>
-          <td>90</td>
-        </tr>
-        <tr>
-          <td><span class="addr-main">#38</span><br><span class="addr-sub">Sold · Feb 2026</span></td>
-          <td>$595,000</td>
-          <td>1,676 sq.ft.</td>
-          <td><strong>$355</strong></td>
-          <td>44</td>
-        </tr>
-        <tr class="highlight-row">
-          <td><span class="addr-main">#67</span><br><span class="addr-sub">Sold · May 2025 · Same footprint</span></td>
-          <td>$620,500</td>
-          <td>1,531 sq.ft.</td>
-          <td><strong>$405</strong></td>
-          <td>7</td>
-        </tr>
-        <tr class="highlight-row">
-          <td><span class="addr-main">#67</span><br><span class="addr-sub">Sold · Oct 2024 · Same footprint</span></td>
-          <td>$620,000</td>
-          <td>1,531 sq.ft.</td>
-          <td><strong>$405</strong></td>
-          <td>77</td>
-        </tr>
-        <tr class="highlight-row">
-          <td><span class="addr-main">#45</span><br><span class="addr-sub">Sold · Sep 2024 · Same footprint</span></td>
-          <td>$585,000</td>
-          <td>1,531 sq.ft.</td>
-          <td><strong>$382</strong></td>
-          <td>43</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="footnote">Highlighted rows share the same 1,531 sq.ft. footprint as 470 Beach Blvd (no confirmed unit). Unit #64 ($710,000 · renovated end unit) excluded from all aggregate figures.</div>
+    <p>The WSCP 448 complex has seen nine sales in the past two years, ranging from $585,000 to $670,000 for standard-finish units. The fully renovated end unit (#64) hit $710,000 in April 2025, but that result reflects a show-home level of investment and should not be read as a typical outcome.</p>
 
-    <!-- Same-size sub-stats -->
-    <div style="margin-top:24px;padding:16px 20px;background:#EAF6FC;border-radius:8px;border-left:4px solid #27A8E0;">
-      <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#0D6E9A;margin-bottom:8px;">1,531 sq.ft. Units Only (Comps 3, 4, 5)</div>
-      <div style="display:flex;flex-wrap:wrap;gap:20px;">
-        <div>
-          <div style="font-size:18px;font-weight:700;color:#1D2E5C;">$585,000 – $620,500</div>
-          <div style="font-size:11px;color:#5F6B80;margin-top:2px;">Sold price range</div>
-        </div>
-        <div>
-          <div style="font-size:18px;font-weight:700;color:#1D2E5C;">$608,500</div>
-          <div style="font-size:11px;color:#5F6B80;margin-top:2px;">Average sold price</div>
-        </div>
-        <div>
-          <div style="font-size:18px;font-weight:700;color:#1D2E5C;">$382 – $405</div>
-          <div style="font-size:11px;color:#5F6B80;margin-top:2px;">$/sq.ft. range</div>
-        </div>
-      </div>
-    </div>
+    <p>For a home at your size — 1,531 sq.ft. — five of those nine sales are a direct match. Those five units sold between <strong>$585,000 and $670,000</strong>, with an average of <strong>$625,300</strong>. The lower end of that range (Unit #45 at $585,000, September 2024) was a standard-condition home with no noted upgrades. The top of the range (Unit #36 at $670,000, October 2024) sold very close to asking price, suggesting strong buyer demand at that moment. The difference between the low and the high in the same footprint is about $85,000 — which tells you that condition, timing, and pricing strategy all matter in this complex.</p>
 
-    <!-- DOM chart -->
-    <div style="margin-top:28px;">
-      <div style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1D2E5C;margin-bottom:14px;">Days on Market by Unit</div>
-      <div class="dom-chart">
-        <div class="dom-row">
-          <div class="dom-label">#67 (May 2025)</div>
-          <div class="dom-track"><div class="dom-fill" style="width:7.8%;"></div></div>
-          <div class="dom-val">7</div>
-        </div>
-        <div class="dom-row">
-          <div class="dom-label">#38 (Feb 2026)</div>
-          <div class="dom-track"><div class="dom-fill" style="width:48.9%;"></div></div>
-          <div class="dom-val">44</div>
-        </div>
-        <div class="dom-row">
-          <div class="dom-label">#45 (Sep 2024)</div>
-          <div class="dom-track"><div class="dom-fill" style="width:47.8%;"></div></div>
-          <div class="dom-val">43</div>
-        </div>
-        <div class="dom-row">
-          <div class="dom-label">#67 (Oct 2024)</div>
-          <div class="dom-track"><div class="dom-fill long" style="width:85.6%;"></div></div>
-          <div class="dom-val">77</div>
-        </div>
-        <div class="dom-row">
-          <div class="dom-label">#69 (Jun 2026)</div>
-          <div class="dom-track"><div class="dom-fill long" style="width:100%;"></div></div>
-          <div class="dom-val">90</div>
-        </div>
-        <div class="dom-row" style="opacity:0.6;">
-          <div class="dom-label">#65 (Active)</div>
-          <div class="dom-track"><div class="dom-fill active-bar" style="width:63.3%;"></div></div>
-          <div class="dom-val">57+</div>
-        </div>
-      </div>
-      <div class="footnote" style="margin-top:12px;">DOM = days on market from list date to firm sale or (for #65) report date. #69 includes showing restriction of 4 hours' notice. Unit #67's two sales of the same home show how opening price and seasonal timing shaped the runway.</div>
-    </div>
+    <p>The most recent sale in the complex, Unit #69, went firm at $652,500 in June 2026 — but that was a larger end unit. There is currently one active listing in the complex (Unit #65) asking $639,999 after a price reduction. It has been on the market for 57 days without finding a buyer. That tells you something: buyers in this complex are active but patient, and they are not rushing at prices that feel high.</p>
+
+    <p>The sale-to-list ratios across all eight standard comps averaged 97%, which means sellers generally received close to what they asked — as long as they started at a realistic number. The two situations where homes took the longest (Units #67 in October 2024 at 77 days, and #38 at 44 days after a failed first attempt at a higher price) both involved opening prices that were above where the market was willing to go. Both eventually sold at or near where the other comps landed.</p>
+
+    <p>Your home has not been toured, so I am working from the information available. At standard finishes, the comparable range for a 1,531 sq.ft. unit in this complex runs from the mid-$600s down to the upper $500s depending on condition, timing, and the strength of any competing inventory. The current active listing at $639,999 — already sitting without an offer for nearly two months — is the clearest signal of where buyer resistance currently sits.</p>
   </div>
 
-  <!-- ══════════════════════════════════════
-       MARKET READ
-  ══════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-eyebrow">Market Read</div>
-    <div class="section-title">What the Data Is Saying</div>
-
-    <div class="market-read-body">
-      <p>
-        This is a tight, self-referential dataset. All six properties are in the same complex, managed under the same condominium corporation, with the same $203/month fee structure. That makes it unusually clean for valuation purposes: the variables are condition, size, and timing, not neighbourhood drift or lot differences.
-      </p>
-      <p>
-        The three sales matching your exact 1,531 sq.ft. footprint landed between $585,000 and $620,500. The spread is meaningful. The high end belongs to Unit #67 in May 2025, which had undergone visible updates in 2024 and sold in seven days at $405/sq.ft. The low end belongs to Unit #45 in September 2024, a standard-condition home that sold at $382/sq.ft. in 43 days. The difference between the two results is condition, not market. Both were priced responsibly and sold within a reasonable window.
-      </p>
-      <p>
-        The two larger units (1,676 sq.ft.) tell a supporting story. Unit #38 sold for $595,000 in February 2026 after being correctly repositioned from a failed attempt at nearly $670,000. Unit #69 went firm in June 2026 at $652,500 after 90 days, reflecting both its end-unit advantage and an updated kitchen. Those results confirm the building's ceiling for the larger footprint under current market conditions.
-      </p>
-      <p>
-        Unit #65 is the one live data point. At 57 days on the market with a price reduction already in place, it is telling you something about where buyers are drawing a line right now for this building. The $640,000 range is not moving quickly, even with updates. That context matters when reading the sold comps alongside the active competition.
-      </p>
-      <p>
-        One practical factor worth noting: units with showing restrictions took longer to sell. Unit #69's 90-day runway included a four-hours-notice requirement. Buyer access directly shapes how quickly a home attracts a firm offer, and that consideration is specific to how a unit is occupied at the time it comes to market.
-      </p>
-      <p>
-        The renovated outlier, Unit #64 at $710,000, is a useful ceiling rather than a comp. It required a complete renovation to reach that result, and it represents the building's upper limit for buyers who are willing to pay for turnkey, high-end finishes. It is not a reference point for a standard-condition home.
-      </p>
+  <!-- ═══════════════════════════════════════════ FOOTER -->
+  <div class="footer">
+    <div class="footer-text">
+      MLS® data sourced from RAHB/REALTOR.ca. Data captured August 19, 2026. Not intended to solicit properties already under contract.<br><br>
+      The information in this report is based on data believed to be reliable but is not guaranteed. This is not an appraisal. An appraisal is a formal valuation prepared by a certified appraiser and carries legal weight; this report does not. Market conditions change, and past sales do not guarantee future results. All figures are approximate and should be independently verified before making any decisions.<br><br>
+      PACK BEFORE YOU CALL&reg; · TOO LATE&reg;
     </div>
-  </div>
-
-  <!-- ══════════════════════════════════════
-       FOOTER
-  ══════════════════════════════════════ -->
-  <div class="report-footer">
-    <div class="footer-brand">Woolcott Real Estate</div>
-    <p>
-      <strong>Prepared by:</strong> Donald Parkhill, Salesperson · Re/Max Escarpment Realty Inc., Brokerage · 905 332 9223
-    </p>
-    <p style="margin-top:8px;">
-      <strong>Sources:</strong> ITSO MLS® (Cornerstone Association of REALTORS®, Niagara Association of REALTORS®, Brantford Regional Real Estate Association) and TREB MLS® (PropTx). All data captured August 19, 2026. Information deemed reliable but not guaranteed.
-    </p>
-    <p style="margin-top:8px;">
-      This report is prepared for informational purposes only and does not constitute an appraisal, valuation opinion, or guarantee of value. It is based solely on data available through the MLS® systems noted above as of the capture date. MLS® is a trademark of the Canadian Real Estate Association (CREA). Not intended to solicit buyers or sellers currently under contract with another brokerage.
-    </p>
-    <p style="margin-top:8px;">
-      Protected by copyright. All use of MLS® System data is at your own risk. Information Technology Systems Ontario (ITSO) and PropTx Innovations Inc. make no warranties or representations regarding the MLS® System data.
-    </p>
-    <div class="footer-tagline">PACK BEFORE YOU CALL® · Make yours TOO LATE®</div>
+    <div class="footer-preparedby">Prepared by Donald Parkhill, Salesperson</div>
+    <div class="footer-trademark">Re/Max Escarpment Realty Inc. · 905 332 9223 · Re/Max Escarpment Realty Inc., Brokerage</div>
   </div>
 
 </div>
