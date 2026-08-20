@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Halifax Girls' Weekend — The Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+ :root{
+ --navy:#14273D; /* Atlantic at dusk */
+ --fog:#F4F4EE; /* sea fog */
+ --red:#D6402D; /* Lunenburg red / lighthouse lantern */
+ --teal:#2F7F78; /* wharf teal */
+ --gold:#E4A32A; /* dory yellow */
+ --ink:#1A2430;
+ --muted:#46525F;
+ --display:'Bricolage Grotesque','Arial Narrow',system-ui,sans-serif;
+ --body:'Instrument Sans',system-ui,sans-serif;
+ --mono:'Space Mono',ui-monospace,'Courier New',monospace;
+ }
+ *{box-sizing:border-box;}
+ html{-webkit-text-size-adjust:100%;}
+ body{margin:0;background:var(--fog);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;}
+ a{color:inherit;text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:3px;}
+ a:hover{color:var(--red);}
+ :focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+ .wrap{max-width:720px;margin:0 auto;padding:0 24px;}
+
+ /* ---------- hero ---------- */
+ .hero{background:var(--navy);color:var(--fog);padding:64px 0 48px;}
+ .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 18px;}
+ h1{font-family:var(--display);font-weight:800;font-size:clamp(2.9rem,11vw,5.6rem);line-height:.95;letter-spacing:-.02em;margin:0 0 20px;text-transform:uppercase;}
+ h1 .accent{color:var(--red);-webkit-text-stroke:0;}
+ .sub{font-size:17px;color:rgba(244,244,238,.82);max-width:46ch;margin:0;}
+ .stripes{height:14px;background:repeating-linear-gradient(90deg,var(--red) 0 26px,var(--fog) 26px 52px);}
+
+ /* ---------- day sections ---------- */
+ .day{padding:52px 0 8px;}
+ .day-head{display:flex;align-items:center;gap:12px;margin-bottom:4px;}
+ .pennant{width:26px;height:18px;flex:0 0 auto;clip-path:polygon(0 0,100% 50%,0 100%);}
+ .p-red{background:var(--red);} .p-teal{background:var(--teal);} .p-gold{background:var(--gold);}
+ .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;}
+ .k-red{color:var(--red);} .k-teal{color:var(--teal);} .k-gold{color:#B07C15;}
+ h2{font-family:var(--display);font-weight:700;font-size:clamp(1.7rem,5.5vw,2.2rem);line-height:1.05;margin:6px 0 10px;color:var(--navy);}
+ .day-intro{color:var(--muted);margin:0 0 10px;max-width:56ch;}
+
+ .stop{display:grid;grid-template-columns:88px 1fr;gap:6px 16px;padding:18px 0;}
+ .stop + .stop{border-top:2px dotted rgba(20,39,61,.28);}
+ .time{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--navy);padding-top:3px;white-space:nowrap;}
+ .stop h3{font-family:var(--display);font-weight:600;font-size:19px;margin:0 0 4px;color:var(--navy);}
+ .stop p{margin:0;font-size:15.5px;color:var(--muted);}
+ .chips{margin-top:9px;display:flex;flex-wrap:wrap;gap:8px;}
+ .chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid currentColor;border-radius:999px;padding:3px 9px;}
+ .c-red{color:var(--red);} .c-teal{color:var(--teal);} .c-navy{color:var(--navy);}
+
+ /* ---------- map card ---------- */
+ .map-card{background:#fff;border:2px solid var(--navy);border-radius:14px;padding:14px 14px 8px;margin:26px 0 8px;}
+ .map-card svg{display:block;width:100%;height:auto;}
+ .map-cap{font-family:var(--mono);font-size:11.5px;color:var(--muted);text-align:center;margin:8px 0 6px;}
+
+ /* ---------- good to know ---------- */
+ .know{background:var(--navy);color:var(--fog);margin-top:52px;padding:48px 0 40px;}
+ .bunting{display:flex;gap:12px;width:fit-content;padding-top:3px;border-top:2px solid rgba(244,244,238,.35);margin-bottom:20px;}
+ .bunting span{width:16px;height:24px;clip-path:polygon(0 0,100% 0,50% 100%);}
+ .know h2{color:var(--fog);margin-top:0;}
+ .know-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px 28px;margin-top:22px;}
+ .know h4{font-family:var(--display);font-weight:600;font-size:16.5px;margin:0 0 5px;color:var(--gold);}
+ .know p{margin:0;font-size:14.5px;line-height:1.55;color:rgba(244,244,238,.84);}
+ .know a{text-decoration-color:var(--gold);}
+ .know a:hover{color:var(--gold);}
+
+ /* ---------- footer ---------- */
+ .foot{padding:34px 0 30px;text-align:center;}
+ .foot p{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 6px;}
+
+ @media (max-width:480px){
+ .stop{grid-template-columns:1fr;gap:2px;}
+ .time{padding-top:0;}
+ }
+ @media (prefers-reduced-motion:no-preference){
+ a{transition:color .15s ease;}
+ }
+</style>
+</head>
+<body>
+
+<header class="hero">
+ <div class="wrap">
+ <p class="eyebrow">Party of three &middot; Friday to Sunday</p>
+ <h1>Halifax<br>girls'<br><span class="accent">weekend</span></h1>
+ <p class="sub">Three days of lighthouses, lobster, cocktails and coastline. Here's the plan &mdash; pack layers and bring your appetite.</p>
+ </div>
+</header>
+<div class="stripes" aria-hidden="true"></div>
+
+<!-- FRIDAY -->
+<section class="day">
+ <div class="wrap">
+ <div class="day-head"><span class="pennant p-red" aria-hidden="true"></span><span class="kicker k-red">Friday</span></div>
+ <h2>Waterfront &amp; Argyle Street</h2>
+ <p class="day-intro">Ease in. Drop the bags, walk the harbour, eat well, stay out.</p>
+
+ <div class="stop">
+ <div class="time">5:00 pm</div>
+ <div>
+ <h3>Halifax Waterfront boardwalk</h3>
+ <p>One of the longest urban boardwalks anywhere &mdash; patios, little shops, and the famous harbour hammocks. Golden-hour photo op before dinner.</p>
+ </div>
+ </div>
+
+ <div class="stop">
+ <div class="time">7:30 pm</div>
+ <div>
+ <h3><a href="https://bicyclethief.ca">The Bicycle Thief</a></h3>
+ <p>Italian right on the water and the classic first-night-in-Halifax dinner. Weekend tables go fast.</p>
+ <div class="chips"><span class="chip c-red">Book ahead</span></div>
+ </div>
+ </div>
+
+ <div class="stop">
+ <div class="time">9:30 pm</div>
+ <div>
+ <h3>Lot Six</h3>
+ <p>Proper cocktails under the glass atrium. The whole Argyle Street strip is right outside if the night has other ideas.</p>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- SATURDAY -->
+<section class="day">
+ <div class="wrap">
+ <div class="day-head"><span class="pennant p-teal" aria-hidden="true"></span><span class="kicker k-teal">Saturday</span></div>
+ <h2>The South Shore loop</h2>
+ <p class="day-intro">The postcard day &mdash; one of the best drives in Canada. Pace it slow.</p>
+
+ <div class="stop">
+ <div class="time">9:00 am</div>
+ <div>
+ <h3>Peggy's Cove</h3>
+ <p>Get there before the tour buses and you'll have the lighthouse and granite mostly to yourselves. Cooler and windier than town &mdash; bring that layer.</p>
+ <div class="chips"><span class="chip c-teal">Go early</span><span class="chip c-navy">Grippy shoes</span><span class="chip c-red">Stay off wet rocks</span></div>
+ </div>
+ </div>
+
+ <div class="stop">
+ <div class="time">11:30 am</div>
+ <div>
+ <h3>Mahone Bay</h3>
+ <p>Tiny town, big charm &mdash; boutiques like The Teazer, caf&eacute;s, and the iconic three-churches view across the bay. Coffee-and-browse stop.</p>
+ </div>
+ </div>
+
+ <div class="stop">
+ <div class="time">1:00 pm</div>
+ <div>
+ <h3>Lunenburg</h3>
+ <p>UNESCO-listed old town. Scallops on a harbour patio, then wander the colourful streets and shops.</p>
+ <div class="chips"><span class="chip c-teal">Late lunch here</span></div>
+ </div>
+ </div>
+
+ <div class="stop">
+ <div class="time">4:30 pm</div>
+ <div>
+ <h3>Cruise back to Halifax</h3>
+ <p>About an hour home. Dinner and full debrief downtown.</p>
+ </div>
+ </div>
+
+ <div class="map-card">
+ <svg viewBox="0 0 640 360" role="img" aria-label="Sketch map of the Saturday driving loop from Halifax to Peggy's Cove, Mahone Bay and Lunenburg and back">
+ <rect width="640" height="360" fill="#DAE7E2"/>
+ <!-- land -->
+ <path d="M0,0 L640,0 L640,62 C566,78 540,118 474,140 C436,153 436,196 404,222 C382,240 342,224 302,234 C262,244 252,272 202,284 C160,294 122,326 78,336 L0,348 Z" fill="#EFEEE4"/>
+ <!-- coastline -->
+ <path d="M640,62 C566,78 540,118 474,140 C436,153 436,196 404,222 C382,240 342,224 302,234 C262,244 252,272 202,284 C160,294 122,326 78,336 L0,348" fill="none" stroke="#14273D" stroke-width="2.5" stroke-linecap="round"/>
+ <!-- route out (dashed) -->
+ <path d="M497,92 C486,116 470,132 455,148 C420,186 330,212 276,236 C258,246 242,266 228,284" fill="none" stroke="#14273D" stroke-width="2.5" stroke-dasharray="7 6" stroke-linecap="round"/>
+ <!-- route home (lighter dashed) -->
+ <path d="M228,284 C310,300 430,220 497,102" fill="none" stroke="#14273D" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round" opacity=".55"/>
+ <!-- lighthouse at Peggy's Cove -->
+ <rect x="449" y="120" width="11" height="20" fill="#F4F4EE" stroke="#14273D" stroke-width="1.5"/>
+ <path d="M447,120 L461,120 L454.5,110 Z" fill="#D6402D" stroke="#14273D" stroke-width="1.5" stroke-linejoin="round"/>
+ <!-- stops -->
+ <circle cx="497" cy="92" r="7" fill="#14273D" stroke="#F4F4EE" stroke-width="2.5"/>
+ <circle cx="455" cy="148" r="7" fill="#D6402D" stroke="#F4F4EE" stroke-width="2.5"/>
+ <circle cx="276" cy="236" r="7" fill="#2F7F78" stroke="#F4F4EE" stroke-width="2.5"/>
+ <circle cx="228" cy="284" r="7" fill="#E4A32A" stroke="#F4F4EE" stroke-width="2.5"/>
+ <!-- labels -->
+ <g font-family="'Space Mono',monospace" font-size="12.5" fill="#14273D" font-weight="700">
+ <text x="510" y="88">Halifax</text>
+ <text x="468" y="160">Peggy's Cove</text>
+ <text x="288" y="228">Mahone Bay</text>
+ <text x="212" y="306">Lunenburg</text>
+ </g>
+ <text x="486" y="330" font-family="'Space Mono',monospace" font-size="11.5" fill="#7CA29B" font-style="italic">Atlantic Ocean</text>
+ <text x="600" y="32" font-family="'Space Mono',monospace" font-size="12" fill="#14273D">N &#8593;</text>
+ </svg>
+ <p class="map-cap">The Saturday loop &mdash; roughly 3.5 hrs of driving, zero regrets. Not remotely to scale.</p>
+ </div>
+ </div>
+</section>
+
+<!-- SUNDAY -->
+<section class="day">
+ <div class="wrap">
+ <div class="day-head"><span class="pennant p-gold" aria-hidden="true"></span><span class="kicker k-gold">Sunday</span></div>
+ <h2>Slow morning</h2>
+ <p class="day-intro">Brunch, browse, one last hit of ocean air.</p>
+
+ <div class="stop">
+ <div class="time">9:30 am</div>
+ <div>
+ <h3><a href="https://blisscaffeinebar.com">Bliss Caffeine Bar</a></h3>
+ <p>Eggs benny, pretty pastries, proper coffee. Very much a girls'-trip brunch spot.</p>
+ </div>
+ </div>
+
+ <div class="stop">
+ <div class="time">11:00 am</div>
+ <div>
+ <h3><a href="https://halifaxfarmersmarket.com">Seaport Farmers' Market</a></h3>
+ <p>One of the oldest markets in North America &mdash; local makers, food stalls, easy souvenirs. Open Sundays 10&ndash;2.</p>
+ </div>
+ </div>
+
+ <div class="stop">
+ <div class="time">12:30 pm</div>
+ <div>
+ <h3>Point Pleasant Park</h3>
+ <p>Five minutes from the market. An easy oceanside loop through the woods before everyone heads home.</p>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- GOOD TO KNOW -->
+<section class="know">
+ <div class="wrap">
+ <div class="bunting" aria-hidden="true">
+ <span style="background:var(--red)"></span><span style="background:var(--fog)"></span><span style="background:var(--gold)"></span><span style="background:var(--teal)"></span><span style="background:var(--red)"></span><span style="background:var(--fog)"></span><span style="background:var(--gold)"></span>
+ </div>
+ <h2>Good to know</h2>
+ <div class="know-grid">
+ <div>
+ <h4>Wheels required Saturday</h4>
+ <p>The loop needs a car (~3.5 hrs total driving, all scenic). No rental? Half-day bus tours to Peggy's Cove leave from downtown.</p>
+ </div>
+ <div>
+ <h4>Lock in dinner now</h4>
+ <p>The Bicycle Thief books up on weekends &mdash; call <a href="tel:+19024257993">+1&nbsp;902-425-7993</a> once the dates are set.</p>
+ </div>
+ <div>
+ <h4>Feeling fancy?</h4>
+ <p>Tribute, on the waterfront, does a chef's-counter tasting menu that's become one of the best meals in Atlantic Canada. The splurge-night move.</p>
+ </div>
+ <div>
+ <h4>Wine people?</h4>
+ <p>Swap a half-day for Wolfville &amp; the Annapolis Valley (~1 hr the other direction) &mdash; sparkling and Tidal Bay tastings at spots like Benjamin Bridge.</p>
+ </div>
+ <div>
+ <h4>History hit</h4>
+ <p>The Halifax Citadel fires its noon cannon daily, with great harbour views from the ramparts. Easy add before the Sunday market.</p>
+ </div>
+ <div>
+ <h4>Real talk at Peggy's Cove</h4>
+ <p>It's colder and windier than town, so bring a layer &mdash; and stay off the dark, wet rocks near the water. Rogue waves are no joke.</p>
+ </div>
+ </div>
+ </div>
+</section>
+
+<footer class="foot">
+ <p>HFX &middot; Fri&ndash;Sun &middot; Party of three</p>
+ <p>Pack: layers &middot; grippy shoes &middot; an appetite</p>
+</footer>
+<div class="stripes" aria-hidden="true"></div>
+
+</body>
+</html>
