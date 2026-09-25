@@ -7,9 +7,10 @@
  * workspace/duty-schedule/roster.json — buyer agents, active, minus Ayriana).
  */
 const ROSTER = [
-  "Alex K","Angus","Christian","Colleen","Deb","Deirdre","Eden",
-  "Frances","Geoffrey","Gillian","Jennifer D","Joseph","Kalie","Lira","Madison",
-  "Mary","Micaela","Michael S","Olivia","Paulo","Shawn","Torri"
+  "Angus","Christian","Colleen","Deirdre","Eden","Elbron","Frances",
+  "Geoffrey","Gillian","Hailey","Jennifer D","Joseph","Joshua",
+  "Kalie","Lira","Madison","Mary","Micaela","Michael S","Olivia",
+  "Paulo","Shawn","Torri"
 ];
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
