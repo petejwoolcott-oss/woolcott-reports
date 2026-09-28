@@ -7,7 +7,7 @@
  * workspace/duty-schedule/roster.json — buyer agents, active, minus Ayriana).
  */
 const ROSTER = [
-  "Angus","Christian","Colleen","Deirdre","Eden","Elbron","Frances",
+  "Angus","Christian","Colleen","Deirdre","Elbron","Frances",
   "Geoffrey","Gillian","Hailey","Jennifer D","Joseph","Joshua",
   "Kalie","Lira","Madison","Mary","Micaela","Michael S","Olivia",
   "Paulo","Shawn","Torri"
